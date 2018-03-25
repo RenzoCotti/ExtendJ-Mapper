@@ -1,0 +1,25 @@
+aspect Position {
+	syn int ASTNode.startLine() {
+		return getLine(getStart());
+	}
+
+	syn int ASTNode.startColumn() {
+		return getColumn(getStart());
+	}
+
+	syn int ASTNode.endLine() {
+		return getLine(getEnd());
+	}
+
+	syn int ASTNode.endColumn() {
+		return getColumn(getEnd());
+	}
+
+	syn String ASTNode.getPos() {
+		// returns " - [ L1C3 - L2C4 ]" string, for example
+
+		return " - [ L"+startLine()+"C"+startColumn()+" - L"+
+			+endLine()+"C"+endColumn()+" ] ";
+
+	}
+}
