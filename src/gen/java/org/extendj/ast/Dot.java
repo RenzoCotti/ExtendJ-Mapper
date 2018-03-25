@@ -35,7 +35,7 @@ import java.io.DataInputStream;
  * expression. There can be an array access as the right hand side,
  * e.g., {@code left[3] }.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:79
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:79
  * @astdecl Dot : Access ::= Left:Expr Right:Access;
  * @production Dot : {@link Access} ::= <span class="component">Left:{@link Expr}</span> <span class="component">Right:{@link Access}</span>;
 
@@ -43,7 +43,7 @@ import java.io.DataInputStream;
 public class Dot extends Access implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrint.jadd:337
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrint.jadd:337
    */
   public void prettyPrint(PrettyPrinter out) {
     if (needsDot()) {
@@ -57,7 +57,7 @@ public class Dot extends Access implements Cloneable {
   }
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:143
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:143
    */
   @Override public String toString() {
     Expr left = getLeftNoTransform();
@@ -76,7 +76,7 @@ public class Dot extends Access implements Cloneable {
   }
   /**
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:190
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:190
    */
   public Dot lastDot() {
     Dot node = this;
@@ -87,7 +87,7 @@ public class Dot extends Access implements Cloneable {
   }
   /**
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:208
    */
   public Access qualifiesAccess(Access access) {
     Dot lastDot = lastDot();
@@ -101,7 +101,7 @@ public class Dot extends Access implements Cloneable {
    * Used when replacing pairs from a list to concatenate the result to the
    * tail of the current location.
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:235
    */
   private Access qualifyTailWith(Access expr) {
     if (getRight() instanceof Dot) {
@@ -112,35 +112,35 @@ public class Dot extends Access implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:227
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:227
    */
   public void emitStore(CodeGeneration gen) {
     lastAccess().emitStore(gen);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:470
    */
   public void createAssignSimpleLoadDest(CodeGeneration gen) {
     lastAccess().createAssignSimpleLoadDest(gen);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:484
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:489
    */
   public void createPushAssignmentResult(CodeGeneration gen) {
     lastAccess().createPushAssignmentResult(gen);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:507
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:512
    */
   public void createAssignLoadDest(CodeGeneration gen) {
     lastAccess().createAssignLoadDest(gen);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:562
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:567
    */
   public void createBCode(CodeGeneration gen) {
     if (transformed() != this) {
@@ -151,7 +151,7 @@ public class Dot extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:1255
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1260
    */
   public void branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -159,7 +159,7 @@ public class Dot extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:1366
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1371
    */
   public void branchFalse(CodeGeneration gen, int target) {
     // Branch when false.
@@ -361,10 +361,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:32")
   public Constant constant() {
     Constant constant_value = lastAccess().constant();
     return constant_value;
@@ -372,10 +372,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:383
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:383")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:383")
   public boolean isConstant() {
     boolean isConstant_value = lastAccess().isConstant();
     return isConstant_value;
@@ -383,10 +383,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:77")
   public Variable varDecl() {
     Variable varDecl_value = lastAccess().varDecl();
     return varDecl_value;
@@ -394,10 +394,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:375
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:375
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:375")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:375")
   public boolean assignedAfterTrue(Variable v) {
     boolean assignedAfterTrue_Variable_value = assignedAfter(v);
     return assignedAfterTrue_Variable_value;
@@ -405,10 +405,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:377
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:377
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:377")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:377")
   public boolean assignedAfterFalse(Variable v) {
     boolean assignedAfterFalse_Variable_value = assignedAfter(v);
     return assignedAfterFalse_Variable_value;
@@ -416,10 +416,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = lastAccess().assignedAfter(v);
     return assignedAfter_Variable_value;
@@ -430,7 +430,7 @@ public class Dot extends Access implements Cloneable {
   }
   protected java.util.Map unassignedAfterTrue_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:905")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:905")
   public boolean unassignedAfterTrue(Variable v) {
     Object _parameters = v;
     if (unassignedAfterTrue_Variable_values == null) unassignedAfterTrue_Variable_values = new java.util.HashMap(4);
@@ -481,7 +481,7 @@ public class Dot extends Access implements Cloneable {
   }
   protected java.util.Map unassignedAfterFalse_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:907")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:907")
   public boolean unassignedAfterFalse(Variable v) {
     Object _parameters = v;
     if (unassignedAfterFalse_Variable_values == null) unassignedAfterFalse_Variable_values = new java.util.HashMap(4);
@@ -532,7 +532,7 @@ public class Dot extends Access implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -582,10 +582,10 @@ public class Dot extends Access implements Cloneable {
    * hand side is an array access.
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:342
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:342
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:342")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:342")
   public boolean needsDot() {
     boolean needsDot_value = !(rightSide() instanceof ArrayAccess);
     return needsDot_value;
@@ -593,10 +593,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect Names
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/QualifiedNames.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/QualifiedNames.jrag:73
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/QualifiedNames.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/QualifiedNames.jrag:73")
   public String typeName() {
     String typeName_value = lastAccess().typeName();
     return typeName_value;
@@ -604,10 +604,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35")
   public boolean isTypeAccess() {
     boolean isTypeAccess_value = getRight().isTypeAccess();
     return isTypeAccess_value;
@@ -615,10 +615,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:47")
   public boolean isMethodAccess() {
     boolean isMethodAccess_value = getRight().isMethodAccess();
     return isMethodAccess_value;
@@ -626,10 +626,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:51
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:51
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:51")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:51")
   public boolean isFieldAccess() {
     boolean isFieldAccess_value = getRight().isFieldAccess();
     return isFieldAccess_value;
@@ -637,10 +637,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:56
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:56")
   public boolean isSuperAccess() {
     boolean isSuperAccess_value = getRight().isSuperAccess();
     return isSuperAccess_value;
@@ -648,10 +648,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:62
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:62
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:62")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:62")
   public boolean isThisAccess() {
     boolean isThisAccess_value = getRight().isThisAccess();
     return isThisAccess_value;
@@ -659,10 +659,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:68
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:68")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:68")
   public boolean isPackageAccess() {
     boolean isPackageAccess_value = getRight().isPackageAccess();
     return isPackageAccess_value;
@@ -670,10 +670,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:72
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:72")
   public boolean isArrayAccess() {
     boolean isArrayAccess_value = getRight().isArrayAccess();
     return isArrayAccess_value;
@@ -681,10 +681,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:76")
   public boolean isClassAccess() {
     boolean isClassAccess_value = getRight().isClassAccess();
     return isClassAccess_value;
@@ -692,10 +692,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:80
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:80
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:80")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:80")
   public boolean isSuperConstructorAccess() {
     boolean isSuperConstructorAccess_value = getRight().isSuperConstructorAccess();
     return isSuperConstructorAccess_value;
@@ -703,10 +703,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:164
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:164
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:164")
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:164")
   public boolean isQualified() {
     boolean isQualified_value = hasParentDot();
     return isQualified_value;
@@ -714,10 +714,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:169
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:169
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:169")
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:169")
   public Expr leftSide() {
     Expr leftSide_value = getLeft();
     return leftSide_value;
@@ -725,10 +725,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:171
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:171
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:171")
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:171")
   public Access rightSide() {
     Access rightSide_value = getRight() instanceof Dot ?
         (Access)((Dot) getRight()).getLeft() : (Access) getRight();
@@ -737,10 +737,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:174
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:174
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:174")
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:174")
   public Access lastAccess() {
     Access lastAccess_value = getRight().lastAccess();
     return lastAccess_value;
@@ -750,10 +750,10 @@ public class Dot extends Access implements Cloneable {
    * expression.
    * @attribute syn
    * @aspect SyntacticClassification
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:60")
   public NameType predNameType() {
     NameType predNameType_value = getLeft() instanceof Access
           ? ((Access) getLeft()).predNameType()
@@ -774,10 +774,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -796,10 +796,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:33")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:33")
   public boolean isVariable() {
     boolean isVariable_value = lastAccess().isVariable();
     return isVariable_value;
@@ -807,10 +807,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeHierarchyCheck.jrag:224
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeHierarchyCheck.jrag:224
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeHierarchyCheck.jrag:224")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeHierarchyCheck.jrag:224")
   public boolean staticContextQualifier() {
     boolean staticContextQualifier_value = lastAccess().staticContextQualifier();
     return staticContextQualifier_value;
@@ -819,10 +819,10 @@ public class Dot extends Access implements Cloneable {
    * Creates a copy of this access where parameterized types have been erased.
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1596
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1596
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1596")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1596")
   public Access erasedCopy() {
     Access erasedCopy_value = new Dot(getLeft().erasedCopy(), getRight().erasedCopy());
     return erasedCopy_value;
@@ -830,10 +830,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:145
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:145")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getLeft().modifiedInScope(var) || getRight().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -851,10 +851,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect StmtCompatible
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:154
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:154
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:154")
+  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:154")
   public boolean stmtCompatible() {
     ASTState state = state();
     if (stmtCompatible_computed == ASTState.NON_CYCLE || stmtCompatible_computed == state().cycle()) {
@@ -873,10 +873,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:300
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:300
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:300")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:300")
   public boolean needsPop() {
     boolean needsPop_value = lastAccess().needsPop();
     return needsPop_value;
@@ -884,10 +884,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:313
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:313
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:313")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:313")
   public boolean isVarAccessWithAccessor() {
     boolean isVarAccessWithAccessor_value = lastAccess().isVarAccessWithAccessor();
     return isVarAccessWithAccessor_value;
@@ -895,10 +895,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:1151
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1156
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:1151")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1156")
   public boolean canBeTrue() {
     boolean canBeTrue_value = lastAccess().canBeTrue();
     return canBeTrue_value;
@@ -906,10 +906,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:1163
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1168
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:1163")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1168")
   public boolean canBeFalse() {
     boolean canBeFalse_value = lastAccess().canBeFalse();
     return canBeFalse_value;
@@ -917,10 +917,10 @@ public class Dot extends Access implements Cloneable {
   /** @return {@code true} if this is a method call that requires a super accessor. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:408
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:408
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:408")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:408")
   public boolean requiresSuperAccessor() {
     boolean requiresSuperAccessor_value = leftSide().isSuperAccess()
           && rightSide().isInstanceMethodAccess()
@@ -931,10 +931,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:413
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:413
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:413")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:413")
   public MethodDecl superAccessorTargetMethod() {
     MethodDecl superAccessorTargetMethod_value = ((MethodAccess) rightSide()).decl().erasedMethod();
     return superAccessorTargetMethod_value;
@@ -953,10 +953,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect Transformations
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Transformations.jrag:48
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Transformations.jrag:48
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Transformations", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Transformations.jrag:48")
+  @ASTNodeAnnotation.Source(aspect="Transformations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Transformations.jrag:48")
   public Access transformed() {
     ASTState state = state();
     if (transformed_computed == ASTState.NON_CYCLE || transformed_computed == state().cycle()) {
@@ -997,10 +997,10 @@ public class Dot extends Access implements Cloneable {
    * a generated super accessor method.
    * @attribute syn
    * @aspect Transformations
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Transformations.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Transformations.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Transformations", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Transformations.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="Transformations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Transformations.jrag:60")
   public Access transformedSuperAccessor() {
     ASTState state = state();
     if (transformedSuperAccessor_computed) {
@@ -1037,10 +1037,10 @@ public class Dot extends Access implements Cloneable {
    * @return the TypeDecl corresponding to the accesssed class.
    * @attribute syn
    * @aspect AnnotationsCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AnnotationsCodegen.jrag:278
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AnnotationsCodegen.jrag:278
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AnnotationsCodegen", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AnnotationsCodegen.jrag:278")
+  @ASTNodeAnnotation.Source(aspect="AnnotationsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AnnotationsCodegen.jrag:278")
   public TypeDecl classAccess() {
     {
         if (getRight() instanceof ClassAccess) {
@@ -1060,10 +1060,10 @@ public class Dot extends Access implements Cloneable {
    * needed to cast a generic type to the expected type.
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/GenericsCodegen.jrag:147
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:147
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/GenericsCodegen.jrag:147")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:147")
   public TypeDecl erasedType() {
     TypeDecl erasedType_value = getRight().erasedType();
     return erasedType_value;
@@ -1071,10 +1071,10 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute inh
    * @aspect DefiniteUnassignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:903
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:903
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:903")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:903")
   public boolean unassignedBefore(Variable v) {
     boolean unassignedBefore_Variable_value = getParent().Define_unassignedBefore(this, null, v);
     return unassignedBefore_Variable_value;
@@ -1082,21 +1082,21 @@ public class Dot extends Access implements Cloneable {
   /**
    * @attribute inh
    * @aspect NameResolution
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:540
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:540
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:540")
+  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:540")
   public boolean canResolve() {
     boolean canResolve_value = getParent().Define_canResolve(this, null);
     return canResolve_value;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:40
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:40
       return false;
     }
     else {
@@ -1104,7 +1104,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isDest
    */
@@ -1112,12 +1112,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    */
   public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:50
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:50
       return true;
     }
     else {
@@ -1125,7 +1125,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isSource
    */
@@ -1133,12 +1133,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:400
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:400
       return getLeft().assignedAfter(v);
     }
     else {
@@ -1146,7 +1146,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -1154,12 +1154,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:1088
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:1088
       return getLeft().unassignedAfter(v);
     }
     else {
@@ -1167,7 +1167,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -1175,12 +1175,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:35
    * @apilevel internal
    */
   public Collection<ConstructorDecl> Define_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:41
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:41
       return getLeft().type().constructors();
     }
     else {
@@ -1188,7 +1188,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:35
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupConstructor
    */
@@ -1196,12 +1196,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:43
    * @apilevel internal
    */
   public Collection<ConstructorDecl> Define_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:56
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:56
       return getLeft().type().lookupSuperConstructor();
     }
     else {
@@ -1209,7 +1209,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:43
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupSuperConstructor
    */
@@ -1217,7 +1217,7 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:98
    * @apilevel internal
    */
   public Expr Define_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
@@ -1225,7 +1225,7 @@ public class Dot extends Access implements Cloneable {
     return isQualified() ? nestedScope() : this;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:98
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nestedScope
    */
@@ -1233,12 +1233,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    */
   public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:194
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:194
       return getLeft().type().memberMethods(name);
     }
     else {
@@ -1246,7 +1246,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
    */
@@ -1254,12 +1254,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:113
    * @apilevel internal
    */
   public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:108
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:108
       return getLeft().hasQualifiedPackage(packageName);
     }
     else {
@@ -1267,7 +1267,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:113
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hasPackage
    */
@@ -1275,12 +1275,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:610
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:610
       return getLeft().qualifiedLookupType(name);
     }
     else {
@@ -1288,7 +1288,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -1296,12 +1296,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupVariable.jrag:257
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupVariable.jrag:257
       return getLeft().qualifiedLookupVariable(name);
     }
     else {
@@ -1309,7 +1309,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -1317,16 +1317,16 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
    * @apilevel internal
    */
   public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:90
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:90
       return false;
     }
     else if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:89
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:89
       return true;
     }
     else {
@@ -1334,7 +1334,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:86
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isLeftChildOfDot
    */
@@ -1342,16 +1342,16 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    */
   public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:105
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:105
       return true;
     }
     else if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:104
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:104
       return isRightChildOfDot();
     }
     else {
@@ -1359,7 +1359,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:101
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
    */
@@ -1367,16 +1367,16 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
    * @apilevel internal
    */
   public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:121
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:121
       return getLeft();
     }
     else if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:120
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:120
       return prevExpr();
     }
     else {
@@ -1384,7 +1384,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:118
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute prevExpr
    */
@@ -1392,16 +1392,16 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
    * @apilevel internal
    */
   public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:145
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:145
       return nextAccessError();
     }
     else if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:144
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:144
       return getRight();
     }
     else {
@@ -1409,7 +1409,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:142
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nextAccess
    */
@@ -1417,12 +1417,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
    * @apilevel internal
    */
   public boolean Define_canResolve(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:549
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:549
       return !getLeft().containsParseName() && canResolve();
     }
     else {
@@ -1430,7 +1430,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute canResolve
    */
@@ -1438,12 +1438,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:81
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:81
       return getRightNoTransform().predNameType();
     }
     else {
@@ -1451,7 +1451,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -1459,12 +1459,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:667
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:667
    * @apilevel internal
    */
   public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:684
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:684
       return getLeft().type();
     }
     else {
@@ -1472,7 +1472,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:667
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:667
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingInstance
    */
@@ -1480,12 +1480,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
    * @apilevel internal
    */
   public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeHierarchyCheck.jrag:37
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeHierarchyCheck.jrag:37
       return getLeft().type().typeName();
     }
     else {
@@ -1493,7 +1493,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute methodHost
    */
@@ -1501,12 +1501,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (getRightNoTransform() != null && _callerNode == getRight()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:37
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:37
       return targetType();
     }
     else {
@@ -1514,7 +1514,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -1522,12 +1522,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:319
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:319
       return false;
     }
     else {
@@ -1535,7 +1535,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -1543,12 +1543,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:320
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:320
       return false;
     }
     else {
@@ -1556,7 +1556,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -1564,12 +1564,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:321
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:321
       return false;
     }
     else {
@@ -1577,7 +1577,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -1585,12 +1585,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:322
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:322
       return false;
     }
     else {
@@ -1598,7 +1598,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -1606,12 +1606,12 @@ public class Dot extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getLeftNoTransform() != null && _callerNode == getLeft()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:323
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:323
       return false;
     }
     else {
@@ -1619,7 +1619,7 @@ public class Dot extends Access implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -1636,7 +1636,7 @@ public class Dot extends Access implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:400
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:400
     if (requiresSuperAccessor()) {
       {
         TypeDecl target = (TypeDecl) (((SuperAccess) leftSide()).superAccessorTarget());

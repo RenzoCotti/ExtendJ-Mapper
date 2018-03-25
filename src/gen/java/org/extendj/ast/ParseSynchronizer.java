@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect ClassPath
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:440
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:440
  */
  class ParseSynchronizer extends java.lang.Object {
   

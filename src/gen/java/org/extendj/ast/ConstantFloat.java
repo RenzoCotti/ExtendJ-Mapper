@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect ConstantPool
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/ConstantPool.jrag:449
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/ConstantPool.jrag:449
  */
 public class ConstantFloat extends CPInfo {
   

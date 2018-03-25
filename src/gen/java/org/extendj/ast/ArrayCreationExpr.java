@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:223
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:223
  * @astdecl ArrayCreationExpr : PrimaryExpr ::= TypeAccess:Access [ArrayInit];
  * @production ArrayCreationExpr : {@link PrimaryExpr} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">[{@link ArrayInit}]</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrint.jadd:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrint.jadd:40
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("new ");
@@ -265,7 +265,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:278
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:278
    */
     public void createBCode(CodeGeneration gen) {
     if (hasArrayInit()){
@@ -286,10 +286,10 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:538
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:538
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:538")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:538")
   public boolean assignedAfterCreation(Variable v) {
     boolean assignedAfterCreation_Variable_value = getTypeAccess().assignedAfter(v);
     return assignedAfterCreation_Variable_value;
@@ -297,10 +297,10 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = hasArrayInit() ? getArrayInit().assignedAfter(v) : assignedAfterCreation(v);
     return assignedAfter_Variable_value;
@@ -311,7 +311,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   }
   protected java.util.Map unassignedAfterCreation_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:1147")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:1147")
   public boolean unassignedAfterCreation(Variable v) {
     Object _parameters = v;
     if (unassignedAfterCreation_Variable_values == null) unassignedAfterCreation_Variable_values = new java.util.HashMap(4);
@@ -362,7 +362,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -421,10 +421,10 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -443,10 +443,10 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:145
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:145")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = hasArrayInit() && getArrayInit().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -464,10 +464,10 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:112
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:112")
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:112")
   public int numArrays() {
     ASTState state = state();
     if (numArrays_computed == ASTState.NON_CYCLE || numArrays_computed == state().cycle()) {
@@ -494,12 +494,12 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
       return dims;
     }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getArrayInitOptNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:544
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:544
       return assignedAfterCreation(v);
     }
     else {
@@ -507,7 +507,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -515,12 +515,12 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getArrayInitOptNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:1153
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:1153
       return unassignedAfterCreation(v);
     }
     else {
@@ -528,7 +528,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -536,12 +536,12 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:110
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:110
       return NameType.TYPE_NAME;
     }
     else {
@@ -549,7 +549,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -557,12 +557,12 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArrayInitOptNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:282
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:282
       return type();
     }
     else {
@@ -570,7 +570,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -578,12 +578,12 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:104
    * @apilevel internal
    */
   public TypeDecl Define_expectedType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArrayInitOptNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:108
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:108
       return type().componentType();
     }
     else {
@@ -591,7 +591,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:104
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute expectedType
    */
@@ -608,7 +608,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:480
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:480
     if (!type().isReifiable()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

@@ -33,7 +33,7 @@ import java.io.DataInputStream;
  * 
  * <p>See JLS 6 &sect;7.3.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:45
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:45
  * @astdecl CompilationUnit : ASTNode ::= <PackageDecl:String> ImportDecl* TypeDecl*;
  * @production CompilationUnit : {@link ASTNode} ::= <span class="component">&lt;PackageDecl:String&gt;</span> <span class="component">{@link ImportDecl}*</span> <span class="component">{@link TypeDecl}*</span>;
 
@@ -41,7 +41,7 @@ import java.io.DataInputStream;
 public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrint.jadd:213
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrint.jadd:213
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasPackageDecl()) {
@@ -68,57 +68,57 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:526
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:526
    */
   private ClassSource classSource = ClassSource.NONE;
   /**
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:528
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:528
    */
   private boolean fromSource = false;
   /**
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:530
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:530
    */
   public void setClassSource(ClassSource source) {
     this.classSource = source;
   }
   /**
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:534
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:534
    */
   public ClassSource getClassSource() {
     return classSource;
   }
   /**
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:538
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:538
    */
   public void setFromSource(boolean value) {
     this.fromSource = value;
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:100
    */
   public Collection<Problem> parseErrors() {
     return parseErrors;
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:104
    */
   public void addParseError(Problem msg) {
     parseErrors.add(msg);
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:108
    */
   protected Collection<Problem> parseErrors = new ArrayList<Problem>();
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:40
    */
   public void generateClassfile() {
     if (fromSource()) {
@@ -129,7 +129,7 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect ExtensionBase
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/ExtensionBase.jrag:3
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/ExtensionBase.jrag:3
    */
   public void process() {
     //System.out.println(pathName() + " contained no errors");
@@ -549,7 +549,7 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:68
    */
   private Collection<Problem> refined_NameCheck_CompilationUnit_nameProblems()
 {
@@ -570,7 +570,7 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:410
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:410
    */
   private SimpleSet<TypeDecl> refined_TypeScopePropagation_CompilationUnit_Child_lookupType_String(String name)
 {
@@ -613,7 +613,7 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:283
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:283
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_CompilationUnit_problems = null;
@@ -628,7 +628,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_Compilat
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:347
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:347
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl_accessors = null;
@@ -643,7 +643,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:155
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:155
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl_nestedTypes = null;
@@ -658,7 +658,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/EnumsCodegen.jrag:130
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/EnumsCodegen.jrag:130
    */
   /** @apilevel internal */
 protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl_enumSwitchStatements = null;
@@ -676,10 +676,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
    * file.
    * @attribute syn
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:97
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:97
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:97")
+  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:97")
   public String relativeName() {
     String relativeName_value = getClassSource().relativeName();
     return relativeName_value;
@@ -688,10 +688,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
    * @return The path to the source file, or the enclosing Jar file.
    * @attribute syn
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:102
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:102
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:102")
+  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:102")
   public String pathName() {
     String pathName_value = getClassSource().pathName();
     return pathName_value;
@@ -700,10 +700,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
    * @return {@code true} if this compilation unit was parsed from source.
    * @attribute syn
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:107
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:107
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:107")
+  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:107")
   public boolean fromSource() {
     boolean fromSource_value = fromSource;
     return fromSource_value;
@@ -711,10 +711,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:285
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:285
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:285")
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:285")
   public Collection<Problem> errors() {
     {
         Collection<Problem> errors = new LinkedList<Problem>();
@@ -729,10 +729,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:295")
   public Collection<Problem> warnings() {
     {
         Collection<Problem> warnings = new LinkedList<Problem>();
@@ -747,10 +747,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /** Searches for a type with the given simple name in this compilation unit. 
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:450
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:450
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:450")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:450")
   public SimpleSet<TypeDecl> localLookupType(String name) {
     {
         for (int i = 0; i < getNumTypeDecl(); i++) {
@@ -764,10 +764,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:459
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:459
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:459")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:459")
   public SimpleSet<TypeDecl> importedTypes(String name) {
     {
         SimpleSet<TypeDecl> result = emptySet();
@@ -784,10 +784,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:471
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:471
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:471")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:471")
   public SimpleSet<TypeDecl> importedTypesOnDemand(String name) {
     {
         SimpleSet<TypeDecl> result = emptySet();
@@ -804,10 +804,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:68
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:68")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:68")
   public Collection<Problem> nameProblems() {
     {
         Collection<Problem> problems = refined_NameCheck_CompilationUnit_nameProblems();
@@ -830,10 +830,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:332
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:332
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:332")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:332")
   public boolean hasPackageDecl() {
     boolean hasPackageDecl_value = !getPackageDecl().isEmpty();
     return hasPackageDecl_value;
@@ -852,10 +852,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect TypeName
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/QualifiedNames.jrag:117
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/QualifiedNames.jrag:117
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/QualifiedNames.jrag:117")
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/QualifiedNames.jrag:117")
   public String packageName() {
     ASTState state = state();
     if (packageName_computed == ASTState.NON_CYCLE || packageName_computed == state().cycle()) {
@@ -876,10 +876,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:212
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:212
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:212")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:212")
   public SimpleSet<Variable> importedFields(String name) {
     {
         SimpleSet<Variable> set = emptySet();
@@ -896,10 +896,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:224
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:224
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:224")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:224")
   public SimpleSet<Variable> importedFieldsOnDemand(String name) {
     {
         SimpleSet<Variable> set = emptySet();
@@ -916,10 +916,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:254
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:254
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:254")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:254")
   public Collection<MethodDecl> importedMethods(String name) {
     {
         Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
@@ -934,10 +934,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:264
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:264
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:264")
   public Collection<MethodDecl> importedMethodsOnDemand(String name) {
     {
         Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
@@ -971,10 +971,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
    * compilation unit, or "." if the path could not be computed.
    * @attribute syn
    * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/ConstantPoolNames.jrag:165
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/ConstantPoolNames.jrag:165
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/ConstantPoolNames.jrag:165")
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/ConstantPoolNames.jrag:165")
   public String destinationPath() {
     ASTState state = state();
     if (destinationPath_computed == ASTState.NON_CYCLE || destinationPath_computed == state().cycle()) {
@@ -1002,10 +1002,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute inh
    * @aspect LookupFullyQualifiedTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:131
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:131")
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:131")
   public TypeDecl lookupType(String packageName, String typeName) {
     TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
     return lookupType_String_String_value;
@@ -1013,10 +1013,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute inh
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:396
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:396
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:396")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:396")
   public SimpleSet<TypeDecl> lookupType(String name) {
     Object _parameters = name;
     if (lookupType_String_computed == null) lookupType_String_computed = new java.util.HashMap(4);
@@ -1051,10 +1051,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute inh
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:210
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:210
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:210")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:210")
   public SimpleSet<Variable> lookupVariable(String name) {
     SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
     return lookupVariable_String_value;
@@ -1062,16 +1062,16 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
   /**
    * @attribute inh
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:252
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:252
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:252")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:252")
   public Collection<MethodDecl> lookupMethod(String name) {
     Collection<MethodDecl> lookupMethod_String_value = getParent().Define_lookupMethod(this, null, name);
     return lookupMethod_String_value;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:110
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:110
    * @apilevel internal
    */
   public CompilationUnit Define_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
@@ -1079,7 +1079,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return this;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:110
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:110
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute compilationUnit
    */
@@ -1087,12 +1087,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    */
   public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:68
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:68
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -1101,7 +1101,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
    */
@@ -1109,17 +1109,17 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:112
    * @apilevel internal
    */
   public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     if (_callerNode == getImportDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:320
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:320
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
     else if (_callerNode == getTypeDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ExceptionHandling.jrag:199
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ExceptionHandling.jrag:199
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -1128,7 +1128,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:112
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute handlesException
    */
@@ -1136,12 +1136,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getImportDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:535
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:535
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return lookupType(name);
     }
@@ -1161,7 +1161,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -1169,12 +1169,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:50
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_allImportedTypes(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getImportDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:52
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:52
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return importedTypes(name);
     }
@@ -1183,7 +1183,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:50
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute allImportedTypes
    */
@@ -1191,7 +1191,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/QualifiedNames.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/QualifiedNames.jrag:113
    * @apilevel internal
    */
   public String Define_packageName(ASTNode _callerNode, ASTNode _childNode) {
@@ -1199,7 +1199,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return packageName();
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/QualifiedNames.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/QualifiedNames.jrag:113
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute packageName
    */
@@ -1207,7 +1207,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
    * @apilevel internal
    */
   public boolean Define_canResolve(ASTNode _callerNode, ASTNode _childNode) {
@@ -1215,7 +1215,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:539
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute canResolve
    */
@@ -1223,12 +1223,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getImportDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:93
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:93
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.PACKAGE_NAME;
     }
@@ -1237,7 +1237,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -1245,7 +1245,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:551
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:551
    * @apilevel internal
    */
   public TypeDecl Define_enclosingType(ASTNode _callerNode, ASTNode _childNode) {
@@ -1253,7 +1253,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return null;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:551
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:551
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingType
    */
@@ -1261,7 +1261,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/NameCheck.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/NameCheck.jrag:30
    * @apilevel internal
    */
   public BodyDecl Define_enclosingBodyDecl(ASTNode _callerNode, ASTNode _childNode) {
@@ -1269,7 +1269,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return null;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/NameCheck.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/NameCheck.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingBodyDecl
    */
@@ -1277,7 +1277,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:576
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:576
    * @apilevel internal
    */
   public boolean Define_isNestedType(ASTNode _callerNode, ASTNode _childNode) {
@@ -1285,7 +1285,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:576
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:576
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isNestedType
    */
@@ -1293,12 +1293,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:584
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:584
    * @apilevel internal
    */
   public boolean Define_isMemberType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:587
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:587
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -1307,7 +1307,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:584
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:584
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isMemberType
    */
@@ -1315,7 +1315,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:602
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:602
    * @apilevel internal
    */
   public boolean Define_isLocalClass(ASTNode _callerNode, ASTNode _childNode) {
@@ -1323,7 +1323,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:602
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:602
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isLocalClass
    */
@@ -1331,7 +1331,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:637
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:637
    * @apilevel internal
    */
   public String Define_hostPackage(ASTNode _callerNode, ASTNode _childNode) {
@@ -1339,7 +1339,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return packageName();
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:637
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:637
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hostPackage
    */
@@ -1347,12 +1347,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/MultiCatch.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/MultiCatch.jrag:76
    * @apilevel internal
    */
   public TypeDecl Define_hostType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getImportDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:650
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:650
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return null;
     }
@@ -1361,7 +1361,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/MultiCatch.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/MultiCatch.jrag:76
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hostType
    */
@@ -1369,7 +1369,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:95
    * @apilevel internal
    */
   public boolean Define_inComplexAnnotation(ASTNode _callerNode, ASTNode _childNode) {
@@ -1377,7 +1377,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:95
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inComplexAnnotation
    */
@@ -1385,7 +1385,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:130
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:130
    * @apilevel internal
    */
   public boolean Define_isOriginalEnumConstructor(ASTNode _callerNode, ASTNode _childNode) {
@@ -1393,7 +1393,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:130
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:130
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isOriginalEnumConstructor
    */
@@ -1401,7 +1401,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:563
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:563
    * @apilevel internal
    */
   public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
@@ -1409,7 +1409,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:563
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:563
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inEnumInitializer
    */
@@ -1417,7 +1417,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:852
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:852
    * @apilevel internal
    */
   public String Define_typeVariableContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -1425,7 +1425,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return "";
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:852
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:852
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVariableContext
    */
@@ -1433,7 +1433,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:519
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:519
    * @apilevel internal
    */
   public Block Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
@@ -1441,7 +1441,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return null;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:519
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:519
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingBlock
    */
@@ -1449,12 +1449,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:198
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:198
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           SimpleSet<Variable> set = importedFields(name);
@@ -1473,7 +1473,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -1481,12 +1481,12 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    */
   public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/StaticImports.jrag:240
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/StaticImports.jrag:240
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           Collection<MethodDecl> methods = importedMethods(name);
@@ -1505,7 +1505,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:116
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
    */
@@ -1513,7 +1513,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EnclosingLambda.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EnclosingLambda.jrag:37
    * @apilevel internal
    */
   public LambdaExpr Define_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
@@ -1521,7 +1521,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return null;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EnclosingLambda.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EnclosingLambda.jrag:37
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingLambda
    */
@@ -1529,7 +1529,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -1537,7 +1537,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -1545,7 +1545,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -1553,7 +1553,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -1561,7 +1561,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -1569,7 +1569,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -1577,7 +1577,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -1585,7 +1585,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -1593,7 +1593,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -1601,7 +1601,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -1609,7 +1609,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:29
    * @apilevel internal
    */
   public int Define_typeVarPosition(ASTNode _callerNode, ASTNode _childNode) {
@@ -1617,7 +1617,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return -1;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:29
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarPosition
    */
@@ -1625,7 +1625,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:32
    * @apilevel internal
    */
   public boolean Define_typeVarInMethod(ASTNode _callerNode, ASTNode _childNode) {
@@ -1633,7 +1633,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return false;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:32
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarInMethod
    */
@@ -1641,7 +1641,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:30
    * @apilevel internal
    */
   public int Define_genericMethodLevel(ASTNode _callerNode, ASTNode _childNode) {
@@ -1649,7 +1649,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
     return 0;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute genericMethodLevel
    */
@@ -1670,10 +1670,10 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
    * <p>Separate error checks are added using individual contribution statements.
    * @attribute coll
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:283
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:283
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.COLL)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:283")
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:283")
   public LinkedList<Problem> problems() {
     ASTState state = state();
     if (CompilationUnit_problems_computed == ASTState.NON_CYCLE || CompilationUnit_problems_computed == state().cycle()) {
@@ -1713,7 +1713,7 @@ protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl
 
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:66
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:66
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

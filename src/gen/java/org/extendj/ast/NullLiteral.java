@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * Java null literal.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Literals.ast:29
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Literals.ast:29
  * @astdecl NullLiteral : Literal;
  * @production NullLiteral : {@link Literal};
 
@@ -38,7 +38,7 @@ import java.io.DataInputStream;
 public class NullLiteral extends Literal implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:145
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:145
    */
   public void emitPushConstant(CodeGeneration gen) {
     gen.ACONST_NULL();
@@ -214,10 +214,10 @@ public class NullLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:383
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:383")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:383")
   public boolean isConstant() {
     boolean isConstant_value = false;
     return isConstant_value;
@@ -236,10 +236,10 @@ public class NullLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -258,10 +258,10 @@ public class NullLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PolyExpressions.jrag:72
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PolyExpressions.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PolyExpressions.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PolyExpressions.jrag:72")
   public boolean isNullLiteral() {
     boolean isNullLiteral_value = true;
     return isNullLiteral_value;

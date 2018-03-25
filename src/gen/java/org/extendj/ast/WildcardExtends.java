@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Generics.ast:67
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Generics.ast:67
  * @astdecl WildcardExtends : AbstractWildcard ::= Access;
  * @production WildcardExtends : {@link AbstractWildcard} ::= <span class="component">{@link Access}</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class WildcardExtends extends AbstractWildcard implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/PrettyPrint.jadd:376
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/PrettyPrint.jadd:376
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("? extends ");
@@ -45,7 +45,7 @@ public class WildcardExtends extends AbstractWildcard implements Cloneable {
   }
   /**
    * @aspect PrettyPrintUtil5
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/PrettyPrintUtil.jrag:129
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/PrettyPrintUtil.jrag:129
    */
   @Override public String toString() {
     return String.format("? extends %s", getAccessNoTransform().toString());
@@ -224,10 +224,10 @@ public class WildcardExtends extends AbstractWildcard implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -246,10 +246,10 @@ public class WildcardExtends extends AbstractWildcard implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:620
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:620
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:620")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:620")
   public boolean mentionsTypeVariable(TypeVariable var) {
     boolean mentionsTypeVariable_TypeVariable_value = getAccess().mentionsTypeVariable(var);
     return mentionsTypeVariable_TypeVariable_value;
@@ -257,10 +257,10 @@ public class WildcardExtends extends AbstractWildcard implements Cloneable {
   /**
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1733
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1733
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1733")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1733")
   public TypeDecl lookupWildcardExtends(TypeDecl typeDecl) {
     TypeDecl lookupWildcardExtends_TypeDecl_value = getParent().Define_lookupWildcardExtends(this, null, typeDecl);
     return lookupWildcardExtends_TypeDecl_value;

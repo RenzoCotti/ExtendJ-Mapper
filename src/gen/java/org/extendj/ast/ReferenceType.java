@@ -33,7 +33,7 @@ import java.io.DataInputStream;
  * All reference types are represented by type declarations.
  * Concrete subclasses include class and interface declarations.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:124
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:124
  * @astdecl ReferenceType : TypeDecl;
  * @production ReferenceType : {@link TypeDecl};
 
@@ -41,42 +41,42 @@ import java.io.DataInputStream;
 public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:185
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:185
    */
   public void emitReturn(CodeGeneration gen) { gen.ARETURN(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:189
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:189
    */
   public void emitArrayLoad(CodeGeneration gen) { gen.AALOAD(this); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:204
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:204
    */
   public void emitLoadLocal(CodeGeneration gen, int pos)  { gen.ALOAD(pos, this); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:259
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:259
    */
   public void emitArrayStore(CodeGeneration gen)  { gen.AASTORE(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:286
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:286
    */
   public void emitStoreLocal(CodeGeneration gen, int pos) { gen.ASTORE(pos, this); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:606
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:606
    */
   public void branchEQ(CodeGeneration gen, int label) { gen.IF_ACMPEQ(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:617
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:617
    */
   public void branchNE(CodeGeneration gen, int label) { gen.IF_ACMPNE(label); }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:45
    */
   void byteToThis(CodeGeneration gen) {
     if (isUnknown()) {
@@ -91,7 +91,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:57
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:57
    */
   void charToThis(CodeGeneration gen) {
     if (isUnknown()) {
@@ -106,7 +106,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:69
    */
   void shortToThis(CodeGeneration gen) {
     if (isUnknown()) {
@@ -121,7 +121,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:81
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:81
    */
   void intToThis(CodeGeneration gen) {
     if (isUnknown()) {
@@ -136,7 +136,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:93
    */
   void longToThis(CodeGeneration gen) {
     if (isUnknown()) {
@@ -151,7 +151,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:105
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:105
    */
   void floatToThis(CodeGeneration gen) {
     if (isUnknown()) {
@@ -166,7 +166,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:117
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:117
    */
   void doubleToThis(CodeGeneration gen) {
     if (isUnknown()) {
@@ -448,7 +448,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/AutoBoxingCodegen.jrag:139
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/AutoBoxingCodegen.jrag:139
    */
    
   public void emitCastTo(CodeGeneration gen, TypeDecl type) {
@@ -469,7 +469,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:328
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:328
    */
   private Collection<FieldDeclarator> refined_GenerateClassfile_ReferenceType_fieldDeclarations()
 {
@@ -486,7 +486,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:424
    */
   private Collection<BodyDecl> refined_GenerateClassfile_ReferenceType_methodsAndConstructors()
 {
@@ -502,10 +502,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:38")
   public boolean wideningConversionTo(TypeDecl type) {
     boolean wideningConversionTo_TypeDecl_value = instanceOf(type);
     return wideningConversionTo_TypeDecl_value;
@@ -522,10 +522,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:39")
   public boolean narrowingConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (narrowingConversionTo_TypeDecl_computed == null) narrowingConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -575,10 +575,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:177
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:177
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:177")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:177")
   public boolean isReferenceType() {
     boolean isReferenceType_value = true;
     return isReferenceType_value;
@@ -586,10 +586,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:526
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:526
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:526")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:526")
   public boolean isSupertypeOfNullType(NullType type) {
     boolean isSupertypeOfNullType_NullType_value = true;
     return isSupertypeOfNullType_NullType_value;
@@ -597,10 +597,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:199
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:199")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:199")
   public boolean isValidAnnotationMethodReturnType() {
     {
         if (isString()) {
@@ -619,10 +619,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:73
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:73")
   public boolean unboxingConversionTo(TypeDecl typeDecl) {
     boolean unboxingConversionTo_TypeDecl_value = unboxed() == typeDecl;
     return unboxingConversionTo_TypeDecl_value;
@@ -641,10 +641,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /** Mapping between Reference type and corresponding unboxed Primitive type. 
    * @attribute syn
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:77")
   public TypeDecl unboxed() {
     ASTState state = state();
     if (unboxed_computed == ASTState.NON_CYCLE || unboxed_computed == state().cycle()) {
@@ -694,10 +694,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect NumericPromotion
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:156
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:156
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:156")
+  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:156")
   public TypeDecl unaryNumericPromotion() {
     TypeDecl unaryNumericPromotion_value = isNumericType() && !isUnknown() ? unboxed().unaryNumericPromotion() : this;
     return unaryNumericPromotion_value;
@@ -705,10 +705,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect NumericPromotion
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:165
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:165
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:165")
+  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:165")
   public TypeDecl binaryNumericPromotion(TypeDecl type) {
     TypeDecl binaryNumericPromotion_TypeDecl_value = unboxed().binaryNumericPromotion(type);
     return binaryNumericPromotion_TypeDecl_value;
@@ -716,10 +716,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:186
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:186
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:186")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:186")
   public boolean isNumericType() {
     boolean isNumericType_value = !unboxed().isUnknown() && unboxed().isNumericType();
     return isNumericType_value;
@@ -727,10 +727,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:190
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:190
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:190")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:190")
   public boolean isIntegralType() {
     boolean isIntegralType_value = !unboxed().isUnknown() && unboxed().isIntegralType();
     return isIntegralType_value;
@@ -738,10 +738,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:236
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:236")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:236")
   public boolean isPrimitive() {
     boolean isPrimitive_value = !unboxed().isUnknown() && unboxed().isPrimitive();
     return isPrimitive_value;
@@ -749,10 +749,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:194
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:194
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:194")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:194")
   public boolean isBoolean() {
     boolean isBoolean_value = fullName().equals("java.lang.Boolean") && unboxed().isBoolean();
     return isBoolean_value;
@@ -760,10 +760,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericsSubtype.jrag:576
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericsSubtype.jrag:576
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericsSubtype.jrag:576")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericsSubtype.jrag:576")
   public boolean supertypeNullType(NullType type) {
     boolean supertypeNullType_NullType_value = true;
     return supertypeNullType_NullType_value;
@@ -771,10 +771,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/GenericsSubtype.jrag:451
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/GenericsSubtype.jrag:451
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/GenericsSubtype.jrag:451")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/GenericsSubtype.jrag:451")
   public boolean strictSupertypeNullType(NullType type) {
     boolean strictSupertypeNullType_NullType_value = true;
     return strictSupertypeNullType_NullType_value;
@@ -793,10 +793,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /** @return a collection of the fields declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:326
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:326
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:326")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:326")
   public Collection<FieldDeclarator> fieldDeclarations() {
     ASTState state = state();
     if (fieldDeclarations_computed == ASTState.NON_CYCLE || fieldDeclarations_computed == state().cycle()) {
@@ -829,10 +829,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /** @return a collection of the methods and constructors declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:424
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:424")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:424")
   public Collection<BodyDecl> methodsAndConstructors() {
     {
         Collection<BodyDecl> original = refined_GenerateClassfile_ReferenceType_methodsAndConstructors();
@@ -863,10 +863,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:122
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:122
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:122")
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:122")
   public TypeDecl stringPromotion() {
     TypeDecl stringPromotion_value = isType("java.lang", "String") ? this : typeObject();
     return stringPromotion_value;
@@ -885,10 +885,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Java2Rewrites
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Java2Rewrites.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Java2Rewrites.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Java2Rewrites.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Java2Rewrites.jrag:37")
   public String jvmName() {
     ASTState state = state();
     if (jvmName_computed == ASTState.NON_CYCLE || jvmName_computed == state().cycle()) {
@@ -928,10 +928,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect VerificationTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/VerificationTypes.jrag:42
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/VerificationTypes.jrag:42
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VerificationTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/VerificationTypes.jrag:42")
+  @ASTNodeAnnotation.Source(aspect="VerificationTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/VerificationTypes.jrag:42")
   public VerificationType verificationType() {
     ASTState state = state();
     if (verificationType_computed == ASTState.NON_CYCLE || verificationType_computed == state().cycle()) {
@@ -965,10 +965,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:110
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:110
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:110")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:110")
   public TypeDecl typeBoolean() {
     TypeDecl typeBoolean_value = getParent().Define_typeBoolean(this, null);
     return typeBoolean_value;
@@ -976,10 +976,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:112
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:112")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:112")
   public TypeDecl typeByte() {
     TypeDecl typeByte_value = getParent().Define_typeByte(this, null);
     return typeByte_value;
@@ -987,10 +987,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:114
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:114
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:114")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:114")
   public TypeDecl typeChar() {
     TypeDecl typeChar_value = getParent().Define_typeChar(this, null);
     return typeChar_value;
@@ -998,10 +998,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:116
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:116")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:116")
   public TypeDecl typeShort() {
     TypeDecl typeShort_value = getParent().Define_typeShort(this, null);
     return typeShort_value;
@@ -1009,10 +1009,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:118
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:118
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:118")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:118")
   public TypeDecl typeInt() {
     TypeDecl typeInt_value = getParent().Define_typeInt(this, null);
     return typeInt_value;
@@ -1020,10 +1020,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:120
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:120
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:120")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:120")
   public TypeDecl typeLong() {
     TypeDecl typeLong_value = getParent().Define_typeLong(this, null);
     return typeLong_value;
@@ -1031,10 +1031,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:122
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:122
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:122")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:122")
   public TypeDecl typeFloat() {
     TypeDecl typeFloat_value = getParent().Define_typeFloat(this, null);
     return typeFloat_value;
@@ -1042,10 +1042,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:124
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:124
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/AutoBoxing.jrag:124")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/AutoBoxing.jrag:124")
   public TypeDecl typeDouble() {
     TypeDecl typeDouble_value = getParent().Define_typeDouble(this, null);
     return typeDouble_value;
@@ -1053,10 +1053,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect VerificationTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/VerificationTypes.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/VerificationTypes.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VerificationTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/VerificationTypes.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="VerificationTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/VerificationTypes.jrag:35")
   public Program program() {
     Program program_value = getParent().Define_program(this, null);
     return program_value;

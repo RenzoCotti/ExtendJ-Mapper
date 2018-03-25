@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/grammar/MethodReference.ast:8
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/grammar/MethodReference.ast:8
  * @astdecl ParMethodReferenceAccess : ParMethodAccess;
  * @production ParMethodReferenceAccess : {@link ParMethodAccess};
 
@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public class ParMethodReferenceAccess extends ParMethodAccess implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/MethodReference.jrag:439
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/MethodReference.jrag:439
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/MethodReference.jrag:440
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/MethodReference.jrag:440
    */
   public ParMethodReferenceAccess(String name,
       List<Expr> args, List<Access> typeArgs, FunctionDescriptor fd) {
@@ -458,10 +458,10 @@ public class ParMethodReferenceAccess extends ParMethodAccess implements Cloneab
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:196
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:196")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:196")
   public TypeDecl assignConvertedType() {
     ASTState state = state();
     if (assignConvertedType_computed == ASTState.NON_CYCLE || assignConvertedType_computed == state().cycle()) {

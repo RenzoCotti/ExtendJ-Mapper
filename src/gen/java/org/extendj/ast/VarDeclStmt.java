@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:169
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:169
  * @astdecl VarDeclStmt : Stmt ::= Modifiers TypeAccess:Access Declarator:VariableDeclarator*;
  * @production VarDeclStmt : {@link Stmt} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}</span> <span class="component">Declarator:{@link VariableDeclarator}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrint.jadd:629
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrint.jadd:629
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -53,13 +53,14 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:318
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:318
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLineNumberEntryAtCurrentPC(this); // Generate line number entry.
 		gen.addPositionEntryAtCurrentPC(this);
     for (VariableDeclarator decl : getDeclaratorList()) {
       decl.createBCode(gen);
+			gen.addPositionEntryAtCurrentPC(decl);
     }
   }
   /**
@@ -370,7 +371,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -421,7 +422,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:895")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:895")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -469,10 +470,10 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupVariable.jrag:219
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupVariable.jrag:219
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupVariable.jrag:219")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupVariable.jrag:219")
   public VariableDeclarator variableDeclaration(String name) {
     {
         for (VariableDeclarator decl : getDeclaratorList()) {
@@ -486,10 +487,10 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:274
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:274
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:274")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:274")
   public TypeDecl type() {
     TypeDecl type_value = getTypeAccess().type();
     return type_value;
@@ -507,10 +508,10 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTState state = state();
     if (canCompleteNormally_computed == ASTState.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -529,10 +530,10 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     {
         for (VariableDeclarator decl : getDeclaratorList()) {
@@ -559,10 +560,10 @@ public class VarDeclStmt extends Stmt implements Cloneable {
    * @return local size for declared variables
    * @attribute syn
    * @aspect LocalNum
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/LocalNum.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/LocalNum.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/LocalNum.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/LocalNum.jrag:38")
   public int localSize() {
     ASTState state = state();
     if (localSize_computed == ASTState.NON_CYCLE || localSize_computed == state().cycle()) {
@@ -587,12 +588,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
       return size;
     }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    */
   public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:70
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:70
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -601,7 +602,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
    */
@@ -609,12 +610,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:560
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:560
       int index = _callerNode.getIndexOfChild(_childNode);
       return index == 0 ? assignedBefore(v) : getDeclarator(index - 1).assignedAfter(v);
     }
@@ -623,7 +624,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -631,12 +632,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:1167
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:1167
       int index = _callerNode.getIndexOfChild(_childNode);
       return index == 0 ? unassignedBefore(v) : getDeclarator(index - 1).unassignedAfter(v);
     }
@@ -645,7 +646,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:887
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:887
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -653,12 +654,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupVariable.jrag:114
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupVariable.jrag:114
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           for (int i = index - 1; i >= 0; i -= 1) {
@@ -674,7 +675,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -682,12 +683,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:434
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:320
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:320
       return true;
     }
     else {
@@ -695,7 +696,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:434
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
    */
@@ -703,12 +704,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:436
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:436
    * @apilevel internal
    */
   public boolean Define_mayBeVolatile(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:321
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:321
       return true;
     }
     else {
@@ -716,7 +717,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:436
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:436
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeVolatile
    */
@@ -724,12 +725,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:107
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:107
       return NameType.TYPE_NAME;
     }
     else {
@@ -737,7 +738,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -745,12 +746,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:279
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:279
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return null;
     }
@@ -759,7 +760,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -767,12 +768,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/VariableDeclaration.jrag:133
    * @apilevel internal
    */
   public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/VariableDeclaration.jrag:135
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/VariableDeclaration.jrag:135
       int index = _callerNode.getIndexOfChild(_childNode);
       return getModifiers();
     }
@@ -781,7 +782,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/VariableDeclaration.jrag:133
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declarationModifiers
    */
@@ -789,12 +790,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/VariableDeclaration.jrag:144
    * @apilevel internal
    */
   public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/VariableDeclaration.jrag:146
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/VariableDeclaration.jrag:146
       int index = _callerNode.getIndexOfChild(_childNode);
       return getTypeAccess();
     }
@@ -803,7 +804,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/VariableDeclaration.jrag:144
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declarationType
    */
@@ -811,12 +812,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:162
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:162
       return name.equals("LOCAL_VARIABLE");
     }
     else {
@@ -824,7 +825,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
    */
@@ -832,12 +833,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1384
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1384
    * @apilevel internal
    */
   public FieldDecl Define_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1388
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1388
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return null;
     }
@@ -846,7 +847,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1384
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1384
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute fieldDecl
    */
@@ -854,12 +855,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1643
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1643
    * @apilevel internal
    */
   public FieldDeclarator Define_erasedField(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1650
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1650
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           throw new Error("FieldDeclarator child of VarDeclStmt");
@@ -870,7 +871,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1643
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1643
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute erasedField
    */
@@ -878,12 +879,12 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:53
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:53
    * @apilevel internal
    */
   public int Define_localNum(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/LocalNum.jrag:52
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/LocalNum.jrag:52
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           if (index == 0) {
@@ -898,7 +899,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:53
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:53
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute localNum
    */

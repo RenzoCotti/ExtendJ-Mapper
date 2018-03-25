@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BranchTarget
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/BranchTarget.jrag:48
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/BranchTarget.jrag:48
  */
  class LazyFinallyIterator extends java.lang.Object implements Iterator<FinallyHost> {
   

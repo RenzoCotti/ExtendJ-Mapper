@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect PathPart
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PathPart.jadd:258
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PathPart.jadd:258
  */
 public class JarClassSource extends BytecodeClassSource {
   

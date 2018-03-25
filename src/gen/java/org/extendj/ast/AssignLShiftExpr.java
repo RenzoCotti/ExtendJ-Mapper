@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:210
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:210
  * @astdecl AssignLShiftExpr : AssignShiftExpr;
  * @production AssignLShiftExpr : {@link AssignShiftExpr};
 
@@ -37,14 +37,14 @@ import java.io.DataInputStream;
 public class AssignLShiftExpr extends AssignShiftExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:449
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:454
    */
   public void createBCode(CodeGeneration gen) {
     emitShiftExpr(gen);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:555
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:560
    */
   public void emitAssignOp(CodeGeneration gen, TypeDecl type)  { type.shl(gen); }
   /**
@@ -236,10 +236,10 @@ public class AssignLShiftExpr extends AssignShiftExpr implements Cloneable {
   /** The operator string used for pretty printing this expression. 
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:367
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:367
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:367")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:367")
   public String printOp() {
     String printOp_value = "<<=";
     return printOp_value;

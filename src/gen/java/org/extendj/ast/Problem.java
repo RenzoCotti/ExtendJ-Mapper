@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect ErrorCheck
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:110
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:110
  */
 public class Problem extends java.lang.Object implements Comparable {
   

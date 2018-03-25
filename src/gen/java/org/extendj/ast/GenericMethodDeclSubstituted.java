@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Generics.ast:78
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Generics.ast:78
  * @astdecl GenericMethodDeclSubstituted : GenericMethodDecl ::= <Original:GenericMethodDecl>;
  * @production GenericMethodDeclSubstituted : {@link GenericMethodDecl} ::= <span class="component">&lt;Original:GenericMethodDecl&gt;</span>;
 

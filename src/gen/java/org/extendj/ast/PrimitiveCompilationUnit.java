@@ -31,7 +31,7 @@ import java.io.DataInputStream;
  * A synthetic type of compilation unit containing the
  * synthetic type declarations for primitive types.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:51
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:51
  * @astdecl PrimitiveCompilationUnit : CompilationUnit;
  * @production PrimitiveCompilationUnit : {@link CompilationUnit};
 
@@ -457,10 +457,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:37")
   public TypeDecl typeBoolean() {
     ASTState state = state();
     if (typeBoolean_computed) {
@@ -496,10 +496,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:45
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:45")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:45")
   public TypeDecl typeByte() {
     ASTState state = state();
     if (typeByte_computed) {
@@ -535,10 +535,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:53
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:53")
   public TypeDecl typeShort() {
     ASTState state = state();
     if (typeShort_computed) {
@@ -574,10 +574,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:61")
   public TypeDecl typeChar() {
     ASTState state = state();
     if (typeChar_computed) {
@@ -613,10 +613,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:69
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:69")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:69")
   public TypeDecl typeInt() {
     ASTState state = state();
     if (typeInt_computed) {
@@ -652,10 +652,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:77")
   public TypeDecl typeLong() {
     ASTState state = state();
     if (typeLong_computed) {
@@ -693,10 +693,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:87
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:87
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:87")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:87")
   public TypeDecl typeFloat() {
     ASTState state = state();
     if (typeFloat_computed) {
@@ -732,10 +732,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:95")
   public TypeDecl typeDouble() {
     ASTState state = state();
     if (typeDouble_computed) {
@@ -771,10 +771,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:103
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:103
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:103")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:103")
   public TypeDecl typeVoid() {
     ASTState state = state();
     if (typeVoid_computed) {
@@ -809,10 +809,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:110
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:110
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:110")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:110")
   public TypeDecl typeNull() {
     ASTState state = state();
     if (typeNull_computed) {
@@ -847,10 +847,10 @@ public class PrimitiveCompilationUnit extends CompilationUnit implements Cloneab
   /**
    * @attribute syn
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:117
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:117
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:117")
+  @ASTNodeAnnotation.Source(aspect="PrimitiveTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:117")
   public TypeDecl unknownType() {
     ASTState state = state();
     if (unknownType_computed) {

@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect BytecodeSignatures
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/BytecodeSignatures.jrag:393
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/BytecodeSignatures.jrag:393
  */
 public interface Flags {
 

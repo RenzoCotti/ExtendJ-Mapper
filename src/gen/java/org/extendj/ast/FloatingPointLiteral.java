@@ -31,7 +31,7 @@ import java.io.DataInputStream;
  * Java floating point literal. Can store any value representable as an
  * IEEE 754 32-bit single-precision floating point number.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Literals.ast:47
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Literals.ast:47
  * @astdecl FloatingPointLiteral : Literal;
  * @production FloatingPointLiteral : {@link Literal};
 
@@ -39,19 +39,19 @@ import java.io.DataInputStream;
 public class FloatingPointLiteral extends Literal implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrint.jadd:386
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrint.jadd:386
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getLITERAL());
   }
   /**
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:910
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:910
    */
   protected Constant constant = null;
   /**
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:912
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:912
    */
   public FloatingPointLiteral(String literal, Constant constant) {
     this(literal);
@@ -59,14 +59,14 @@ public class FloatingPointLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:99
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:99
    */
   public static void push(CodeGeneration gen, float value) {
     gen.FCONST(value);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:129
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:129
    */
   public void emitPushConstant(CodeGeneration gen) {
     FloatingPointLiteral.push(gen, constant().floatValue());
@@ -255,10 +255,10 @@ public class FloatingPointLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:295")
   public TypeDecl type() {
     ASTState state = state();
     if (type_computed == ASTState.NON_CYCLE || type_computed == state().cycle()) {
@@ -288,10 +288,10 @@ public class FloatingPointLiteral extends Literal implements Cloneable {
    * @return true if this floating point literal is equivalent to a zero literal
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:44
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:44")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:44")
   public boolean isZero() {
     ASTState state = state();
     if (isZero_computed == ASTState.NON_CYCLE || isZero_computed == state().cycle()) {
@@ -335,10 +335,10 @@ public class FloatingPointLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ConstantExpression.jrag:38")
   public Constant constant() {
     ASTState state = state();
     if (constant_computed == ASTState.NON_CYCLE || constant_computed == state().cycle()) {
@@ -377,7 +377,7 @@ public class FloatingPointLiteral extends Literal implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:767
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:767
     if (!isZero() && constant().floatValue() == 0.0f) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -388,7 +388,7 @@ public class FloatingPointLiteral extends Literal implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:772
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:772
     if (constant().floatValue() == Float.NEGATIVE_INFINITY
               || constant().floatValue() == Float.POSITIVE_INFINITY) {
       {

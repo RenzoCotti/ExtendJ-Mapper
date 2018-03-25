@@ -36,7 +36,7 @@ import java.io.DataInputStream;
 public class Opt<T extends ASTNode> extends ASTNode<T> implements Cloneable {
   /** Pretty-print Opt nodes only if they are not empty. 
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:163
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:163
    */
   public void prettyPrint(PrettyPrinter out) {
     if (getNumChild() > 0) {

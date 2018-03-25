@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect Java7Literals
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:311
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:311
  */
  interface NumericLiteral {
 
@@ -39,25 +39,25 @@ import java.io.DataInputStream;
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:317
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:317
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:317")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:317")
   public boolean isHex();
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:319
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:319
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:319")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:319")
   public boolean isOctal();
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:321
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:321
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:321")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:321")
   public boolean isDecimal();
 }

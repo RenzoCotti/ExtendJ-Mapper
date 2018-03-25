@@ -32,7 +32,7 @@ import java.io.DataInputStream;
  * This subclass is added as a convenient method of making resource
  * declarations implicitly final.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/grammar/TryWithResources.ast:16
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/grammar/TryWithResources.ast:16
  * @astdecl ResourceModifiers : Modifiers;
  * @production ResourceModifiers : {@link Modifiers};
 
@@ -296,10 +296,10 @@ public class ResourceModifiers extends Modifiers implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:446
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:446
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:446")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:446")
   public boolean isFinal() {
     ASTState state = state();
     if (isFinal_computed == ASTState.NON_CYCLE || isFinal_computed == state().cycle()) {

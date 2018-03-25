@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect Attributes
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Attributes.jrag:141
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Attributes.jrag:141
  */
 public class InnerClassesAttribute extends Attribute {
   

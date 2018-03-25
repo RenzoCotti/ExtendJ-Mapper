@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect ClassfileParser
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassfileParser.jrag:34
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassfileParser.jrag:34
  */
 public abstract class AbstractClassfileParser extends java.lang.Object {
   

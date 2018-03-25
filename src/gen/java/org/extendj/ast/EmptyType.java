@@ -33,7 +33,7 @@ import java.io.DataInputStream;
  * <p>The empty type should never occur during type analysis of non-empty
  * expressions.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:133
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:133
  * @astdecl EmptyType : PrimitiveType;
  * @production EmptyType : {@link PrimitiveType};
 
@@ -41,7 +41,7 @@ import java.io.DataInputStream;
 public class EmptyType extends PrimitiveType implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrint.jadd:356
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrint.jadd:356
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(";");

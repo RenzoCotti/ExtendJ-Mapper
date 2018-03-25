@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Generics.ast:79
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Generics.ast:79
  * @astdecl GenericMethodDeclErased : GenericMethodDecl ::= <Original:GenericMethodDecl>;
  * @production GenericMethodDeclErased : {@link GenericMethodDecl} ::= <span class="component">&lt;Original:GenericMethodDecl&gt;</span>;
 
@@ -689,10 +689,10 @@ public class GenericMethodDeclErased extends GenericMethodDecl implements Clonea
    * @return a specific parameterization of this generic method.
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:66
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:66")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:66")
   public ParMethodDecl lookupParMethodDecl(Collection<TypeDecl> typeArguments) {
     Object _parameters = typeArguments;
     if (lookupParMethodDecl_Collection_TypeDecl__values == null) lookupParMethodDecl_Collection_TypeDecl__values = new java.util.HashMap(4);

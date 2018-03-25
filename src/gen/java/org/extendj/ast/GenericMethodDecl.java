@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/GenericMethods.ast:1
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/GenericMethods.ast:1
  * @astdecl GenericMethodDecl : MethodDecl ::= TypeParameter:TypeVariable*;
  * @production GenericMethodDecl : {@link MethodDecl} ::= <span class="component">TypeParameter:{@link TypeVariable}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/PrettyPrint.jadd:289
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/PrettyPrint.jadd:289
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasDocComment()) {
@@ -84,7 +84,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   }
   /**
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:70
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:70
    */
   public ParMethodDecl newParMethodDecl(Collection<TypeDecl> typeArguments) {
     Parameterization parameterization = new Parameterization(getTypeParameterList(),
@@ -118,7 +118,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1432
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1432
    */
   public BodyDecl signatureCopy() {
     return new GenericMethodDeclSubstituted(
@@ -133,7 +133,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1533
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1533
    */
   public BodyDecl erasedCopy() {
     return new GenericMethodDeclErased(
@@ -148,7 +148,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   }
   /**
    * @aspect PrettyPrintUtil5
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/PrettyPrintUtil.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/PrettyPrintUtil.jrag:35
    */
   @Override public String toString() {
     StringBuilder params = new StringBuilder();
@@ -799,10 +799,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:49
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:49")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:49")
   public ParMethodDecl rawMethodDecl() {
     ASTState state = state();
     if (rawMethodDecl_computed == ASTState.NON_CYCLE || rawMethodDecl_computed == state().cycle()) {
@@ -832,10 +832,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
    * @return a specific parameterization of this generic method.
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:60")
   public ParMethodDecl lookupParMethodDecl(Collection<TypeDecl> typeArguments) {
     Object _parameters = typeArguments;
     if (lookupParMethodDecl_Collection_TypeDecl__values == null) lookupParMethodDecl_Collection_TypeDecl__values = new java.util.HashMap(4);
@@ -863,10 +863,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethodsNameAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:211
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:211
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethodsNameAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:211")
+  @ASTNodeAnnotation.Source(aspect="GenericMethodsNameAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:211")
   public SimpleSet<TypeDecl> localLookupType(String name) {
     {
         for (int i = 0; i < getNumTypeParameter(); i++) {
@@ -880,10 +880,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1444
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1444
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1444")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1444")
   public GenericMethodDecl original() {
     GenericMethodDecl original_value = this;
     return original_value;
@@ -893,10 +893,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
    * substitued generic method or constructor.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:413
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:413
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:413")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:413")
   public boolean isGeneric() {
     boolean isGeneric_value = true;
     return isGeneric_value;
@@ -907,10 +907,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
    * @return the original generic declaration of this method.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:424
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:424")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:424")
   public GenericMethodDecl genericDecl() {
     GenericMethodDecl genericDecl_value = this;
     return genericDecl_value;
@@ -921,10 +921,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
    * @return type parameters for this declaration.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:448
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:448
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:448")
   public List<TypeVariable> typeParameters() {
     List<TypeVariable> typeParameters_value = getTypeParameterList();
     return typeParameters_value;
@@ -932,10 +932,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:36")
   public boolean sameSignature(MethodDecl m) {
     {
         if (!m.isGeneric()) {
@@ -957,10 +957,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:54
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:54
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:54")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:54")
   public boolean subsignatureTo(MethodDecl m) {
     Object _parameters = m;
     if (subsignatureTo_MethodDecl_computed == null) subsignatureTo_MethodDecl_computed = new java.util.HashMap(4);
@@ -1008,10 +1008,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:90
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:90
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:90")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:90")
   public boolean sameTypeParameters(GenericMethodDecl gm) {
     Object _parameters = gm;
     if (sameTypeParameters_GenericMethodDecl_computed == null) sameTypeParameters_GenericMethodDecl_computed = new java.util.HashMap(4);
@@ -1061,10 +1061,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:106
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/FunctionalInterface.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/FunctionalInterface.jrag:106")
   public boolean sameFormalParameters(GenericMethodDecl gm) {
     Object _parameters = gm;
     if (sameFormalParameters_GenericMethodDecl_computed == null) sameFormalParameters_GenericMethodDecl_computed = new java.util.HashMap(4);
@@ -1120,10 +1120,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1311
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1311
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1311")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1311")
   public boolean usesTypeVariable() {
     ASTState state = state();
     if (usesTypeVariable_computed == ASTState.NON_CYCLE || usesTypeVariable_computed == state().cycle()) {
@@ -1152,10 +1152,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PolyExpressions.jrag:117
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PolyExpressions.jrag:117
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PolyExpressions.jrag:117")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PolyExpressions.jrag:117")
   public boolean typeVariableInReturn() {
     ASTState state = state();
     if (typeVariableInReturn_computed == ASTState.NON_CYCLE || typeVariableInReturn_computed == state().cycle()) {
@@ -1205,10 +1205,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/GenericsCodegen.jrag:438
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:438
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/GenericsCodegen.jrag:438")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:438")
   public boolean needsSignatureAttribute() {
     boolean needsSignatureAttribute_value = true;
     return needsSignatureAttribute_value;
@@ -1216,10 +1216,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/GenericsCodegen.jrag:557
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:557
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/GenericsCodegen.jrag:557")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:557")
   public String methodTypeSignature() {
     {
         StringBuilder buf = new StringBuilder();
@@ -1236,10 +1236,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect GenericMethodsNameAnalysis
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:209
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:209
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="GenericMethodsNameAnalysis", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:209")
+  @ASTNodeAnnotation.Source(aspect="GenericMethodsNameAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:209")
   public SimpleSet<TypeDecl> lookupType(String name) {
     SimpleSet<TypeDecl> lookupType_String_value = getParent().Define_lookupType(this, null, name);
     return lookupType_String_value;
@@ -1247,10 +1247,10 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect TypeVariablePositions
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:31")
+  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:31")
   public int genericMethodLevel() {
     ASTState state = state();
     if (genericMethodLevel_computed == ASTState.NON_CYCLE || genericMethodLevel_computed == state().cycle()) {
@@ -1277,12 +1277,12 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
   protected int genericMethodLevel_value;
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:207
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:207
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -1291,7 +1291,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -1299,7 +1299,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -1307,7 +1307,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     return localLookupType(name).isEmpty() ? lookupType(name) : localLookupType(name);
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -1315,12 +1315,12 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:29
    * @apilevel internal
    */
   public int Define_typeVarPosition(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:37
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:37
       int i = _callerNode.getIndexOfChild(_childNode);
       return i;
     }
@@ -1329,7 +1329,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:29
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarPosition
    */
@@ -1337,12 +1337,12 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:32
    * @apilevel internal
    */
   public boolean Define_typeVarInMethod(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:38
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:38
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -1351,7 +1351,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:32
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarInMethod
    */
@@ -1359,16 +1359,16 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:30
    * @apilevel internal
    */
   public int Define_genericMethodLevel(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:50
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:50
       return genericMethodLevel() + 1;
     }
     else if (_callerNode == getTypeParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:49
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:49
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return genericMethodLevel() + 1;
     }
@@ -1377,7 +1377,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute genericMethodLevel
    */

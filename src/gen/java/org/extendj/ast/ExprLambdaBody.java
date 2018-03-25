@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/grammar/Lambda.ast:13
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/grammar/Lambda.ast:13
  * @astdecl ExprLambdaBody : LambdaBody ::= Expr;
  * @production ExprLambdaBody : {@link LambdaBody} ::= <span class="component">{@link Expr}</span>;
 
@@ -37,21 +37,21 @@ import java.io.DataInputStream;
 public class ExprLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PrettyPrint.jadd:67
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PrettyPrint.jadd:67
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getExpr());
   }
   /**
    * @aspect PrettyPrintUtil8
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PrettyPrintUtil.jadd:75
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PrettyPrintUtil.jadd:75
    */
   @Override public String toString() {
     return getExprNoTransform().toString();
   }
   /**
    * @aspect LambdaToClass
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaAnonymousDecl.jrag:92
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaAnonymousDecl.jrag:92
    */
   protected Block toBlock() {
     List<Stmt> stmtList = new List<Stmt>();
@@ -237,10 +237,10 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EffectivelyFinal.jrag:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EffectivelyFinal.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EffectivelyFinal.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EffectivelyFinal.jrag:43")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getExpr().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -258,10 +258,10 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaBody
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaBody.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaBody.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaBody.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaBody.jrag:29")
   public boolean isBlockBody() {
     ASTState state = state();
     if (isBlockBody_computed == ASTState.NON_CYCLE || isBlockBody_computed == state().cycle()) {
@@ -290,10 +290,10 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaBody
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaBody.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaBody.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaBody.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaBody.jrag:30")
   public boolean isExprBody() {
     ASTState state = state();
     if (isExprBody_computed == ASTState.NON_CYCLE || isExprBody_computed == state().cycle()) {
@@ -321,10 +321,10 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:89
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:89
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:89")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:89")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -360,12 +360,12 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
       }
     }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:127
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:127
       {
           TypeDecl decl = enclosingLambda().targetType();
           if (decl.isNull()) {
@@ -392,7 +392,7 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:31
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -400,12 +400,12 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:247
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:247
       return true;
     }
     else {
@@ -413,7 +413,7 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:235
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -421,12 +421,12 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:248
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:248
       return false;
     }
     else {
@@ -434,7 +434,7 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:236
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -442,12 +442,12 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:249
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:249
       return false;
     }
     else {
@@ -455,7 +455,7 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:237
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -463,12 +463,12 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:250
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:250
       return false;
     }
     else {
@@ -476,7 +476,7 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:238
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:238
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -484,12 +484,12 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:251
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:251
       return false;
     }
     else {
@@ -497,7 +497,7 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:239
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */

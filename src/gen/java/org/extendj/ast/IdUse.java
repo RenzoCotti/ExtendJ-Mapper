@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:192
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:192
  * @astdecl IdUse : ASTNode ::= <ID:String>;
  * @production IdUse : {@link ASTNode} ::= <span class="component">&lt;ID:String&gt;</span>;
 

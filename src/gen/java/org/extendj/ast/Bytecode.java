@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect JVMBytecodes
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/JVMBytecodes.jrag:34
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/JVMBytecodes.jrag:34
  */
  class Bytecode extends java.lang.Object {
   

@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Generics.ast:125
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Generics.ast:125
  * @astdecl BridgeMethodDecl : MethodDecl;
  * @production BridgeMethodDecl : {@link MethodDecl};
 
@@ -553,10 +553,10 @@ public class BridgeMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Flags
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Flags.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Flags.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Flags.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Flags.jrag:60")
   public int flags() {
     ASTState state = state();
     if (flags_computed == ASTState.NON_CYCLE || flags_computed == state().cycle()) {

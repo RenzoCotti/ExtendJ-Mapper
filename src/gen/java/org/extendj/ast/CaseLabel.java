@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect CaseLabels
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CaseLabels.jadd:36
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CaseLabels.jadd:36
  */
 public class CaseLabel extends java.lang.Object {
   

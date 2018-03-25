@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/grammar/Lambda.ast:8
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/grammar/Lambda.ast:8
  * @astdecl InferredLambdaParameters : LambdaParameters ::= Parameter:InferredParameterDeclaration*;
  * @production InferredLambdaParameters : {@link LambdaParameters} ::= <span class="component">Parameter:{@link InferredParameterDeclaration}*</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class InferredLambdaParameters extends LambdaParameters implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PrettyPrint.jadd:85
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PrettyPrint.jadd:85
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("(");
@@ -51,7 +51,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   }
   /**
    * @aspect PrettyPrintUtil8
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/PrettyPrintUtil.jadd:41
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/PrettyPrintUtil.jadd:41
    */
   @Override public String toString() {
     int numParams = 0;
@@ -71,7 +71,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   }
   /**
    * @aspect LambdaToClass
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaAnonymousDecl.jrag:121
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaAnonymousDecl.jrag:121
    */
   protected List<ParameterDeclaration> toParameterList() {
     List<ParameterDeclaration> paramList = new List<ParameterDeclaration>();
@@ -348,10 +348,10 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:47")
   public int numParameters() {
     ASTState state = state();
     if (numParameters_computed == ASTState.NON_CYCLE || numParameters_computed == state().cycle()) {
@@ -379,10 +379,10 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:53
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:53")
   public boolean congruentTo(FunctionDescriptor fd) {
     Object _parameters = fd;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -425,10 +425,10 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LookupVariable.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LookupVariable.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LookupVariable.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LookupVariable.jrag:47")
   public SimpleSet<Variable> parameterDeclaration(String name) {
     Object _parameters = name;
     if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
@@ -463,10 +463,10 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   /**
    * @attribute syn
    * @aspect Java8NameCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/NameCheck.jrag:560
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/NameCheck.jrag:560
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/NameCheck.jrag:560")
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/NameCheck.jrag:560")
   public Collection<Problem> nameProblems() {
     {
         for (int i = 0; i < getNumParameter(); i++) {
@@ -480,12 +480,12 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
       }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
   public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EffectivelyFinal.jrag:37
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EffectivelyFinal.jrag:37
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return inhModifiedInScope(var);
     }
@@ -494,7 +494,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
    */
@@ -502,12 +502,12 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LookupVariable.jrag:35
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LookupVariable.jrag:35
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return parameterDeclaration(name);
     }
@@ -516,7 +516,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:96
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -524,12 +524,12 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:502
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:502
    * @apilevel internal
    */
   public TypeDecl Define_inferredType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:503
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:503
       int i = _callerNode.getIndexOfChild(_childNode);
       {
           if (enclosingLambda().targetInterface() == null) {
@@ -560,7 +560,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
     }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:502
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:502
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inferredType
    */
@@ -577,7 +577,7 @@ public class InferredLambdaParameters extends LambdaParameters implements Clonea
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/NameCheck.jrag:558
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/NameCheck.jrag:558
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/GenericMethods.ast:8
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/GenericMethods.ast:8
  * @astdecl RawMethodDecl : ParMethodDecl;
  * @production RawMethodDecl : {@link ParMethodDecl};
 

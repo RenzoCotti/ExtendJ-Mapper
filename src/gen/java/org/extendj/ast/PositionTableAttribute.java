@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect PositionTable
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/PositionTable.jrag:2
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/PositionTable.jrag:2
  */
 public class PositionTableAttribute extends Attribute {
   

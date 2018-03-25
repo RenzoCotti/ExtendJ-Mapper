@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/BoundNames.ast:6
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/BoundNames.ast:6
  * @astdecl BoundFieldAccess : VarAccess ::= <FieldDeclarator:FieldDeclarator>;
  * @production BoundFieldAccess : {@link VarAccess} ::= <span class="component">&lt;FieldDeclarator:FieldDeclarator&gt;</span>;
 
@@ -37,14 +37,14 @@ import java.io.DataInputStream;
 public class BoundFieldAccess extends VarAccess implements Cloneable {
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/BoundNames.jrag:85
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/BoundNames.jrag:85
    */
   public BoundFieldAccess(FieldDeclarator f) {
     this(f.name(), f);
   }
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/BoundNames.jrag:91
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/BoundNames.jrag:91
    */
   public boolean isExactVarAccess() {
     return false;
@@ -253,10 +253,10 @@ public class BoundFieldAccess extends VarAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScopePropagation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupVariable.jrag:374
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupVariable.jrag:374
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupVariable.jrag:374")
+  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupVariable.jrag:374")
   public Variable decl() {
     ASTState state = state();
     if (decl_computed == ASTState.NON_CYCLE || decl_computed == state().cycle()) {

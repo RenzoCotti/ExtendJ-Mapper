@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/grammar/MethodReference.ast:7
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/grammar/MethodReference.ast:7
  * @astdecl MethodReferenceAccess : MethodAccess;
  * @production MethodReferenceAccess : {@link MethodAccess};
 
@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public class MethodReferenceAccess extends MethodAccess implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/MethodReference.jrag:432
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/MethodReference.jrag:432
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/MethodReference.jrag:433
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/MethodReference.jrag:433
    */
   public MethodReferenceAccess(String name,
       List<Expr> args, FunctionDescriptor fd) {
@@ -345,10 +345,10 @@ public class MethodReferenceAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:188
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:188
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:188")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:188")
   public TypeDecl assignConvertedType() {
     ASTState state = state();
     if (assignConvertedType_computed == ASTState.NON_CYCLE || assignConvertedType_computed == state().cycle()) {

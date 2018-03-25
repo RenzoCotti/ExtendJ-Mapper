@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Generics.ast:84
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Generics.ast:84
  * @astdecl FieldDeclarationSubstituted : FieldDeclarator ::= <Original:FieldDeclarator>;
  * @production FieldDeclarationSubstituted : {@link FieldDeclarator} ::= <span class="component">&lt;Original:FieldDeclarator&gt;</span>;
 

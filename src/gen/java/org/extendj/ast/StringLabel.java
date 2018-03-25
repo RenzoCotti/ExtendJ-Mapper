@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect StringsInSwitch
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/StringsInSwitch.jrag:81
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/StringsInSwitch.jrag:81
  */
  class StringLabel extends CaseLabel {
   

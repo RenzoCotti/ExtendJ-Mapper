@@ -31,7 +31,7 @@ import java.io.DataInputStream;
  * A type variable that should have its type bounds substituted during type
  * argument bounds checking.
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Generics.ast:62
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Generics.ast:62
  * @astdecl SubstitutedTypeVariable : TypeVariable ::= Modifiers <ID:String> BodyDecl* TypeBound:Access* <Parameterization:Parameterization>;
  * @production SubstitutedTypeVariable : {@link TypeVariable} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link BodyDecl}*</span> <span class="component">TypeBound:{@link Access}*</span> <span class="component">&lt;Parameterization:Parameterization&gt;</span>;
 
@@ -482,7 +482,7 @@ public class SubstitutedTypeVariable extends TypeVariable implements Cloneable {
     return tokenParameterization_Parameterization;
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -496,7 +496,7 @@ public class SubstitutedTypeVariable extends TypeVariable implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */

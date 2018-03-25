@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect StackMapTable
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java6/backend/StackMap.jrag:36
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java6/backend/StackMap.jrag:36
  */
 public class StackMapTableAttribute extends Attribute {
   

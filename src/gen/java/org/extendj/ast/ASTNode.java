@@ -36,12 +36,12 @@ import java.io.DataInputStream;
 public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneable, PrettyPrintable {
   /**
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:38
    */
   private String DUMP_TREE_INDENT = "  ";
   /**
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:40
    */
   public String dumpTree() {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -50,7 +50,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:46
    */
   public void dumpTree(PrintStream out) {
     dumpTree(out, "");
@@ -58,7 +58,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:51
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:51
    */
   public void dumpTree(PrintStream out, String indent) {
     out.print(indent + getClass().getSimpleName());
@@ -78,7 +78,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * 
    * <p>Only used for debug tree dumping.
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:70
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:70
    */
   public String getTokens() {
     StringBuilder sb = new StringBuilder();
@@ -97,7 +97,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:86
    */
   public String dumpTreeNoRewrite() {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -106,7 +106,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:92
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:92
    */
   public void dumpTreeNoRewrite(PrintStream out) {
     dumpTreeNoRewrite(out, "");
@@ -114,7 +114,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect DumpTree
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DumpTree.jadd:97
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DumpTree.jadd:97
    */
   public void dumpTreeNoRewrite(PrintStream out, String indent) {
     out.print(indent + getClass().getSimpleName() + " " + getPos());
@@ -131,7 +131,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect StructuredPrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/StructuredPrettyPrint.jadd:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/StructuredPrettyPrint.jadd:32
    */
   public String structuredPrettyPrint() throws IOException {
     ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -143,7 +143,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * Hacky way of inserting parens around all expressions.
    * @aspect StructuredPrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/StructuredPrettyPrint.jadd:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/StructuredPrettyPrint.jadd:43
    */
   private void wrapExprs() {
     for (int i = 0; i < getNumChildNoTransform(); ++i) {
@@ -162,7 +162,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * Finds all exceptions thrown in this part of the AST.
    * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:127
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:127
    */
   protected void collectExceptions(Collection<TypeDecl> exceptions) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -171,7 +171,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect BranchTarget
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/BranchTarget.jrag:94
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/BranchTarget.jrag:94
    */
   public void collectBranches(Collection<Stmt> c) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -180,14 +180,14 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DataStructures.jrag:313
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DataStructures.jrag:313
    */
   public static <T> SimpleSet<T> emptySet() {
     return (SimpleSet<T>) SimpleSet.EMPTY_SET;
   }
   /**
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:570
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:570
    */
   protected boolean checkDUeverywhere(Variable v) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -199,7 +199,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:719
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:719
    */
   protected boolean isDescendantTo(ASTNode node) {
     if (this == node) {
@@ -212,7 +212,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:34
    */
   protected String sourceFile() {
     ASTNode node = this;
@@ -227,7 +227,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:59
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:59
    */
   public ASTNode setLocation(ASTNode node) {
     setStart(node.getStart());
@@ -236,7 +236,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:65
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:65
    */
   public ASTNode setStart(int i) {
     start = i;
@@ -244,14 +244,14 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:70
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:70
    */
   public int start() {
     return start;
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:74
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:74
    */
   public ASTNode setEnd(int i) {
     end = i;
@@ -259,49 +259,49 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:79
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:79
    */
   public int end() {
     return end;
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:83
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:83
    */
   public String location() {
     return "" + lineNumber();
   }
   /** @return the source location of this node in the format "filename:line" 
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:88
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:88
    */
   public String sourceLocation() {
     return sourceFile() + ":" + lineNumber();
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:92
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:92
    */
   public String errorPrefix() {
     return sourceLocation() + ":\n" + "  *** Semantic Error: ";
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:96
    */
   public String warningPrefix() {
     return sourceLocation() + ":\n" + "  *** WARNING: ";
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:245
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:245
    */
   public Problem errorf(String messagefmt, Object... args) {
     return error(String.format(messagefmt, args));
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:249
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:249
    */
   public Problem error(String message) {
     ASTNode node = this;
@@ -323,7 +323,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:268
    */
   public Problem warning(String message) {
     ASTNode node = this;
@@ -340,7 +340,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @return {@code true} if this expression/statement can throw an exception
    * that is catchable as the given exception type.
    * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ExceptionHandling.jrag:298
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ExceptionHandling.jrag:298
    */
   protected boolean reachedException(TypeDecl catchType) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -356,7 +356,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * 
    * @return the filtered collection of methods.
    * @aspect LookupMethod
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:183
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:183
    */
   public static Collection<MethodDecl> keepStaticMethods(
       Collection<MethodDecl> methods) {
@@ -371,7 +371,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * Utility method to add a single item in a {@code SimpleSet}-based map.
    * @aspect MemberMethods
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:699
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:699
    */
   protected static <E> void putSimpleSetElement(Map<String, SimpleSet<E>> map,
       String key, E value) {
@@ -385,7 +385,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * Converts a null SimpleSet to an empty set.
    * If the passed SimpleSet is not null, the input set is returned.
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:349
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:349
    */
   public static <T extends SimpleSet<T>> SimpleSet<T> toSet(T set) {
     if (set != null) {
@@ -396,7 +396,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupVariable.jrag:299
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupVariable.jrag:299
    */
   public SimpleSet<Variable> removeInstanceVariables(SimpleSet<Variable> vars) {
     SimpleSet<Variable> newSet = emptySet();
@@ -409,14 +409,14 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:33
    */
   public TypeDecl extractSingleType(SimpleSet<TypeDecl> types) {
     return types.isSingleton() ? types.singletonValue() : null;
   }
   /** @return a copy of the block as an NTAFinallyBlock. 
    * @aspect NTAFinally
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NTAFinally.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NTAFinally.jrag:33
    */
   protected static NTAFinallyBlock ntaFinallyBlock(FinallyHost origin,
       Stmt branch, Block block) {
@@ -434,7 +434,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * Pretty-print this ASTNode.
    * @return pretty-printed representation of this AST node
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:41
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:41
    */
   public String prettyPrint() {
     ByteArrayOutputStream buf = new ByteArrayOutputStream();
@@ -445,34 +445,34 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * Pretty print this AST node to the target PrintStream.
    * @param out target for pretty printing
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:51
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:51
    */
   public void prettyPrint(PrintStream out) {
     prettyPrint(new PrettyPrinter("  ", out));
   }
   /** @return the name of the class implementing this AST node. 
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:63
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:63
    */
   @Override public String toString() {
     return getClass().getName();
   }
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrettyPrintUtil.jrag:159
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrettyPrintUtil.jrag:159
    */
   public void prettyPrint(PrettyPrinter out) {
   }
   /**
    * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/PrimitiveTypes.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/PrimitiveTypes.jrag:35
    */
   protected static final String PRIMITIVE_PACKAGE_NAME = "@primitive";
   /**
    * Helper method to throw an error when prevExpr is evaluated somewhere where
    * the attribute can not be evaluated.
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:138
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:138
    */
   protected Expr prevExprError() {
     throw new Error("prevExpr can not be evaluated outside of the right side of a Dot access.");
@@ -481,14 +481,14 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * Helper method to throw an error when nextAccess is evaluated somewhere
    * where the attribute can not be evaluated.
    * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:160
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:160
    */
   protected Access nextAccessError() {
     throw new Error("nextAccess can not be evaluated outside of the left side of a Dot access.");
   }
   /**
    * @aspect VariableDeclarationTransformation
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/VariableDeclaration.jrag:121
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/VariableDeclaration.jrag:121
    */
   public void clearLocations() {
     setStart(0);
@@ -500,7 +500,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * Create a copy of the access list where each access has been erased.
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1624
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1624
    */
   protected List<Access> erasedAccessList(List<Access> list) {
     List<Access> result = new List<Access>();
@@ -512,7 +512,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * Create a copy of the parameter list where each parameter has been erased.
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1635
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1635
    */
   protected List<ParameterDeclaration> erasedParameterList(List<ParameterDeclaration> list) {
     List<ParameterDeclaration> result = new List<ParameterDeclaration>();
@@ -523,7 +523,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect UncheckedConversion
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/UncheckedConversion.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/UncheckedConversion.jrag:61
    */
   Collection<Problem> uncheckedConversionWarnings(TypeDecl source, TypeDecl dest) {
     if (source.isUncheckedConversionTo(dest)) {
@@ -539,13 +539,13 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * 
    * <p>Version 4 = Java 1.4, 5 = Java 5, 6 = Java 6, ...
    * @aspect JavaVersion
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/JavaVersion.jrag:7
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/JavaVersion.jrag:7
    */
   public static final int JAVA_VERSION = 8;
   /**
    * Builds a collection of the extra attributes to attach to a code attribute.
    * @aspect Attributes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Attributes.jrag:221
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Attributes.jrag:221
    */
   static Collection<Attribute> refined_Attributes_ASTNode_codeAttributes(CodeGeneration codeGen, MethodDecl m) {
     Collection<Attribute> attributes = new ArrayList<Attribute>();
@@ -565,14 +565,14 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:34
    */
   public void setSourceLineNumber(int i) {
     setStart(ASTNode.makePosition(i, 1));
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:58
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:58
    */
   protected int findFirstSourceLineNumber() {
     if (getStart() != 0) {
@@ -589,7 +589,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * Throws an error about unimplemented code generation.
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:156
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:156
    */
   public void codeGenError(String instr) {
     throw new Error(String.format("Cannot create %s bytecode for type %s.",
@@ -597,7 +597,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CreateBCode.jrag:279
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:279
    */
   public void createBCode(CodeGeneration gen) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -606,7 +606,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:204
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:204
    */
   public void collectEnclosingVariables(Collection<Variable> vars, TypeDecl typeDecl) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -615,7 +615,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:381
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:381
    */
   protected static Access createAccess(Variable var) {
     if (var instanceof FieldDeclarator) {
@@ -631,7 +631,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @param name name of the method
    * @return method declaration
    * @aspect EnhancedForToBytecode
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/EnhancedForCodegen.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/EnhancedForCodegen.jrag:116
    */
   protected static MethodDecl getMethod(TypeDecl type, String name) {
     Collection<MethodDecl> methods = (Collection<MethodDecl>) type.memberMethods(name);
@@ -1051,7 +1051,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect StackMapTable
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java6/backend/StackMap.jrag:48
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java6/backend/StackMap.jrag:48
    */
    
   static Collection<Attribute> codeAttributes(CodeGeneration codeGen, MethodDecl m) {
@@ -1064,7 +1064,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:283
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:283
    */
     /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -1078,7 +1078,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/GenerateClassfile.jrag:347
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/GenerateClassfile.jrag:347
    */
     /** @apilevel internal */
   protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -1092,7 +1092,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:155
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:155
    */
     /** @apilevel internal */
   protected void collect_contributors_TypeDecl_nestedTypes(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -1106,7 +1106,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/EnumsCodegen.jrag:130
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/EnumsCodegen.jrag:130
    */
     /** @apilevel internal */
   protected void collect_contributors_TypeDecl_enumSwitchStatements(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -1120,7 +1120,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaBody.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaBody.jrag:47
    */
     /** @apilevel internal */
   protected void collect_contributors_BlockLambdaBody_lambdaReturns(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -1135,10 +1135,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ErrorCheck.jrag:46")
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ErrorCheck.jrag:46")
   public int lineNumber() {
     {
         ASTNode n = this;
@@ -1151,10 +1151,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1302
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1302
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1302")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1302")
   public boolean usesTypeVariable() {
     {
         for (int i = 0; i < getNumChild(); i++) {
@@ -1168,10 +1168,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:38")
   public int sourceLineNumber() {
     int sourceLineNumber_value = getStart() != 0 ? getLine(getStart()) : -1;
     return sourceLineNumber_value;
@@ -1179,10 +1179,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:128
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:128
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:128")
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:128")
   public boolean isStringAdd() {
     boolean isStringAdd_value = false;
     return isStringAdd_value;
@@ -1190,10 +1190,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect Java2Rewrites
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Java2Rewrites.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Java2Rewrites.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Java2Rewrites.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Java2Rewrites.jrag:100")
   public boolean hasAssertStatementRecursive() {
     {
         for (ASTNode child : astChildren()) {
@@ -1207,10 +1207,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect Position
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:2
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:2
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:2")
+  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:2")
   public int startLine() {
     {
     		return getLine(getStart());
@@ -1219,10 +1219,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect Position
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:6
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:6
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:6")
+  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:6")
   public int startColumn() {
     {
     		return getColumn(getStart());
@@ -1231,10 +1231,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect Position
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:10
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:10
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:10")
+  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:10")
   public int endLine() {
     {
     		return getLine(getEnd());
@@ -1243,10 +1243,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect Position
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:14
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:14
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:14")
+  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:14")
   public int endColumn() {
     {
     		return getColumn(getEnd());
@@ -1255,10 +1255,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect Position
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:18
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:18
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/src/jastadd/Position.jrag:18")
+  @ASTNodeAnnotation.Source(aspect="Position", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/src/jastadd/Position.jrag:18")
   public String getPos() {
     {
     		// returns " - [ L1C3 - L2C4 ]" string, for example
@@ -1271,10 +1271,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute inh
    * @aspect AddOptionsToProgram
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Options.jadd:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Options.jadd:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AddOptionsToProgram", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Options.jadd:40")
+  @ASTNodeAnnotation.Source(aspect="AddOptionsToProgram", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Options.jadd:40")
   public Program program() {
     Program program_value = getParent().Define_program(this, null);
     return program_value;
@@ -1282,10 +1282,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /** @return the enclosing compilation unit. 
    * @attribute inh
    * @aspect ClassPath
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:110
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:110
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:110")
+  @ASTNodeAnnotation.Source(aspect="ClassPath", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:110")
   public CompilationUnit compilationUnit() {
     CompilationUnit compilationUnit_value = getParent().Define_compilationUnit(this, null);
     return compilationUnit_value;
@@ -1293,10 +1293,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /** @return {@code true} if the field declaration is before this node. 
    * @attribute inh
    * @aspect DeclareBeforeUse
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DeclareBeforeUse.jrag:58
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DeclareBeforeUse.jrag:58
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DeclareBeforeUse.jrag:58")
+  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DeclareBeforeUse.jrag:58")
   public boolean declaredBefore(Variable decl) {
     boolean declaredBefore_Variable_value = getParent().Define_declaredBefore(this, null, decl);
     return declaredBefore_Variable_value;
@@ -1322,7 +1322,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/backend/ToClassInherited.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/backend/ToClassInherited.jrag:45
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
    */
@@ -1342,7 +1342,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Options.jadd:42
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Options.jadd:42
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute program
    */
@@ -1362,7 +1362,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LookupType.jrag:92
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LookupType.jrag:92
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute superType
    */
@@ -1382,7 +1382,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:103
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:103
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute constructorDecl
    */
@@ -1402,7 +1402,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Arrays.jrag:54
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Arrays.jrag:54
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute componentType
    */
@@ -1422,7 +1422,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/BranchTarget.jrag:260
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/BranchTarget.jrag:260
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupLabel
    */
@@ -1442,7 +1442,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ClassPath.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ClassPath.jrag:112
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute compilationUnit
    */
@@ -1462,7 +1462,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DeclareBeforeUse.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DeclareBeforeUse.jrag:40
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute blockIndex
    */
@@ -1482,7 +1482,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DeclareBeforeUse.jrag:62
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DeclareBeforeUse.jrag:62
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declaredBefore
    */
@@ -1502,7 +1502,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:62
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:62
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isDest
    */
@@ -1522,7 +1522,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:61
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isSource
    */
@@ -1542,7 +1542,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:69
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
    */
@@ -1562,7 +1562,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:207
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:207
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -1582,7 +1582,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/EnhancedFor.jrag:222
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/EnhancedFor.jrag:222
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -1602,7 +1602,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ExceptionHandling.jrag:48
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ExceptionHandling.jrag:48
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeException
    */
@@ -1622,7 +1622,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ExceptionHandling.jrag:51
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ExceptionHandling.jrag:51
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeRuntimeException
    */
@@ -1642,7 +1642,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ExceptionHandling.jrag:54
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ExceptionHandling.jrag:54
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeError
    */
@@ -1662,7 +1662,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ExceptionHandling.jrag:57
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ExceptionHandling.jrag:57
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeNullPointerException
    */
@@ -1682,7 +1682,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ExceptionHandling.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ExceptionHandling.jrag:61
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeThrowable
    */
@@ -1702,7 +1702,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/LambdaExpr.jrag:158
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/LambdaExpr.jrag:158
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute handlesException
    */
@@ -1722,7 +1722,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:39
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupConstructor
    */
@@ -1742,7 +1742,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:45
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupSuperConstructor
    */
@@ -1762,7 +1762,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupMethod.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupMethod.jrag:100
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nestedScope
    */
@@ -1782,7 +1782,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:251
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:251
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
    */
@@ -1802,7 +1802,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:45
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeObject
    */
@@ -1822,7 +1822,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:46
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeCloneable
    */
@@ -1842,7 +1842,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:47
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeSerializable
    */
@@ -1862,7 +1862,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:59
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:59
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeBoolean
    */
@@ -1882,7 +1882,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:60
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeByte
    */
@@ -1902,7 +1902,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:61
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeShort
    */
@@ -1922,7 +1922,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:62
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:62
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeChar
    */
@@ -1942,7 +1942,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:63
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:63
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeInt
    */
@@ -1962,7 +1962,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:64
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeLong
    */
@@ -1982,7 +1982,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:65
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:65
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeFloat
    */
@@ -2002,7 +2002,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:66
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeDouble
    */
@@ -2022,7 +2022,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:67
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:67
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeString
    */
@@ -2042,7 +2042,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:70
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:70
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVoid
    */
@@ -2062,7 +2062,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:73
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeNull
    */
@@ -2082,7 +2082,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:34
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unknownType
    */
@@ -2102,7 +2102,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:124
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:124
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hasPackage
    */
@@ -2122,7 +2122,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupType.jrag:138
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupType.jrag:138
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -2142,7 +2142,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Diamond.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Diamond.jrag:61
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -2162,7 +2162,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/MultiCatch.jrag:81
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:81
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
    */
@@ -2182,7 +2182,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:324
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:324
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBePublic
    */
@@ -2202,7 +2202,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:325
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeProtected
    */
@@ -2222,7 +2222,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:326
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:326
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBePrivate
    */
@@ -2242,7 +2242,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:67
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:67
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeStatic
    */
@@ -2262,7 +2262,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:308
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:308
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeFinal
    */
@@ -2282,7 +2282,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:60
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeAbstract
    */
@@ -2302,7 +2302,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:321
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:321
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeVolatile
    */
@@ -2322,7 +2322,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:317
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:317
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeTransient
    */
@@ -2342,7 +2342,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:332
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:332
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeStrictfp
    */
@@ -2362,7 +2362,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:330
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:330
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeSynchronized
    */
@@ -2382,7 +2382,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/Modifiers.jrag:331
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/Modifiers.jrag:331
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayBeNative
    */
@@ -2402,7 +2402,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:378
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:378
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingMemberDecl
    */
@@ -2422,7 +2422,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/NameCheck.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/NameCheck.jrag:36
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute outerScope
    */
@@ -2442,7 +2442,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/EnhancedFor.jrag:224
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/EnhancedFor.jrag:224
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute insideLoop
    */
@@ -2462,7 +2462,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:534
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:534
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute insideSwitch
    */
@@ -2482,7 +2482,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:594
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:594
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute previousCase
    */
@@ -2502,7 +2502,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/MethodReference.jrag:217
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/MethodReference.jrag:217
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
@@ -2522,7 +2522,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:233
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:233
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isAnonymous
    */
@@ -2542,7 +2542,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:248
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:248
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unknownField
    */
@@ -2562,7 +2562,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:254
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:254
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unknownMethod
    */
@@ -2582,7 +2582,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:261
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:261
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unknownConstructor
    */
@@ -2602,7 +2602,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:727
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:727
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -2622,7 +2622,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:573
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:573
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingBodyDecl
    */
@@ -2642,7 +2642,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:586
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:586
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isMemberType
    */
@@ -2662,7 +2662,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:647
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:647
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hostType
    */
@@ -2682,7 +2682,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:483
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:483
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute switchType
    */
@@ -2702,7 +2702,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:39
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute returnType
    */
@@ -2722,7 +2722,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeCheck.jrag:688
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeCheck.jrag:688
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingInstance
    */
@@ -2742,7 +2742,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:783
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:783
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute methodHost
    */
@@ -2762,7 +2762,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeHierarchyCheck.jrag:194
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeHierarchyCheck.jrag:194
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inExplicitConstructorInvocation
    */
@@ -2782,7 +2782,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeHierarchyCheck.jrag:204
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeHierarchyCheck.jrag:204
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingExplicitConstructorHostType
    */
@@ -2802,7 +2802,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:256
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
    */
@@ -2822,7 +2822,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:281
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:281
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
    */
@@ -2842,7 +2842,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/MultiCatch.jrag:54
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/MultiCatch.jrag:54
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isMethodParameter
    */
@@ -2862,7 +2862,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/MultiCatch.jrag:55
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/MultiCatch.jrag:55
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isConstructorParameter
    */
@@ -2882,7 +2882,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/MultiCatch.jrag:56
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/MultiCatch.jrag:56
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isExceptionHandlerParameter
    */
@@ -2902,7 +2902,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:147
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:147
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
    */
@@ -2922,7 +2922,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:280
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:280
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupElementTypeValue
    */
@@ -2942,7 +2942,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:406
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:406
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute withinSuppressWarnings
    */
@@ -2962,7 +2962,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:535
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:535
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute withinDeprecatedAnnotation
    */
@@ -2982,7 +2982,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:610
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:610
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupAnnotation
    */
@@ -3002,7 +3002,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:650
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:650
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingAnnotationDecl
    */
@@ -3022,7 +3022,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:382
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:382
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inExtendsOrImplements
    */
@@ -3042,7 +3042,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1390
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1390
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute fieldDecl
    */
@@ -3062,7 +3062,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1744
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1744
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeWildcard
    */
@@ -3082,7 +3082,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1753
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1753
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupWildcardExtends
    */
@@ -3102,7 +3102,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1767
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1767
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupWildcardSuper
    */
@@ -3122,7 +3122,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1795
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1795
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupLUBType
    */
@@ -3142,7 +3142,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1836
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1836
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupGLBType
    */
@@ -3162,7 +3162,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericsParTypeDecl.jrag:90
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericsParTypeDecl.jrag:90
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute genericDecl
    */
@@ -3182,7 +3182,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/VariableArityParameters.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/VariableArityParameters.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute variableArityValid
    */
@@ -3202,7 +3202,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Diamond.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Diamond.jrag:108
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute getClassInstanceExpr
    */
@@ -3222,7 +3222,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Diamond.jrag:300
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Diamond.jrag:300
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isAnonymousDecl
    */
@@ -3242,7 +3242,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Diamond.jrag:313
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Diamond.jrag:313
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isExplicitGenericConstructorAccess
    */
@@ -3262,7 +3262,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:206
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:206
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isCatchParam
    */
@@ -3282,7 +3282,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:215
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:215
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute catchClause
    */
@@ -3302,7 +3302,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:180
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:180
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute resourcePreviouslyDeclared
    */
@@ -3322,7 +3322,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:127
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:127
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
@@ -3342,7 +3342,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/CodeGeneration.jrag:79
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:79
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute variableScopeEndLabel
    */
@@ -3362,7 +3362,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:108
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute expectedType
    */
@@ -3382,7 +3382,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/InnerClasses.jrag:441
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/InnerClasses.jrag:441
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute classInstanceExpression
    */
@@ -3402,7 +3402,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/TryWithResources.jrag:300
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/TryWithResources.jrag:300
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute localNum
    */
@@ -3422,7 +3422,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/LocalNum.jrag:102
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/LocalNum.jrag:102
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute resultSaveLocalNum
    */
@@ -3442,7 +3442,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/NameCheck.jrag:52
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/NameCheck.jrag:52
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute allImportedTypes
    */
@@ -3462,7 +3462,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/QualifiedNames.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/QualifiedNames.jrag:115
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute packageName
    */
@@ -3482,7 +3482,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/ResolveAmbiguousNames.jrag:544
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/ResolveAmbiguousNames.jrag:544
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute canResolve
    */
@@ -3502,7 +3502,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:758
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:758
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingType
    */
@@ -3522,7 +3522,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:757
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:757
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isNestedType
    */
@@ -3542,7 +3542,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:608
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:608
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isLocalClass
    */
@@ -3562,7 +3562,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:780
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:780
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute hostPackage
    */
@@ -3582,7 +3582,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:97
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:97
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inComplexAnnotation
    */
@@ -3602,7 +3602,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:134
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:134
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isOriginalEnumConstructor
    */
@@ -3622,7 +3622,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Enums.jrag:565
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Enums.jrag:565
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inEnumInitializer
    */
@@ -3642,7 +3642,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:854
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:854
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVariableContext
    */
@@ -3662,7 +3662,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/MethodSignature.jrag:523
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/MethodSignature.jrag:523
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingBlock
    */
@@ -3682,7 +3682,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/backend/ToClassInherited.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/backend/ToClassInherited.jrag:34
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingLambda
    */
@@ -3702,7 +3702,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:398
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:398
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
    */
@@ -3722,7 +3722,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:399
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:399
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute invocationContext
    */
@@ -3742,7 +3742,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:400
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:400
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute castContext
    */
@@ -3762,7 +3762,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:401
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:401
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute stringContext
    */
@@ -3782,7 +3782,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:402
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:402
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute numericContext
    */
@@ -3802,7 +3802,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:46
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarPosition
    */
@@ -3822,7 +3822,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:47
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarInMethod
    */
@@ -3842,7 +3842,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeVariablePositions.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeVariablePositions.jrag:50
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute genericMethodLevel
    */
@@ -3862,7 +3862,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:33
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isLeftChildOfDot
    */
@@ -3882,7 +3882,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GenericMethods.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GenericMethods.jrag:33
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute isRightChildOfDot
    */
@@ -3902,7 +3902,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:37
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute prevExpr
    */
@@ -3922,7 +3922,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:39
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nextAccess
    */
@@ -3942,7 +3942,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:292
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:292
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
    */
@@ -3962,7 +3962,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:935
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:935
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
    */
@@ -3982,7 +3982,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/ExtraInheritedEqs.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/ExtraInheritedEqs.jrag:30
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute branchTarget
    */
@@ -4002,7 +4002,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/ExtraInheritedEqs.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/ExtraInheritedEqs.jrag:29
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
    */
@@ -4022,7 +4022,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/ExtraInheritedEqs.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/ExtraInheritedEqs.jrag:33
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute otherLocalClassDecls
    */
@@ -4042,7 +4042,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/backend/Tmp.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/backend/Tmp.jrag:29
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute leavesMonitor
    */
@@ -4062,7 +4062,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/UnreachableStatements.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/UnreachableStatements.jrag:29
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reachable
    */
@@ -4082,7 +4082,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/EffectivelyFinal.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/EffectivelyFinal.jrag:35
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inhModifiedInScope
    */
@@ -4102,7 +4102,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/TryWithResources.jrag:302
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/TryWithResources.jrag:302
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declarationModifiers
    */
@@ -4122,7 +4122,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/backend/TryWithResources.jrag:304
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/TryWithResources.jrag:304
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declarationType
    */
@@ -4142,7 +4142,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Generics.jrag:1647
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Generics.jrag:1647
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute erasedField
    */
@@ -4162,7 +4162,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/TryWithResources.jrag:124
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/TryWithResources.jrag:124
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute reachableCatchClause
    */
@@ -4182,7 +4182,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/PreciseRethrow.jrag:219
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/PreciseRethrow.jrag:219
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute caughtExceptions
    */
@@ -4202,7 +4202,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/VariableDeclaration.jrag:79
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/VariableDeclaration.jrag:79
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute enclosingLambdaType
    */
@@ -4222,7 +4222,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TypeCheck.jrag:503
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TypeCheck.jrag:503
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute inferredType
    */

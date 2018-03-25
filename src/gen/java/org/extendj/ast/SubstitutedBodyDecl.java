@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Generics.ast:75
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Generics.ast:75
  * @astdecl SubstitutedBodyDecl : BodyDecl ::= <Original:BodyDecl> <Parameterization:Parameterization>;
  * @production SubstitutedBodyDecl : {@link BodyDecl} ::= <span class="component">&lt;Original:BodyDecl&gt;</span> <span class="component">&lt;Parameterization:Parameterization&gt;</span>;
 

@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BytecodeDescriptor
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/BytecodeDescriptor.jrag:55
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/BytecodeDescriptor.jrag:55
  */
  class FieldInfo extends java.lang.Object {
   

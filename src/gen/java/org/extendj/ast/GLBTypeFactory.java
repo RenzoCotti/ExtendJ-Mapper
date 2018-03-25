@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect GreatestLowerBoundFactory
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/GLBTypeFactory.jadd:63
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/GLBTypeFactory.jadd:63
  */
 public class GLBTypeFactory extends java.lang.Object {
   

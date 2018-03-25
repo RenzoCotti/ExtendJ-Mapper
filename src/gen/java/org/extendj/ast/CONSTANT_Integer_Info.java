@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BytecodeCONSTANT
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/BytecodeCONSTANT.jrag:173
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/BytecodeCONSTANT.jrag:173
  */
  class CONSTANT_Integer_Info extends CONSTANT_Info {
   

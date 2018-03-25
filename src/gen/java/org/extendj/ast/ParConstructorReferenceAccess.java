@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/grammar/ConstructorReference.ast:6
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/grammar/ConstructorReference.ast:6
  * @astdecl ParConstructorReferenceAccess : ParClassInstanceExpr;
  * @production ParConstructorReferenceAccess : {@link ParClassInstanceExpr};
 
@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public class ParConstructorReferenceAccess extends ParClassInstanceExpr implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/MethodReference.jrag:453
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/MethodReference.jrag:453
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/MethodReference.jrag:454
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/MethodReference.jrag:454
    */
   public ParConstructorReferenceAccess(Access access,
       List<Expr> args, Opt<TypeDecl> optDecl, List<Access> typeArgs, FunctionDescriptor fd) {
@@ -500,10 +500,10 @@ public class ParConstructorReferenceAccess extends ParClassInstanceExpr implemen
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:215
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/TargetType.jrag:215")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/TargetType.jrag:215")
   public TypeDecl targetType() {
     ASTState state = state();
     if (targetType_computed == ASTState.NON_CYCLE || targetType_computed == state().cycle()) {

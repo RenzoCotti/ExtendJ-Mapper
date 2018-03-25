@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/grammar/Annotations.ast:3
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/grammar/Annotations.ast:3
  * @astdecl AnnotationMethodDecl : MethodDecl ::= [DefaultValue:ElementValue];
  * @production AnnotationMethodDecl : {@link MethodDecl} ::= <span class="component">[DefaultValue:{@link ElementValue}]</span>;
 
@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/PrettyPrint.jadd:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/PrettyPrint.jadd:68
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasDocComment()) {
@@ -630,10 +630,10 @@ public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Attributes
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Attributes.jrag:277
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Attributes.jrag:277
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/Attributes.jrag:277")
+  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/Attributes.jrag:277")
   public Collection<Attribute> attributes() {
     ASTState state = state();
     if (attributes_computed == ASTState.NON_CYCLE || attributes_computed == state().cycle()) {
@@ -661,7 +661,7 @@ public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
       return attributes;
     }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
@@ -669,7 +669,7 @@ public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
     return type();
   }
   /**
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:723
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:723
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute declType
    */
@@ -686,7 +686,7 @@ public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
   }
   /** @apilevel internal */
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/Annotations.jrag:254
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/Annotations.jrag:254
     if (hasDefaultValue() && !type().commensurateWith(getDefaultValue())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

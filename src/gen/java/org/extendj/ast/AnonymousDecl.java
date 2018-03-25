@@ -29,7 +29,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/grammar/Java.ast:158
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/grammar/Java.ast:158
  * @astdecl AnonymousDecl : ClassDecl ::= Modifiers <ID:String> [SuperClass:Access] Implements:Access* BodyDecl*;
  * @production AnonymousDecl : {@link ClassDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClass:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
@@ -571,7 +571,7 @@ public class AnonymousDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/frontend/VariableArityParameters.jrag:132
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/frontend/VariableArityParameters.jrag:132
    */
    
   protected List constructorParameterList(ConstructorDecl decl) {
@@ -612,7 +612,7 @@ protected ASTState.Cycle isCircular_cycle = null;
   /** @apilevel internal */
   protected boolean isCircular_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/TypeAnalysis.jrag:720")
+  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/TypeAnalysis.jrag:720")
   public boolean isCircular() {
     if (isCircular_computed) {
       return isCircular_value;
@@ -661,10 +661,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn nta
    * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:56
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:56")
   public Opt getSuperClassOpt() {
     ASTState state = state();
     if (getSuperClassOpt_computed) {
@@ -701,10 +701,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn nta
    * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:64
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:64")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:64")
   public List getImplementsList() {
     ASTState state = state();
     if (getImplementsList_computed) {
@@ -741,10 +741,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute syn nta
    * @aspect ImplicitConstructor
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:274
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:274
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="ImplicitConstructor", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/LookupConstructor.jrag:274")
+  @ASTNodeAnnotation.Source(aspect="ImplicitConstructor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/LookupConstructor.jrag:274")
   public Opt<ConstructorDecl> getImplicitConstructorOpt() {
     ASTState state = state();
     if (getImplicitConstructorOpt_computed) {
@@ -819,10 +819,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute inh
    * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:33")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:33")
   public TypeDecl superType() {
     TypeDecl superType_value = getParent().Define_superType(this, null);
     return superType_value;
@@ -830,10 +830,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute inh
    * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:39")
   public ConstructorDecl constructorDecl() {
     ConstructorDecl constructorDecl_value = getParent().Define_constructorDecl(this, null);
     return constructorDecl_value;
@@ -841,10 +841,10 @@ protected ASTState.Cycle isCircular_cycle = null;
   /**
    * @attribute inh
    * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/AnonymousClasses.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/AnonymousClasses.jrag:95")
   public TypeDecl typeNullPointerException() {
     TypeDecl typeNullPointerException_value = getParent().Define_typeNullPointerException(this, null);
     return typeNullPointerException_value;

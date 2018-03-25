@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect DefiniteUnassignment
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DefiniteAssignment.jrag:1221
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DefiniteAssignment.jrag:1221
  */
  interface FinallyHost {
 
@@ -48,9 +48,9 @@ import java.io.DataInputStream;
   /**
    * @attribute syn
    * @aspect NTAFinally
-   * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/NTAFinally.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/NTAFinally.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/backend/NTAFinally.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/NTAFinally.jrag:32")
   public int label_end();
 }

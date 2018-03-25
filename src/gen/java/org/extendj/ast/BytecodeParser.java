@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BytecodeReader
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java8/frontend/BytecodeReader.jrag:35
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java8/frontend/BytecodeReader.jrag:35
  */
 public class BytecodeParser extends AbstractClassfileParser implements Flags {
   

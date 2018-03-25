@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast enum
  * @aspect Java7Literals
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java7/frontend/Literals.jrag:422
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/frontend/Literals.jrag:422
  */
 /**
    * Describes a kind of numeric literal (hex, octal, binary, decimal).

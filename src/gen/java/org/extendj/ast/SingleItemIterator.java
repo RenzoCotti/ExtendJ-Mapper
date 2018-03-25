@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect DataStructures
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java4/frontend/DataStructures.jrag:288
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/frontend/DataStructures.jrag:288
  */
 public class SingleItemIterator<T> extends java.lang.Object implements Iterator<T> {
   

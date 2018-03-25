@@ -30,7 +30,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect EnclosingMethodAttribute
- * @declaredat /Users/BMW/Dropbox/Bachelor Project/compiler/extendj/java5/backend/EnclosingMethodAttribute.jrag:41
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/EnclosingMethodAttribute.jrag:41
  */
 public class EnclosingMethod extends Attribute {
   

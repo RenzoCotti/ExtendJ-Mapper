@@ -320,6 +320,7 @@ aspect CreateBCode {
 		gen.addPositionEntryAtCurrentPC(this);
     for (VariableDeclarator decl : getDeclaratorList()) {
       decl.createBCode(gen);
+			gen.addPositionEntryAtCurrentPC(decl);
     }
   }
 
@@ -345,11 +346,13 @@ aspect CreateBCode {
   public void AssignSimpleExpr.createBCode(CodeGeneration gen) {
     getDest().createAssignSimpleLoadDest(gen);
     getSource().createBCode(gen);
+		gen.addPositionEntryAtCurrentPC(getSource());
     getSource().emitAssignConvTo(gen, getDest().type());
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
     getDest().emitStore(gen);
+		gen.addPositionEntryAtCurrentPC(getDest());
   }
 
   /**
@@ -368,12 +371,14 @@ aspect CreateBCode {
     dest.emitCastTo(gen, type);
     getSource().createBCode(gen);
     source.emitCastTo(gen, type);
+		gen.addPositionEntryAtCurrentPC(getSource());
     emitAssignOp(gen, type);
     type.emitCastTo(gen, dest);
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
     getDest().emitStore(gen);
+		gen.addPositionEntryAtCurrentPC(getDest());
   }
 
   // Generate code for String addition assignment expression.
