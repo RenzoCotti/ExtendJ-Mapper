@@ -148,13 +148,13 @@ aspect StringsInSwitch {
     // Push the hash code for the switch instruction.
     if (getExpr().isConstant()) {
       // Statically computed hash code.
-      typeString().emitStoreLocal(gen, index_b);
+      typeString().emitStoreLocal(this, gen, index_b);
       int hashCode = getExpr().constant().stringValue().hashCode();
       gen.ICONST(hashCode);
     } else {
       // Dynamically computed hash code.
       gen.DUP(typeString());
-      typeString().emitStoreLocal(gen, index_b);
+      typeString().emitStoreLocal(this, gen, index_b);
       hashCodeMethod().emitInvokeMethod(gen,
           lookupType("java.lang", "Object"));
     }

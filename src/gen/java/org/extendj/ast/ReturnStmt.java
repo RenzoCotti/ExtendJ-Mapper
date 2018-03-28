@@ -79,7 +79,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
       getResult().emitCastTo(gen, type);
       if (hasFinally()) {
         int nextRange = gen.constantPool().newLabel();
-        type.emitStoreLocal(gen, resultSaveLocalNum());
+        type.emitStoreLocal(type, gen, resultSaveLocalNum());
         getFinally().createBCode(gen);
         type.emitLoadLocal(gen, resultSaveLocalNum());
         type.emitReturn(gen);
@@ -94,7 +94,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
         getFinally().createBCode(gen);
         gen.RETURN();
         gen.addLabel(nextRange);
-        gen.monitorRangesStart(this, nextRange);
+        gen.monitorRangesStart(getFinally(), nextRange);
       } else {
         gen.RETURN();
       }

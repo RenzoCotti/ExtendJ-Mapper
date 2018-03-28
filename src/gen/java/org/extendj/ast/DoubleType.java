@@ -71,132 +71,135 @@ public class DoubleType extends FloatingPointType implements Cloneable {
   public void emitLoadLocal(CodeGeneration gen, int pos)     { gen.DLOAD(pos); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:263
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:267
    */
   public void emitArrayStore(CodeGeneration gen)     { gen.DASTORE(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:285
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:300
    */
-  public void emitStoreLocal(CodeGeneration gen, int pos)    { gen.DSTORE(pos); }
-  /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:386
-   */
-  void emitCastTo(CodeGeneration gen, TypeDecl type)    { type.doubleToThis(gen); }
-  /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:398
-   */
-  void intToThis(CodeGeneration gen) { gen.I2D(); }
+  public void emitStoreLocal(ASTNode node, CodeGeneration gen, int pos)    {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.DSTORE(pos);
+	}
   /**
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:410
    */
+  void emitCastTo(CodeGeneration gen, TypeDecl type)    { type.doubleToThis(gen); }
+  /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:422
+   */
+  void intToThis(CodeGeneration gen) { gen.I2D(); }
+  /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:434
+   */
   void floatToThis(CodeGeneration gen) { gen.F2D(); }
-  /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:419
-   */
-  void doubleToThis(CodeGeneration gen) { }
-  /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:428
-   */
-  void longToThis(CodeGeneration gen) { gen.L2D(); }
-  /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:435
-   */
-  void byteToThis(CodeGeneration gen)   { gen.I2D();}
   /**
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:443
    */
+  void doubleToThis(CodeGeneration gen) { }
+  /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:452
+   */
+  void longToThis(CodeGeneration gen) { gen.L2D(); }
+  /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:459
+   */
+  void byteToThis(CodeGeneration gen)   { gen.I2D();}
+  /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:467
+   */
   void charToThis(CodeGeneration gen)   { gen.I2D();}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:451
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:475
    */
   void shortToThis(CodeGeneration gen)   { gen.I2D(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:484
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:508
    */
   void neg(CodeGeneration gen)   { gen.DNEG(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:496
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:520
    */
   void add(CodeGeneration gen)   { gen.DADD(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:502
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:526
    */
   void sub(CodeGeneration gen)   { gen.DSUB(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:508
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:532
    */
   void mul(CodeGeneration gen)   { gen.DMUL(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:514
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:538
    */
   void div(CodeGeneration gen)   { gen.DDIV(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:520
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:544
    */
   void rem(CodeGeneration gen)   { gen.DREM(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:553
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:577
    */
   public void branchLT(CodeGeneration gen, int label)   { gen.DCMPG(); gen.IFLT(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:559
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:583
    */
   public void branchLTInv(CodeGeneration gen, int label) { gen.DCMPL(); gen.IFLT(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:565
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:589
    */
   public void branchLE(CodeGeneration gen, int label)   { gen.DCMPG(); gen.IFLE(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:571
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:595
    */
   public void branchLEInv(CodeGeneration gen, int label) { gen.DCMPL(); gen.IFLE(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:577
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:601
    */
   public void branchGE(CodeGeneration gen, int label)   { gen.DCMPL(); gen.IFGE(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:583
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:607
    */
   public void branchGEInv(CodeGeneration gen, int label) { gen.DCMPG(); gen.IFGE(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:589
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:613
    */
   public void branchGT(CodeGeneration gen, int label)   { gen.DCMPL(); gen.IFGT(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:595
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:619
    */
   public void branchGTInv(CodeGeneration gen, int label) { gen.DCMPG(); gen.IFGT(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:601
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:625
    */
   public void branchEQ(CodeGeneration gen, int label)    { gen.DCMPL(); gen.IFEQ(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:612
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:636
    */
   public void branchNE(CodeGeneration gen, int label)    { gen.DCMPL(); gen.IFNE(label); }
   /**

@@ -162,7 +162,7 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
   }
   /** Generate bytecode to store a field in the given hostType. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:270
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:274
    */
   public void emitStoreField(CodeGeneration gen, TypeDecl hostType) {
     String classname = hostType.constantPoolName();

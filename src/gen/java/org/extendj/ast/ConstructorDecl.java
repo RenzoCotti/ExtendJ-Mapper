@@ -150,7 +150,7 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:327
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:351
    */
   public void emitInvokeConstructor(CodeGeneration gen) {
     int numArg = 1 + getNumParameter() + hostType().enclosingVariables().size();

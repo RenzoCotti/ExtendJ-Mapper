@@ -85,9 +85,11 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:232
    */
-  public void refined_CodeGeneration_VarAccess_emitStore(CodeGeneration gen) {
+  public void refined_CodeGeneration_VarAccess_emitStore(ASTNode node, CodeGeneration gen) {
+		// gen.addPositionEntryAtCurrentPC(node);
+
     Variable v = decl();
     if (v instanceof VariableDeclarator) {
       VariableDeclarator var = (VariableDeclarator) v;
@@ -95,7 +97,7 @@ public class VarAccess extends Access implements Cloneable {
          gen.addLocalVariableEntryAtCurrentPC(var.name(), var.type(),
              var.localNum(), var.variableScopeEndLabel(gen));
       }
-      var.type().emitStoreLocal(gen, var.localNum());
+      var.type().emitStoreLocal(this, gen, var.localNum());
     } else if (v.isField()) {
       if (v.isPrivate() && !hostType().hasField(v.name())) {
         fieldQualifierType()
@@ -106,7 +108,7 @@ public class VarAccess extends Access implements Cloneable {
       }
     } else if (v instanceof ParameterDeclaration) {
       ParameterDeclaration decl = (ParameterDeclaration) v;
-      decl.type().emitStoreLocal(gen, decl.localNum());
+      decl.type().emitStoreLocal(this, gen, decl.localNum());
     }
   }
   /**
@@ -363,7 +365,7 @@ public class VarAccess extends Access implements Cloneable {
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:73
    */
    
-  public void emitStore(CodeGeneration gen) {
+  public void emitStore(ASTNode node, CodeGeneration gen) {
     Variable v = decl();
     if (v.isField()) {
       if (v instanceof FieldDeclarator) {
@@ -375,7 +377,7 @@ public class VarAccess extends Access implements Cloneable {
         v.emitStoreField(gen, fieldQualifierType());
       }
     } else {
-      refined_CodeGeneration_VarAccess_emitStore(gen);
+      refined_CodeGeneration_VarAccess_emitStore(node, gen);
     }
   }
   /**

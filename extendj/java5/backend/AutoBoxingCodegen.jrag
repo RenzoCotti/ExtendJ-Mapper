@@ -252,7 +252,7 @@ aspect AutoBoxingCodegen {
     type.emitPushConstant(gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
-    access.emitStore(gen);
+    access.emitStore(type, gen);
   }
 
   // 15.15.1 Prefix Increment Operator ++
@@ -272,7 +272,7 @@ aspect AutoBoxingCodegen {
     if (needsPush()) {
       access.createPushAssignmentResult(gen);
     }
-    access.emitStore(gen);
+    access.emitStore(type, gen);
   }
 
   refine CreateBCode public void ArrayCreationExpr.createBCode(CodeGeneration gen) {
@@ -370,7 +370,7 @@ aspect AutoBoxingCodegen {
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
-    getDest().emitStore(gen);
+    getDest().emitStore(type, gen);
   }
 
   public void EqualityExpr.branchTrue(CodeGeneration gen, int target) {

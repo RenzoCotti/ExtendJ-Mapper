@@ -83,7 +83,7 @@ public class EnhancedForStmt extends BranchTargetStmt implements Cloneable, Vari
       gen.ILOAD(extraLocalIndex() + 1);
       exprType.componentType().emitArrayLoad(gen);
       exprType.componentType().emitCastTo(gen, targetType);
-      targetType.emitStoreLocal(gen, var.localNum());
+      targetType.emitStoreLocal(this, gen, var.localNum());
       getStmt().createBCode(gen);
       gen.addLabel(update_label());
       gen.IINC(extraLocalIndex() + 1, 1);
@@ -107,7 +107,7 @@ public class EnhancedForStmt extends BranchTargetStmt implements Cloneable, Vari
       if (!targetType.boxed().isUnknown()) {
         gen.CHECKCAST(targetType.boxed());
         targetType.boxed().emitCastTo(gen, targetType);
-        targetType.emitStoreLocal(gen, var.localNum());
+        targetType.emitStoreLocal(this, gen, var.localNum());
       } else {
         gen.CHECKCAST(targetType);
         gen.ASTORE(var.localNum(), targetType);

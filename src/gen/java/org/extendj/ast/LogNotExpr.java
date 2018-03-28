@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class LogNotExpr extends Unary implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:464
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:488
    */
   void emitOperation(CodeGeneration gen) { type().logNot(gen); }
   /**

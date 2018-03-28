@@ -114,8 +114,9 @@ public class Dot extends Access implements Cloneable {
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:227
    */
-  public void emitStore(CodeGeneration gen) {
-    lastAccess().emitStore(gen);
+  public void emitStore(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+    lastAccess().emitStore(node, gen);
   }
   /**
    * @aspect CreateBCode

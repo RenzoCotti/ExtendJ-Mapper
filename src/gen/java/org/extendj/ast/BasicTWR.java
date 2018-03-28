@@ -155,7 +155,7 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
       // Catch primary exception:
       // operand stack: .., #primary
       gen.addLabel(catchPrimaryLbl);
-      throwableType.emitStoreLocal(gen, primaryIndex);
+      throwableType.emitStoreLocal(this, gen, primaryIndex);
 
       // Try-close resource:
       gen.addLabel(tryCloseBeginLbl);
@@ -172,7 +172,7 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
       // Catch suppressed exception.
       // operand stack: .., #primary, #suppressed
       gen.addLabel(catchSuppressedLbl);
-      throwableType.emitStoreLocal(gen, suppressedIndex);
+      throwableType.emitStoreLocal(this, gen, suppressedIndex);
       throwableType.emitLoadLocal(gen, primaryIndex);
       throwableType.emitLoadLocal(gen, suppressedIndex);
       addSuppressedMethod().emitInvokeMethod(gen, throwableType);

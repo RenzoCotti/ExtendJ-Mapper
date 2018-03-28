@@ -82,7 +82,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
-    getDest().emitStore(gen);
+    getDest().emitStore(this, gen);
   }
   /** Select the typed operation for a compound assign expression. 
    * @aspect CreateBCode
@@ -259,7 +259,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
-    getDest().emitStore(gen);
+    getDest().emitStore(type, gen);
   }
   /** The operator string used for pretty printing this expression. 
    * @attribute syn

@@ -278,13 +278,13 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:223
    */
-  public void emitStore(CodeGeneration gen) {
+  public void emitStore(ASTNode node, CodeGeneration gen) {
     error("emitStore called with " + getClass().getName());
   }
   /**
    * Outputs the desired operation on the operand(s) on the stack.
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:456
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:480
    */
   void emitOperation(CodeGeneration gen) {
     codeGenError("expression");

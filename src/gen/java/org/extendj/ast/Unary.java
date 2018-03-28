@@ -197,7 +197,7 @@ public abstract class Unary extends Expr implements Cloneable {
     type.emitPushConstant(gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
-    access.emitStore(gen);
+    access.emitStore(type, gen);
   }
   /**
    * @aspect AutoBoxingCodegen
@@ -218,7 +218,7 @@ public abstract class Unary extends Expr implements Cloneable {
     if (needsPush()) {
       access.createPushAssignmentResult(gen);
     }
-    access.emitStore(gen);
+    access.emitStore(type, gen);
   }
   /**
    * @attribute syn

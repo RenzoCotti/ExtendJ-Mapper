@@ -317,10 +317,10 @@ aspect CreateBCode {
 
   public void VarDeclStmt.createBCode(CodeGeneration gen) {
     gen.addLineNumberEntryAtCurrentPC(this); // Generate line number entry.
-		gen.addPositionEntryAtCurrentPC(this);
+		// gen.addPositionEntryAtCurrentPC(this);
     for (VariableDeclarator decl : getDeclaratorList()) {
       decl.createBCode(gen);
-			gen.addPositionEntryAtCurrentPC(decl);
+			// gen.addPositionEntryAtCurrentPC(decl);
     }
   }
 
@@ -328,7 +328,7 @@ aspect CreateBCode {
     if (hasInit()) {
       gen.addLocalVariableEntryAtCurrentPC(name(), type(), localNum(), variableScopeEndLabel(gen));
       emitInitializerBCode(gen);
-      type().emitStoreLocal(gen, localNum());
+      type().emitStoreLocal(type(), gen, localNum());
     }
   }
 
@@ -346,13 +346,13 @@ aspect CreateBCode {
   public void AssignSimpleExpr.createBCode(CodeGeneration gen) {
     getDest().createAssignSimpleLoadDest(gen);
     getSource().createBCode(gen);
-		gen.addPositionEntryAtCurrentPC(getSource());
+		// gen.addPositionEntryAtCurrentPC(getSource());
     getSource().emitAssignConvTo(gen, getDest().type());
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
-    getDest().emitStore(gen);
-		gen.addPositionEntryAtCurrentPC(getDest());
+    getDest().emitStore(this, gen);
+		// gen.addPositionEntryAtCurrentPC(getDest());
   }
 
   /**
@@ -371,14 +371,14 @@ aspect CreateBCode {
     dest.emitCastTo(gen, type);
     getSource().createBCode(gen);
     source.emitCastTo(gen, type);
-		gen.addPositionEntryAtCurrentPC(getSource());
+		// gen.addPositionEntryAtCurrentPC(getSource());
     emitAssignOp(gen, type);
     type.emitCastTo(gen, dest);
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
-    getDest().emitStore(gen);
-		gen.addPositionEntryAtCurrentPC(getDest());
+    getDest().emitStore(this, gen);
+		// gen.addPositionEntryAtCurrentPC(getDest());
   }
 
   // Generate code for String addition assignment expression.
@@ -428,7 +428,7 @@ aspect CreateBCode {
       if (needsPush()) {
         getDest().createPushAssignmentResult(gen);
       }
-      getDest().emitStore(gen);
+      getDest().emitStore(this, gen);
     } else {
       super.createBCode(gen);
     }
@@ -448,7 +448,7 @@ aspect CreateBCode {
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
-    getDest().emitStore(gen);
+    getDest().emitStore(this, gen);
   }
 
   public void AssignLShiftExpr.createBCode(CodeGeneration gen) {
@@ -1046,7 +1046,7 @@ aspect CreateBCode {
     type.emitPushConstant(gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
-    access.emitStore(gen);
+    access.emitStore(this, gen);
   }
 
   public void PostIncExpr.createBCode(CodeGeneration gen) {
@@ -1071,7 +1071,7 @@ aspect CreateBCode {
     if (needsPush()) {
       access.createPushAssignmentResult(gen);
     }
-    access.emitStore(gen);
+    access.emitStore(this, gen);
   }
 
   public void PreIncExpr.createBCode(CodeGeneration gen) {
@@ -1518,7 +1518,7 @@ aspect CreateBCode {
 
   public void Stmt.createBCode(CodeGeneration gen) {
     gen.addLineNumberEntryAtCurrentPC(this);
-		gen.addPositionEntryAtCurrentPC(this);
+		// gen.addPositionEntryAtCurrentPC(this);
   }
 
   public void Block.createBCode(CodeGeneration gen) {
@@ -1771,7 +1771,7 @@ aspect CreateBCode {
       getResult().emitCastTo(gen, type);
       if (hasFinally()) {
         int nextRange = gen.constantPool().newLabel();
-        type.emitStoreLocal(gen, resultSaveLocalNum());
+        type.emitStoreLocal(type, gen, resultSaveLocalNum());
         getFinally().createBCode(gen);
         type.emitLoadLocal(gen, resultSaveLocalNum());
         type.emitReturn(gen);
@@ -1786,7 +1786,7 @@ aspect CreateBCode {
         getFinally().createBCode(gen);
         gen.RETURN();
         gen.addLabel(nextRange);
-        gen.monitorRangesStart(this, nextRange);
+        gen.monitorRangesStart(getFinally(), nextRange);
       } else {
         gen.RETURN();
       }
@@ -1887,7 +1887,7 @@ aspect CreateBCode {
   syn lazy int CatchClause.label() = hostType().constantPool().newLabel();
   public void BasicCatch.createBCode(CodeGeneration gen) {
     gen.addLabel(label());
-    getParameter().type().emitStoreLocal(gen, getParameter().localNum());
+    getParameter().type().emitStoreLocal(getParameter().type(), gen, getParameter().localNum());
     getBlock().createBCode(gen);
   }
 

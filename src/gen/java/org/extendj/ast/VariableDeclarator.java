@@ -43,7 +43,7 @@ public class VariableDeclarator extends Declarator implements Cloneable {
     if (hasInit()) {
       gen.addLocalVariableEntryAtCurrentPC(name(), type(), localNum(), variableScopeEndLabel(gen));
       emitInitializerBCode(gen);
-      type().emitStoreLocal(gen, localNum());
+      type().emitStoreLocal(type(), gen, localNum());
     }
   }
   /**

@@ -220,15 +220,18 @@ aspect CodeGeneration {
     }
   }
 
-  public void Expr.emitStore(CodeGeneration gen) {
+  public void Expr.emitStore(ASTNode node, CodeGeneration gen) {
     error("emitStore called with " + getClass().getName());
   }
 
-  public void Dot.emitStore(CodeGeneration gen) {
-    lastAccess().emitStore(gen);
+  public void Dot.emitStore(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+    lastAccess().emitStore(node, gen);
   }
 
-  public void VarAccess.emitStore(CodeGeneration gen) {
+  public void VarAccess.emitStore(ASTNode node, CodeGeneration gen) {
+		// gen.addPositionEntryAtCurrentPC(node);
+
     Variable v = decl();
     if (v instanceof VariableDeclarator) {
       VariableDeclarator var = (VariableDeclarator) v;
@@ -236,7 +239,7 @@ aspect CodeGeneration {
          gen.addLocalVariableEntryAtCurrentPC(var.name(), var.type(),
              var.localNum(), var.variableScopeEndLabel(gen));
       }
-      var.type().emitStoreLocal(gen, var.localNum());
+      var.type().emitStoreLocal(this, gen, var.localNum());
     } else if (v.isField()) {
       if (v.isPrivate() && !hostType().hasField(v.name())) {
         fieldQualifierType()
@@ -247,11 +250,12 @@ aspect CodeGeneration {
       }
     } else if (v instanceof ParameterDeclaration) {
       ParameterDeclaration decl = (ParameterDeclaration) v;
-      decl.type().emitStoreLocal(gen, decl.localNum());
+      decl.type().emitStoreLocal(this, gen, decl.localNum());
     }
   }
 
-  public void ArrayAccess.emitStore(CodeGeneration gen) {
+  public void ArrayAccess.emitStore(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     type().emitArrayStore(gen);
   }
 
@@ -278,13 +282,33 @@ aspect CodeGeneration {
     }
   }
 
-  public void TypeDecl.emitStoreLocal(CodeGeneration gen, int pos)      { codeGenError("store local"); }
-  public void PrimitiveType.emitStoreLocal(CodeGeneration gen, int pos) { gen.ISTORE(pos); }
-  public void LongType.emitStoreLocal(CodeGeneration gen, int pos)      { gen.LSTORE(pos); }
-  public void FloatType.emitStoreLocal(CodeGeneration gen, int pos)     { gen.FSTORE(pos); }
-  public void DoubleType.emitStoreLocal(CodeGeneration gen, int pos)    { gen.DSTORE(pos); }
-  public void ReferenceType.emitStoreLocal(CodeGeneration gen, int pos) { gen.ASTORE(pos, this); }
-  public void NullType.emitStoreLocal(CodeGeneration gen, int pos)      { gen.ASTORE(pos, this); }
+  public void TypeDecl.emitStoreLocal(ASTNode node, CodeGeneration gen, int pos)      {
+		codeGenError("store local");
+	}
+  public void PrimitiveType.emitStoreLocal(ASTNode node, CodeGeneration gen, int pos) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ISTORE(pos);
+	}
+  public void LongType.emitStoreLocal(ASTNode node, CodeGeneration gen, int pos)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.LSTORE(pos);
+	}
+  public void FloatType.emitStoreLocal(ASTNode node, CodeGeneration gen, int pos)     {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.FSTORE(pos);
+	}
+  public void DoubleType.emitStoreLocal(ASTNode node, CodeGeneration gen, int pos)    {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.DSTORE(pos);
+	}
+  public void ReferenceType.emitStoreLocal(ASTNode node, CodeGeneration gen, int pos) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ASTORE(pos, this);
+	}
+  public void NullType.emitStoreLocal(ASTNode node, CodeGeneration gen, int pos)      {
+		// gen.addPositionEntryAtCurrentPC(node);
+		gen.ASTORE(pos, this);
+	}
 
   inh TypeDecl TryStmt.typeThrowable();
 

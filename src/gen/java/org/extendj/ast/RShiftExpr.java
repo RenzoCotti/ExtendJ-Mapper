@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class RShiftExpr extends ShiftExpr implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:474
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:498
    */
   void emitOperation(CodeGeneration gen)     { type().shr(gen); }
   /**

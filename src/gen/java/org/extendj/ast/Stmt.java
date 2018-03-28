@@ -55,7 +55,7 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLineNumberEntryAtCurrentPC(this);
-		gen.addPositionEntryAtCurrentPC(this);
+		// gen.addPositionEntryAtCurrentPC(this);
   }
   /**
    * @declaredat ASTNode:1

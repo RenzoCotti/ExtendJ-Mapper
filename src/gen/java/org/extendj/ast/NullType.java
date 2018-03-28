@@ -54,22 +54,25 @@ public class NullType extends TypeDecl implements Cloneable {
   public void emitLoadLocal(CodeGeneration gen, int pos)       { gen.ALOAD(pos, this); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:287
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:308
    */
-  public void emitStoreLocal(CodeGeneration gen, int pos)      { gen.ASTORE(pos, this); }
+  public void emitStoreLocal(ASTNode node, CodeGeneration gen, int pos)      {
+		// gen.addPositionEntryAtCurrentPC(node);
+		gen.ASTORE(pos, this);
+	}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:392
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:416
    */
   void emitCastTo(CodeGeneration gen, TypeDecl type)      { }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:607
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:631
    */
   public void branchEQ(CodeGeneration gen, int label)      { gen.IF_ACMPEQ(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:618
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:642
    */
   public void branchNE(CodeGeneration gen, int label)      { gen.IF_ACMPNE(label); }
   /**

@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class MinusExpr extends Unary implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:461
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:485
    */
   void emitOperation(CodeGeneration gen)  { type().neg(gen); }
   /**

@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class MulExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:469
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:493
    */
   void emitOperation(CodeGeneration gen) { type().mul(gen); }
   /**

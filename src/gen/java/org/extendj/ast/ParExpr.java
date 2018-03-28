@@ -46,7 +46,7 @@ public class ParExpr extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:367
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:391
    */
   void emitCastTo(CodeGeneration gen, TypeDecl type) {
     getExpr().emitCastTo(gen, type);

@@ -64,7 +64,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLabel(label());
-    getParameter().type().emitStoreLocal(gen, localNum());
+    getParameter().type().emitStoreLocal(this, gen, localNum());
     getBlock().createBCode(gen);
   }
   /**

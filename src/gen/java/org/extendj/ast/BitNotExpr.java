@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class BitNotExpr extends Unary implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:463
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:487
    */
   void emitOperation(CodeGeneration gen) { type().bitNot(gen); }
   /**

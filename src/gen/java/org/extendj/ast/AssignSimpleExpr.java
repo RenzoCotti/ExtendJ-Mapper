@@ -43,13 +43,13 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   public void createBCode(CodeGeneration gen) {
     getDest().createAssignSimpleLoadDest(gen);
     getSource().createBCode(gen);
-		gen.addPositionEntryAtCurrentPC(getSource());
+		// gen.addPositionEntryAtCurrentPC(getSource());
     getSource().emitAssignConvTo(gen, getDest().type());
     if (needsPush()) {
       getDest().createPushAssignmentResult(gen);
     }
-    getDest().emitStore(gen);
-		gen.addPositionEntryAtCurrentPC(getDest());
+    getDest().emitStore(this, gen);
+		// gen.addPositionEntryAtCurrentPC(getDest());
   }
   /**
    * @declaredat ASTNode:1

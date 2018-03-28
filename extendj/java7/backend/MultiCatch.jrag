@@ -43,7 +43,7 @@ aspect MultiCatch {
 
   public void MultiCatch.createBCode(CodeGeneration gen) {
     gen.addLabel(label());
-    getParameter().type().emitStoreLocal(gen, localNum());
+    getParameter().type().emitStoreLocal(this, gen, localNum());
     getBlock().createBCode(gen);
   }
 

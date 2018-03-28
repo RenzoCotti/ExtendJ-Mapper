@@ -85,7 +85,7 @@ public class AssignPlusExpr extends AssignAdditiveExpr implements Cloneable {
       if (needsPush()) {
         getDest().createPushAssignmentResult(gen);
       }
-      getDest().emitStore(gen);
+      getDest().emitStore(this, gen);
     } else {
       super.createBCode(gen);
     }

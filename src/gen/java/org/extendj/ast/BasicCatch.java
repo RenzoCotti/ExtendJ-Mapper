@@ -59,7 +59,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLabel(label());
-    getParameter().type().emitStoreLocal(gen, getParameter().localNum());
+    getParameter().type().emitStoreLocal(getParameter().type(), gen, getParameter().localNum());
     getBlock().createBCode(gen);
   }
   /**
