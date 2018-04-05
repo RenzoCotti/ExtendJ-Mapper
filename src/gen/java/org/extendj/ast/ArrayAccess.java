@@ -46,7 +46,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:257
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:352
    */
   public void emitStore(ASTNode node, CodeGeneration gen) {
 		gen.addPositionEntryAtCurrentPC(node);
@@ -241,7 +241,7 @@ public class ArrayAccess extends Access implements Cloneable {
     getExpr().createBCode(gen);
     getExpr().emitCastTo(gen, typeInt());
     gen.DUP_X1(typeInt());
-    type().emitArrayLoad(gen);
+    type().emitArrayLoad(type(), gen);
   }
   /**
    * @aspect AutoBoxingCodegen
@@ -252,7 +252,7 @@ public class ArrayAccess extends Access implements Cloneable {
     prevExpr().emitCastTo(gen, type().arrayType());
     getExpr().createBCode(gen);
     getExpr().emitCastTo(gen, typeInt());
-    type().emitArrayLoad(gen);
+    type().emitArrayLoad(type(), gen);
   }
   /**
    * @attribute syn

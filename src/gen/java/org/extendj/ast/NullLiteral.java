@@ -38,9 +38,10 @@ import java.io.DataInputStream;
 public class NullLiteral extends Literal implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:145
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:166
    */
-  public void emitPushConstant(CodeGeneration gen) {
+  public void emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     gen.ACONST_NULL();
   }
   /**

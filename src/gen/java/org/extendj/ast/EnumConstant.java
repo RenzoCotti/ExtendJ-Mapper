@@ -180,13 +180,13 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
    * @aspect GenericsCodegen
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:119
    */
-  public void emitLoadVariable(CodeGeneration gen, Access access) {
+  public void emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     access.createLoadQualifier(gen, this);
     emitLoadField(gen, access.fieldQualifierType());
   }
   /** Generate bytecode to load this field. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:303
    */
   public void emitLoadField(CodeGeneration gen, TypeDecl hostType) {
     if (hostType().isArrayDecl() && name().equals("length")) {
@@ -204,7 +204,7 @@ public class EnumConstant extends BodyDecl implements Cloneable, Variable {
   }
   /** Generate bytecode to store a field in the given hostType. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:274
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:369
    */
   public void emitStoreField(CodeGeneration gen, TypeDecl hostType) {
     String classname = hostType.constantPoolName();

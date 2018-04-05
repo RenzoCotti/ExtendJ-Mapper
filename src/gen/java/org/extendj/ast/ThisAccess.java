@@ -44,7 +44,7 @@ public class ThisAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:749
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:756
    */
   public void createBCode(CodeGeneration gen) {
     emitThis(gen, decl());

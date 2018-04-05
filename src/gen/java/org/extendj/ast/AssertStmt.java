@@ -56,7 +56,7 @@ public class AssertStmt extends Stmt implements Cloneable {
    * Assert statement bytecode is generated through the transformed
    * version of the assert statement.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1947
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1954
    */
   public void createBCode(CodeGeneration gen) {
     transformed().createBCode(gen);

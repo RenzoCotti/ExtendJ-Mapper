@@ -85,7 +85,7 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:232
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:327
    */
   public void refined_CodeGeneration_VarAccess_emitStore(ASTNode node, CodeGeneration gen) {
 		// gen.addPositionEntryAtCurrentPC(node);
@@ -147,7 +147,7 @@ public class VarAccess extends Access implements Cloneable {
     }
     if (v instanceof VariableDeclarator) {
       VariableDeclarator var = (VariableDeclarator) v;
-      var.type().emitLoadLocal(gen, var.localNum());
+      var.type().emitLoadLocal(this, gen, var.localNum());
     } else if (v.isField()) {
       if (requiresAccessor()) {
         fieldQualifierType().fieldAccessor(v).emitInvokeMethod(gen, fieldQualifierType());
@@ -156,7 +156,7 @@ public class VarAccess extends Access implements Cloneable {
       }
     } else if (v instanceof ParameterDeclaration) {
       ParameterDeclaration decl = (ParameterDeclaration) v;
-      decl.type().emitLoadLocal(gen, decl.localNum());
+      decl.type().emitLoadLocal(this, gen, decl.localNum());
     }
   }
   /**
@@ -164,7 +164,7 @@ public class VarAccess extends Access implements Cloneable {
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:575
    */
   public void createBCode(CodeGeneration gen) {
-    decl().emitLoadVariable(gen, this);
+    decl().emitLoadVariable(this, gen, this);
   }
   /**
    * @aspect InnerClasses
@@ -415,7 +415,7 @@ public class VarAccess extends Access implements Cloneable {
         gen.DUP();
       }
       CatchParameterDeclaration decl = (CatchParameterDeclaration) v;
-      decl.type().emitLoadLocal(gen, decl.localNum());
+      decl.type().emitLoadLocal(this, gen, decl.localNum());
     } else {
       refined_GenericsCodegen_VarAccess_createAssignLoadDest(gen);
     }

@@ -46,7 +46,7 @@ public class InstanceOfExpr extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1514
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1521
    */
   public void createBCode(CodeGeneration gen) {
     getExpr().createBCode(gen);

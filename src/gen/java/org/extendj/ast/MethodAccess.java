@@ -179,7 +179,7 @@ public class MethodAccess extends Access implements Cloneable {
   /**
    * Prints diagnostic error messages for debugging method binding errors.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:673
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:680
    */
   public void printDiagnosticMessages() {
     if (decl().type().isUnknown()) {
@@ -208,7 +208,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:725
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:732
    */
   protected void createLoadQualifier(CodeGeneration gen) {
     MethodDecl m = decl();

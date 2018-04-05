@@ -125,9 +125,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:117
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:131
    */
-  public void emitPushConstant(CodeGeneration gen) {
+  public void emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     System.err.println("ERROR: Tried to generate bytecode for: " + getClass().getName());
   }
   /**
@@ -135,7 +136,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:285
    */
   public void createBCode(CodeGeneration gen) {
-    emitPushConstant(gen);
+    emitPushConstant(this, gen);
   }
   /**
    * @declaredat ASTNode:1

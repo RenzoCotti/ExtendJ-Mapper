@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class XorBitwiseExpr extends BitwiseExpr implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:502
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:597
    */
   void emitOperation(CodeGeneration gen) { type().bitxor(gen); }
   /**

@@ -57,7 +57,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLineNumberEntryAtCurrentPC(this); // Generate line number entry.
-		// gen.addPositionEntryAtCurrentPC(this);
+		gen.addPositionEntryAtCurrentPC(this);
     for (VariableDeclarator decl : getDeclaratorList()) {
       decl.createBCode(gen);
 			// gen.addPositionEntryAtCurrentPC(decl);

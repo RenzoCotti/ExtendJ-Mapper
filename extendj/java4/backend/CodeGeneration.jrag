@@ -108,45 +108,68 @@ aspect CodeGeneration {
     gen.ICONST(value);
   }
 
-  public void TypeDecl.emitPushConstant(CodeGeneration gen, int value) { }
-  public void IntegralType.emitPushConstant(CodeGeneration gen, int value) { IntegerLiteral.push(gen, value); }
-  public void LongType.emitPushConstant(CodeGeneration gen, int value) { LongLiteral.push(gen, value); }
-  public void DoubleType.emitPushConstant(CodeGeneration gen, int value) { DoubleLiteral.push(gen, value); }
-  public void FloatType.emitPushConstant(CodeGeneration gen, int value) { FloatingPointLiteral.push(gen, value); }
+  public void TypeDecl.emitPushConstant(ASTNode node, CodeGeneration gen, int value) {
+		// gen.addPositionEntryAtCurrentPC(node);
+	}
+  public void IntegralType.emitPushConstant(ASTNode node, CodeGeneration gen, int value) {
+		gen.addPositionEntryAtCurrentPC(node);
+		IntegerLiteral.push(gen, value);
+	}
+  public void LongType.emitPushConstant(ASTNode node, CodeGeneration gen, int value) {
+		gen.addPositionEntryAtCurrentPC(node);
+		LongLiteral.push(gen, value);
+	}
+  public void DoubleType.emitPushConstant(ASTNode node, CodeGeneration gen, int value) {
+		gen.addPositionEntryAtCurrentPC(node);
+		DoubleLiteral.push(gen, value);
+	}
+  public void FloatType.emitPushConstant(ASTNode node, CodeGeneration gen, int value) {
+		gen.addPositionEntryAtCurrentPC(node);
+		FloatingPointLiteral.push(gen, value);
+	}
 
-  public void Literal.emitPushConstant(CodeGeneration gen) {
+  public void Literal.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     System.err.println("ERROR: Tried to generate bytecode for: " + getClass().getName());
   }
 
-  public void IntegerLiteral.emitPushConstant(CodeGeneration gen) {
-    type().emitPushConstant(gen, constant().intValue());
+  public void IntegerLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+    type().emitPushConstant(node, gen, constant().intValue());
   }
 
-  public void CharacterLiteral.emitPushConstant(CodeGeneration gen) {
-    type().emitPushConstant(gen, constant().intValue());
+  public void CharacterLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+    type().emitPushConstant(node, gen, constant().intValue());
   }
 
-  public void FloatingPointLiteral.emitPushConstant(CodeGeneration gen) {
+  public void FloatingPointLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     FloatingPointLiteral.push(gen, constant().floatValue());
   }
 
-  public void LongLiteral.emitPushConstant(CodeGeneration gen) {
+  public void LongLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     LongLiteral.push(gen, constant().longValue());
   }
 
-  public void DoubleLiteral.emitPushConstant(CodeGeneration gen) {
+  public void DoubleLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     DoubleLiteral.push(gen, constant().doubleValue());
   }
 
-  public void StringLiteral.emitPushConstant(CodeGeneration gen) {
+  public void StringLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     StringLiteral.push(gen, getLITERAL());
   }
 
-  public void NullLiteral.emitPushConstant(CodeGeneration gen) {
+  public void NullLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     gen.ACONST_NULL();
   }
 
-  public void BooleanLiteral.emitPushConstant(CodeGeneration gen) {
+  public void BooleanLiteral.emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     BooleanLiteral.push(gen, constant().booleanValue());
   }
 
@@ -176,33 +199,105 @@ aspect CodeGeneration {
     }
   }
 
-  public void TypeDecl.emitReturn(CodeGeneration gen)      { codeGenError("return"); }
-  public void VoidType.emitReturn(CodeGeneration gen)      { gen.RETURN(); }
-  public void PrimitiveType.emitReturn(CodeGeneration gen) { gen.IRETURN(); }
-  public void LongType.emitReturn(CodeGeneration gen)      { gen.LRETURN(); }
-  public void FloatType.emitReturn(CodeGeneration gen)     { gen.FRETURN(); }
-  public void DoubleType.emitReturn(CodeGeneration gen)    { gen.DRETURN(); }
-  public void ReferenceType.emitReturn(CodeGeneration gen) { gen.ARETURN(); }
-  public void NullType.emitReturn(CodeGeneration gen)      { gen.ARETURN(); }
+  public void TypeDecl.emitReturn(ASTNode node, CodeGeneration gen)      {
+		codeGenError("return");
+	}
+  public void VoidType.emitReturn(ASTNode node, CodeGeneration gen)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.RETURN();
+	}
+  public void PrimitiveType.emitReturn(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.IRETURN();
+	}
+  public void LongType.emitReturn(ASTNode node, CodeGeneration gen)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.LRETURN();
+	}
+  public void FloatType.emitReturn(ASTNode node, CodeGeneration gen)     {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.FRETURN();
+	}
+  public void DoubleType.emitReturn(ASTNode node, CodeGeneration gen)    {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.DRETURN();
+	}
+  public void ReferenceType.emitReturn(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ARETURN();
+	}
+  public void NullType.emitReturn(ASTNode node, CodeGeneration gen)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ARETURN();
+	}
 
-  public void TypeDecl.emitArrayLoad(CodeGeneration gen)      { codeGenError("array load"); }
-  public void ReferenceType.emitArrayLoad(CodeGeneration gen) { gen.AALOAD(this); }
-  public void IntType.emitArrayLoad(CodeGeneration gen)       { gen.IALOAD(); }
-  public void LongType.emitArrayLoad(CodeGeneration gen)      { gen.LALOAD(); }
-  public void FloatType.emitArrayLoad(CodeGeneration gen)     { gen.FALOAD(); }
-  public void DoubleType.emitArrayLoad(CodeGeneration gen)    { gen.DALOAD(); }
-  public void ByteType.emitArrayLoad(CodeGeneration gen)      { gen.BALOAD(); }
-  public void CharType.emitArrayLoad(CodeGeneration gen)      { gen.CALOAD(); }
-  public void ShortType.emitArrayLoad(CodeGeneration gen)     { gen.SALOAD(); }
-  public void BooleanType.emitArrayLoad(CodeGeneration gen)   { gen.BALOAD(); }
+  public void TypeDecl.emitArrayLoad(ASTNode node, CodeGeneration gen)      {
+		codeGenError("array load");
+	}
+  public void ReferenceType.emitArrayLoad(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.AALOAD(this);
+	}
+  public void IntType.emitArrayLoad(ASTNode node, CodeGeneration gen)       {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.IALOAD();
+	}
+  public void LongType.emitArrayLoad(ASTNode node, CodeGeneration gen)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.LALOAD();
+	}
+  public void FloatType.emitArrayLoad(ASTNode node, CodeGeneration gen)     {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.FALOAD();
+	}
+  public void DoubleType.emitArrayLoad(ASTNode node, CodeGeneration gen)    {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.DALOAD();
+	}
+  public void ByteType.emitArrayLoad(ASTNode node, CodeGeneration gen)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.BALOAD();
+	}
+  public void CharType.emitArrayLoad(ASTNode node, CodeGeneration gen)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.CALOAD();
+	}
+  public void ShortType.emitArrayLoad(ASTNode node, CodeGeneration gen)     {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.SALOAD();
+	}
+  public void BooleanType.emitArrayLoad(ASTNode node, CodeGeneration gen)   {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.BALOAD();
+	}
 
-  public void TypeDecl.emitLoadLocal(CodeGeneration gen, int pos)       { codeGenError("load local"); }
-  public void PrimitiveType.emitLoadLocal(CodeGeneration gen, int pos)  { gen.ILOAD(pos); }
-  public void LongType.emitLoadLocal(CodeGeneration gen, int pos)       { gen.LLOAD(pos); }
-  public void FloatType.emitLoadLocal(CodeGeneration gen, int pos)      { gen.FLOAD(pos); }
-  public void DoubleType.emitLoadLocal(CodeGeneration gen, int pos)     { gen.DLOAD(pos); }
-  public void ReferenceType.emitLoadLocal(CodeGeneration gen, int pos)  { gen.ALOAD(pos, this); }
-  public void NullType.emitLoadLocal(CodeGeneration gen, int pos)       { gen.ALOAD(pos, this); }
+  public void TypeDecl.emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)       {
+		codeGenError("load local");
+	}
+  public void PrimitiveType.emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)  {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ILOAD(pos);
+	}
+  public void LongType.emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)       {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.LLOAD(pos);
+	}
+  public void FloatType.emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.FLOAD(pos);
+	}
+  public void DoubleType.emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)     {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.DLOAD(pos);
+	}
+  public void ReferenceType.emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)  {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ALOAD(pos, this);
+	}
+  public void NullType.emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)       {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ALOAD(pos, this);
+	}
 
   /** Generate bytecode to load this field. */
   public void Variable.emitLoadField(CodeGeneration gen, TypeDecl hostType) {

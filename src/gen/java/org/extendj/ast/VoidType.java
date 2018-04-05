@@ -44,9 +44,12 @@ public class VoidType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:180
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:205
    */
-  public void emitReturn(CodeGeneration gen)      { gen.RETURN(); }
+  public void emitReturn(ASTNode node, CodeGeneration gen)      {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.RETURN();
+	}
   /**
    * @declaredat ASTNode:1
    */

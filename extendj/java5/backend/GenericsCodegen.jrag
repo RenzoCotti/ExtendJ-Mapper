@@ -108,15 +108,15 @@ aspect GenericsCodegen {
   }
 
   refine CreateBCode
-  public void FieldDeclarator.emitLoadVariable(CodeGeneration gen, Access access) {
+  public void FieldDeclarator.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     if (erasedField() != this) {
-      erasedField().emitLoadVariable(gen, access);
+      erasedField().emitLoadVariable(node, gen, access);
     } else {
-      refined(gen, access);
+      refined(node, gen, access);
     }
   }
 
-  public void EnumConstant.emitLoadVariable(CodeGeneration gen, Access access) {
+  public void EnumConstant.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     access.createLoadQualifier(gen, this);
     emitLoadField(gen, access.fieldQualifierType());
   }
@@ -654,7 +654,7 @@ aspect GenericsCodegen {
   }
 
   public void AbstractWildcardType.emitLoadLocal(CodeGeneration gen, int pos) {
-    erasure().emitLoadLocal(gen, pos);
+    erasure().emitLoadLocal(this, gen, pos);
   }
 
   eq GenericConstructorDeclSubstituted.bytecodeTarget() = getOriginal();

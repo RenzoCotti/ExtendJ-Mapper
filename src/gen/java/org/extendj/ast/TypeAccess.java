@@ -157,7 +157,7 @@ public class TypeAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:387
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:482
    */
   void emitCastTo(CodeGeneration gen, TypeDecl type) {
     // Nothing to do for a type access.

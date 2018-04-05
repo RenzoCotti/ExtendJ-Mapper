@@ -66,9 +66,10 @@ public class FloatingPointLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:129
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:146
    */
-  public void emitPushConstant(CodeGeneration gen) {
+  public void emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     FloatingPointLiteral.push(gen, constant().floatValue());
   }
   /**

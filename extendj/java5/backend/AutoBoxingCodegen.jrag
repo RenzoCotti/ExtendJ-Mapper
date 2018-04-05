@@ -249,7 +249,7 @@ aspect AutoBoxingCodegen {
     }
     TypeDecl type = access.type().binaryNumericPromotion(typeInt());
     access.type().emitCastTo(gen, type); // Added for AutoBoxing.
-    type.emitPushConstant(gen, constant);
+    type.emitPushConstant(this, gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
     access.emitStore(type, gen);
@@ -266,7 +266,7 @@ aspect AutoBoxingCodegen {
     access.createAssignLoadDest(gen);
     TypeDecl type = access.type().binaryNumericPromotion(typeInt());
     access.type().emitCastTo(gen, type); // Added for AutoBoxing.
-    type.emitPushConstant(gen, constant);
+    type.emitPushConstant(this, gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
     if (needsPush()) {
@@ -437,7 +437,7 @@ aspect AutoBoxingCodegen {
     prevExpr().emitCastTo(gen, type().arrayType());
     getExpr().createBCode(gen);
     getExpr().emitCastTo(gen, typeInt());
-    type().emitArrayLoad(gen);
+    type().emitArrayLoad(type(), gen);
   }
 
   refine CreateBCode public void ArrayAccess.createAssignSimpleLoadDest(CodeGeneration gen) {
@@ -454,7 +454,7 @@ aspect AutoBoxingCodegen {
     getExpr().createBCode(gen);
     getExpr().emitCastTo(gen, typeInt());
     gen.DUP_X1(typeInt());
-    type().emitArrayLoad(gen);
+    type().emitArrayLoad(type(), gen);
   }
 
   public void ConditionalExpr.emitBooleanCondition(CodeGeneration gen) {

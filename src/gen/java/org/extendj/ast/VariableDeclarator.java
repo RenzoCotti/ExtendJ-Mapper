@@ -50,9 +50,11 @@ public class VariableDeclarator extends Declarator implements Cloneable {
    * @aspect CreateBCode
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:593
    */
-  public void emitLoadVariable(CodeGeneration gen, Access access) {
-    if (hostType() == access.hostType()) {
-      type().emitLoadLocal(gen, localNum());
+  public void emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
+		gen.addPositionEntryAtCurrentPC(node);
+
+		if (hostType() == access.hostType()) {
+      type().emitLoadLocal(this, gen, localNum());
     } else {
       access.emitLoadLocalInNestedClass(gen, this);
     }

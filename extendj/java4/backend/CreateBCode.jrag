@@ -242,7 +242,7 @@ aspect CreateBCode {
       int localIndex = offsetFirstEnclosingVariable();
       for (Variable v : hostType().enclosingVariables()) {
         gen.ALOAD(0, hostType());
-        v.type().emitLoadLocal(gen, localIndex);
+        v.type().emitLoadLocal(this, gen, localIndex);
         String classname = hostType().constantPoolName();
         String name = "val$" + v.name();
         int index = gen.constantPool().addFieldref(classname, name, v.type());
@@ -283,7 +283,7 @@ aspect CreateBCode {
   }
 
   public void Literal.createBCode(CodeGeneration gen) {
-    emitPushConstant(gen);
+    emitPushConstant(this, gen);
   }
 
   // TODO(joqvist): this should be an inherited attribute.
@@ -317,7 +317,7 @@ aspect CreateBCode {
 
   public void VarDeclStmt.createBCode(CodeGeneration gen) {
     gen.addLineNumberEntryAtCurrentPC(this); // Generate line number entry.
-		// gen.addPositionEntryAtCurrentPC(this);
+		gen.addPositionEntryAtCurrentPC(this);
     for (VariableDeclarator decl : getDeclaratorList()) {
       decl.createBCode(gen);
 			// gen.addPositionEntryAtCurrentPC(decl);
@@ -526,7 +526,7 @@ aspect CreateBCode {
     }
     if (v instanceof VariableDeclarator) {
       VariableDeclarator var = (VariableDeclarator) v;
-      var.type().emitLoadLocal(gen, var.localNum());
+      var.type().emitLoadLocal(this, gen, var.localNum());
     } else if (v.isField()) {
       if (requiresAccessor()) {
         fieldQualifierType().fieldAccessor(v).emitInvokeMethod(gen, fieldQualifierType());
@@ -535,7 +535,7 @@ aspect CreateBCode {
       }
     } else if (v instanceof ParameterDeclaration) {
       ParameterDeclaration decl = (ParameterDeclaration) v;
-      decl.type().emitLoadLocal(gen, decl.localNum());
+      decl.type().emitLoadLocal(this, gen, decl.localNum());
     }
   }
 
@@ -544,7 +544,7 @@ aspect CreateBCode {
     gen.DUP();
     getExpr().createBCode(gen);
     gen.DUP_X1(typeInt());
-    type().emitArrayLoad(gen);
+    type().emitArrayLoad(this, gen);
   }
 
   /** Select the typed operation for a compound assign expression. */
@@ -573,7 +573,7 @@ aspect CreateBCode {
   }
 
   public void VarAccess.createBCode(CodeGeneration gen) {
-    decl().emitLoadVariable(gen, this);
+    decl().emitLoadVariable(this, gen, this);
   }
 
   /**
@@ -582,24 +582,29 @@ aspect CreateBCode {
    * @param gen bytecode output.
    * @param access the access for which the variable load is to be generated.
    */
-  void Variable.emitLoadVariable(CodeGeneration gen, Access access);
+  void Variable.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access);
 
   // TODO(joqvist): remove this - added to fix build problem with JastAdd 2.2.2.
   // See https://bitbucket.org/jastadd/jastadd2/issues/282/abstract-interface-methods-are-added-to
-  public void Declarator.emitLoadVariable(CodeGeneration gen, Access access) {
+  public void Declarator.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     throw new Error("Missing implementation for emitLoadVariable in " + getClass().getName());
   }
 
-  public void VariableDeclarator.emitLoadVariable(CodeGeneration gen, Access access) {
-    if (hostType() == access.hostType()) {
-      type().emitLoadLocal(gen, localNum());
+  public void VariableDeclarator.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
+		gen.addPositionEntryAtCurrentPC(node);
+
+		if (hostType() == access.hostType()) {
+      type().emitLoadLocal(this, gen, localNum());
     } else {
       access.emitLoadLocalInNestedClass(gen, this);
     }
   }
 
-  public void FieldDeclarator.emitLoadVariable(CodeGeneration gen, Access access) {
+  public void FieldDeclarator.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
+		gen.addPositionEntryAtCurrentPC(node);
+
     access.createLoadQualifier(gen, this);
+
     if (isConstant() && (type().isPrimitive() || type().isString())) {
       if (!isStatic()) {
         gen.POP(access.fieldQualifierType());
@@ -613,9 +618,11 @@ aspect CreateBCode {
     }
   }
 
-  public void ParameterDeclaration.emitLoadVariable(CodeGeneration gen, Access access) {
-    if (hostType() == access.hostType()) {
-      type().emitLoadLocal(gen, localNum());
+  public void ParameterDeclaration.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
+		gen.addPositionEntryAtCurrentPC(node);
+
+		if (hostType() == access.hostType()) {
+      type().emitLoadLocal(this, gen, localNum());
     } else {
       access.emitLoadLocalInNestedClass(gen, this);
     }
@@ -636,7 +643,7 @@ aspect CreateBCode {
   protected void Access.emitLoadLocalInNestedClass(CodeGeneration gen, Variable v) {
     if (inExplicitConstructorInvocation() && enclosingBodyDecl() instanceof ConstructorDecl) {
       ConstructorDecl c = (ConstructorDecl) enclosingBodyDecl();
-      v.type().emitLoadLocal(gen, c.localIndexOfEnclosingVariable(v));
+      v.type().emitLoadLocal(c, gen, c.localIndexOfEnclosingVariable(v));
     } else {
       String classname = hostType().constantPoolName();
       String      name = "val$" + v.name();
@@ -743,7 +750,7 @@ aspect CreateBCode {
   public void ArrayAccess.createBCode(CodeGeneration gen) {
     prevExpr().createBCode(gen);
     getExpr().createBCode(gen);
-    type().emitArrayLoad(gen);
+    type().emitArrayLoad(type(), gen);
   }
 
   public void ThisAccess.createBCode(CodeGeneration gen) {
@@ -802,7 +809,7 @@ aspect CreateBCode {
     }
     // Push enclosing variable arguments.
     for (Variable var : decl.hostType().enclosingVariables()) {
-      var.emitLoadVariable(gen, this);
+      var.emitLoadVariable(decl, gen, this);
     }
     if (decl.isPrivate() && decl.hostType() != hostType()) {
       gen.ACONST_NULL();
@@ -853,7 +860,7 @@ aspect CreateBCode {
     }
     // Push enclosing variable arguments.
     for (Variable var : decl.hostType().enclosingVariables()) {
-      var.emitLoadVariable(gen, this);
+      var.emitLoadVariable(decl, gen, this);
     }
     if (decl.isPrivate() && decl.hostType() != hostType()) {
       gen.ACONST_NULL();
@@ -938,7 +945,7 @@ aspect CreateBCode {
     }
     // Push enclosing variable arguments.
     for (Variable var : decl.hostType().enclosingVariables()) {
-      var.emitLoadVariable(gen, this);
+      var.emitLoadVariable(decl, gen, this);
     }
 
     if (decl.isPrivate() && type() != hostType()) {
@@ -1043,7 +1050,7 @@ aspect CreateBCode {
       access.createPushAssignmentResult(gen);
     }
     TypeDecl type = access.type().binaryNumericPromotion(typeInt());
-    type.emitPushConstant(gen, constant);
+    type.emitPushConstant(this, gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
     access.emitStore(this, gen);
@@ -1065,7 +1072,7 @@ aspect CreateBCode {
     Access access = ((Access) operand).lastAccess();
     access.createAssignLoadDest(gen);
     TypeDecl type = access.type().binaryNumericPromotion(typeInt());
-    type.emitPushConstant(gen, constant);
+    type.emitPushConstant(this, gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
     if (needsPush()) {
@@ -1773,12 +1780,12 @@ aspect CreateBCode {
         int nextRange = gen.constantPool().newLabel();
         type.emitStoreLocal(type, gen, resultSaveLocalNum());
         getFinally().createBCode(gen);
-        type.emitLoadLocal(gen, resultSaveLocalNum());
-        type.emitReturn(gen);
+        type.emitLoadLocal(type, gen, resultSaveLocalNum());
+        type.emitReturn(this, gen);
         gen.addLabel(nextRange);
         gen.monitorRangesStart(this, nextRange);
       } else {
-        type.emitReturn(gen);
+        type.emitReturn(this, gen);
       }
     } else {
       if (hasFinally()) {

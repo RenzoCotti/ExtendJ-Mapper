@@ -41,27 +41,36 @@ import java.io.DataInputStream;
 public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:185
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:225
    */
-  public void emitReturn(CodeGeneration gen) { gen.ARETURN(); }
+  public void emitReturn(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ARETURN();
+	}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:189
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:237
    */
-  public void emitArrayLoad(CodeGeneration gen) { gen.AALOAD(this); }
+  public void emitArrayLoad(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.AALOAD(this);
+	}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:204
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:293
    */
-  public void emitLoadLocal(CodeGeneration gen, int pos)  { gen.ALOAD(pos, this); }
+  public void emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)  {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ALOAD(pos, this);
+	}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:263
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:358
    */
   public void emitArrayStore(CodeGeneration gen)  { gen.AASTORE(); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:304
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:399
    */
   public void emitStoreLocal(ASTNode node, CodeGeneration gen, int pos) {
 		gen.addPositionEntryAtCurrentPC(node);
@@ -69,12 +78,12 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
 	}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:630
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:725
    */
   public void branchEQ(CodeGeneration gen, int label) { gen.IF_ACMPEQ(label); }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:641
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:736
    */
   public void branchNE(CodeGeneration gen, int label) { gen.IF_ACMPNE(label); }
   /**

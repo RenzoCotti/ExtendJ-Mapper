@@ -81,7 +81,7 @@ public class EnhancedForStmt extends BranchTargetStmt implements Cloneable, Vari
       gen.IF_ICMPGE(end_label());
       gen.ALOAD(extraLocalIndex(), exprType);
       gen.ILOAD(extraLocalIndex() + 1);
-      exprType.componentType().emitArrayLoad(gen);
+      exprType.componentType().emitArrayLoad(exprType.componentType(), gen);
       exprType.componentType().emitCastTo(gen, targetType);
       targetType.emitStoreLocal(this, gen, var.localNum());
       getStmt().createBCode(gen);
@@ -795,10 +795,10 @@ public class EnhancedForStmt extends BranchTargetStmt implements Cloneable, Vari
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1711
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1718
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1711")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1718")
   public int break_label() {
     int break_label_value = end_label();
     return break_label_value;
@@ -806,10 +806,10 @@ public class EnhancedForStmt extends BranchTargetStmt implements Cloneable, Vari
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1736
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1743
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1736")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1743")
   public int continue_label() {
     int continue_label_value = update_label();
     return continue_label_value;

@@ -161,9 +161,9 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
       gen.addLabel(tryCloseBeginLbl);
       {
         // if resource != null
-        resourceType.emitLoadLocal(gen, resourceIndex);
+        resourceType.emitLoadLocal(this, gen, resourceIndex);
         gen.IFNULL(innerFinallyLbl);
-        resourceType.emitLoadLocal(gen, resourceIndex);
+        resourceType.emitLoadLocal(this, gen, resourceIndex);
         closeMethod().emitInvokeMethod(gen, autoCloseableType);
       }
       gen.addLabel(tryCloseEndLbl);
@@ -173,14 +173,14 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
       // operand stack: .., #primary, #suppressed
       gen.addLabel(catchSuppressedLbl);
       throwableType.emitStoreLocal(this, gen, suppressedIndex);
-      throwableType.emitLoadLocal(gen, primaryIndex);
-      throwableType.emitLoadLocal(gen, suppressedIndex);
+      throwableType.emitLoadLocal(this, gen, primaryIndex);
+      throwableType.emitLoadLocal(this, gen, suppressedIndex);
       addSuppressedMethod().emitInvokeMethod(gen, throwableType);
 
       // Inner finally:
       // operand stack: .., #primary
       gen.addLabel(innerFinallyLbl);
-      throwableType.emitLoadLocal(gen, primaryIndex);
+      throwableType.emitLoadLocal(this, gen, primaryIndex);
       gen.ATHROW();
 
       // If there was an exception during the block of the try
@@ -196,9 +196,9 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
     gen.addLabel(outerFinallyLbl);
     {
       // if resource != null
-      resourceType.emitLoadLocal(gen, resourceIndex);
+      resourceType.emitLoadLocal(this, gen, resourceIndex);
       gen.IFNULL(tryEndLbl);
-      resourceType.emitLoadLocal(gen, resourceIndex);
+      resourceType.emitLoadLocal(this, gen, resourceIndex);
       closeMethod().emitInvokeMethod(gen, autoCloseableType);
     }
 

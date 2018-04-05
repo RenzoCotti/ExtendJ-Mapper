@@ -178,7 +178,7 @@ aspect StringsInSwitch {
           thenLbl = defaultLbl;
         }
 
-        typeString().emitLoadLocal(gen, index_b);
+        typeString().emitLoadLocal(this, gen, index_b);
         gen.LDC(lbl.string);
         equalsMethod().emitInvokeMethod(gen,
             lookupType("java.lang", "Object"));

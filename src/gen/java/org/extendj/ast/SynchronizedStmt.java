@@ -54,7 +54,7 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1880
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1887
    */
   public void emitMonitorEnter(CodeGeneration gen) {
     gen.DUP();
@@ -64,12 +64,12 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1894
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1901
    */
   protected int monitorId = -1;
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1896
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1903
    */
   public void createBCode(CodeGeneration gen) {
     int lbl_start = gen.constantPool().newLabel();
@@ -522,10 +522,10 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1721
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1728
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1721")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1728")
   public int start_label() {
     ASTState state = state();
     if (start_label_computed == ASTState.NON_CYCLE || start_label_computed == state().cycle()) {
@@ -688,7 +688,7 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1921
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1928
    * @apilevel internal
    */
   public boolean Define_leavesMonitor(ASTNode _callerNode, ASTNode _childNode, Stmt branch, SynchronizedStmt monitor) {
@@ -702,7 +702,7 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
       }
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1921
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1928
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute leavesMonitor
    */

@@ -139,12 +139,12 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
    * @aspect CreateBCode
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:589
    */
-  public void emitLoadVariable(CodeGeneration gen, Access access) {
+  public void emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     throw new Error("Missing implementation for emitLoadVariable in " + getClass().getName());
   }
   /** Generate bytecode to load this field. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:303
    */
   public void emitLoadField(CodeGeneration gen, TypeDecl hostType) {
     if (hostType().isArrayDecl() && name().equals("length")) {
@@ -162,7 +162,7 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
   }
   /** Generate bytecode to store a field in the given hostType. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:274
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:369
    */
   public void emitStoreField(CodeGeneration gen, TypeDecl hostType) {
     String classname = hostType.constantPoolName();

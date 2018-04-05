@@ -65,7 +65,7 @@ public class ConstructorAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:779
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:786
    */
   public void createBCode(CodeGeneration gen) {
     if (transformed() != this) {
@@ -93,7 +93,7 @@ public class ConstructorAccess extends Access implements Cloneable {
     }
     // Push enclosing variable arguments.
     for (Variable var : decl.hostType().enclosingVariables()) {
-      var.emitLoadVariable(gen, this);
+      var.emitLoadVariable(decl, gen, this);
     }
     if (decl.isPrivate() && decl.hostType() != hostType()) {
       gen.ACONST_NULL();

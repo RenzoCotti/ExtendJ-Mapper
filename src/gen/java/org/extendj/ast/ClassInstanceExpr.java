@@ -215,7 +215,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:867
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:874
    */
   private void emitLocalEnclosing(CodeGeneration gen, TypeDecl localClass) {
     if (!localClass.inStaticContext()) {
@@ -224,7 +224,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:873
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:880
    */
   private void emitInnerMemberEnclosing(CodeGeneration gen, TypeDecl innerClass) {
     if (hasPrevExpr()) {
@@ -248,7 +248,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:894
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:901
    */
   public void createBCode(CodeGeneration gen) {
     if (transformed() != this) {
@@ -297,7 +297,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
     }
     // Push enclosing variable arguments.
     for (Variable var : decl.hostType().enclosingVariables()) {
-      var.emitLoadVariable(gen, this);
+      var.emitLoadVariable(decl, gen, this);
     }
 
     if (decl.isPrivate() && type() != hostType()) {

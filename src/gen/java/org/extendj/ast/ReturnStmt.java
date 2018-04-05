@@ -63,7 +63,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1760
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1767
    */
   public void createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -81,12 +81,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
         int nextRange = gen.constantPool().newLabel();
         type.emitStoreLocal(type, gen, resultSaveLocalNum());
         getFinally().createBCode(gen);
-        type.emitLoadLocal(gen, resultSaveLocalNum());
-        type.emitReturn(gen);
+        type.emitLoadLocal(type, gen, resultSaveLocalNum());
+        type.emitReturn(this, gen);
         gen.addLabel(nextRange);
         gen.monitorRangesStart(this, nextRange);
       } else {
-        type.emitReturn(gen);
+        type.emitReturn(this, gen);
       }
     } else {
       if (hasFinally()) {

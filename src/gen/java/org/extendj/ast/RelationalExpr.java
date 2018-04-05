@@ -37,12 +37,12 @@ import java.io.DataInputStream;
 public abstract class RelationalExpr extends Binary implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1180
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1187
    */
   public void createBCode(CodeGeneration gen) { emitBooleanCondition(gen); }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1332
    */
   public void branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -67,7 +67,7 @@ public abstract class RelationalExpr extends Binary implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1436
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1443
    */
   public void branchFalse(CodeGeneration gen, int target) {
     // Branch when false.
@@ -92,14 +92,14 @@ public abstract class RelationalExpr extends Binary implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1458
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1465
    */
   public void compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareBranch not implemented for " + getClass().getName());
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1486
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1493
    */
   public void compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareNotBranch not implemented for " + getClass().getName());

@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class AndBitwiseExpr extends BitwiseExpr implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:501
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:596
    */
   void emitOperation(CodeGeneration gen) { type().bitand(gen); }
   /**

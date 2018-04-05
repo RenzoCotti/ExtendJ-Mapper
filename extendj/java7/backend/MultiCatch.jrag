@@ -64,15 +64,15 @@ aspect MultiCatch {
         gen.DUP();
       }
       CatchParameterDeclaration decl = (CatchParameterDeclaration) v;
-      decl.type().emitLoadLocal(gen, decl.localNum());
+      decl.type().emitLoadLocal(this, gen, decl.localNum());
     } else {
       refined(gen);
     }
   }
 
-  public void CatchParameterDeclaration.emitLoadVariable(CodeGeneration gen, Access access) {
+  public void CatchParameterDeclaration.emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     if (hostType() == access.hostType()) {
-      type().emitLoadLocal(gen, localNum());
+      type().emitLoadLocal(this, gen, localNum());
     } else {
       access.emitLoadLocalInNestedClass(gen, this);
     }

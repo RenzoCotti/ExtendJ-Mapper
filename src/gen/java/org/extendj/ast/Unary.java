@@ -46,7 +46,7 @@ public abstract class Unary extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1023
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1030
    */
   public void createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -194,7 +194,7 @@ public abstract class Unary extends Expr implements Cloneable {
     }
     TypeDecl type = access.type().binaryNumericPromotion(typeInt());
     access.type().emitCastTo(gen, type); // Added for AutoBoxing.
-    type.emitPushConstant(gen, constant);
+    type.emitPushConstant(this, gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
     access.emitStore(type, gen);
@@ -212,7 +212,7 @@ public abstract class Unary extends Expr implements Cloneable {
     access.createAssignLoadDest(gen);
     TypeDecl type = access.type().binaryNumericPromotion(typeInt());
     access.type().emitCastTo(gen, type); // Added for AutoBoxing.
-    type.emitPushConstant(gen, constant);
+    type.emitPushConstant(this, gen, constant);
     type.add(gen);
     type.emitCastTo(gen, access.type());
     if (needsPush()) {

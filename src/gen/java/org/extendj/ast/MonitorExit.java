@@ -52,7 +52,7 @@ public class MonitorExit extends Block implements Cloneable {
   /**
    * Generate bytecode for the monitor exit call.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1968
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1975
    */
   public void createBCode(CodeGeneration gen) {
     gen.monitorRangeEnd(monitor.monitorId, hostType().constantPool().newLabel());
@@ -61,7 +61,7 @@ public class MonitorExit extends Block implements Cloneable {
    * Generate exception handler for monitor closing.
    * @param gen
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1976
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1983
    */
   public void emitMonitorExitHandler(CodeGeneration gen) {
     int handler_lbl = handler_label();

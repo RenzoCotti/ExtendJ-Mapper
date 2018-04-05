@@ -37,7 +37,7 @@ import java.io.DataInputStream;
 public class SuperConstructorAccess extends ConstructorAccess implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:815
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:822
    */
   public void createBCode(CodeGeneration gen) {
     if (transformed() != this) {
@@ -80,7 +80,7 @@ public class SuperConstructorAccess extends ConstructorAccess implements Cloneab
     }
     // Push enclosing variable arguments.
     for (Variable var : decl.hostType().enclosingVariables()) {
-      var.emitLoadVariable(gen, this);
+      var.emitLoadVariable(decl, gen, this);
     }
     if (decl.isPrivate() && decl.hostType() != hostType()) {
       gen.ACONST_NULL();

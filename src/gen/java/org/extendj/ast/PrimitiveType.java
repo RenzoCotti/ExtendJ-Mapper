@@ -51,17 +51,23 @@ public class PrimitiveType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:181
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:209
    */
-  public void emitReturn(CodeGeneration gen) { gen.IRETURN(); }
+  public void emitReturn(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.IRETURN();
+	}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:200
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:277
    */
-  public void emitLoadLocal(CodeGeneration gen, int pos)  { gen.ILOAD(pos); }
+  public void emitLoadLocal(ASTNode node, CodeGeneration gen, int pos)  {
+		gen.addPositionEntryAtCurrentPC(node);
+		gen.ILOAD(pos);
+	}
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:288
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:383
    */
   public void emitStoreLocal(ASTNode node, CodeGeneration gen, int pos) {
 		gen.addPositionEntryAtCurrentPC(node);

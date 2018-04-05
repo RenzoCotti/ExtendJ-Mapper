@@ -119,16 +119,16 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
    * @aspect MultiCatch
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java7/backend/MultiCatch.jrag:73
    */
-  public void emitLoadVariable(CodeGeneration gen, Access access) {
+  public void emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     if (hostType() == access.hostType()) {
-      type().emitLoadLocal(gen, localNum());
+      type().emitLoadLocal(this, gen, localNum());
     } else {
       access.emitLoadLocalInNestedClass(gen, this);
     }
   }
   /** Generate bytecode to load this field. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:303
    */
   public void emitLoadField(CodeGeneration gen, TypeDecl hostType) {
     if (hostType().isArrayDecl() && name().equals("length")) {
@@ -146,7 +146,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /** Generate bytecode to store a field in the given hostType. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:274
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:369
    */
   public void emitStoreField(CodeGeneration gen, TypeDecl hostType) {
     String classname = hostType.constantPoolName();

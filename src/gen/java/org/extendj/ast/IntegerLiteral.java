@@ -66,10 +66,11 @@ public class IntegerLiteral extends Literal implements Cloneable, NumericLiteral
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:121
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:136
    */
-  public void emitPushConstant(CodeGeneration gen) {
-    type().emitPushConstant(gen, constant().intValue());
+  public void emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
+    type().emitPushConstant(node, gen, constant().intValue());
   }
   /**
    * @declaredat ASTNode:1

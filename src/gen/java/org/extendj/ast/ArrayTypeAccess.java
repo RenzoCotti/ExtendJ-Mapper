@@ -71,7 +71,7 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:996
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1003
    */
   public void createBCode(CodeGeneration gen) {
     getAccess().createBCode(gen);

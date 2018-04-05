@@ -150,7 +150,7 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:351
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:446
    */
   public void emitInvokeConstructor(CodeGeneration gen) {
     int numArg = 1 + getNumParameter() + hostType().enclosingVariables().size();
@@ -239,7 +239,7 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
       int localIndex = offsetFirstEnclosingVariable();
       for (Variable v : hostType().enclosingVariables()) {
         gen.ALOAD(0, hostType());
-        v.type().emitLoadLocal(gen, localIndex);
+        v.type().emitLoadLocal(this, gen, localIndex);
         String classname = hostType().constantPoolName();
         String name = "val$" + v.name();
         int index = gen.constantPool().addFieldref(classname, name, v.type());
@@ -2382,10 +2382,10 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
    * The constructor that is called in bytecode.
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:957
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:964
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:957")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:964")
   public ConstructorDecl bytecodeTarget() {
     ConstructorDecl bytecodeTarget_value = this;
     return bytecodeTarget_value;

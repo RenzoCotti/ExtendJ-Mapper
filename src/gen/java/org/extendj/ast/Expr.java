@@ -276,7 +276,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:223
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:318
    */
   public void emitStore(ASTNode node, CodeGeneration gen) {
     error("emitStore called with " + getClass().getName());
@@ -284,7 +284,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * Outputs the desired operation on the operand(s) on the stack.
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:480
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:575
    */
   void emitOperation(CodeGeneration gen) {
     codeGenError("expression");
@@ -321,7 +321,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1184
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1191
    */
   protected void emitBooleanCondition(CodeGeneration gen) {
     int end_label = -1;
@@ -354,7 +354,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @param gen code generator
    * @param target target label to jump to if the condition was true
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1243
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1250
    */
   public void refined_CreateBCode_Expr_branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -374,7 +374,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @param gen code generator
    * @param target target label to jump to if the condition was false
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1354
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1361
    */
   public void refined_CreateBCode_Expr_branchFalse(CodeGeneration gen, int target) {
     // Branch when false.
@@ -1740,10 +1740,10 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1156
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1163
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1156")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1163")
   public boolean canBeTrue() {
     boolean canBeTrue_value = !isFalse();
     return canBeTrue_value;
@@ -1751,10 +1751,10 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1168
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1175
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1168")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1175")
   public boolean canBeFalse() {
     boolean canBeFalse_value = !isTrue();
     return canBeFalse_value;

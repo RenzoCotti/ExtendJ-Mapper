@@ -56,7 +56,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1524
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1531
    */
   public void createBCode(CodeGeneration gen) {
     for (Stmt stmt : getStmtList()) {

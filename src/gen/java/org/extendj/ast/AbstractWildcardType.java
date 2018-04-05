@@ -98,7 +98,7 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:656
    */
   public void emitLoadLocal(CodeGeneration gen, int pos) {
-    erasure().emitLoadLocal(gen, pos);
+    erasure().emitLoadLocal(this, gen, pos);
   }
   /**
    * @declaredat ASTNode:1

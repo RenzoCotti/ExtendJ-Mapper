@@ -1535,7 +1535,7 @@ protected ASTState.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1921
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1928
    * @apilevel internal
    */
   public boolean Define_leavesMonitor(ASTNode _callerNode, ASTNode _childNode, Stmt branch, SynchronizedStmt monitor) {
@@ -1545,7 +1545,7 @@ protected ASTState.Cycle type_cycle = null;
       }
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1921
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:1928
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute leavesMonitor
    */

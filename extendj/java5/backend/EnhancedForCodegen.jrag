@@ -67,7 +67,7 @@ aspect EnhancedForToBytecode {
       gen.IF_ICMPGE(end_label());
       gen.ALOAD(extraLocalIndex(), exprType);
       gen.ILOAD(extraLocalIndex() + 1);
-      exprType.componentType().emitArrayLoad(gen);
+      exprType.componentType().emitArrayLoad(exprType.componentType(), gen);
       exprType.componentType().emitCastTo(gen, targetType);
       targetType.emitStoreLocal(this, gen, var.localNum());
       getStmt().createBCode(gen);

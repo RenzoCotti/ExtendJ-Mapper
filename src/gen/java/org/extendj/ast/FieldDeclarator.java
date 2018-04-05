@@ -56,10 +56,13 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:601
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:603
    */
-  public void refined_CreateBCode_FieldDeclarator_emitLoadVariable(CodeGeneration gen, Access access) {
+  public void refined_CreateBCode_FieldDeclarator_emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
+		gen.addPositionEntryAtCurrentPC(node);
+
     access.createLoadQualifier(gen, this);
+
     if (isConstant() && (type().isPrimitive() || type().isString())) {
       if (!isStatic()) {
         gen.POP(access.fieldQualifierType());
@@ -456,11 +459,11 @@ public class FieldDeclarator extends Declarator implements Cloneable {
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java5/backend/GenericsCodegen.jrag:110
    */
    
-  public void emitLoadVariable(CodeGeneration gen, Access access) {
+  public void emitLoadVariable(ASTNode node, CodeGeneration gen, Access access) {
     if (erasedField() != this) {
-      erasedField().emitLoadVariable(gen, access);
+      erasedField().emitLoadVariable(node, gen, access);
     } else {
-      refined_CreateBCode_FieldDeclarator_emitLoadVariable(gen, access);
+      refined_CreateBCode_FieldDeclarator_emitLoadVariable(node, gen, access);
     }
   }
   /**

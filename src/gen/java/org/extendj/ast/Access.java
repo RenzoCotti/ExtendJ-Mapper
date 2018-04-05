@@ -110,12 +110,12 @@ public abstract class Access extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:636
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:643
    */
   protected void emitLoadLocalInNestedClass(CodeGeneration gen, Variable v) {
     if (inExplicitConstructorInvocation() && enclosingBodyDecl() instanceof ConstructorDecl) {
       ConstructorDecl c = (ConstructorDecl) enclosingBodyDecl();
-      v.type().emitLoadLocal(gen, c.localIndexOfEnclosingVariable(v));
+      v.type().emitLoadLocal(c, gen, c.localIndexOfEnclosingVariable(v));
     } else {
       String classname = hostType().constantPoolName();
       String      name = "val$" + v.name();
@@ -127,7 +127,7 @@ public abstract class Access extends Expr implements Cloneable {
   /**
    * Generate bytecode to push on the stack the qualifier to access the variable v.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:652
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:659
    */
   protected void createLoadQualifier(CodeGeneration gen, Variable v) {
     if (v.isField()) {
@@ -148,7 +148,7 @@ public abstract class Access extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:759
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:766
    */
   public void emitThis(CodeGeneration gen, TypeDecl targetDecl) {
     if (targetDecl == hostType()) {
@@ -544,10 +544,10 @@ public abstract class Access extends Expr implements Cloneable {
   /**
    * @attribute inh
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:634
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:641
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:634")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CreateBCode.jrag:641")
   public boolean inExplicitConstructorInvocation() {
     boolean inExplicitConstructorInvocation_value = getParent().Define_inExplicitConstructorInvocation(this, null);
     return inExplicitConstructorInvocation_value;

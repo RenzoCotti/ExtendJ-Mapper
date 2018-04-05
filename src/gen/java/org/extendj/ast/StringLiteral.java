@@ -56,9 +56,10 @@ public class StringLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:141
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:161
    */
-  public void emitPushConstant(CodeGeneration gen) {
+  public void emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     StringLiteral.push(gen, getLITERAL());
   }
   /**

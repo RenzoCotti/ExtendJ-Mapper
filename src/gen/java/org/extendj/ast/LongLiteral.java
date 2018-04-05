@@ -66,9 +66,10 @@ public class LongLiteral extends Literal implements Cloneable, NumericLiteral {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:133
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/extendj/java4/backend/CodeGeneration.jrag:151
    */
-  public void emitPushConstant(CodeGeneration gen) {
+  public void emitPushConstant(ASTNode node, CodeGeneration gen) {
+		gen.addPositionEntryAtCurrentPC(node);
     LongLiteral.push(gen, constant().longValue());
   }
   /**

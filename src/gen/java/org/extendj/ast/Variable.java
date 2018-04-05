@@ -144,7 +144,7 @@ public void emitStoreField(CodeGeneration gen, TypeDecl hostType);
    * @param gen bytecode output.
    * @param access the access for which the variable load is to be generated.
    */
-  void emitLoadVariable(CodeGeneration gen, Access access);
+  void emitLoadVariable(ASTNode node, CodeGeneration gen, Access access);
 
   /**
    * @attribute syn
