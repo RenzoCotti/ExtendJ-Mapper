@@ -756,7 +756,7 @@ Expr multiplicative_expression =
   ;
 Expr additive_expression =
     multiplicative_expression @BOTTOM
-  | additive_expression.e1 PLUS multiplicative_expression.e2   {: return new AddExpr(e1, e2); :}
+  | additive_expression.e1 PLUS.e3 multiplicative_expression.e2   {: Expr res = new AddExpr(e1, e2); res.addOperator(e3); return res; :}
   | additive_expression.e1 MINUS multiplicative_expression.e2  {: return new SubExpr(e1, e2); :}
   ;
 Expr shift_expression =
@@ -1467,7 +1467,7 @@ Access class_or_interface_type =
   ;
 Expr literal :=
     NUMERIC_LITERAL
-    {: return NumericLiteralParser.parse("" + NUMERIC_LITERAL.value); :}
+    {: return new NumericLiteral(NUMERIC_LITERAL); :}
   | BOOLEAN_LITERAL
     {: return new BooleanLiteral(BOOLEAN_LITERAL); :}
   | CHARACTER_LITERAL
@@ -1519,7 +1519,9 @@ List resource_declarations =
   ;
 
 ResourceDeclaration resource_declaration =
-    modifiers.a? type.b IDENTIFIER EQ variable_initializer.i
+    modifiers.a? type.b IDENTIFIER
+    {: return new ResourceDeclaration(IDENTIFIER, new List(), new Opt(), new ResourceModifiers(a), b); :}
+  | modifiers.a? type.b IDENTIFIER EQ variable_initializer.i
     {: return new ResourceDeclaration(IDENTIFIER, new List(), new Opt(i), new ResourceModifiers(a), b); :}
   ;
 Expr primary_no_new_array = constructor_reference;

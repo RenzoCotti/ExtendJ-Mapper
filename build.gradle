@@ -1,96 +1,158 @@
-plugins {
-  id 'java'
-  id 'org.jastadd' version '1.12.0'
+buildscript {
+	repositories.mavenCentral()
+	dependencies {
+		classpath 'org.jastadd:jastaddgradle:1.10.4'
+	}
 }
+
+repositories {
+	mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'jastadd'
+apply plugin: 'eclipse'
 
 defaultTasks 'jar'
 
-if (!file('extendj/jastadd_modules').exists()) {
-  throw new GradleException('ExtendJ seems to be missing. Please run "git submodule init", then "git submodule update".')
+/** Helper function to run a command. Returns the command output if the command succeeded. */
+def tryCommand(List command, boolean failOnError = false) {
+	def out = new StringBuilder()
+	def err = new StringBuilder()
+	def proc = command.execute()
+	proc.waitForProcessOutput(out, err)
+	if (proc.exitValue()) {
+		def message = "Failed to run '${command[0]}' command (args: ${command.tail()})\n$err$out"
+		if (failOnError) {
+			throw new GradleException(message)
+		} else {
+			println "Warning: ${message}"
+		}
+		""
+	} else {
+		if (err) println "${err}"
+		out.toString()
+	}
+}
+
+/** Helper function to retrieve the current version string. */
+def getVersion() {
+	if (hasProperty('newVersion')) {
+		// A new version string should be saved.
+		Properties version = new Properties()
+		version['version'] = newVersion
+		version.store(file('src/res/Version.properties').newWriter(), null)
+		return newVersion
+	} else {
+		def output = tryCommand(['git', 'describe'])
+		if (output) {
+			// Use Git describe output.
+			output.readLines()[0]
+		} else {
+			// Git command failed. Read the previous version string instead.
+			Properties version = new Properties()
+			version.load(new FileInputStream(file('src/res/Version.properties')))
+			version['version']
+		}
+	}
 }
 
 jastadd {
-  configureModuleBuild()
+	configureModuleBuild()
 
-  modules {
-    include("extendj/jastadd_modules") // Includes the core ExtendJ modules.
+	modules 'jastadd_modules'
 
-    module "extension-base", {
-      imports "java8 backend" // This module depends on "java8 frontend" from ExtendJ.
+	// Target module:
+	// Run Gradle with -Pjastadd.module="..." to select module to build.
+	// Remember to run the 'clean' task if a new target module is specified!
+	module = project.properties['jastadd.module'] ?: "java8 backend"
 
-      java {
-        basedir "src/java/"
-        include "**/*.java"
-      }
-
-      jastadd {
-        basedir "src/jastadd/"
-        include "**/*.ast"
-        include "**/*.jadd"
-        include "**/*.jrag"
-      }
-
-      //scanner {
-      // TODO List your scanner specification additions here.
-      //}
-
-      //parser {
-      // TODO List your parser specification additions here.
-      //}
-    }
-  }
-
-  // Target module to build:
-  module = 'extension-base'
-
-  astPackage = 'org.extendj.ast'
-  genDir = 'src/gen/java'
-  buildInfoDir = 'src/gen-res'
-  parser.name = 'JavaParser'
-  parser.genDir = 'src/gen/java/org/extendj/parser'
-  scanner.name = 'OriginalScanner'
-  scanner.genDir = 'src/gen/java/org/extendj/scanner'
+	astPackage = "org.extendj.ast"
+	genDir = "src/gen"
+	buildInfoDir = "src/gen-res"
+	parser.name = "JavaParser"
+	parser.genDir = "src/gen/org/extendj/parser"
+	scanner.genDir = "src/gen/org/extendj/scanner"
 }
 
-sourceSets.main {
-  java {
-		srcDir 'extendj/src/backend-main'
-    srcDir 'extendj/src/frontend-main'
-  }
-  resources {
-    srcDir 'extendj/src/res'
-    srcDir jastadd.buildInfoDir
-  }
+project.version = getVersion()
+
+println "Building ${module.name} version ${version}"
+
+// Add main classes depending on target module.
+if (jastadd.module.name.endsWith('backend')) {
+	// Add the backend main classes.
+	mainClassName = 'org.extendj.JavaCompiler'
+	sourceSets {
+		main.java.srcDir 'src/backend-main'
+		main.java.srcDir 'src/frontend-main'
+	}
+} else {
+	mainClassName = 'org.extendj.JavaChecker'
+	sourceSets {
+		main.java.srcDir 'src/frontend-main'
+	}
 }
 
-jar.manifest.attributes 'Main-Class': 'org.extendj.JavaCompiler'
+jar.archiveName = 'extendj.jar'
+jar.manifest.attributes 'Main-Class': mainClassName
 jar.destinationDir = projectDir
 
-// Java -source and -target version.
-sourceCompatibility = targetCompatibility = '1.7'
+// Set javac -source and -target flags.
+sourceCompatibility = '1.6'
+targetCompatibility = '1.6'
 
-task sourceZip(type: Zip) {
-  description 'Builds a Zip file with the entire repisotory (including the ExtendJ submodule).'
-  destinationDir = projectDir
-  archiveName = "extension-base.zip"
-
-  from (projectDir) {
-    exclude '**/.git'
-    exclude '**/.gitignore'
-    exclude '**/.gitattributes'
-    exclude '**/.gitmodules'
-    exclude 'build'
-    exclude 'bin'
-    exclude '.gradle'
-    exclude '.classpath'
-    exclude '.settings'
-    exclude '.project'
-    exclude 'src/gen'
-    exclude 'src/gen-res'
-    exclude '*.jar'
-    exclude '*.zip'
-    exclude '**/*.swp'
-  }
-
-  into 'extension-base'
+dependencies {
+	// Ant is needed to build the ExtendJ Ant task.
+	compile group: 'org.apache.ant', name: 'ant', version: '1.9.4'
 }
+
+sourceSets {
+	main {
+		resources {
+			srcDir jastadd.buildInfoDir
+		}
+	}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '3.4.1'
+}
+
+processResources.dependsOn 'updateVersionString'
+
+task updateVersionString {
+	outputs.upToDateWhen {
+		def props = new Properties()
+		def output = file('src/gen-res/Version.properties')
+		if (output.isFile()) {
+			output.withInputStream { stream -> props.load(stream) }
+		}
+		props['version'] == project.version
+	}
+
+	doLast {
+		file('src/gen-res').mkdirs()
+		def versionFile = file('src/gen-res/Version.properties')
+		ant.propertyfile(file: versionFile) {
+			entry(key: 'version', value: project.version)
+		}
+	}
+}
+
+// Fix the .classpath file for the generated Eclipse project.
+eclipse.classpath.file {
+	beforeMerged { classpath ->
+		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('src/frontend', null)
+		classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('src/backend', null)
+		if (jastadd.module.name.contains('java8'))
+			classpath.entries << new org.gradle.plugins.ide.eclipse.model.SourceFolder('java8/src', null)
+	}
+	withXml { node ->
+		def gen = node.asNode().find { it.@kind == 'src' && it.@path == 'src/gen/java' }
+		if (gen?.children()?.isEmpty())
+			gen.appendNode('attributes').appendNode('attribute', [ name: 'ignore_optional_problems', value: 'true' ])
+	}
+}
+

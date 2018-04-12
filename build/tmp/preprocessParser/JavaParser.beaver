@@ -1,10 +1,10 @@
-%header {: // Generated from /Users/BMW/Desktop/example/extension-base/build/tmp/preprocessParser/JavaParser.all
+%header {: // Generated from /Users/BMW/Downloads/extendj/build/tmp/preprocessParser/JavaParser.all
 package org.extendj.parser;
 
  import org.extendj.ast.*;
  import org.extendj.scanner.JavaScanner;
  import org.extendj.scanner.Unicode; :};
-%embed {: // Generated from /Users/BMW/Desktop/example/extension-base/build/tmp/preprocessParser/JavaParser.all
+%embed {: // Generated from /Users/BMW/Downloads/extendj/build/tmp/preprocessParser/JavaParser.all
 class Events extends Parser.Events {
     public void scannerError(Scanner.Exception e) {
       errors.add(new Problem(null, e.getMessage(), e.line, e.column,
@@ -1181,7 +1181,7 @@ multiplicative_expression =
   ;
 additive_expression =
     multiplicative_expression.multiplicative_expression @ BOTTOM 
-  | additive_expression.e1 PLUS.PLUS multiplicative_expression.e2 {: return new AddExpr(e1, e2); :}
+  | additive_expression.e1 PLUS.e3 multiplicative_expression.e2 {: Expr res = new AddExpr(e1, e2); res.addOperator(((String)e3.value)); return res; :}
 
   | additive_expression.e1 MINUS.MINUS multiplicative_expression.e2 {: return new SubExpr(e1, e2); :}
   ;
@@ -1947,7 +1947,7 @@ class_or_interface_type =
     class_or_interface.class_or_interface LT.LT GT.GT {: return new DiamondAccess(class_or_interface); :}
   ;
 literal =
-    NUMERIC_LITERAL.NUMERIC_LITERAL {: return NumericLiteralParser.parse("" + NUMERIC_LITERAL.value); :}
+    NUMERIC_LITERAL.NUMERIC_LITERAL {: return new NumericLiteral(NUMERIC_LITERAL); :}
 
   | BOOLEAN_LITERAL.BOOLEAN_LITERAL {: return new BooleanLiteral(BOOLEAN_LITERAL); :}
 
@@ -1992,7 +1992,11 @@ resource_declarations =
   | resource_declarations.a SEMICOLON.SEMICOLON resource_declaration.b {: return a.add(b); :}
   ;
 resource_declaration =
-    type.b IDENTIFIER.IDENTIFIER EQ.EQ variable_initializer.i {: return new ResourceDeclaration(IDENTIFIER, new List(), new Opt(i), new ResourceModifiers(new List()), b); :}
+    type.b IDENTIFIER.IDENTIFIER {: return new ResourceDeclaration(IDENTIFIER, new List(), new Opt(), new ResourceModifiers(new List()), b); :}
+
+  | modifiers.a type.b IDENTIFIER.IDENTIFIER {: return new ResourceDeclaration(IDENTIFIER, new List(), new Opt(), new ResourceModifiers(a), b); :}
+
+  | type.b IDENTIFIER.IDENTIFIER EQ.EQ variable_initializer.i {: return new ResourceDeclaration(IDENTIFIER, new List(), new Opt(i), new ResourceModifiers(new List()), b); :}
 
   | modifiers.a type.b IDENTIFIER.IDENTIFIER EQ.EQ variable_initializer.i {: return new ResourceDeclaration(IDENTIFIER, new List(), new Opt(i), new ResourceModifiers(a), b); :}
   ;

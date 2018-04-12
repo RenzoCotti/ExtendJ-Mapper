@@ -1,289 +1,132 @@
-# ExtendJ Extension Base
+ExtendJ
+========
+
+The JastAdd extensible Java compiler.
 
-This project is a minimal working example of an extension to the extensible
-Java compiler ExtendJ. This should provide a useful base for creating your own
-extensions.
+License & Copyright
+-------------------
 
+* Copyright (c) 2005-2008, Torbj&ouml;rn Ekman
+* Copyright (c) 2005-2016, ExtendJ Committers
+
+All rights reserved.
+
+ExtendJ is covered by the Modified BSD License. The full license text is
+distributed with this software. See the `LICENSE` file.
 
-## License
+Tools Used
+----------
 
-Obviously this stuff is just simple template code that is meant to be copied,
-and I give anyone permission to use it without attribution.  If you copy this
-code to create your own project, you can delete the LICENSE file.  The license
-is there just to make it possible to use this project if your employer is
-strict about Open Source licensing.
+ExtendJ uses these libraries:
 
+* JastAdd2 R20130212, Copyright (c) 2005-2013, The JastAdd Team. JastAdd2 is
+  covered by the Modified BSD License. See the file `licenses/JastAdd2-BSD` for
+the full license text.
+* Beaver 0.9.11, Copyright (c) 2003-2011 Alexander Demenchuk. Beaver is covered
+  by the Modified BSD License. See the file `licenses/Beaver-BSD` for the full
+license text.
+* JFlex 1.4.3, Copyright (c) 1998-2009 Gerwin Klein. JFlex is covered by the
+  GNU General Public License. See the file `licenses/JFlex-GPL` for the full
+license text.
+* JastAddParser, Copyright (c) 2005, The JastAdd Team. JastAddParser is covered
+  by the Modified BSD License. See the file `licenses/JastAddParser-BSD` for
+the full license text.
+* RagDoll R20120208, Copyright (c) 2011-2012 Jesper &Ouml;qvist. RagDoll is
+  covered by the GNU General Public License Version 2, with the Classpath
+Exception. See the file `licenses/RagDoll-GPL` for the full license text.
 
-## Cloning this Project
+The only library used by ExtendJ at runtime is the Beaver runtime component
+`beaver-rt.jar`.
 
-To clone this project you will need [Git][3] installed.
+Building
+--------
 
-Use this command to clone the project using Git:
+ExtendJ is built using Apache Ant. Each module has it's own Ant script, and
+there is a toplevel Ant script that contains targets to build ExtendJ with
+support for various versions of Java.  The default target will build ExtendJ
+for the highest supported Java version.
 
-    git clone --recursive https://bitbucket.org/extendj/extension-base.git
+If you have Ant installed you can get a list of available build targets by
+entering the following in a terminal:
 
-The `--recursive` flag makes Git also clone the ExtendJ submodule while cloning
-the `extension-base` repository.
+    $ ant -p
 
-If you forgot the `--recursive` flag you can manually clone the ExtendJ
-submodule using these commands:
+Running
+-------
 
-    cd extension-base
-    git submodule init
-    git submodule update
+Usage:
 
-This should download the ExtendJ Git repository into a local directory named
-`extendj`.
+    java JavaCompiler <options> <source files>
+      -verbose                  Output messages about what the compiler is doing
+      -classpath <path>         Specify where to find user class files
+      -sourcepath <path>        Specify where to find input source files
+      -bootclasspath <path>     Override location of bootstrap class files
+      -extdirs <dirs>           Override location of installed extensions
+      -d <directory>            Specify where to place generated class files
+      -nowarn                   Disable warning messages
+      -help                     Print a synopsis of standard options
+      -version                  Print version information
 
+Extensions
+----------
 
-## Build and Run
+ExtendJ is intended to be an extensible compiler, however right now we are
+changing things in ExtendJ rapidly and breaking backward-compatibility.
 
-This project is set up to be built with [Gradle][1].  Don't worry, you do not
-need to install Gradle. Just run the following commands:
+The ExtendJ API up to version 7.1 was mostly much unchanged for several years.
+Since version 7.1 though many things have changed in ExtendJ in order to
+remove side effects, fix errors, and make the code more understandable. The
+next release should be much more stable, but right now ExtendJ is changing
+very much. Most of these non-compatible changes have happened since we moved
+the main development code to bitbucket. What you see in the bitbucket
+repository should be considered unstable.
 
-    ./gradlew jar
-    java -jar checker.jar testfiles/Test.java
+[See the extension migration guide][1] for more information about migrating
+an extension from an older version of ExtendJ to the latest development
+version.
 
+Development
+-----------
 
-If you are on Windows, replace `./gradlew` by just `gradlew`.
+Some useful scripts for ExtendJ development can be found at [the JJScripts
+repository][2].
 
-If everything went well, you should see this output:
+###Coding Style
 
-    testfiles/Test.java contained no errors
+*Note: The source code of ExtendJ does not fully follow this style guide yet.
+We are in a conversion process to get the code consistent, but it takes a lot of
+work.*
 
+For the most part, JastAdd code should follow [Google's Java Style Guide][3].
+JastAdd code should use a 100 character maximum line width, two-space
+indentation, as in the linked style guide. Line breaking rules are also
+generally the same.
 
-## Backend Extensions
+Some things to note about JastAdd code:
 
-This project is set up to build a frontend extension, i.e., static analysis tools.
+* Don't let synthesized and inherited attributes share the same name. That is a
+  sure way to cause unexpected behaviour.
+* The `refine` constructs can cause lines to be very long, so it's a good idea
+  to consistently always insert a line break after aspect name part of a refinement.
+* If you have a long equation, prefer to add a line break after the first equals
+  sign.
 
-To build a backend extension, i.e., a full compiler, you should apply the following
-changes in the file `build.gradle`:
+###Debugging
 
-* In the java block in sourceSets.main: add a line `srcDir' 'extendj/src/backend-main'`
-* Change the Main-Class Jar attribute from `org.extendj.ExtensionMain` to `org.extendj.JavaCompiler`
-* Change the line `imports "java8 frontend"` to `imports "java8 backend"`
+If ExtendJ should generate faulty bytecode there are a number of different
+tools that can be used to diagnose the problem.
 
+* `javap` comes with the JDK
+* `asm` can be downloaded from http://asm.ow2.org/
 
-## File Overview
+`javap` can be used to disassemble compiled bytecode:
 
-Here is a short description of some notable files in this project:
+    $ javap -verbose -c Test.class
 
-* `build.gradle` - the main Gradle build script. More about this below.
-* `gradlew.bat` - script for building on Windows.
-* `gradlew` - script for building on Unix-likes.
-* `src/java/org/extendj/ExtensionMain.java` - main class for the base extension. Parses
-  Java files supplied on the command-line and runs the `process()` method on each parsed AST.
-* `src/jastadd/ExtensionBase.jrag` - simple aspect containing a single inter-type declaration:
-  the `CompilationUnit.process()` method.
-* `testfiles/Test.java` - simple Java file to test the generated compiler.
-* `settings.gradle` - configures the Gradle project name.
-* `checker.jar` - the generated compiler Jar file (based on project name).
+ASM by OW2 Consortium can be used for advanced instrumentation and analysis
+of bytecode. There is also a useful plugin for eclipse called
+"Bytecode Outline" from OW2.
 
-
-## How this Extension Works
-
-This extension builds a compiler that prints out the filenames of Java files
-you supply to the compiler. This is obviously super simple to do, but the compiler
-does error-check each file for semantic errors first before printing the file
-name, so it can be used as a simple Java error checker.
-
-The `src/java/org/extendj/ExtensionMain.java` class is the entry-point for the
-compiler. This is where command-line arguments are processed. The
-`ExtensionMain` class is very small because it extends the
-`org.jastadd.extendj.JavaChecker` class from ExtendJ.
-
-The `processNoErrors` method in `ExtensionMain` is called for each
-`CompilationUnit`, i.e. each Java source file, that contained no semantic
-errors.
-
-    @Override
-    protected void processNoErrors(CompilationUnit unit) {
-      // Called when there were no errors in the compilation unit.
-      unit.process();
-    }
-
-The `process` method is defined in `src/jastadd/ExtensionBase.jrag`:
-
-    aspect ExtensionBase {
-      /** Called by ExtensionMain.processNoErrors() after error-checking a compilation unit. */
-      public void CompilationUnit.process() {
-        System.out.println(pathName());
-      }
-    }
-
-
-## Extension Architecture
-
-This section explains how the module system in the JastAdd Gradle plugin works.
-
-A module definition usually starts like this:
-
-    include("extendj/jastadd_modules")
-
-
-This includes the core ExtendJ modules by loading the file with the path
-`extendj/jastadd_modules`. That file is a module specification which in turn
-includes modules from subdirectories in the `extendj` directory.
-
-Each `jastadd_modules` file can define multiple JastAdd modules. In the build script,
-there is just one module named `extension-base`:
-
-    module "extension-base", {
-
-        imports "java8 frontend"
-
-        java {
-            basedir "src/java/"
-            include "**/*.java"
-        }
-
-        jastadd {
-            basedir "src/jastadd/"
-            include "**/*.ast"
-            include "**/*.jadd"
-            include "**/*.jrag"
-        }
-    }
-
-
-The module has some comments to show how to add parser or scanner files, but we
-don't use that and it is likely that you wont need to either if you just want to
-parse Java code.
-
-The module uses an `imports` statement to import all of the JastAdd files from
-the core ExtendJ module `java8 frontend`. Each supported Java version in
-ExtendJ has a frontend and backend module. The frontend module is used if you don't
-need to generate bytecode.
-
-JastAdd only uses `.ast`, `.jadd`, and `.jrag` files to generate Java code, but a
-JastAdd compiler needs some supporting code to run the compiler, so our module has
-a Java class `src/java/org/extendj/ExtensionMain.java` to run the compiler, and
-ExtendJ includes some Java code and scanner/parser code that is not generated by JastAdd.
-
-The Java code generated by JastAdd is output to the `src/gen` directory.
-
-
-## Gradle Build Walkthrough
-
-The build script `build.gradle` may need an introduction even if you are
-already familiar with [Gradle][1]. The first part of the build script declares
-which plugins will be used. We use the [JastAdd Gradle plugin][2] to generate
-code with JastAdd:
-
-    plugins {
-      id 'java'
-      id 'org.jastadd' version '1.12.0'
-    }
-
-
-Next comes the `jastadd {...}` configuration. This part provides information about
-the JastAdd modules that you want to build:
-
-    jastadd {
-      configureModuleBuild()
-
-      modules {
-        include("extendj/jastadd_modules") // Include the core ExtendJ modules.
-
-        module "extension-base", {
-          imports "java8 frontend" // This module depends on "java8 frontend" from ExtendJ.
-
-          java {
-            basedir "src/java/"
-            include "**/*.java"
-          }
-
-          jastadd {
-            basedir "src/jastadd/"
-            include "**/*.ast"
-            include "**/*.jadd"
-            include "**/*.jrag"
-          }
-
-          //scanner {
-          // TODO List your scanner specification additions here.
-          //}
-
-          //parser {
-          // TODO List your parser specification additions here.
-          //}
-        }
-      }
-
-      // Target module to build:
-      module = 'extension-base'
-
-      astPackage = 'org.extendj.ast'
-      genDir = 'src/gen/java'
-      buildInfoDir = 'src/gen-res'
-      parser.name = 'JavaParser'
-      parser.genDir = 'src/gen/java/org/extendj/parser'
-      scanner.name = 'OriginalScanner'
-      scanner.genDir = 'src/gen/java/org/extendj/scanner'
-    }
-
-
-ExtendJ is organized into a modular structure where each Java version of the
-compiler has its own module.  Each Java version also has a frontend and backend
-module. The backend modules add bytecode generation to the corresponding
-frontend.
-
-The `modules {...}` block above declares the modules that will be visible to
-the JastAdd Gradle plugin. Then, the `module = ...` line tells the plugin
-which module you want to build. The JastAdd Gradle plugin will include all
-source files in the module, plus the source files from modules that your module
-depends on (recursively).
-
-The next part of the build script specifies source and resource directories for the build.
-We need to do this here to include a few Java files from ExtendJ that will be used by
-`src/java/org/extendj/ExtensionMain.java':
-
-    sourceSets.main {
-      java {
-        srcDir 'extendj/src/frontend-main'
-      }
-      resources {
-        srcDir 'extendj/src/res'
-        srcDir jastadd.buildInfoDir
-      }
-    }
-
-
-The remaining parts of the build script are not very interesting.
-
-
-## Rebuilding
-
-Although the Gradle plugin can handle some automatic rebuilding when a source
-file changes, it does not handle all possible cases. In some situations you
-will need to force Gradle to rebuild your project. This can be done passing the
-`--rerun-tasks` option to Gradle:
-
-    ./gradlew --rerun-tasks
-
-
-## Upgrading ExtendJ
-
-If you want to update to the latest ExtendJ version, you can use these commands:
-
-    cd extendj
-    git fetch origin
-    git reset --hard origin/master
-
-
-This may be necessary if a bugfix that you need was committed to ExtendJ in a version
-later than the version that this repository links to.
-
-It is recommended that you use a test suite to ensure that your extension
-functionality is preserved after upgrading the core ExtendJ compiler.
-
-## Additional Resources
-
-More examples on how to build ExtendJ-like projects with the [JastAdd Gradle
-plugin][2] can be found here:
-
-* [JastAdd Example: GradleBuild](http://jastadd.org/web/examples.php?example=GradleBuild)
-
-[1]:https://gradle.org/
-[2]:https://github.com/jastadd/jastaddgradle
-[3]:https://git-scm.com/
+[1]: https://bitbucket.org/extendj/extendj/src/HEAD/ExtensionMigrationGuide.md?at=master
+[2]: https://bitbucket.org/joqvist/jjscripts
+[3]: http://google.github.io/styleguide/javaguide.html
