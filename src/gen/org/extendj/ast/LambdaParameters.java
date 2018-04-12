@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/Lambda.ast:3
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/Lambda.ast:3
  * @production LambdaParameters : {@link ASTNode};
 
  */
@@ -32,7 +32,7 @@ public abstract class LambdaParameters extends ASTNode<ASTNode> implements Clone
   /**
    * Builds a parameter list copying the lambda parameters.
    * @aspect LambdaToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaAnonymousDecl.jrag:99
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaAnonymousDecl.jrag:99
    */
   protected abstract List<ParameterDeclaration> toParameterList();
   /**
@@ -113,26 +113,26 @@ public abstract class LambdaParameters extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:42
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:42
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:42")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:42")
   public abstract int numParameters();
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:48
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:48
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:48")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:48")
   public abstract boolean congruentTo(FunctionDescriptor f);
   /**
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:31")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:31")
   public boolean inhModifiedInScope(Variable var) {
     boolean inhModifiedInScope_Variable_value = getParent().Define_inhModifiedInScope(this, null, var);
     return inhModifiedInScope_Variable_value;
@@ -140,10 +140,10 @@ public abstract class LambdaParameters extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect EnclosingLambda
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:30")
   public LambdaExpr enclosingLambda() {
     ASTNode$State state = state();
     if (enclosingLambda_computed == ASTNode$State.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
@@ -173,10 +173,10 @@ public abstract class LambdaParameters extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect Java8NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:32")
   public VariableScope outerScope() {
     VariableScope outerScope_value = getParent().Define_outerScope(this, null);
     return outerScope_value;
@@ -184,10 +184,10 @@ public abstract class LambdaParameters extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:30")
   public TypeDecl unknownType() {
     TypeDecl unknownType_value = getParent().Define_unknownType(this, null);
     return unknownType_value;

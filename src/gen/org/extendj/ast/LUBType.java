@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:59
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:59
  * @production LUBType : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link BodyDecl}*</span> <span class="component">TypeBound:{@link Access}*</span>;
 
  */
 public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:646
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:646
    */
   public static Collection<TypeDecl> EC(ArrayList<TypeDecl> list) {
     Collection<TypeDecl> result = new HashSet<TypeDecl>();
@@ -53,7 +53,7 @@ public class LUBType extends ReferenceType implements Cloneable {
    * is MEC = {V | V in EC, forall  W != V in EC, not W <: V}
    * @return minimal erased candidate set for Tj
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:667
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:667
    */
   public static Collection<TypeDecl> MEC(ArrayList<TypeDecl> list) {
     Collection<TypeDecl> EC = LUBType.EC(list);
@@ -79,7 +79,7 @@ public class LUBType extends ReferenceType implements Cloneable {
    * Inv(G) = {V | 1 <= i <= k, V in ST(Ui), V = G<...>}
    * @return set of relevant invocations of G, Inv(G)
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:692
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:692
    */
   public static Collection<ParTypeDecl> Inv(TypeDecl G, Collection<TypeDecl> Us) {
     Collection<ParTypeDecl> result = new HashSet<ParTypeDecl>();
@@ -95,7 +95,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @return least containing invocation (lci)
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:707
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:707
    */
   public TypeDecl lci(Collection<ParTypeDecl> set, TypeDecl G) {
     ArrayList<TypeDecl> list = new ArrayList<TypeDecl>();
@@ -118,7 +118,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * Least containing type arguments.
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:729
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:729
    */
   public TypeDecl lcta(TypeDecl X, TypeDecl Y) {
     if (!X.isWildcard() && !Y.isWildcard()) {
@@ -173,7 +173,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:781
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:781
    */
   public TypeDecl lub(TypeDecl X, TypeDecl Y) {
     ArrayList<TypeDecl> list = new ArrayList<TypeDecl>(2);
@@ -183,14 +183,14 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:788
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:788
    */
   public TypeDecl lub(ArrayList<TypeDecl> list) {
     return lookupLUBType(list);
   }
   /** @return erased supertype set of the given type. 
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:793
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:793
    */
   public static Collection<TypeDecl> EST(TypeDecl type) {
     Collection<TypeDecl> result = new HashSet<TypeDecl>();
@@ -205,7 +205,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /** @return supertype set of the given type. 
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:806
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:806
    */
   public static Collection<TypeDecl> ST(TypeDecl type) {
     Collection<TypeDecl> result = new HashSet<TypeDecl>();
@@ -214,7 +214,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:812
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:812
    */
   public static void addSupertypes(Collection<TypeDecl> set, TypeDecl t) {
     set.add(t);
@@ -257,7 +257,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1659
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1659
    */
   public Collection<InterfaceDecl> implementedInterfaces() {
     Collection<InterfaceDecl> ret = new HashSet<InterfaceDecl>();
@@ -700,10 +700,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethodsInference
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:627
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:627
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:627")
+  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:627")
   public TypeDecl lub() {
     ASTNode$State state = state();
     if (lub_computed == ASTNode$State.NON_CYCLE || lub_computed == state().cycle()) {
@@ -738,10 +738,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1647
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1647
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1647")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1647")
   public String typeName() {
     {
         if (getNumTypeBound() == 0) {
@@ -761,7 +761,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:490")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:490")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -809,10 +809,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505")
   public boolean supertypeClassDecl(ClassDecl type) {
     boolean supertypeClassDecl_ClassDecl_value = type.subtype(lub());
     return supertypeClassDecl_ClassDecl_value;
@@ -820,10 +820,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522")
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
     boolean supertypeInterfaceDecl_InterfaceDecl_value = type.subtype(lub());
     return supertypeInterfaceDecl_InterfaceDecl_value;
@@ -831,10 +831,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:424
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:424")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:424")
   public boolean supertypeGLBType(GLBType type) {
     {
         // TODO(joqvist): changed from Access to TypeDecl, is this correct?
@@ -851,7 +851,7 @@ public class LUBType extends ReferenceType implements Cloneable {
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -899,10 +899,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378")
   public boolean strictSupertypeClassDecl(ClassDecl type) {
     boolean strictSupertypeClassDecl_ClassDecl_value = type.strictSubtype(lub());
     return strictSupertypeClassDecl_ClassDecl_value;
@@ -910,10 +910,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398")
   public boolean strictSupertypeInterfaceDecl(InterfaceDecl type) {
     boolean strictSupertypeInterfaceDecl_InterfaceDecl_value = type.strictSubtype(lub());
     return strictSupertypeInterfaceDecl_InterfaceDecl_value;
@@ -921,10 +921,10 @@ public class LUBType extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:342
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:342
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:342")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:342")
   public boolean strictSupertypeGLBType(GLBType type) {
     {
         // TODO(joqvist): changed from Access to TypeDecl, is this correct?

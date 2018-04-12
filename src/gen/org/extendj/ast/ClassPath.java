@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect ClassPath
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ClassPath.jrag:167
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ClassPath.jrag:167
  */
 public class ClassPath extends java.lang.Object {
   

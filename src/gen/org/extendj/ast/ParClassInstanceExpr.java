@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/GenericMethods.ast:22
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/GenericMethods.ast:22
  * @production ParClassInstanceExpr : {@link ClassInstanceExpr} ::= <span class="component">TypeArgument:{@link Access}*</span>;
 
  */
 public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @aspect GenericMethodsPrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:288
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:288
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("<");
@@ -476,12 +476,12 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     return getTypeArgumentListNoTransform();
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:245
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:245
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -493,12 +493,12 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:246
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:246
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return unqualifiedScope().lookupType(name);
     }
@@ -510,12 +510,12 @@ public class ParClassInstanceExpr extends ClassInstanceExpr implements Cloneable
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:425
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:425
    * @apilevel internal
    */
   public boolean Define_isExplicitGenericConstructorAccess(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:430
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:430
       return true;
     }
     else {

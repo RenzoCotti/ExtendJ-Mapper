@@ -27,14 +27,14 @@ import java.io.DataInputStream;
  * May not contain a Unicode escape sequence (Unicode escapes
  * are transcoded by the scanner).
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/Literals.ast:30
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/Literals.ast:30
  * @production CharacterLiteral : {@link Literal};
 
  */
 public class CharacterLiteral extends Literal implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:149
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:149
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("'");
@@ -43,7 +43,7 @@ public class CharacterLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:240
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:240
    */
   public void emitPushConstant(CodeGeneration gen) {
     type().emitPushConstant(this, gen, constant().intValue());
@@ -226,10 +226,10 @@ public class CharacterLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38")
   public Constant constant() {
     ASTNode$State state = state();
     if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
@@ -248,10 +248,10 @@ public class CharacterLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:237
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:237")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:237")
   public String escapedLiteral() {
     String escapedLiteral_value = escape(getLITERAL());
     return escapedLiteral_value;
@@ -270,10 +270,10 @@ public class CharacterLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {

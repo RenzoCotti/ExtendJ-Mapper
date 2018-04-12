@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect ClassfileParser
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ClassfileParser.jrag:34
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ClassfileParser.jrag:34
  */
 public abstract class AbstractClassfileParser extends java.lang.Object {
   

@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/GenericMethods.ast:17
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/GenericMethods.ast:17
  * @production ParMethodAccess : {@link MethodAccess} ::= <span class="component">TypeArgument:{@link Access}*</span>;
 
  */
 public class ParMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @aspect GenericMethodsPrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:252
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:252
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("<");
@@ -438,10 +438,10 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:35")
   public Collection<Problem> typeProblems() {
     {
         if (!decl().hostType().isUnknown()) {
@@ -470,10 +470,10 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
    * Infers type arguments for this method invocation.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:431
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:431
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:431")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:431")
   public ArrayList<TypeDecl> inferTypeArguments(TypeDecl resultType, List<ParameterDeclaration> params, List<Expr> args, List<TypeVariable> typeParams) {
     java.util.List _parameters = new java.util.ArrayList(4);
     _parameters.add(resultType);
@@ -521,10 +521,10 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86")
   public boolean isPolyExpression() {
     ASTNode$State state = state();
     if (isPolyExpression_computed == ASTNode$State.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
@@ -541,12 +541,12 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     return isPolyExpression_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ResolveAmbiguousNames.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93
    * @apilevel internal
    */
   public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:33
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:33
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -558,12 +558,12 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:204
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:204
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -575,12 +575,12 @@ public class ParMethodAccess extends MethodAccess implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:205
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:205
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return unqualifiedScope().lookupType(name);
     }

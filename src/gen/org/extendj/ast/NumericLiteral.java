@@ -27,41 +27,41 @@ import java.io.DataInputStream;
  * NumericLiterals are rewritten to the best matching concrete
  * numeric literal kind, or IllegalLiteral.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/Literals.ast:18
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/Literals.ast:18
  * @production NumericLiteral : {@link Literal};
 
  */
 public class NumericLiteral extends Literal implements Cloneable {
   /**
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:351
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:351
    */
   public static final int DECIMAL = 0;
   /**
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:352
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:352
    */
   public static final int HEXADECIMAL = 1;
   /**
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:353
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:353
    */
   public static final int OCTAL = 2;
   /**
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:354
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:354
    */
   public static final int BINARY = 3;
   /**
    * The trimmed digits.
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:418
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:418
    */
   protected String digits = "";
   /**
    * Sets the trimmed digits of this literal.
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:423
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:423
    */
   public void setDigits(String digits) {
     this.digits = digits;
@@ -70,13 +70,13 @@ public class NumericLiteral extends Literal implements Cloneable {
    * The literal kind tells which kind of literal it is;
    * either a DECIMAL, HEXADECIMAL, OCTAL or BINARY literal.
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:437
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:437
    */
   protected int kind = NumericLiteral.DECIMAL;
   /**
    * Sets the literal kind.
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:442
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:442
    */
   public void setKind(int kind) {
     this.kind = kind;
@@ -257,10 +257,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * bounds requirements on the resulting parsed value.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:232
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:232
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:232")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:232")
   public long parseLong() {
     {
         switch (getKind()) {
@@ -282,10 +282,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:251
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:251
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:251")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:251")
   public long parseLongHexadecimal() {
     {
         long val = 0;
@@ -313,10 +313,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:276
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:276
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:276")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:276")
   public long parseLongOctal() {
     {
         long val = 0;
@@ -345,10 +345,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:302
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:302
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:302")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:302")
   public long parseLongBinary() {
     {
         long val = 0;
@@ -371,10 +371,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @throws NumberFormatException if the literal is too large.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:322
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:322
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:322")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:322")
   public long parseLongDecimal() {
     {
         long val = 0;
@@ -414,10 +414,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @return true if this literal is a "raw", not-yet-parsed NumericLiteral
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:364
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:364
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:364")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:364")
   public boolean needsRewrite() {
     boolean needsRewrite_value = true;
     return needsRewrite_value;
@@ -425,10 +425,10 @@ public class NumericLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:407
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:407
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:407")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:407")
   public boolean isNegative() {
     boolean isNegative_value = getLITERAL().charAt(0) == '-';
     return isNegative_value;
@@ -438,10 +438,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * underscore, prefix and suffix.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:413
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:413
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:413")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:413")
   public String getDigits() {
     String getDigits_value = digits;
     return getDigits_value;
@@ -451,10 +451,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * either a DECIMAL, HEXADECIMAL, OCTAL or BINARY literal.
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:431
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:431
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:431")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:431")
   public int getKind() {
     int getKind_value = kind;
     return getKind_value;
@@ -464,10 +464,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @return 16 (hex), 10 (decimal), 8 (octal) or 2 (binary)
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:450
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:450
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:450")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:450")
   public int getRadix() {
     {
         switch (kind) {
@@ -487,10 +487,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @return true if the literal is a decimal literal
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:467
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:467
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:467")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:467")
   public boolean isDecimal() {
     boolean isDecimal_value = kind == DECIMAL;
     return isDecimal_value;
@@ -499,10 +499,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @return true if the literal is a hexadecimal literal
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:472
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:472
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:472")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:472")
   public boolean isHex() {
     boolean isHex_value = kind == HEXADECIMAL;
     return isHex_value;
@@ -511,10 +511,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @return true if the literal is an octal literal
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:477
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:477
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:477")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:477")
   public boolean isOctal() {
     boolean isOctal_value = kind == OCTAL;
     return isOctal_value;
@@ -523,10 +523,10 @@ public class NumericLiteral extends Literal implements Cloneable {
    * @return true if the literal is a binary literal
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:482
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:482
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:482")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:482")
   public boolean isBinary() {
     boolean isBinary_value = kind == BINARY;
     return isBinary_value;
@@ -545,10 +545,10 @@ public class NumericLiteral extends Literal implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
@@ -566,14 +566,14 @@ public class NumericLiteral extends Literal implements Cloneable {
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:397
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:397
     if (needsRewrite()) {
       return rewriteRule0();
     }
     return super.rewriteTo();
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:397
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:397
    * @apilevel internal
    */
   private Literal rewriteRule0() {
@@ -586,7 +586,7 @@ public class NumericLiteral extends Literal implements Cloneable {
     }  }
   /** @apilevel internal */
   public boolean canRewrite() {
-    // Declared at /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:397
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:397
     if (needsRewrite()) {
       return true;
     }

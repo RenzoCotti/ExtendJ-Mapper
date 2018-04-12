@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:153
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:153
  * @production MulExpr : {@link MultiplicativeExpr};
 
  */
 public class MulExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1007
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1007
    */
   void emitOperation(CodeGeneration gen) {
     type().mul(this, gen);
@@ -220,10 +220,10 @@ public class MulExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32")
   public Constant constant() {
     Constant constant_value = type().mul(getLeftOperand().constant(), getRightOperand().constant());
     return constant_value;
@@ -231,10 +231,10 @@ public class MulExpr extends MultiplicativeExpr implements Cloneable {
   /** The operator string used for pretty printing this expression. 
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:242
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:242
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:242")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:242")
   public String printOp() {
     String printOp_value = "*";
     return printOp_value;

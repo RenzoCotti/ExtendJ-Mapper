@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Annotations.ast:2
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Annotations.ast:2
  * @production AnnotationDecl : {@link InterfaceDecl} ::= <span class="component">SuperInterface:{@link Access}*</span>;
 
  */
 public class AnnotationDecl extends InterfaceDecl implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/PrettyPrint.jadd:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/PrettyPrint.jadd:49
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -494,10 +494,10 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:170
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:170
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:170")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:170")
   public List getSuperInterfaceList() {
     ASTNode$State state = state();
     if (getSuperInterfaceList_computed) {
@@ -518,10 +518,10 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:176
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:176
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:176")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:176")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -545,10 +545,10 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:199")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199")
   public boolean isValidAnnotationMethodReturnType() {
     boolean isValidAnnotationMethodReturnType_value = true;
     return isValidAnnotationMethodReturnType_value;
@@ -559,7 +559,7 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
   }
   protected java.util.Map containsElementOf_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:236")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:236")
   public boolean containsElementOf(TypeDecl typeDecl) {
     Object _parameters = typeDecl;
     if (containsElementOf_TypeDecl_values == null) containsElementOf_TypeDecl_values = new java.util.HashMap(4);
@@ -622,10 +622,10 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:761
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:761
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:761")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:761")
   public boolean isAnnotationDecl() {
     boolean isAnnotationDecl_value = true;
     return isAnnotationDecl_value;
@@ -643,10 +643,10 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Flags
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Flags.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:112
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/Flags.jrag:112")
+  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:112")
   public int flags() {
     ASTNode$State state = state();
     if (flags_computed == ASTNode$State.NON_CYCLE || flags_computed == state().cycle()) {
@@ -663,12 +663,12 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
     return flags_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:141
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:141
       return name.equals("ANNOTATION_TYPE") || name.equals("TYPE");
     }
     else {
@@ -687,7 +687,7 @@ public class AnnotationDecl extends InterfaceDecl implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:174
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:174
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

@@ -25,14 +25,14 @@ import java.io.DataInputStream;
 /**
  * Abstract superclass for catch clauses.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/MultiCatch.ast:4
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/MultiCatch.ast:4
  * @production CatchClause : {@link ASTNode} ::= <span class="component">{@link Block}</span>;
 
  */
 public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable, VariableScope {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:39
    */
   public abstract void exceptionTableEntries(CodeGeneration gen,
       int begin_lbl, int end_lbl);
@@ -151,10 +151,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:279
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:279
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:279")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:279")
   public boolean handles(TypeDecl exceptionType) {
     boolean handles_TypeDecl_value = false;
     return handles_TypeDecl_value;
@@ -171,10 +171,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:192
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:192
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:192")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:192")
   public SimpleSet<Variable> parameterDeclaration(String name) {
     Object _parameters = name;
     if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
@@ -200,10 +200,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:144
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:144")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:144")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -221,10 +221,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2508
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2508
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2508")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2508")
   public int label() {
     ASTNode$State state = state();
     if (label_computed == ASTNode$State.NON_CYCLE || label_computed == state().cycle()) {
@@ -243,10 +243,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect SpecialClasses
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:93
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:93")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:93")
   public TypeDecl typeThrowable() {
     ASTNode$State state = state();
     if (typeThrowable_computed == ASTNode$State.NON_CYCLE || typeThrowable_computed == state().cycle()) {
@@ -276,10 +276,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:44
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:44")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:44")
   public SimpleSet<Variable> lookupVariable(String name) {
     Object _parameters = name;
     if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
@@ -315,10 +315,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
    * @return true if an exception of type exceptionType is catchable by the catch clause
    * @attribute inh
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:182
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:182
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:182")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:182")
   public boolean reachableCatchClause(TypeDecl exceptionType) {
     Object _parameters = exceptionType;
     if (reachableCatchClause_TypeDecl_computed == null) reachableCatchClause_TypeDecl_computed = new java.util.HashMap(4);
@@ -353,10 +353,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:217
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:217
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:217")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:217")
   public Collection<TypeDecl> caughtExceptions() {
     Collection<TypeDecl> caughtExceptions_value = getParent().Define_caughtExceptions(this, null);
     return caughtExceptions_value;
@@ -364,10 +364,10 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:280")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280")
   public boolean reportUnreachable() {
     boolean reportUnreachable_value = getParent().Define_reportUnreachable(this, null);
     return reportUnreachable_value;
@@ -375,21 +375,21 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:37")
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:138
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:138
       {
           SimpleSet<Variable> result = parameterDeclaration(name);
           if (!result.isEmpty()) {
@@ -406,7 +406,7 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:209
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:209
    * @apilevel internal
    */
   public CatchClause Define_catchClause(ASTNode _callerNode, ASTNode _childNode) {
@@ -417,12 +417,12 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    */
   public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:281
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:281
       return false;
     }
     else {

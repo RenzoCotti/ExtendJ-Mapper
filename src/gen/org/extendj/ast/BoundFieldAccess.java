@@ -24,21 +24,21 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/BoundNames.ast:6
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/BoundNames.ast:6
  * @production BoundFieldAccess : {@link VarAccess} ::= <span class="component">&lt;FieldDeclarator:FieldDeclarator&gt;</span>;
 
  */
 public class BoundFieldAccess extends VarAccess implements Cloneable {
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:85
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:85
    */
   public BoundFieldAccess(FieldDeclarator f) {
     this(f.name(), f);
   }
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:91
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:91
    */
   public boolean isExactVarAccess() {
     return false;
@@ -242,10 +242,10 @@ public class BoundFieldAccess extends VarAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:374
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:374
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:374")
+  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:374")
   public Variable decl() {
     ASTNode$State state = state();
     if (decl_computed == ASTNode$State.NON_CYCLE || decl_computed == state().cycle()) {

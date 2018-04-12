@@ -26,14 +26,14 @@ import java.io.DataInputStream;
  * A parameter declaration as used in either method parameter lists
  * or as a catch clause parameter.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:90
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:90
  * @production ParameterDeclaration : {@link ASTNode} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}</span> <span class="component">&lt;ID:String&gt;</span>;
 
  */
 public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable, SimpleSet<Variable>, Variable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:533
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:533
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -43,7 +43,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:369
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:369
    */
   @Override
   public int size() {
@@ -51,7 +51,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:374
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:374
    */
   @Override
   public boolean isEmpty() {
@@ -59,7 +59,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:379
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:379
    */
   @Override
   public SimpleSet<Variable> add(Variable o) {
@@ -67,7 +67,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:384
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:384
    */
   @Override
   public boolean contains(Object o) {
@@ -75,7 +75,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:389
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:389
    */
   @Override
   public boolean isSingleton() {
@@ -83,7 +83,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:394
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:394
    */
   @Override
   public boolean isSingleton(Variable o) {
@@ -91,7 +91,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:399
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:399
    */
   @Override
   public Variable singletonValue() {
@@ -99,7 +99,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:404
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:404
    */
   @Override
   public Iterator<Variable> iterator() {
@@ -107,14 +107,14 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NodeConstructors.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:32
    */
   public ParameterDeclaration(Access type, String name) {
     this(new Modifiers(new List()), type, name);
   }
   /**
    * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NodeConstructors.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:36
    */
   public ParameterDeclaration(TypeDecl type, String name) {
     this(new Modifiers(new List()), type.createQualifiedAccess(), name);
@@ -355,10 +355,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:255
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:255
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:255")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:255")
   public boolean isSynthetic() {
     boolean isSynthetic_value = getModifiers().isSynthetic();
     return isSynthetic_value;
@@ -366,10 +366,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:465
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:465")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:465")
   public Collection<Problem> nameProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -408,10 +408,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:225
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:225
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:225")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:225")
   public boolean hasModifiers() {
     boolean hasModifiers_value = getModifiers().getNumModifier() > 0;
     return hasModifiers_value;
@@ -430,10 +430,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:273
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:273
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:273")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:273")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
@@ -452,10 +452,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:73
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:73")
   public boolean isParameter() {
     boolean isParameter_value = true;
     return isParameter_value;
@@ -463,10 +463,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:75
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:75
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:75")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:75")
   public boolean isConstant() {
     boolean isConstant_value = false;
     return isConstant_value;
@@ -474,10 +474,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:76")
   public boolean isPublic() {
     boolean isPublic_value = false;
     return isPublic_value;
@@ -485,10 +485,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:77")
   public boolean accessibleFrom(TypeDecl type) {
     boolean accessibleFrom_TypeDecl_value = false;
     return accessibleFrom_TypeDecl_value;
@@ -496,10 +496,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:80
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:80
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:80")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:80")
   public boolean isClassVariable() {
     boolean isClassVariable_value = false;
     return isClassVariable_value;
@@ -507,10 +507,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:81
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:81
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:81")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:81")
   public boolean isInstanceVariable() {
     boolean isInstanceVariable_value = false;
     return isInstanceVariable_value;
@@ -518,10 +518,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:85
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:85
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:85")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:85")
   public boolean isLocalVariable() {
     boolean isLocalVariable_value = false;
     return isLocalVariable_value;
@@ -529,10 +529,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:86")
   public boolean isField() {
     boolean isField_value = false;
     return isField_value;
@@ -540,10 +540,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:104")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:104")
   public boolean isFinal() {
     boolean isFinal_value = getModifiers().isFinal();
     return isFinal_value;
@@ -551,10 +551,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:105
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:105
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:105")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:105")
   public boolean isVolatile() {
     boolean isVolatile_value = getModifiers().isVolatile();
     return isVolatile_value;
@@ -562,10 +562,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:106
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:106")
   public boolean isBlank() {
     boolean isBlank_value = true;
     return isBlank_value;
@@ -573,10 +573,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:107
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:107
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:107")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:107")
   public boolean isStatic() {
     boolean isStatic_value = false;
     return isStatic_value;
@@ -584,10 +584,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:109
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:109
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:109")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:109")
   public String name() {
     String name_value = getID();
     return name_value;
@@ -595,10 +595,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:111
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:111
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:111")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:111")
   public boolean hasInit() {
     boolean hasInit_value = false;
     return hasInit_value;
@@ -606,10 +606,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:112
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:112")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:112")
   public Expr getInit() {
     {
         throw new UnsupportedOperationException();
@@ -618,10 +618,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:115
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:115")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:115")
   public Constant constant() {
     {
         throw new UnsupportedOperationException();
@@ -631,10 +631,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
    * Creates a copy of this parameter declaration where parameterized types have been erased.
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1475
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1475
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1475")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1475")
   public ParameterDeclaration erasedCopy() {
     ParameterDeclaration erasedCopy_value = new ParameterDeclaration(
               getModifiers().treeCopyNoTransform(),
@@ -645,10 +645,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:59
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:59
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:59")
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:59")
   public boolean isVariableArity() {
     boolean isVariableArity_value = false;
     return isVariableArity_value;
@@ -661,10 +661,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
    * @return the substituted ParameterDeclaration node
    * @attribute syn
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:355
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:355
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:355")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:355")
   public ParameterDeclaration substituted(Collection<TypeVariable> original, List<TypeVariable> substitution) {
     ParameterDeclaration substituted_Collection_TypeVariable__List_TypeVariable__value = new ParameterDeclaration(
             (Modifiers) getModifiers().treeCopyNoTransform(),
@@ -686,10 +686,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:47")
   public Collection<TypeDecl> throwTypes() {
     ASTNode$State state = state();
     if (throwTypes_computed == ASTNode$State.NON_CYCLE || throwTypes_computed == state().cycle()) {
@@ -721,10 +721,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
    * and effectively final to be mutually exclusive, we don't.
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:65
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:65
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:65")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:65")
   public boolean isEffectivelyFinal() {
     boolean isEffectivelyFinal_value = isFinal() || !inhModifiedInScope(this);
     return isEffectivelyFinal_value;
@@ -742,10 +742,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:106
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:106")
   public ParTypeAccess inferredReferenceAccess(TypeAccess typeAccess) {
     Object _parameters = typeAccess;
     if (inferredReferenceAccess_TypeAccess_values == null) inferredReferenceAccess_TypeAccess_values = new java.util.HashMap(4);
@@ -779,10 +779,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:281
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:281
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:281")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:281")
   public boolean isProtected() {
     boolean isProtected_value = getModifiers().isProtected();
     return isProtected_value;
@@ -790,10 +790,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:283
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:283
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:283")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:283")
   public boolean isPrivate() {
     boolean isPrivate_value = getModifiers().isPrivate();
     return isPrivate_value;
@@ -801,10 +801,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:46")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:46")
   public SimpleSet<Variable> lookupVariable(String name) {
     SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
     return lookupVariable_String_value;
@@ -812,10 +812,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:420
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:420
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:420")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:420")
   public VariableScope outerScope() {
     VariableScope outerScope_value = getParent().Define_outerScope(this, null);
     return outerScope_value;
@@ -823,10 +823,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:489
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:489
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:489")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:489")
   public BodyDecl enclosingBodyDecl() {
     BodyDecl enclosingBodyDecl_value = getParent().Define_enclosingBodyDecl(this, null);
     return enclosingBodyDecl_value;
@@ -834,10 +834,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect NestedTypes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:660
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:660
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:660")
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:660")
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
@@ -845,10 +845,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:82
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:82
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:82")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:82")
   public boolean isMethodParameter() {
     boolean isMethodParameter_value = getParent().Define_isMethodParameter(this, null);
     return isMethodParameter_value;
@@ -856,10 +856,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:83
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:83
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:83")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:83")
   public boolean isConstructorParameter() {
     boolean isConstructorParameter_value = getParent().Define_isConstructorParameter(this, null);
     return isConstructorParameter_value;
@@ -867,10 +867,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect Variables
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:84
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:84")
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:84")
   public boolean isExceptionHandlerParameter() {
     boolean isExceptionHandlerParameter_value = getParent().Define_isExceptionHandlerParameter(this, null);
     return isExceptionHandlerParameter_value;
@@ -879,10 +879,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
    * @return true if the variable var is modified in the local scope
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:70
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:70
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:70")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:70")
   public boolean inhModifiedInScope(Variable var) {
     boolean inhModifiedInScope_Variable_value = getParent().Define_inhModifiedInScope(this, null, var);
     return inhModifiedInScope_Variable_value;
@@ -891,10 +891,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
    * @return true if this is the parameter declaration of a catch clause
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:202
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:202
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:202")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:202")
   public boolean isCatchParam() {
     boolean isCatchParam_value = getParent().Define_isCatchParam(this, null);
     return isCatchParam_value;
@@ -902,10 +902,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:208
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:208")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:208")
   public CatchClause catchClause() {
     CatchClause catchClause_value = getParent().Define_catchClause(this, null);
     return catchClause_value;
@@ -913,10 +913,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect EnclosingLambda
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:34
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:34")
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:34")
   public LambdaExpr enclosingLambda() {
     ASTNode$State state = state();
     if (enclosingLambda_computed == ASTNode$State.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
@@ -946,10 +946,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect LocalNum
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:65
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:65
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:65")
+  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:65")
   public int localNum() {
     ASTNode$State state = state();
     if (localNum_computed == ASTNode$State.NON_CYCLE || localNum_computed == state().cycle()) {
@@ -978,10 +978,10 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect NestedTypes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:641
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:641
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:641")
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:641")
   public String hostPackage() {
     String hostPackage_value = getParent().Define_hostPackage(this, null);
     return hostPackage_value;
@@ -989,21 +989,21 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   /**
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1249
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1249
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1249")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1249")
   public FieldDecl fieldDecl() {
     FieldDecl fieldDecl_value = getParent().Define_fieldDecl(this, null);
     return fieldDecl_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:437
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:437
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:342
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:342
       return true;
     }
     else {
@@ -1014,12 +1014,12 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:150
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:150
       return name.equals("PARAMETER");
     }
     else {
@@ -1030,12 +1030,12 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:99
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:99
       return NameType.TYPE_NAME;
     }
     else {
@@ -1054,7 +1054,7 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:463
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:463
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:47
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:47
  * @production UnknownType : {@link ClassDecl};
 
  */
@@ -569,10 +569,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessControl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:39")
   public boolean accessibleFromPackage(String packageName) {
     Object _parameters = packageName;
     if (accessibleFromPackage_String_computed == null) accessibleFromPackage_String_computed = new java.util.HashMap(4);
@@ -600,10 +600,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
    * which case an empty set is returned
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:307
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:307
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:307")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:307")
   public SimpleSet<TypeDecl> asSet() {
     SimpleSet<TypeDecl> asSet_value = emptySet();
     return asSet_value;
@@ -611,10 +611,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:629
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:629")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629")
   public SimpleSet<TypeDecl> memberTypes(String name) {
     SimpleSet<TypeDecl> memberTypes_String_value = emptySet();
     return memberTypes_String_value;
@@ -622,10 +622,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:178
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:178
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:178")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:178")
   public boolean isReferenceType() {
     boolean isReferenceType_value = true;
     return isReferenceType_value;
@@ -633,10 +633,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:182
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:182
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:182")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:182")
   public boolean isPrimitiveType() {
     boolean isPrimitiveType_value = true;
     return isPrimitiveType_value;
@@ -644,10 +644,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:187
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:187
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:187")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:187")
   public boolean isNumericType() {
     boolean isNumericType_value = true;
     return isNumericType_value;
@@ -655,10 +655,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:191
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:191
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:191")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:191")
   public boolean isIntegralType() {
     boolean isIntegralType_value = true;
     return isIntegralType_value;
@@ -666,10 +666,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:195
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:195")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:195")
   public boolean isBoolean() {
     boolean isBoolean_value = true;
     return isBoolean_value;
@@ -677,10 +677,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:205
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:205
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:205")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:205")
   public boolean isInt() {
     boolean isInt_value = true;
     return isInt_value;
@@ -688,10 +688,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:246
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:246
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:246")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:246")
   public boolean isUnknown() {
     boolean isUnknown_value = true;
     return isUnknown_value;
@@ -708,10 +708,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:443
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:443
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:443")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:443")
   public boolean instanceOf(TypeDecl type) {
     Object _parameters = type;
     if (instanceOf_TypeDecl_computed == null) instanceOf_TypeDecl_computed = new java.util.HashMap(4);
@@ -741,10 +741,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:459
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:459
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:459")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:459")
   public boolean isSupertypeOfClassDecl(ClassDecl type) {
     boolean isSupertypeOfClassDecl_ClassDecl_value = true;
     return isSupertypeOfClassDecl_ClassDecl_value;
@@ -752,10 +752,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:479
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:479")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:479")
   public boolean isSupertypeOfInterfaceDecl(InterfaceDecl type) {
     boolean isSupertypeOfInterfaceDecl_InterfaceDecl_value = true;
     return isSupertypeOfInterfaceDecl_InterfaceDecl_value;
@@ -763,10 +763,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:494
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:494
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:494")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:494")
   public boolean isSupertypeOfArrayDecl(ArrayDecl type) {
     boolean isSupertypeOfArrayDecl_ArrayDecl_value = true;
     return isSupertypeOfArrayDecl_ArrayDecl_value;
@@ -774,10 +774,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:520
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:520
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:520")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:520")
   public boolean isSupertypeOfPrimitiveType(PrimitiveType type) {
     boolean isSupertypeOfPrimitiveType_PrimitiveType_value = true;
     return isSupertypeOfPrimitiveType_PrimitiveType_value;
@@ -785,10 +785,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:530
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:530
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:530")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:530")
   public boolean isSupertypeOfNullType(NullType type) {
     boolean isSupertypeOfNullType_NullType_value = true;
     return isSupertypeOfNullType_NullType_value;
@@ -796,10 +796,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect NumericPromotion
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:157
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:157
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:157")
+  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:157")
   public TypeDecl unaryNumericPromotion() {
     TypeDecl unaryNumericPromotion_value = this;
     return unaryNumericPromotion_value;
@@ -807,10 +807,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect NumericPromotion
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:166
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:166
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:166")
+  @ASTNodeAnnotation.Source(aspect="NumericPromotion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:166")
   public TypeDecl binaryNumericPromotion(TypeDecl type) {
     TypeDecl binaryNumericPromotion_TypeDecl_value = this;
     return binaryNumericPromotion_TypeDecl_value;
@@ -820,10 +820,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
    * @return {@code true} if this type is within the bounds of the parameter type
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40")
   public boolean withinBounds(TypeDecl bound) {
     boolean withinBounds_TypeDecl_value = false;
     return withinBounds_TypeDecl_value;
@@ -834,7 +834,7 @@ public class UnknownType extends ClassDecl implements Cloneable {
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:490")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:490")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -882,10 +882,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505")
   public boolean supertypeClassDecl(ClassDecl type) {
     boolean supertypeClassDecl_ClassDecl_value = true;
     return supertypeClassDecl_ClassDecl_value;
@@ -893,10 +893,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522")
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
     boolean supertypeInterfaceDecl_InterfaceDecl_value = true;
     return supertypeInterfaceDecl_InterfaceDecl_value;
@@ -904,10 +904,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:539
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:539
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:539")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:539")
   public boolean supertypeArrayDecl(ArrayDecl type) {
     boolean supertypeArrayDecl_ArrayDecl_value = true;
     return supertypeArrayDecl_ArrayDecl_value;
@@ -915,10 +915,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:568
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:568
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:568")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:568")
   public boolean supertypePrimitiveType(PrimitiveType type) {
     boolean supertypePrimitiveType_PrimitiveType_value = true;
     return supertypePrimitiveType_PrimitiveType_value;
@@ -926,10 +926,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:577
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:577
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:577")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:577")
   public boolean supertypeNullType(NullType type) {
     boolean supertypeNullType_NullType_value = true;
     return supertypeNullType_NullType_value;
@@ -940,7 +940,7 @@ public class UnknownType extends ClassDecl implements Cloneable {
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -988,10 +988,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378")
   public boolean strictSupertypeClassDecl(ClassDecl type) {
     boolean strictSupertypeClassDecl_ClassDecl_value = true;
     return strictSupertypeClassDecl_ClassDecl_value;
@@ -999,10 +999,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398")
   public boolean strictSupertypeInterfaceDecl(InterfaceDecl type) {
     boolean strictSupertypeInterfaceDecl_InterfaceDecl_value = true;
     return strictSupertypeInterfaceDecl_InterfaceDecl_value;
@@ -1010,10 +1010,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:415
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:415
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:415")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:415")
   public boolean strictSupertypeArrayDecl(ArrayDecl type) {
     boolean strictSupertypeArrayDecl_ArrayDecl_value = true;
     return strictSupertypeArrayDecl_ArrayDecl_value;
@@ -1021,10 +1021,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:445
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:445
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:445")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:445")
   public boolean strictSupertypePrimitiveType(PrimitiveType type) {
     boolean strictSupertypePrimitiveType_PrimitiveType_value = true;
     return strictSupertypePrimitiveType_PrimitiveType_value;
@@ -1032,10 +1032,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:454
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:454
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:454")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:454")
   public boolean strictSupertypeNullType(NullType type) {
     boolean strictSupertypeNullType_NullType_value = true;
     return strictSupertypeNullType_NullType_value;
@@ -1054,10 +1054,10 @@ public class UnknownType extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
   public String typeDescriptor() {
     ASTNode$State state = state();
     if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {

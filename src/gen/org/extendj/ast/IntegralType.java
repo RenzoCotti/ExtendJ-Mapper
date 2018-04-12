@@ -24,137 +24,137 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:52
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:52
  * @production IntegralType : {@link NumericType};
 
  */
 public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @aspect Attributes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Attributes.jrag:125
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:125
    */
   public int addConstant(ConstantPool p, Constant c) {
     return p.addConstant(c.intValue());
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:216
    */
   public void emitPushConstant(ASTNode<ASTNode> node, CodeGeneration gen, int value) {
     IntegerLiteral.push(node, gen, value);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:905
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:905
    */
   void byteToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:928
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:928
    */
   void charToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:955
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:955
    */
   void shortToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1047
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1047
    */
   void neg(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.INEG);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1067
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1067
    */
   void bitNot(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ICONST_M1).emit(node, Bytecode.IXOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1099
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1099
    */
   void add(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IADD);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1119
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1119
    */
   void sub(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ISUB);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1139
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1139
    */
   void mul(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IMUL);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1159
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1159
    */
   void div(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IDIV);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1179
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1179
    */
   void rem(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IREM);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1191
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1191
    */
   void shl(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ISHL);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1203
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1203
    */
   void shr(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ISHR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1215
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1215
    */
   void ushr(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IUSHR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1227
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1227
    */
   void bitand(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IAND);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1243
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1243
    */
   void bitor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1259
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1259
    */
   void bitxor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IXOR);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1293
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1293
    */
   public <E extends TraceElement<S>, S> NodeValueList branchLT(
 			TraceIterator<E, S> trace,
@@ -169,49 +169,49 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1305
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1305
    */
   public void branchLT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPLT, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1358
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1358
    */
   public void branchLE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPLE, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1410
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1410
    */
   public void branchGE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPGE, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1464
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1464
    */
   public void branchGT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPGT, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1518
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1518
    */
   public void branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPEQ, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:1560
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1560
    */
   public void branchNE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPNE, label);
   }
   /**
    * @aspect AnnotationsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AnnotationsCodegen.jrag:229
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AnnotationsCodegen.jrag:229
    */
   public int addAnnotConstant(ConstantPool p, Constant c) {
     return addConstant(p, c);
@@ -530,10 +530,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:95")
   public Constant cast(Constant c) {
     Constant cast_Constant_value = Constant.create(c.intValue());
     return cast_Constant_value;
@@ -541,10 +541,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:118
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:118
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:118")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:118")
   public Constant plus(Constant c) {
     Constant plus_Constant_value = c;
     return plus_Constant_value;
@@ -552,10 +552,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:131
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:131")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:131")
   public Constant minus(Constant c) {
     Constant minus_Constant_value = Constant.create(-c.intValue());
     return minus_Constant_value;
@@ -563,10 +563,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:144
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:144")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:144")
   public Constant bitNot(Constant c) {
     Constant bitNot_Constant_value = Constant.create(~c.intValue());
     return bitNot_Constant_value;
@@ -574,10 +574,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:153
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:153")
   public Constant mul(Constant c1, Constant c2) {
     Constant mul_Constant_Constant_value = Constant.create(c1.intValue() * c2.intValue());
     return mul_Constant_Constant_value;
@@ -585,10 +585,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:167
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:167
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:167")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:167")
   public Constant div(Constant c1, Constant c2) {
     Constant div_Constant_Constant_value = Constant.create(c1.intValue() / c2.intValue());
     return div_Constant_Constant_value;
@@ -596,10 +596,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:181
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:181
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:181")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:181")
   public Constant mod(Constant c1, Constant c2) {
     Constant mod_Constant_Constant_value = Constant.create(c1.intValue() % c2.intValue());
     return mod_Constant_Constant_value;
@@ -607,10 +607,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:195
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:195")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:195")
   public Constant add(Constant c1, Constant c2) {
     Constant add_Constant_Constant_value = Constant.create(c1.intValue() + c2.intValue());
     return add_Constant_Constant_value;
@@ -618,10 +618,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:212
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:212
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:212")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:212")
   public Constant sub(Constant c1, Constant c2) {
     Constant sub_Constant_Constant_value = Constant.create(c1.intValue() - c2.intValue());
     return sub_Constant_Constant_value;
@@ -629,10 +629,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:226
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:226
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:226")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:226")
   public Constant lshift(Constant c1, Constant c2) {
     Constant lshift_Constant_Constant_value = Constant.create(c1.intValue() << c2.intValue());
     return lshift_Constant_Constant_value;
@@ -640,10 +640,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:236
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:236")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:236")
   public Constant rshift(Constant c1, Constant c2) {
     Constant rshift_Constant_Constant_value = Constant.create(c1.intValue() >> c2.intValue());
     return rshift_Constant_Constant_value;
@@ -651,10 +651,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:246
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:246
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:246")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:246")
   public Constant urshift(Constant c1, Constant c2) {
     Constant urshift_Constant_Constant_value = Constant.create(c1.intValue() >>> c2.intValue());
     return urshift_Constant_Constant_value;
@@ -662,10 +662,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:257
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:257
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:257")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:257")
   public Constant andBitwise(Constant c1, Constant c2) {
     Constant andBitwise_Constant_Constant_value = Constant.create(c1.intValue() & c2.intValue());
     return andBitwise_Constant_Constant_value;
@@ -673,10 +673,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:271
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:271
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:271")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:271")
   public Constant xorBitwise(Constant c1, Constant c2) {
     Constant xorBitwise_Constant_Constant_value = Constant.create(c1.intValue() ^ c2.intValue());
     return xorBitwise_Constant_Constant_value;
@@ -684,10 +684,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:285
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:285
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:285")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:285")
   public Constant orBitwise(Constant c1, Constant c2) {
     Constant orBitwise_Constant_Constant_value = Constant.create(c1.intValue() | c2.intValue());
     return orBitwise_Constant_Constant_value;
@@ -695,10 +695,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:299
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:299
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:299")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:299")
   public Constant questionColon(Constant cond, Constant c1, Constant c2) {
     Constant questionColon_Constant_Constant_Constant_value = Constant.create(cond.booleanValue() ? c1.intValue() : c2.intValue());
     return questionColon_Constant_Constant_Constant_value;
@@ -706,10 +706,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:499
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:499
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:499")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:499")
   public boolean eqIsTrue(Expr left, Expr right) {
     boolean eqIsTrue_Expr_Expr_value = left.constant().intValue() == right.constant().intValue();
     return eqIsTrue_Expr_Expr_value;
@@ -717,10 +717,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:522
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:522")
   public boolean ltIsTrue(Expr left, Expr right) {
     boolean ltIsTrue_Expr_Expr_value = left.constant().intValue() < right.constant().intValue();
     return ltIsTrue_Expr_Expr_value;
@@ -728,10 +728,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:536
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:536
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:536")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:536")
   public boolean leIsTrue(Expr left, Expr right) {
     boolean leIsTrue_Expr_Expr_value = left.constant().intValue() <= right.constant().intValue();
     return leIsTrue_Expr_Expr_value;
@@ -739,10 +739,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:582
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:582
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:582")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:582")
   public boolean assignableToInt() {
     boolean assignableToInt_value = true;
     return assignableToInt_value;
@@ -750,10 +750,10 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:191
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:191
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:191")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:191")
   public boolean isIntegralType() {
     boolean isIntegralType_value = true;
     return isIntegralType_value;

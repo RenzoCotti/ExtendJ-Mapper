@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:201
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:201
  * @production Case : {@link Stmt};
 
  */
 public abstract class Case extends Stmt implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2149
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2149
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLabel(label());
@@ -118,10 +118,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:586
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:586
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:586")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:586")
   public abstract boolean constValue(Case c);
   /** @apilevel internal */
   private void assignedBefore_Variable_reset() {
@@ -129,7 +129,7 @@ public abstract class Case extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedBefore_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:735")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:735")
   public boolean assignedBefore(Variable v) {
     Object _parameters = v;
     if (assignedBefore_Variable_values == null) assignedBefore_Variable_values = new java.util.HashMap(4);
@@ -184,7 +184,7 @@ public abstract class Case extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -232,10 +232,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteUnassignment
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1393
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1393
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1393")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1393")
   public boolean unassignedBefore(Variable v) {
     boolean unassignedBefore_Variable_value = getParent().getParent() instanceof Block
           && ((Block) getParent().getParent()).unassignedBefore(v)
@@ -248,7 +248,7 @@ public abstract class Case extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -296,10 +296,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:127
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:127
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:127")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:127")
   public boolean reachable() {
     boolean reachable_value = getParent().getParent() instanceof Block && ((Block) getParent().getParent()).reachable();
     return reachable_value;
@@ -307,10 +307,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
@@ -318,10 +318,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/StringsInSwitch.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/StringsInSwitch.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61")
   public boolean isDefaultCase() {
     boolean isDefaultCase_value = false;
     return isDefaultCase_value;
@@ -339,10 +339,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2147
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2147
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2147")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2147")
   public int label() {
     ASTNode$State state = state();
     if (label_computed == ASTNode$State.NON_CYCLE || label_computed == state().cycle()) {
@@ -361,10 +361,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:569
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:569
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:569")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:569")
   public Case bind(Case c) {
     Object _parameters = c;
     if (bind_Case_computed == null) bind_Case_computed = new java.util.HashMap(4);
@@ -399,10 +399,10 @@ public abstract class Case extends Stmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:482
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:482")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482")
   public TypeDecl switchType() {
     TypeDecl switchType_value = getParent().Define_switchType(this, null);
     return switchType_value;

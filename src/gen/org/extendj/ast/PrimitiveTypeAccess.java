@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:23
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:23
  * @production PrimitiveTypeAccess : {@link TypeAccess} ::= <span class="component">&lt;Package:String&gt;</span> <span class="component">&lt;ID:String&gt;</span>;
 
  */
 public class PrimitiveTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NodeConstructors.jrag:92
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:92
    */
   public PrimitiveTypeAccess(String name) {
     this(PRIMITIVE_PACKAGE_NAME, name);
@@ -244,10 +244,10 @@ public class PrimitiveTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:311
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:311
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:311")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:311")
   public SimpleSet<TypeDecl> decls() {
     ASTNode$State state = state();
     if (decls_computed == ASTNode$State.NON_CYCLE || decls_computed == state().cycle()) {

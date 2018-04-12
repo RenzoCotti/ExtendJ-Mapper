@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Enums.ast:1
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Enums.ast:1
  * @production EnumDecl : {@link ClassDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClass:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
  */
@@ -33,7 +33,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * Not implemented using generated pretty-print code because we have to separate
    * enum constants and enum body declarations.
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:686
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:686
    */
   public void prettyPrint(PrettyPrinter out) {
     if (!docComment.isEmpty()) {
@@ -79,7 +79,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @aspect EnumsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:229
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:229
    */
   @Override
   protected void generateBytecodes(CodeGeneration gen) {
@@ -109,7 +109,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   }
   /**
    * @aspect EnumsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:261
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:261
    */
   @Override
   protected void generateFields(DataOutputStream out, ConstantPool cp) throws IOException {
@@ -677,10 +677,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:199")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199")
   public boolean isValidAnnotationMethodReturnType() {
     boolean isValidAnnotationMethodReturnType_value = true;
     return isValidAnnotationMethodReturnType_value;
@@ -688,10 +688,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:38")
   public boolean isEnumDecl() {
     boolean isEnumDecl_value = true;
     return isEnumDecl_value;
@@ -709,10 +709,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:239
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:239")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:239")
   public boolean isStatic() {
     ASTNode$State state = state();
     if (isStatic_computed == ASTNode$State.NON_CYCLE || isStatic_computed == state().cycle()) {
@@ -731,10 +731,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:353
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:353
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:353")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:353")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>(super.typeProblems());
@@ -761,10 +761,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:87
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:87
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:87")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:87")
   public Opt<Access> getSuperClassOpt() {
     ASTNode$State state = state();
     if (getSuperClassOpt_computed) {
@@ -796,10 +796,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * Implicit constructor for enum type.
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:104")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:104")
   public Opt<ConstructorDecl> getImplicitConstructorOpt() {
     ASTNode$State state = state();
     if (getImplicitConstructorOpt_computed) {
@@ -850,10 +850,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Fields
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:390
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:390
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:390")
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:390")
   public Map<String, SimpleSet<Variable>> localFieldsMap() {
     ASTNode$State state = state();
     if (localFieldsMap_computed == ASTNode$State.NON_CYCLE || localFieldsMap_computed == state().cycle()) {
@@ -885,10 +885,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:244
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:244
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:244")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:244")
   public boolean isFinal() {
     {
         for (EnumConstant c : enumConstants()) {
@@ -914,10 +914,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:405
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:405
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:405")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:405")
   public Collection<EnumConstant> enumConstants() {
     ASTNode$State state = state();
     if (enumConstants_computed == ASTNode$State.NON_CYCLE || enumConstants_computed == state().cycle()) {
@@ -958,10 +958,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * @return map from method name to method declarations
    * @attribute syn
    * @aspect MemberMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:343
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:343
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:343")
+  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:343")
   public Map<String, Collection<MethodDecl>> methodsNameMap() {
     ASTNode$State state = state();
     if (methodsNameMap_computed == ASTNode$State.NON_CYCLE || methodsNameMap_computed == state().cycle()) {
@@ -1002,10 +1002,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:452
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:452
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:452")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:452")
   public FieldDeclarator valuesFieldDeclarator() {
     ASTNode$State state = state();
     if (valuesFieldDeclarator_computed == ASTNode$State.NON_CYCLE || valuesFieldDeclarator_computed == state().cycle()) {
@@ -1036,10 +1036,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:455
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:455
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:455")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:455")
   public FieldDecl implicitValuesField() {
     ASTNode$State state = state();
     if (implicitValuesField_computed) {
@@ -1094,10 +1094,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:483
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:483
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:483")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:483")
   public MethodDecl implicitValuesMethod() {
     ASTNode$State state = state();
     if (implicitValuesMethod_computed) {
@@ -1150,10 +1150,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:509
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:509
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:509")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:509")
   public MethodDecl implicitValueOfMethod() {
     ASTNode$State state = state();
     if (implicitValueOfMethod_computed) {
@@ -1201,10 +1201,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:237
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:237")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:237")
   public boolean isAbstract() {
     {
         for (int i = 0; i < getNumBodyDecl(); i++) {
@@ -1232,10 +1232,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:35")
   public Collection<MethodDecl> unimplementedMethods() {
     ASTNode$State state = state();
     if (unimplementedMethods_computed == ASTNode$State.NON_CYCLE || unimplementedMethods_computed == state().cycle()) {
@@ -1307,10 +1307,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * Check that the enum does not contain unimplemented abstract methods.
    * @attribute syn
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:793
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:793
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:793")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:793")
   public Collection<Problem> modifierProblems() {
     {
         if (!unimplementedMethods().isEmpty()) {
@@ -1340,10 +1340,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
    * @return a mapping of method signature to method declaration
    * @attribute syn
    * @aspect MemberMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:410
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:410
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:410")
+  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:410")
   public Map<String, SimpleSet<MethodDecl>> localMethodsSignatureMap() {
     ASTNode$State state = state();
     if (localMethodsSignatureMap_computed == ASTNode$State.NON_CYCLE || localMethodsSignatureMap_computed == state().cycle()) {
@@ -1380,10 +1380,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Flags
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Flags.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:112
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/Flags.jrag:112")
+  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:112")
   public int flags() {
     ASTNode$State state = state();
     if (flags_computed == ASTNode$State.NON_CYCLE || flags_computed == state().cycle()) {
@@ -1402,10 +1402,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /** @return a collection of the methods and constructors declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:424
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:424")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:424")
   public Collection<BodyDecl> methodsAndConstructors() {
     {
         Collection<BodyDecl> methods = new ArrayList<BodyDecl>(super.methodsAndConstructors());
@@ -1428,10 +1428,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /** @return a collection of the fields declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:326
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:326
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:326")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:326")
   public Collection<FieldDeclarator> fieldDeclarations() {
     ASTNode$State state = state();
     if (fieldDeclarations_computed == ASTNode$State.NON_CYCLE || fieldDeclarations_computed == state().cycle()) {
@@ -1466,10 +1466,10 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:50")
   public boolean hasClinit() {
     ASTNode$State state = state();
     if (hasClinit_computed == ASTNode$State.NON_CYCLE || hasClinit_computed == state().cycle()) {
@@ -1488,21 +1488,21 @@ public class EnumDecl extends ClassDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:541
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:541
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:541")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:541")
   public TypeDecl typeString() {
     TypeDecl typeString_value = getParent().Define_typeString(this, null);
     return typeString_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:438
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:438
    * @apilevel internal
    */
   public boolean Define_mayBeAbstract(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:60
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:60
       return false;
     }
     else {
@@ -1513,12 +1513,12 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:436
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:436
    * @apilevel internal
    */
   public boolean Define_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:67
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:67
       return isNestedType();
     }
     else {
@@ -1529,16 +1529,16 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:130
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:130
    * @apilevel internal
    */
   public boolean Define_isOriginalEnumConstructor(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getImplicitConstructorOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:134
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:134
       return false;
     }
     else if (_callerNode == getBodyDeclListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:132
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:132
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -1550,12 +1550,12 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:437
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:437
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:403
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:403
       return false;
     }
     else {
@@ -1574,7 +1574,7 @@ public class EnumDecl extends ClassDecl implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:788
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:788
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

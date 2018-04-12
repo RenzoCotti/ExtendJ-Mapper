@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:38
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:38
  * @production AbstractWildcardType : {@link TypeDecl};
 
  */
@@ -33,63 +33,63 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
    * Qualified access for wildcard types.  Since they have no ordinary package
    * and type name we just return the bound access.
    * @aspect Generics
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:38
    */
   public Access createQualifiedAccess() {
     return createBoundAccess();
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:638
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:638
    */
   void emitCastTo(CodeGeneration gen, TypeDecl type) {
     erasure().emitCastTo(this, gen, type);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:642
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:642
    */
   public void branchLT(CodeGeneration gen, int label) {
     erasure().branchLT(this, gen, label);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:646
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:646
    */
   public void branchLE(CodeGeneration gen, int label) {
     erasure().branchLE(this, gen, label);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:650
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:650
    */
   public void branchGE(CodeGeneration gen, int label) {
     erasure().branchGE(this, gen, label);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:654
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:654
    */
   public void branchGT(CodeGeneration gen, int label) {
     erasure().branchGT(this, gen, label);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:658
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:658
    */
   public void branchEQ(CodeGeneration gen, int label) {
     erasure().branchEQ(this, gen, label);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:662
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:662
    */
   public void branchNE(CodeGeneration gen, int label) {
     erasure().branchNE(this, gen, label);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:666
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:666
    */
   public void emitLoadLocal(CodeGeneration gen, int pos) {
     erasure().emitLoadLocal(this, gen, pos);
@@ -366,10 +366,10 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:100")
   public boolean castingConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (castingConversionTo_TypeDecl_computed == null) castingConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -395,10 +395,10 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:178
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:178
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:178")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:178")
   public boolean isReferenceType() {
     boolean isReferenceType_value = true;
     return isReferenceType_value;
@@ -406,10 +406,10 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
   /** @return {@code true} if this type is a wildcard type, possibly with type bounds. 
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:120
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:120
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:120")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:120")
   public boolean isWildcard() {
     boolean isWildcard_value = true;
     return isWildcard_value;
@@ -417,10 +417,10 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:577
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:577
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:577")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:577")
   public boolean supertypeNullType(NullType type) {
     boolean supertypeNullType_NullType_value = true;
     return supertypeNullType_NullType_value;
@@ -433,10 +433,10 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
    * @see "JLS SE7 &sect;4.7"
    * @attribute syn
    * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/ReifiableTypes.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/ReifiableTypes.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
   public boolean isReifiable() {
     boolean isReifiable_value = false;
     return isReifiable_value;
@@ -455,10 +455,10 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
   /**
    * @attribute syn
    * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
   public String typeDescriptor() {
     ASTNode$State state = state();
     if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {
@@ -487,10 +487,10 @@ public abstract class AbstractWildcardType extends TypeDecl implements Cloneable
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:433
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:433")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433")
   public boolean needsSignatureAttribute() {
     ASTNode$State state = state();
     if (needsSignatureAttribute_computed == ASTNode$State.NON_CYCLE || needsSignatureAttribute_computed == state().cycle()) {

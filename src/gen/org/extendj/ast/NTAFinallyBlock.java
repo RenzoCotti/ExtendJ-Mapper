@@ -27,19 +27,19 @@ import java.io.DataInputStream;
  * regular, non-NTA, blocks. This is required to avoid an endlessly
  * recursive AST.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/NTAFinally.ast:6
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/NTAFinally.ast:6
  * @production NTAFinallyBlock : {@link Block};
 
  */
 public class NTAFinallyBlock extends Block implements Cloneable {
   /**
    * @aspect NTAFinally
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NTAFinally.jrag:82
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:82
    */
   private FinallyHost origin;
   /**
    * @aspect NTAFinally
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NTAFinally.jrag:84
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:84
    */
   public NTAFinallyBlock(FinallyHost finallyHost) {
     this.origin = finallyHost;
@@ -284,7 +284,7 @@ public class NTAFinallyBlock extends Block implements Cloneable {
     return getStmtListNoTransform();
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BranchTarget.jrag:273
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    */
   public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {

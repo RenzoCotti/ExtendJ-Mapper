@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:107
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:107
  * @production AssignSimpleExpr : {@link AssignExpr};
 
  */
 public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:463
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:463
    */
   @Override
 	public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
@@ -49,7 +49,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * Create bytecode for a simple assign expression.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:481
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:481
    */
   public void createBCode(CodeGeneration gen) {
     getDest().createAssignSimpleLoadDest(gen);
@@ -244,10 +244,10 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /** The operator string used for pretty printing this expression. 
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:264
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:264
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:264")
   public String printOp() {
     String printOp_value = "=";
     return printOp_value;
@@ -255,10 +255,10 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:77")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -275,21 +275,21 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * @attribute inh
    * @aspect SuppressWarnings
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/SuppressWarnings.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/SuppressWarnings.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:36")
   public boolean withinSuppressWarnings(String annot) {
     boolean withinSuppressWarnings_String_value = getParent().Define_withinSuppressWarnings(this, null, annot);
     return withinSuppressWarnings_String_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getDestNoTransform() != null && _callerNode == getDest()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:36
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:36
       return true;
     }
     else {
@@ -300,12 +300,12 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    */
   public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
     if (getDestNoTransform() != null && _callerNode == getDest()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:46
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:46
       return false;
     }
     else {
@@ -316,12 +316,12 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    */
   public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     if (getSourceNoTransform() != null && _callerNode == getSource()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:71
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:71
       return getDest().type();
     }
     else {
@@ -340,7 +340,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/UncheckedConversion.jrag:51
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/UncheckedConversion.jrag:51
     if (!withinSuppressWarnings("unchecked")) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

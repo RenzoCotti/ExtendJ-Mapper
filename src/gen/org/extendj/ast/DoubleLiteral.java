@@ -27,14 +27,14 @@ import java.io.DataInputStream;
  * Can store any value representable as an
  * IEEE 754 64-bit double-precision floating point number.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/Literals.ast:67
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/Literals.ast:67
  * @production DoubleLiteral : {@link NumericLiteral};
 
  */
 public class DoubleLiteral extends NumericLiteral implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:172
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:172
    */
   public static void push(ASTNode<ASTNode> node, CodeGeneration gen, double value) {
     if (value == 0) {
@@ -48,7 +48,7 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:252
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:252
    */
   public void emitPushConstant(CodeGeneration gen) {
     DoubleLiteral.push(this, gen, constant().doubleValue());
@@ -221,7 +221,7 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
   /**
    * Defer pretty printing to superclass.
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:138
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:138
    */
     public void prettyPrint(PrettyPrinter out) {
     super.prettyPrint(out);
@@ -240,10 +240,10 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
@@ -273,10 +273,10 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
    * @return true if this floating point literal is equivalent to a zero literal
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:60")
   public boolean isZero() {
     ASTNode$State state = state();
     if (isZero_computed == ASTNode$State.NON_CYCLE || isZero_computed == state().cycle()) {
@@ -319,10 +319,10 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38")
   public Constant constant() {
     ASTNode$State state = state();
     if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
@@ -357,10 +357,10 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
    * @return true if this literal is a "raw", not-yet-parsed NumericLiteral
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:364
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:364
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:364")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:364")
   public boolean needsRewrite() {
     boolean needsRewrite_value = false;
     return needsRewrite_value;
@@ -374,7 +374,7 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:778
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:778
     if (!isZero() && constant().doubleValue() == 0.0f) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -385,7 +385,7 @@ public class DoubleLiteral extends NumericLiteral implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:783
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:783
     if (constant().doubleValue() == Double.NEGATIVE_INFINITY
               || constant().doubleValue() == Double.POSITIVE_INFINITY) {
       {

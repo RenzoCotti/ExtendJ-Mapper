@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:133
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:133
  * @production Dims : {@link ASTNode} ::= <span class="component">[{@link Expr}]</span>;
 
  */
 public class Dims extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:335
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:335
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("[");
@@ -219,12 +219,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return (Opt<Expr>) getChildNoTransform(0);
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:195
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:346
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:346
       return false;
     }
     else {
@@ -235,12 +235,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:196
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:347
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:347
       return false;
     }
     else {
@@ -251,12 +251,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:197
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:197
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:348
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:348
       return false;
     }
     else {
@@ -267,12 +267,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:198
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:349
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:349
       return false;
     }
     else {
@@ -283,12 +283,12 @@ public class Dims extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:199
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExprOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:350
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:350
       return false;
     }
     else {

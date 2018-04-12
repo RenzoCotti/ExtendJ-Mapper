@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:52
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:52
  * @production FieldDeclarationSubstituted : {@link FieldDeclarator} ::= <span class="component">&lt;Original:FieldDeclarator&gt;</span>;
 
  */

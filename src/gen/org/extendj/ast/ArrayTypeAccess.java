@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:24
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:24
  * @production ArrayTypeAccess : {@link TypeAccess} ::= <span class="component">&lt;Package:String&gt;</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link Access}</span>;
 
  */
 public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:68
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getAccess());
@@ -39,7 +39,7 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   }
   /**
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:287
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:287
    */
   public boolean sameType(ArrayTypeAccess a) {
     ArrayTypeAccess at1 = this;
@@ -58,7 +58,7 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:1203
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1203
    */
   public void createBCode(CodeGeneration gen) {
     getAccess().createBCode(gen);
@@ -259,10 +259,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Arrays
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Arrays.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Arrays.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:95")
   public String getPackage() {
     ASTNode$State state = state();
     if (getPackage_computed == ASTNode$State.NON_CYCLE || getPackage_computed == state().cycle()) {
@@ -292,10 +292,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Arrays
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Arrays.jrag:97
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:97
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Arrays.jrag:97")
+  @ASTNodeAnnotation.Source(aspect="Arrays", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:97")
   public String getID() {
     ASTNode$State state = state();
     if (getID_computed == ASTNode$State.NON_CYCLE || getID_computed == state().cycle()) {
@@ -314,10 +314,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = getAccess().assignedAfter(v);
     return assignedAfter_Variable_value;
@@ -328,7 +328,7 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:903")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:903")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -387,10 +387,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:323
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:323
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:323")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:323")
   public TypeDecl decl() {
     ASTNode$State state = state();
     if (decl_computed == ASTNode$State.NON_CYCLE || decl_computed == state().cycle()) {
@@ -409,10 +409,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:241
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:241
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:241")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:241")
   public Collection<Problem> nameProblems() {
     {
         if (decl().elementType().isUnknown()) {
@@ -426,10 +426,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
    * expression.
    * @attribute syn
    * @aspect SyntacticClassification
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60")
   public NameType predNameType() {
     NameType predNameType_value = NameType.AMBIGUOUS_NAME;
     return predNameType_value;
@@ -437,10 +437,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:224
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:224
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:224")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:224")
   public boolean staticContextQualifier() {
     boolean staticContextQualifier_value = true;
     return staticContextQualifier_value;
@@ -449,10 +449,10 @@ public class ArrayTypeAccess extends TypeAccess implements Cloneable {
    * Creates a copy of this access where parameterized types have been erased.
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1462
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1462")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462")
   public Access erasedCopy() {
     Access erasedCopy_value = new ArrayTypeAccess(getAccess().erasedCopy());
     return erasedCopy_value;

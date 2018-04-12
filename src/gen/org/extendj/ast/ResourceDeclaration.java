@@ -25,14 +25,14 @@ import java.io.DataInputStream;
 /**
  * A resource declaration in a try with resources statement.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/TryWithResources.ast:9
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/TryWithResources.ast:9
  * @production ResourceDeclaration : {@link VariableDeclarator} ::= <span class="component">{@link ResourceModifiers}</span> <span class="component">ResourceType:{@link Access}</span>;
 
  */
 public class ResourceDeclaration extends VariableDeclarator implements Cloneable {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PrettyPrint.jadd:56
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PrettyPrint.jadd:56
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -463,10 +463,10 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
    * Type checking for TWR.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:47")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -493,10 +493,10 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
   /** Modifiers are same as the parent declaration (e.g. VarDeclStmt). 
    * @attribute syn
    * @aspect VariableDeclarationTransformation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:130
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:130
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:130")
+  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:130")
   public Modifiers getModifiers() {
     ASTNode$State state = state();
     if (getModifiers_computed == ASTNode$State.NON_CYCLE || getModifiers_computed == state().cycle()) {
@@ -527,10 +527,10 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
   /**
    * @attribute syn nta
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:306
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:306
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:306")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:306")
   public Access getTypeAccess() {
     ASTNode$State state = state();
     if (getTypeAccess_computed) {
@@ -548,25 +548,25 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
    * Inherit the lookupType attribute in ResourceDeclaration.
    * @attribute inh
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:40")
   public TypeDecl lookupType(String packageName, String typeName) {
     TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
     return lookupType_String_String_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getResourceTypeNoTransform() != null && _callerNode == getResourceType()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:316
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:316
       return NameType.TYPE_NAME;
     }
     else if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:35
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:35
       return NameType.TYPE_NAME;
     }
     else {
@@ -577,12 +577,12 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:437
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:437
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getResourceModifiersNoTransform() != null && _callerNode == getResourceModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:314
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:314
       return true;
     }
     else {
@@ -601,7 +601,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:42
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:42
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -610,7 +610,7 @@ public class ResourceDeclaration extends VariableDeclarator implements Cloneable
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:214
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:214
     if (resourcePreviouslyDeclared(name())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

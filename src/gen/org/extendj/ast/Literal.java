@@ -25,28 +25,28 @@ import java.io.DataInputStream;
 /**
  * The abstract base class for all literals.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/Literals.ast:4
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/Literals.ast:4
  * @production Literal : {@link PrimaryExpr} ::= <span class="component">&lt;LITERAL:String&gt;</span>;
 
  */
 public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:442
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:442
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getLITERAL());
   }
   /**
    * @aspect BytecodeCONSTANT
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BytecodeCONSTANT.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BytecodeCONSTANT.jrag:96
    */
   public static Literal buildBooleanLiteral(boolean value) {
     return new BooleanLiteral(value ? "true" : "false");
   }
   /**
    * @aspect BytecodeCONSTANT
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BytecodeCONSTANT.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BytecodeCONSTANT.jrag:100
    */
   public static Literal buildStringLiteral(String value) {
     return new StringLiteral(value);
@@ -56,7 +56,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
    * @param s string to escape
    * @return escaped string literal
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:295
    */
   protected static String escape(String s) {
     StringBuffer result = new StringBuffer();
@@ -99,7 +99,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:335
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:335
    */
   protected static String asEscape(int value) {
     StringBuffer s = new StringBuffer("\\u");
@@ -112,14 +112,14 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:232
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:232
    */
   public void emitPushConstant(CodeGeneration gen) {
     System.err.println("ERROR: Tried to generate bytecode for: " + getClass().getName());
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:323
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:323
    */
   public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
 		  TraceGenerator<E, S> generator, String contextMsg) {
@@ -134,7 +134,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:336
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:336
    */
   public void createBCode(CodeGeneration gen) {
     emitPushConstant(gen);
@@ -267,7 +267,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @return a fresh double literal representing the given value
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:76
    */
     public static Literal buildDoubleLiteral(double value) {
     String digits = Double.toString(value);
@@ -279,7 +279,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @return a fresh float literal representing the given value
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:88
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:88
    */
     public static Literal buildFloatLiteral(float value) {
     String digits = Float.toString(value);
@@ -291,7 +291,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @return a fresh integer literal representing the given value
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:100
    */
     public static Literal buildIntegerLiteral(int value) {
     String digits = Integer.toHexString(value);
@@ -303,7 +303,7 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @return a fresh long literal representing the given value
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:112
    */
     public static Literal buildLongLiteral(long value) {
     String digits = Long.toHexString(value);
@@ -326,10 +326,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38")
   public Constant constant() {
     ASTNode$State state = state();
     if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
@@ -353,10 +353,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:383
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:383")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383")
   public boolean isConstant() {
     boolean isConstant_value = true;
     return isConstant_value;
@@ -364,10 +364,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:435
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:435
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:435")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:435")
   public boolean isTrue() {
     boolean isTrue_value = false;
     return isTrue_value;
@@ -375,10 +375,10 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:438
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:438
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:438")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:438")
   public boolean isFalse() {
     boolean isFalse_value = false;
     return isFalse_value;

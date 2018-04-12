@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:25
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:25
  * @production ArrayTypeWithSizeAccess : {@link ArrayTypeAccess} ::= <span class="component">{@link Expr}</span>;
 
  */
 public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:72
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:72
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getAccess());
@@ -241,7 +241,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AutoBoxingCodegen.jrag:344
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:344
    */
     public void createBCode(CodeGeneration gen) {
     getAccess().createBCode(gen);
@@ -253,10 +253,10 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268")
   public boolean assignedAfter(Variable v) {
     boolean assignedAfter_Variable_value = getExpr().assignedAfter(v);
     return assignedAfter_Variable_value;
@@ -267,7 +267,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:903")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:903")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -313,12 +313,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     }
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:55
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:55
       return false;
     }
     else {
@@ -329,12 +329,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:44
    * @apilevel internal
    */
   public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:56
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:56
       return true;
     }
     else {
@@ -345,12 +345,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:413
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:413
       return getAccess().assignedAfter(v);
     }
     else {
@@ -361,12 +361,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:891
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1101
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1101
       return getAccess().unassignedAfter(v);
     }
     else {
@@ -377,12 +377,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:52
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
    * @apilevel internal
    */
   public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:64
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:64
       return unqualifiedScope().lookupMethod(name);
     }
     else {
@@ -393,12 +393,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:113
    * @apilevel internal
    */
   public boolean Define_hasPackage(ASTNode _callerNode, ASTNode _childNode, String packageName) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:122
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:122
       return unqualifiedScope().hasPackage(packageName);
     }
     else {
@@ -409,12 +409,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:345
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:345
       return unqualifiedScope().lookupType(name);
     }
     else {
@@ -425,12 +425,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:251
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:251
       return unqualifiedScope().lookupVariable(name);
     }
     else {
@@ -441,12 +441,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:142
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:142
       return NameType.EXPRESSION_NAME;
     }
     else {
@@ -457,12 +457,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:195
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:340
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:340
       return false;
     }
     else {
@@ -473,12 +473,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:196
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:341
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:341
       return false;
     }
     else {
@@ -489,12 +489,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:197
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:197
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:342
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:342
       return false;
     }
     else {
@@ -505,12 +505,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:198
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:343
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:343
       return false;
     }
     else {
@@ -521,12 +521,12 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:199
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:344
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:344
       return false;
     }
     else {
@@ -545,7 +545,7 @@ public class ArrayTypeWithSizeAccess extends ArrayTypeAccess implements Cloneabl
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:732
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:732
     if (!getExpr().type().unaryNumericPromotion().isInt()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

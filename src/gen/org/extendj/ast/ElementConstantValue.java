@@ -24,21 +24,21 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Annotations.ast:11
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Annotations.ast:11
  * @production ElementConstantValue : {@link ElementValue} ::= <span class="component">{@link Expr}</span>;
 
  */
 public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/PrettyPrint.jadd:99
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/PrettyPrint.jadd:99
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getExpr());
   }
   /**
    * @aspect AnnotationsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AnnotationsCodegen.jrag:270
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AnnotationsCodegen.jrag:270
    */
   public void appendAsAttributeTo(Attribute buf) {
     if (getExpr().isConstant() && !getExpr().type().isEnumDecl()) {
@@ -223,10 +223,10 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:111
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:111
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:111")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:111")
   public boolean validTarget(Annotation a) {
     {
         Variable v = getExpr().varDecl();
@@ -240,10 +240,10 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:265
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:265
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:265")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:265")
   public Collection<Problem> nameProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -261,10 +261,10 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:285
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:285
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:285")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:285")
   public ElementValue definesElementTypeValue(String name) {
     {
         Variable v = getExpr().varDecl();
@@ -277,10 +277,10 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:451
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:451
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:451")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:451")
   public boolean hasValue(String annot) {
     boolean hasValue_String_value = getExpr().type().isString()
           && getExpr().isConstant()
@@ -290,10 +290,10 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:665
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:665
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:665")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:665")
   public boolean commensurateWithTypeDecl(TypeDecl type) {
     {
         Expr v = getExpr();
@@ -318,10 +318,10 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:721
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:721
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:721")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:721")
   public TypeDecl type() {
     TypeDecl type_value = getExpr().type();
     return type_value;
@@ -329,21 +329,21 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
   /**
    * @attribute inh
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:278
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:278
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:278")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:278")
   public ElementValue lookupElementTypeValue(String name) {
     ElementValue lookupElementTypeValue_String_value = getParent().Define_lookupElementTypeValue(this, null, name);
     return lookupElementTypeValue_String_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:768
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:768
       return NameType.EXPRESSION_NAME;
     }
     else {
@@ -354,12 +354,12 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
    * @apilevel internal
    */
   public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
     if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:773
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:773
       return enclosingAnnotationDecl().typeName();
     }
     else {
@@ -378,7 +378,7 @@ public class ElementConstantValue extends ElementValue implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:263
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:263
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

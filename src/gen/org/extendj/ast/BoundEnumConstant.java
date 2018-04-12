@@ -24,21 +24,21 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Enums.ast:8
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Enums.ast:8
  * @production BoundEnumConstant : {@link VarAccess} ::= <span class="component">&lt;EnumConstant:EnumConstant&gt;</span>;
 
  */
 public class BoundEnumConstant extends VarAccess implements Cloneable {
   /**
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:426
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:426
    */
   public boolean isExactVarAccess() {
     return false;
   }
   /**
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:430
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:430
    */
   public BoundEnumConstant(EnumConstant c) {
     this(c.name(), c);
@@ -242,10 +242,10 @@ public class BoundEnumConstant extends VarAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:374
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:374
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:374")
+  @ASTNodeAnnotation.Source(aspect="VariableScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:374")
   public Variable decl() {
     ASTNode$State state = state();
     if (decl_computed == ASTNode$State.NON_CYCLE || decl_computed == state().cycle()) {

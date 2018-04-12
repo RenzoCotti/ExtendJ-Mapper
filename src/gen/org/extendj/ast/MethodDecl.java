@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:94
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:94
  * @production MethodDecl : {@link MemberDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">Parameter:{@link ParameterDeclaration}*</span> <span class="component">Exception:{@link Access}*</span> <span class="component">[{@link Block}]</span>;
 
  */
 public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<MethodDecl>, ExceptionHolder {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:471
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:471
    */
   public void prettyPrint(PrettyPrinter out) {
     if (!isSynthetic()) {
@@ -72,14 +72,14 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:95
    */
   public Access createBoundAccess(List<Expr> args) {
     return createBoundAccess(args, hostType());
   }
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:99
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:99
    */
   public Access createBoundAccess(List<Expr> args, TypeDecl hostType) {
     if (isStatic()) {
@@ -91,7 +91,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:455
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:455
    */
   @Override
   public int size() {
@@ -99,7 +99,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:460
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:460
    */
   @Override
   public boolean isEmpty() {
@@ -107,7 +107,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:465
    */
   @Override
   public SimpleSet<MethodDecl> add(MethodDecl o) {
@@ -115,7 +115,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:470
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:470
    */
   @Override
   public boolean contains(Object o) {
@@ -123,7 +123,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:475
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:475
    */
   @Override
   public boolean isSingleton() {
@@ -131,7 +131,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:480
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:480
    */
   @Override
   public boolean isSingleton(MethodDecl o) {
@@ -139,7 +139,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:485
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:485
    */
   @Override
   public MethodDecl singletonValue() {
@@ -147,7 +147,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:490
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:490
    */
   @Override
   public boolean equals(Object o) {
@@ -155,7 +155,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect DataStructures
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:495
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:495
    */
   @Override
   public Iterator<MethodDecl> iterator() {
@@ -163,7 +163,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1286
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1286
    */
   public BodyDecl signatureCopy() {
     return new MethodDeclSubstituted(
@@ -177,7 +177,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1387
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1387
    */
   public BodyDecl erasedCopy() {
     return new MethodDeclSubstituted(
@@ -194,7 +194,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * in the methods throws-clause. This takes the position of the type
    * parameters into account.
    * @aspect FunctionDescriptor
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionDescriptor.jrag:216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionDescriptor.jrag:216
    */
   public boolean subtypeThrowsClause(Access exception) {
     boolean foundCompatible = false;
@@ -211,7 +211,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * in the methods throws-clause. Performs erasure on all types before
    * comparing them.
    * @aspect FunctionDescriptor
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionDescriptor.jrag:232
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionDescriptor.jrag:232
    */
   public boolean subtypeThrowsClauseErased(Access exception) {
     boolean foundCompatible = false;
@@ -225,7 +225,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:656
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:656
    */
   public void emitInvokeMethod(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl hostType) {
     if (hostType.isInterfaceDecl()) {
@@ -259,7 +259,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:687
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:687
    */
   public void emitInvokeSpecialMethod(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl hostType) {
     String classname = hostType.constantPoolName();
@@ -274,7 +274,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:146
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:146
    */
   private void generateBytecodes(CodeGeneration gen) {
     int label = gen.variableScopeLabel();
@@ -302,7 +302,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:212
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:212
    */
   public <E extends TraceElement<S>, S> NodeValueList generateExplanation(
 																TraceIterator<E, S> trace,
@@ -313,7 +313,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:220
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:220
    */
   public void createBCode(CodeGeneration gen) {
     try {
@@ -330,7 +330,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:288
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:288
    */
   public void generateMethod(DataOutputStream out, ConstantPool cp) throws IOException {
   // System.out.println("[MethodDecl]\tname:\t"+name()+", desc:\t"+descName()+", host:\t"+hostType().typeName()+",\t"+hostType().packageName());
@@ -344,7 +344,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:313
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:313
    */
   public void touchMethod(ConstantPool cp) {
     cp.addUtf8(name());
@@ -353,7 +353,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/InnerClasses.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:268
    */
   protected Stmt createAccessorStmt() {
     List<Access> argumentList = new List<Access>();
@@ -368,7 +368,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /** Create a static super accessor binding. 
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/InnerClasses.jrag:291
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:291
    */
   public Access createBoundSuperAccessor(List<Expr> args) {
     if (isStatic()) {
@@ -382,7 +382,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect AnnotationsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AnnotationsCodegen.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AnnotationsCodegen.jrag:115
    */
   public void addRuntimeVisibleParameterAnnotationsAttribute(
       Collection<Attribute> attributes) {
@@ -403,7 +403,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect AnnotationsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AnnotationsCodegen.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AnnotationsCodegen.jrag:144
    */
   public void addRuntimeInvisibleParameterAnnotationsAttribute(
       Collection<Attribute> attributes) {
@@ -953,13 +953,13 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:232
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:232
    */
   private boolean refined_MethodDecl_MethodDecl_sameSignature_MethodDecl(MethodDecl other)
 { return signature().equals(other.signature()); }
   /**
    * @aspect Attributes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Attributes.jrag:283
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:283
    */
   private Collection<Attribute> refined_Attributes_MethodDecl_attributes()
 {
@@ -978,7 +978,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect Flags
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Flags.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:60
    */
   private int refined_Flags_MethodDecl_flags()
 {
@@ -1017,7 +1017,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect AnnotationsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AnnotationsCodegen.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AnnotationsCodegen.jrag:46
    */
   private Collection<Attribute> refined_AnnotationsCodegen_MethodDecl_attributes()
 {
@@ -1040,10 +1040,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect AccessControl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:104")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:104")
   public boolean accessibleFrom(TypeDecl type) {
     Object _parameters = type;
     if (accessibleFrom_TypeDecl_computed == null) accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
@@ -1087,10 +1087,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ErrorCheck.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ErrorCheck.jrag:46")
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46")
   public int lineNumber() {
     int lineNumber_value = getLine(IDstart);
     return lineNumber_value;
@@ -1107,10 +1107,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:204
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:204
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:204")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:204")
   public boolean throwsException(TypeDecl exceptionType) {
     Object _parameters = exceptionType;
     if (throwsException_TypeDecl_computed == null) throwsException_TypeDecl_computed = new java.util.HashMap(4);
@@ -1145,10 +1145,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:193
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:193
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:193")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:193")
   public String name() {
     String name_value = getID();
     return name_value;
@@ -1167,10 +1167,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:196
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:196")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:196")
   public String signature() {
     ASTNode$State state = state();
     if (signature_computed == ASTNode$State.NON_CYCLE || signature_computed == state().cycle()) {
@@ -1203,10 +1203,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * @return Method signature, including generic parameters.
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:212
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:212
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:212")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:212")
   public String fullSignature() {
     {
         StringBuilder sb = new StringBuilder();
@@ -1232,10 +1232,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * the signature of the argument method
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:232
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:232
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:232")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:232")
   public boolean sameSignature(MethodDecl other) {
     {
         if (!refined_MethodDecl_MethodDecl_sameSignature_MethodDecl(other)) {
@@ -1258,10 +1258,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * and this is not less specific than the argument
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:240
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:240
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:240")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:240")
   public boolean moreSpecificThan(MethodDecl m) {
     boolean moreSpecificThan_MethodDecl_value = m.lessSpecificThan(this) && !this.lessSpecificThan(m);
     return moreSpecificThan_MethodDecl_value;
@@ -1283,10 +1283,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * argument method
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:250
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:250
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:250")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:250")
   public boolean lessSpecificThan(MethodDecl m) {
     Object _parameters = m;
     if (lessSpecificThan_MethodDecl_computed == null) lessSpecificThan_MethodDecl_computed = new java.util.HashMap(4);
@@ -1340,10 +1340,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * @return {@code true} of the method could potentially override
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:319
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:319
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:319")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:319")
   public boolean overrideCandidate(MethodDecl m) {
     Object _parameters = m;
     if (overrideCandidate_MethodDecl_computed == null) overrideCandidate_MethodDecl_computed = new java.util.HashMap(4);
@@ -1378,10 +1378,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:322
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:322
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:322")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:322")
   public boolean overrides(MethodDecl m) {
     Object _parameters = m;
     if (overrides_MethodDecl_computed == null) overrides_MethodDecl_computed = new java.util.HashMap(4);
@@ -1417,10 +1417,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:326
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:326
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:326")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:326")
   public boolean hides(MethodDecl m) {
     Object _parameters = m;
     if (hides_MethodDecl_computed == null) hides_MethodDecl_computed = new java.util.HashMap(4);
@@ -1456,10 +1456,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /** @return the first variable declaration with the given name. 
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:174
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:174
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:174")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:174")
   public SimpleSet<Variable> parameterDeclaration(String name) {
     Object _parameters = name;
     if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
@@ -1494,10 +1494,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:152
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:152
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:152")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:152")
   public Collection<Problem> modifierProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -1578,10 +1578,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:249
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:249
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:249")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:249")
   public boolean isSynthetic() {
     boolean isSynthetic_value = getModifiers().isSynthetic();
     return isSynthetic_value;
@@ -1589,10 +1589,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:259
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:259
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:259")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:259")
   public boolean isPublic() {
     boolean isPublic_value = getModifiers().isPublic() || hostType().isInterfaceDecl();
     return isPublic_value;
@@ -1600,10 +1600,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:260
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:260
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:260")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:260")
   public boolean isPrivate() {
     boolean isPrivate_value = getModifiers().isPrivate();
     return isPrivate_value;
@@ -1611,10 +1611,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:261
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:261
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:261")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:261")
   public boolean isProtected() {
     boolean isProtected_value = getModifiers().isProtected();
     return isProtected_value;
@@ -1622,10 +1622,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:262
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:262
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:262")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:262")
   public boolean isAbstract() {
     {
         return getModifiers().isAbstract() || (hostType().isInterfaceDecl() && !isStatic() && !isDefault());
@@ -1634,10 +1634,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:263
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:263
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:263")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:263")
   public boolean isStatic() {
     boolean isStatic_value = getModifiers().isStatic();
     return isStatic_value;
@@ -1645,10 +1645,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:266
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:266
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:266")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:266")
   public boolean isFinal() {
     boolean isFinal_value = getModifiers().isFinal() || hostType().isFinal() || isPrivate();
     return isFinal_value;
@@ -1656,10 +1656,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:268")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:268")
   public boolean isSynchronized() {
     boolean isSynchronized_value = getModifiers().isSynchronized();
     return isSynchronized_value;
@@ -1667,10 +1667,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:269
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:269
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:269")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:269")
   public boolean isNative() {
     boolean isNative_value = getModifiers().isNative();
     return isNative_value;
@@ -1678,10 +1678,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:270
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:270
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:270")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:270")
   public boolean isStrictfp() {
     boolean isStrictfp_value = getModifiers().isStrictfp();
     return isStrictfp_value;
@@ -1689,10 +1689,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:147
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:147
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:147")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:147")
   public Collection<Problem> nameProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -1720,10 +1720,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:219
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:219
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:219")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:219")
   public boolean hasModifiers() {
     boolean hasModifiers_value = getModifiers().getNumModifier() > 0;
     return hasModifiers_value;
@@ -1731,10 +1731,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:231
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:231")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:231")
   public boolean hasExceptions() {
     boolean hasExceptions_value = getNumException() > 0;
     return hasExceptions_value;
@@ -1753,10 +1753,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:290
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:290
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:290")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:290")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
@@ -1775,10 +1775,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:292
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:292
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:292")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:292")
   public boolean isVoid() {
     boolean isVoid_value = type().isVoid();
     return isVoid_value;
@@ -1786,10 +1786,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:514
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:514
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:514")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:514")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -1812,10 +1812,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:387
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:387
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:387")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:387")
   public boolean mayOverride(MethodDecl m) {
     {
         // 9.4.3
@@ -1836,10 +1836,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:231
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:231")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:231")
   public boolean annotationMethodOverride() {
     boolean annotationMethodOverride_value = !hostType().ancestorMethods(signature()).isEmpty();
     return annotationMethodOverride_value;
@@ -1847,10 +1847,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:428
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:428
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:428")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:428")
   public boolean hasAnnotationSuppressWarnings(String annot) {
     boolean hasAnnotationSuppressWarnings_String_value = getModifiers().hasAnnotationSuppressWarnings(annot);
     return hasAnnotationSuppressWarnings_String_value;
@@ -1858,10 +1858,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:485
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:485
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:485")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:485")
   public boolean isDeprecated() {
     boolean isDeprecated_value = getModifiers().hasDeprecatedAnnotation();
     return isDeprecated_value;
@@ -1879,10 +1879,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1179
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1179
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1179")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1179")
   public boolean usesTypeVariable() {
     ASTNode$State state = state();
     if (usesTypeVariable_computed == ASTNode$State.NON_CYCLE || usesTypeVariable_computed == state().cycle()) {
@@ -1902,10 +1902,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1524
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1524
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1524")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1524")
   public MethodDecl erasedMethod() {
     MethodDecl erasedMethod_value = this;
     return erasedMethod_value;
@@ -1913,10 +1913,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1563
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1563
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1563")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1563")
   public boolean isSubstitutable() {
     boolean isSubstitutable_value = !isStatic();
     return isSubstitutable_value;
@@ -1935,10 +1935,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1729
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1729
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1729")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1729")
   public MethodDecl sourceMethodDecl() {
     ASTNode$State state = state();
     if (sourceMethodDecl_computed == ASTNode$State.NON_CYCLE || sourceMethodDecl_computed == state().cycle()) {
@@ -1957,10 +1957,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect GenericsParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsParTypeDecl.jrag:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:98
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsParTypeDecl.jrag:98")
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:98")
   public boolean visibleTypeParameters() {
     boolean visibleTypeParameters_value = !isStatic();
     return visibleTypeParameters_value;
@@ -1971,10 +1971,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * @return the original generic declaration of this method.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:336
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:336
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:336")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:336")
   public GenericMethodDecl genericDecl() {
     {
         throw new Error("can not evaulate generic declaration of non-generic method");
@@ -1983,10 +1983,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:425
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:425
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:425")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:425")
   public int arity() {
     int arity_value = getNumParameter();
     return arity_value;
@@ -1994,10 +1994,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:53
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:53")
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:53")
   public boolean isVariableArity() {
     boolean isVariableArity_value = getNumParameter() > 0 && getParameter(getNumParameter() - 1).isVariableArity();
     return isVariableArity_value;
@@ -2005,10 +2005,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:63
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:63
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:63")
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:63")
   public ParameterDeclaration lastParameter() {
     ParameterDeclaration lastParameter_value = getParameter(getNumParameter() - 1);
     return lastParameter_value;
@@ -2017,10 +2017,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * @return true if the modifier list includes the SafeVarargs annotation
    * @attribute syn
    * @aspect SafeVarargs
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/SafeVarargs.jrag:41
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SafeVarargs.jrag:41
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/SafeVarargs.jrag:41")
+  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SafeVarargs.jrag:41")
   public boolean hasAnnotationSafeVarargs() {
     boolean hasAnnotationSafeVarargs_value = getModifiers().hasAnnotationSafeVarargs();
     return hasAnnotationSafeVarargs_value;
@@ -2030,10 +2030,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * that is not a variable arity method or constructor.
    * @attribute syn
    * @aspect SafeVarargs
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/SafeVarargs.jrag:72
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SafeVarargs.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/SafeVarargs.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="SafeVarargs", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SafeVarargs.jrag:72")
   public boolean hasIllegalAnnotationSafeVarargs() {
     boolean hasIllegalAnnotationSafeVarargs_value = hasAnnotationSafeVarargs() && (!isVariableArity() || (!isFinal() && !isStatic()));
     return hasIllegalAnnotationSafeVarargs_value;
@@ -2041,10 +2041,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect SuppressWarnings
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/SuppressWarnings.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:45
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/SuppressWarnings.jrag:45")
+  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:45")
   public boolean suppressWarnings(String type) {
     boolean suppressWarnings_String_value = hasAnnotationSuppressWarnings(type) || withinSuppressWarnings(type);
     return suppressWarnings_String_value;
@@ -2052,10 +2052,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = hasBlock() && getBlock().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -2072,10 +2072,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:62
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:62
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:62")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:62")
   public boolean subsignatureTo(MethodDecl m) {
     Object _parameters = m;
     if (subsignatureTo_MethodDecl_computed == null) subsignatureTo_MethodDecl_computed = new java.util.HashMap(4);
@@ -2120,10 +2120,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:86")
   public boolean returnTypeSubstitutableFor(MethodDecl m) {
     Object _parameters = m;
     if (returnTypeSubstitutableFor_MethodDecl_computed == null) returnTypeSubstitutableFor_MethodDecl_computed = new java.util.HashMap(4);
@@ -2169,10 +2169,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/Modifiers.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Modifiers.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/Modifiers.jrag:31")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Modifiers.jrag:31")
   public boolean isDefault() {
     boolean isDefault_value = getModifiers().isDefault();
     return isDefault_value;
@@ -2182,10 +2182,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    * according to the rules specified in JLS 8 &sect;9.9.
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:497
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:497
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:497")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:497")
   public MethodDecl nonWildcardParameterization() {
     MethodDecl nonWildcardParameterization_value = this;
     return nonWildcardParameterization_value;
@@ -2204,10 +2204,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Attributes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Attributes.jrag:273
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:273
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/Attributes.jrag:273")
+  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:273")
   public Collection<Attribute> attributes() {
     ASTNode$State state = state();
     if (attributes_computed == ASTNode$State.NON_CYCLE || attributes_computed == state().cycle()) {
@@ -2245,10 +2245,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:117
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:117
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:117")
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:117")
   public String descName() {
     ASTNode$State state = state();
     if (descName_computed == ASTNode$State.NON_CYCLE || descName_computed == state().cycle()) {
@@ -2292,10 +2292,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:133
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:133
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:133")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:133")
   public CodeGeneration bytecodes(ConstantPool constantPool) {
     Object _parameters = constantPool;
     if (bytecodes_ConstantPool_computed == null) bytecodes_ConstantPool_computed = new java.util.HashMap(4);
@@ -2344,10 +2344,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect Flags
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Flags.jrag:60
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:60
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/Flags.jrag:60")
+  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:60")
   public int flags() {
     ASTNode$State state = state();
     if (flags_computed == ASTNode$State.NON_CYCLE || flags_computed == state().cycle()) {
@@ -2374,10 +2374,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:448
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448")
   public boolean isMethodOrConstructor() {
     boolean isMethodOrConstructor_value = true;
     return isMethodOrConstructor_value;
@@ -2395,10 +2395,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect LocalNum
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:69
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:69")
+  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:69")
   public int offsetBeforeParameters() {
     ASTNode$State state = state();
     if (offsetBeforeParameters_computed == ASTNode$State.NON_CYCLE || offsetBeforeParameters_computed == state().cycle()) {
@@ -2427,10 +2427,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect LocalNum
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:71
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:71
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:71")
+  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:71")
   public int offsetAfterParameters() {
     ASTNode$State state = state();
     if (offsetAfterParameters_computed == ASTNode$State.NON_CYCLE || offsetAfterParameters_computed == state().cycle()) {
@@ -2468,10 +2468,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect LocalNum
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:108
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:108")
+  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:108")
   public int resultOffset() {
     ASTNode$State state = state();
     if (resultOffset_computed == ASTNode$State.NON_CYCLE || resultOffset_computed == state().cycle()) {
@@ -2490,10 +2490,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:465
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:465")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:465")
   public boolean needsSignatureAttribute() {
     {
         if (type().needsSignatureAttribute()) {
@@ -2510,10 +2510,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:596
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:596
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:596")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:596")
   public String methodTypeSignature() {
     {
         StringBuilder buf = new StringBuilder();
@@ -2532,10 +2532,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute inh
    * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:95")
   public boolean handlesException(TypeDecl exceptionType) {
     Object _parameters = exceptionType;
     if (handlesException_TypeDecl_computed == null) handlesException_TypeDecl_computed = new java.util.HashMap(4);
@@ -2570,10 +2570,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute inh
    * @aspect LookupMethod
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:36")
   public MethodDecl unknownMethod() {
     MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
     return unknownMethod_value;
@@ -2581,21 +2581,21 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute inh
    * @aspect SuppressWarnings
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/SuppressWarnings.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/SuppressWarnings.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="SuppressWarnings", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:38")
   public boolean withinSuppressWarnings(String annot) {
     boolean withinSuppressWarnings_String_value = getParent().Define_withinSuppressWarnings(this, null, annot);
     return withinSuppressWarnings_String_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:550
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:550
       return v.isFinal() && v.isField() || assignedBefore(v);
     }
     else {
@@ -2606,12 +2606,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:891
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1162
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1162
       return !(v.isFinal() && v.isField());
     }
     else {
@@ -2622,12 +2622,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
    * @apilevel internal
    */
   public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:201
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:201
       return throwsException(exceptionType);
     }
     else {
@@ -2638,17 +2638,17 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:76
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:76
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return parameterDeclaration(name);
     }
     else if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:64
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:64
       {
           SimpleSet<Variable> result = parameterDeclaration(name);
           // A declaration of a method parameter name shadows any other variable declarations.
@@ -2667,12 +2667,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:433
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:433
    * @apilevel internal
    */
   public boolean Define_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:327
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:327
       return true;
     }
     else {
@@ -2683,12 +2683,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:435
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:435
    * @apilevel internal
    */
   public boolean Define_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:328
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:328
       return true;
     }
     else {
@@ -2699,12 +2699,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:434
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:434
    * @apilevel internal
    */
   public boolean Define_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:329
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:329
       return true;
     }
     else {
@@ -2715,12 +2715,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:438
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:438
    * @apilevel internal
    */
   public boolean Define_mayBeAbstract(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:330
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:330
       return true;
     }
     else {
@@ -2731,12 +2731,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:436
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:436
    * @apilevel internal
    */
   public boolean Define_mayBeStatic(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:331
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:331
       return true;
     }
     else {
@@ -2747,12 +2747,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:437
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:437
    * @apilevel internal
    */
   public boolean Define_mayBeFinal(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:332
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:332
       return true;
     }
     else {
@@ -2763,12 +2763,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:442
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:442
    * @apilevel internal
    */
   public boolean Define_mayBeSynchronized(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:333
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:333
       return true;
     }
     else {
@@ -2779,12 +2779,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:443
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:443
    * @apilevel internal
    */
   public boolean Define_mayBeNative(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:334
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:334
       return true;
     }
     else {
@@ -2795,12 +2795,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:441
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:441
    * @apilevel internal
    */
   public boolean Define_mayBeStrictfp(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:335
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:335
       return true;
     }
     else {
@@ -2811,12 +2811,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:356
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:356
    * @apilevel internal
    */
   public ASTNode Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:357
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:357
       return this;
     }
     else {
@@ -2827,22 +2827,22 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getExceptionListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:104
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:104
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
     else if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:103
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:103
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
     else if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:102
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:102
       return NameType.TYPE_NAME;
     }
     else {
@@ -2853,12 +2853,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:534
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
    * @apilevel internal
    */
   public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:536
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:536
       return type();
     }
     else {
@@ -2869,12 +2869,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
    * @apilevel internal
    */
   public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:215
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:215
       return isStatic();
     }
     else {
@@ -2885,12 +2885,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:62
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:62
       return true;
     }
     else {
@@ -2901,12 +2901,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
    * @apilevel internal
    */
   public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:92
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:92
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -2918,12 +2918,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
    * @apilevel internal
    */
   public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:93
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:93
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -2935,12 +2935,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
    * @apilevel internal
    */
   public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:94
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:94
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -2952,12 +2952,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:154
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:154
       return name.equals("METHOD");
     }
     else {
@@ -2968,7 +2968,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:566
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:566
    * @apilevel internal
    */
   public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
@@ -2979,7 +2979,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:789
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:789
    * @apilevel internal
    */
   public String Define_typeVariableContext(ASTNode _callerNode, ASTNode _childNode) {
@@ -2990,12 +2990,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    */
   public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/VariableArityParameters.jrag:42
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:42
       int i = _callerNode.getIndexOfChild(_childNode);
       return i == getNumParameter() - 1;
     }
@@ -3007,12 +3007,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
   public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:73
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:73
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return hasBlock() && getBlock().modifiedInScope(var);
     }
@@ -3024,12 +3024,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:202
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:202
    * @apilevel internal
    */
   public boolean Define_isCatchParam(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:205
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:205
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return false;
     }
@@ -3041,16 +3041,16 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:64
    * @apilevel internal
    */
   public int Define_localNum(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:110
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:110
       return offsetAfterParameters() + resultOffset();
     }
     else if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:80
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:80
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           if (index == 0) {
@@ -3069,12 +3069,12 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:100
    * @apilevel internal
    */
   public int Define_resultSaveLocalNum(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:102
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:102
       return offsetAfterParameters();
     }
     else {
@@ -3093,7 +3093,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:150
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:150
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -3102,7 +3102,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:145
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:145
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -3111,7 +3111,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:512
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:512
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -3120,7 +3120,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/SafeVarargs.jrag:118
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SafeVarargs.jrag:118
     if (!suppressWarnings("unchecked")
               && !hasAnnotationSafeVarargs()
               && isVariableArity()

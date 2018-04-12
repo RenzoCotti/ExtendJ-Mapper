@@ -24,19 +24,19 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/MethodReference.ast:7
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/MethodReference.ast:7
  * @production MethodReferenceAccess : {@link MethodAccess};
 
  */
 public class MethodReferenceAccess extends MethodAccess implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:385
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:385
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:386
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:386
    */
   public MethodReferenceAccess(String name,
       List<Expr> args, FunctionDescriptor f) {
@@ -334,10 +334,10 @@ public class MethodReferenceAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:173
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:173
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:173")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:173")
   public TypeDecl assignConvertedType() {
     ASTNode$State state = state();
     if (assignConvertedType_computed == ASTNode$State.NON_CYCLE || assignConvertedType_computed == state().cycle()) {

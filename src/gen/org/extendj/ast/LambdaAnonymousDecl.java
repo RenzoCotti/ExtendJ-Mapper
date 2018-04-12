@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/LambdaAnonymousDecl.ast:1
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/LambdaAnonymousDecl.ast:1
  * @production LambdaAnonymousDecl : {@link AnonymousDecl} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">[SuperClass:{@link Access}]</span> <span class="component">Implements:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
  */
@@ -565,10 +565,10 @@ public class LambdaAnonymousDecl extends AnonymousDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupMethod
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:71
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:71
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:71")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:71")
   public Collection<MethodDecl> unqualifiedLookupMethod(String name) {
     Object _parameters = name;
     if (unqualifiedLookupMethod_String_computed == null) unqualifiedLookupMethod_String_computed = new java.util.HashMap(4);
@@ -604,10 +604,10 @@ public class LambdaAnonymousDecl extends AnonymousDecl implements Cloneable {
   /**
    * @attribute inh
    * @aspect EnclosingLambda
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:37")
   public LambdaExpr enclosingLambda() {
     ASTNode$State state = state();
     if (enclosingLambda_computed == ASTNode$State.NON_CYCLE || enclosingLambda_computed == state().cycle()) {

@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect LookupParTypeDecl
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:973
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:973
  */
 public class Parameterization extends java.lang.Object {
   

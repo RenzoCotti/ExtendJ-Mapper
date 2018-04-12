@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /** Parameterized type access. 
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:29
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:29
  * @production ParTypeAccess : {@link Access} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">TypeArgument:{@link Access}*</span>;
 
  */
 public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/PrettyPrint.jadd:332
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/PrettyPrint.jadd:332
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -46,14 +46,14 @@ public class ParTypeAccess extends Access implements Cloneable {
   }
   /**
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:409
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:409
    */
   public boolean isRaw() {
     return false;
   }
   /**
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:249
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:249
    */
   public boolean sameType(ParTypeAccess p) {
     TypeAccess ta1 = (TypeAccess) getTypeAccess();
@@ -346,10 +346,10 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupMethod
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:40")
   public Expr unqualifiedScope() {
     Expr unqualifiedScope_value = getParent() instanceof Access
           ? ((Access) getParent()).unqualifiedScope()
@@ -370,10 +370,10 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
@@ -411,10 +411,10 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:362
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:362
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsTypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:362")
+  @ASTNodeAnnotation.Source(aspect="GenericsTypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:362")
   public TypeDecl genericDecl() {
     TypeDecl genericDecl_value = getTypeAccess().type();
     return genericDecl_value;
@@ -422,10 +422,10 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessTypes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ResolveAmbiguousNames.jrag:35")
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:35")
   public boolean isTypeAccess() {
     boolean isTypeAccess_value = true;
     return isTypeAccess_value;
@@ -433,10 +433,10 @@ public class ParTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:662
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:662
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:662")
+  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:662")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -474,10 +474,10 @@ public class ParTypeAccess extends Access implements Cloneable {
    * Creates a copy of this access where parameterized types have been erased.
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1462
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1462")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462")
   public Access erasedCopy() {
     Access erasedCopy_value = getTypeAccess().erasedCopy();
     return erasedCopy_value;
@@ -490,10 +490,10 @@ public class ParTypeAccess extends Access implements Cloneable {
    * @return the substituted Access node
    * @attribute syn
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:369
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:369
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:369")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:369")
   public Access substituted(Collection<TypeVariable> original, List<TypeVariable> substitution) {
     {
         List<Access> substArgs = new List<Access>();
@@ -504,12 +504,12 @@ public class ParTypeAccess extends Access implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:335
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:335
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return unqualifiedScope().lookupType(name);
     }
@@ -521,7 +521,7 @@ public class ParTypeAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
@@ -540,7 +540,7 @@ public class ParTypeAccess extends Access implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:660
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:660
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

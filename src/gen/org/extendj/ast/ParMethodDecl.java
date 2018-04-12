@@ -24,21 +24,21 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/GenericMethods.ast:4
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/GenericMethods.ast:4
  * @production ParMethodDecl : {@link MethodDecl} ::= <span class="component">TypeArgument:{@link Access}*</span> <span class="component">&lt;GenericMethodDecl:GenericMethodDecl&gt;</span> <span class="component">TypeParameter:{@link TypeVariable}*</span> <span class="component">&lt;Parameterization:Parameterization&gt;</span>;
 
  */
 public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1142
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1142
    */
   public int numTypeParameter() {
     return genericMethodDecl().original().getNumTypeParameter();
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1150
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1150
    */
   public TypeVariable typeParameter(int index) {
     return genericMethodDecl().original().getTypeParameter(index);
@@ -829,10 +829,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:52
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:52
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:52")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:52")
   public GenericMethodDecl genericMethodDecl() {
     ASTNode$State state = state();
     if (genericMethodDecl_computed == ASTNode$State.NON_CYCLE || genericMethodDecl_computed == state().cycle()) {
@@ -851,10 +851,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1524
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1524
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1524")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1524")
   public MethodDecl erasedMethod() {
     MethodDecl erasedMethod_value = genericMethodDecl().erasedMethod();
     return erasedMethod_value;
@@ -873,10 +873,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1729
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1729
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1729")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1729")
   public MethodDecl sourceMethodDecl() {
     ASTNode$State state = state();
     if (sourceMethodDecl_computed == ASTNode$State.NON_CYCLE || sourceMethodDecl_computed == state().cycle()) {
@@ -909,10 +909,10 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
    * argument method
    * @attribute syn
    * @aspect MethodDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:250
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:250
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:250")
+  @ASTNodeAnnotation.Source(aspect="MethodDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:250")
   public boolean lessSpecificThan(MethodDecl m) {
     Object _parameters = m;
     if (lessSpecificThan_MethodDecl_computed == null) lessSpecificThan_MethodDecl_computed = new java.util.HashMap(4);
@@ -937,7 +937,7 @@ public class ParMethodDecl extends MethodDecl implements Cloneable {
     return lessSpecificThan_MethodDecl_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {

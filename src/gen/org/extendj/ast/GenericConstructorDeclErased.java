@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:50
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:50
  * @production GenericConstructorDeclErased : {@link GenericConstructorDecl} ::= <span class="component">&lt;Original:GenericConstructorDecl&gt;</span>;
 
  */
@@ -704,10 +704,10 @@ public class GenericConstructorDeclErased extends GenericConstructorDecl impleme
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:105
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:105
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:105")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:105")
   public ParConstructorDecl lookupParConstructorDecl(Collection<TypeDecl> typeArguments) {
     Object _parameters = typeArguments;
     if (lookupParConstructorDecl_Collection_TypeDecl__values == null) lookupParConstructorDecl_Collection_TypeDecl__values = new java.util.HashMap(4);

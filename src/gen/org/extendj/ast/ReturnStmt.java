@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:212
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:212
  * @production ReturnStmt : {@link Stmt} ::= <span class="component">[Result:{@link Expr}]</span> <span class="component">[Finally:{@link Block}]</span>;
 
  */
 public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:542
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:542
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("return");
@@ -43,21 +43,21 @@ public class ReturnStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect BranchTarget
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BranchTarget.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:108
    */
   public void collectBranches(Collection<Stmt> c) {
     c.add(this);
   }
   /**
    * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NodeConstructors.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:76
    */
   public ReturnStmt(Expr expr) {
     this(new Opt(expr));
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2379
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2379
    */
   public void createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -340,7 +340,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -391,7 +391,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfterReachedFinallyBlocks_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1282")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1282")
   public boolean unassignedAfterReachedFinallyBlocks(Variable v) {
     Object _parameters = v;
     if (unassignedAfterReachedFinallyBlocks_Variable_values == null) unassignedAfterReachedFinallyBlocks_Variable_values = new java.util.HashMap(4);
@@ -456,7 +456,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map assignedAfterReachedFinallyBlocks_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1330")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1330")
   public boolean assignedAfterReachedFinallyBlocks(Variable v) {
     Object _parameters = v;
     if (assignedAfterReachedFinallyBlocks_Variable_values == null) assignedAfterReachedFinallyBlocks_Variable_values = new java.util.HashMap(4);
@@ -524,7 +524,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -584,10 +584,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect NTAFinally
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NTAFinally.jrag:54
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:54
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NTAFinally.jrag:54")
+  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:54")
   public Opt<Block> getFinallyOpt() {
     ASTNode$State state = state();
     if (getFinallyOpt_computed) {
@@ -608,10 +608,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:541
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:541
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:541")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:541")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -658,10 +658,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTNode$State state = state();
     if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -680,10 +680,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
@@ -691,10 +691,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:73
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:73")
   public int sourceLineNumber() {
     {
         int num = super.sourceLineNumber();
@@ -713,10 +713,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:534
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:534")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534")
   public TypeDecl returnType() {
     TypeDecl returnType_value = getParent().Define_returnType(this, null);
     return returnType_value;
@@ -724,10 +724,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect EnclosingLambda
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:33")
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:33")
   public LambdaExpr enclosingLambda() {
     ASTNode$State state = state();
     if (enclosingLambda_computed == ASTNode$State.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
@@ -757,10 +757,10 @@ public class ReturnStmt extends Stmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect LocalNum
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/LocalNum.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:100")
   public int resultSaveLocalNum() {
     ASTNode$State state = state();
     if (resultSaveLocalNum_computed == ASTNode$State.NON_CYCLE || resultSaveLocalNum_computed == state().cycle()) {
@@ -787,12 +787,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
   protected int resultSaveLocalNum_value;
 
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:841
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:841
       return assignedBefore(v);
     }
     else {
@@ -803,12 +803,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:891
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1563
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1563
       return unassignedBefore(v);
     }
     else {
@@ -819,12 +819,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    */
   public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:73
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:73
       return returnType();
     }
     else {
@@ -835,12 +835,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:30
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:40
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:40
       return returnType();
     }
     else {
@@ -851,12 +851,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:195
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:328
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:328
       return true;
     }
     else {
@@ -867,12 +867,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:196
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:329
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:329
       return false;
     }
     else {
@@ -883,12 +883,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:197
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:197
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:330
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:330
       return false;
     }
     else {
@@ -899,12 +899,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:198
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:331
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:331
       return false;
     }
     else {
@@ -915,12 +915,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:199
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResultOptNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:332
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:332
       return false;
     }
     else {
@@ -939,7 +939,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:539
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:539
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -951,7 +951,7 @@ public class ReturnStmt extends Stmt implements Cloneable {
     super.collect_contributors_CompilationUnit_problems(_root, _map);
   }
   protected void collect_contributors_BlockLambdaBody_lambdaReturns(Program _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:52
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:52
     if ((enclosingLambda() != null) && (enclosingLambda().hostType() == hostType())) {
       {
         BlockLambdaBody target = (BlockLambdaBody) ((BlockLambdaBody) enclosingLambda().getLambdaBody());

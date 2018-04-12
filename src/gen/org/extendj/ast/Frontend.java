@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect FrontendMain
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/FrontendMain.jrag:68
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:68
  */
 abstract public class Frontend extends java.lang.Object {
   

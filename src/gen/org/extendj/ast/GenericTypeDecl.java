@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect Generics
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:201
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:201
  */
  interface GenericTypeDecl {
 
@@ -54,33 +54,33 @@ public SimpleSet<TypeDecl> addTypeVariables(SimpleSet<TypeDecl> types,
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:202
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:202
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:202")
+  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:202")
   public boolean isGenericType();
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:207
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:207
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:207")
+  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:207")
   public TypeDecl rawType();
   /** Transforms the parameter and calls the lookupParTypeDecl attribute for ArrayList arguments. 
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:874
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:874
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:874")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:874")
   public TypeDecl lookupParTypeDecl(ParTypeAccess p);
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:882
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:882
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:882")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:882")
   public TypeDecl lookupParTypeDecl(Collection<TypeDecl> typeArgs);
 }

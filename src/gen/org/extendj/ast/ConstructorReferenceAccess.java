@@ -24,19 +24,19 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/ConstructorReference.ast:5
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/ConstructorReference.ast:5
  * @production ConstructorReferenceAccess : {@link ClassInstanceExpr};
 
  */
 public class ConstructorReferenceAccess extends ClassInstanceExpr implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:399
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:399
    */
   private FunctionDescriptor targetDescriptor;
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:400
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:400
    */
   public ConstructorReferenceAccess(Access access,
       List<Expr> args, FunctionDescriptor f) {
@@ -377,10 +377,10 @@ public class ConstructorReferenceAccess extends ClassInstanceExpr implements Clo
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:182
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:182
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:182")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:182")
   public TypeDecl targetType() {
     ASTNode$State state = state();
     if (targetType_computed == ASTNode$State.NON_CYCLE || targetType_computed == state().cycle()) {
@@ -397,12 +397,12 @@ public class ConstructorReferenceAccess extends ClassInstanceExpr implements Clo
     return targetType_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:30
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:188
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:188
       return targetDescriptor.method.type();
     }
     else {

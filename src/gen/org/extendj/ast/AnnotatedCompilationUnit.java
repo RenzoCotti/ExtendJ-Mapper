@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Annotations.ast:16
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Annotations.ast:16
  * @production AnnotatedCompilationUnit : {@link CompilationUnit} ::= <span class="component">{@link Modifiers}</span>;
 
  */
 public class AnnotatedCompilationUnit extends CompilationUnit implements Cloneable {
   /**
    * @aspect AnnotationPrettyPrinting
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:777
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:777
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -455,12 +455,12 @@ public class AnnotatedCompilationUnit extends CompilationUnit implements Cloneab
     return (Modifiers) getChildNoTransform(2);
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:131
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    */
   public boolean Define_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:134
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:134
       return name.equals("PACKAGE");
     }
     else {
@@ -471,12 +471,12 @@ public class AnnotatedCompilationUnit extends CompilationUnit implements Cloneab
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:641
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:641
    * @apilevel internal
    */
   public String Define_hostPackage(ASTNode _callerNode, ASTNode _childNode) {
     if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:770
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:770
       return packageName();
     }
     else {
@@ -495,7 +495,7 @@ public class AnnotatedCompilationUnit extends CompilationUnit implements Cloneab
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:51
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:51
     if (!relativeName().endsWith("package-info.java")) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

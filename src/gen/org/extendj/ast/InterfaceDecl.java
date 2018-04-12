@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:64
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:64
  * @production InterfaceDecl : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">SuperInterface:{@link Access}*</span> <span class="component">{@link BodyDecl}*</span>;
 
  */
 public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:402
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:402
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasDocComment()) {
@@ -69,7 +69,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect Generics
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:269
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:269
    */
   public TypeDecl makeGeneric(Signatures.ClassSignature s) {
     if (s.hasFormalTypeParameters()) {
@@ -95,7 +95,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/GenerateClassfile.jrag:181
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:181
    */
   public void generateClassfile() {
     super.generateClassfile();
@@ -644,7 +644,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect Generics
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:100
    */
   private boolean refined_Generics_InterfaceDecl_castingConversionTo_TypeDecl(TypeDecl type)
 {
@@ -661,10 +661,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect AccessControl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:211
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:211
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:211")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:211")
   public Collection<Problem> accessControlProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -696,10 +696,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructScope
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupConstructor.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupConstructor.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:47")
   public Collection<ConstructorDecl> lookupSuperConstructor() {
     Collection<ConstructorDecl> lookupSuperConstructor_value = typeObject().constructors();
     return lookupSuperConstructor_value;
@@ -718,10 +718,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /** Maps signature String to SimpleSet. 
    * @attribute syn
    * @aspect MemberMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:520
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:520
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:520")
+  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:520")
   public Map<String, SimpleSet<MethodDecl>> methodsSignatureMap() {
     ASTNode$State state = state();
     if (methodsSignatureMap_computed == ASTNode$State.NON_CYCLE || methodsSignatureMap_computed == state().cycle()) {
@@ -772,10 +772,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
    * abstract methods.
    * @attribute syn
    * @aspect AncestorMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:594
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:594
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AncestorMethods", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:594")
+  @ASTNodeAnnotation.Source(aspect="AncestorMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:594")
   public SimpleSet<MethodDecl> ancestorMethods(String signature) {
     Object _parameters = signature;
     if (ancestorMethods_String_computed == null) ancestorMethods_String_computed = new java.util.HashMap(4);
@@ -819,10 +819,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:629
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:629")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629")
   public SimpleSet<TypeDecl> memberTypes(String name) {
     {
         SimpleSet<TypeDecl> result = localTypeDecls(name);
@@ -854,10 +854,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Fields
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:402
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:402
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:402")
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:402")
   public Map<String, SimpleSet<Variable>> memberFieldsMap() {
     ASTNode$State state = state();
     if (memberFieldsMap_computed == ASTNode$State.NON_CYCLE || memberFieldsMap_computed == state().cycle()) {
@@ -902,10 +902,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Fields
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:475
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:475")
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475")
   public SimpleSet<Variable> memberFields(String name) {
     Object _parameters = name;
     if (memberFields_String_computed == null) memberFields_String_computed = new java.util.HashMap(4);
@@ -949,10 +949,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:237
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:237
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:237")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:237")
   public boolean isAbstract() {
     boolean isAbstract_value = true;
     return isAbstract_value;
@@ -970,10 +970,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:239
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:239")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:239")
   public boolean isStatic() {
     ASTNode$State state = state();
     if (isStatic_computed == ASTNode$State.NON_CYCLE || isStatic_computed == state().cycle()) {
@@ -992,10 +992,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:215
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PrettyPrintUtil.jrag:215")
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:215")
   public boolean hasModifiers() {
     boolean hasModifiers_value = getModifiers().getNumModifier() > 0;
     return hasModifiers_value;
@@ -1012,10 +1012,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:100")
   public boolean castingConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (castingConversionTo_TypeDecl_computed == null) castingConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -1053,10 +1053,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:227
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:227
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:227")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:227")
   public boolean isInterfaceDecl() {
     boolean isInterfaceDecl_value = true;
     return isInterfaceDecl_value;
@@ -1073,10 +1073,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:443
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:443
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:443")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:443")
   public boolean instanceOf(TypeDecl type) {
     Object _parameters = type;
     if (instanceOf_TypeDecl_computed == null) instanceOf_TypeDecl_computed = new java.util.HashMap(4);
@@ -1106,10 +1106,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:459
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:459
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:459")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:459")
   public boolean isSupertypeOfClassDecl(ClassDecl type) {
     {
         if (super.isSupertypeOfClassDecl(type)) {
@@ -1127,10 +1127,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:479
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:479")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:479")
   public boolean isSupertypeOfInterfaceDecl(InterfaceDecl type) {
     {
         if (super.isSupertypeOfInterfaceDecl(type)) {
@@ -1148,10 +1148,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:494
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:494
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:494")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:494")
   public boolean isSupertypeOfArrayDecl(ArrayDecl type) {
     {
         if (super.isSupertypeOfArrayDecl(type)) {
@@ -1181,10 +1181,10 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
    * @return the interfaces directly implemented by this type.
    * @attribute syn
    * @aspect SuperClasses
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:694
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:694
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SuperClasses", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:694")
+  @ASTNodeAnnotation.Source(aspect="SuperClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:694")
   public Collection<TypeDecl> superInterfaces() {
     ASTNode$State state = state();
     if (superInterfaces_computed == ASTNode$State.NON_CYCLE || superInterfaces_computed == state().cycle()) {
@@ -1227,7 +1227,7 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /** @apilevel internal */
   protected boolean isCircular_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:726")
+  @ASTNodeAnnotation.Source(aspect="Circularity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:726")
   public boolean isCircular() {
     if (isCircular_computed) {
       return isCircular_value;
@@ -1277,10 +1277,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:511
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:511
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:511")
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:511")
   public Collection<Problem> typeHierarchyProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -1328,10 +1328,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
    * Returns UnknownType if this type does not implement java.lang.Iterable.
    * @attribute syn
    * @aspect EnhancedFor
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/EnhancedFor.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/EnhancedFor.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:77")
   public TypeDecl iterableElementType() {
     ASTNode$State state = state();
     if (iterableElementType_computed == ASTNode$State.NON_CYCLE || iterableElementType_computed == state().cycle()) {
@@ -1376,10 +1376,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:503
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:503
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:503")
+  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:503")
   public Map<String, SimpleSet<MethodDecl>> erasedAncestorMethodsMap() {
     ASTNode$State state = state();
     if (erasedAncestorMethodsMap_computed == ASTNode$State.NON_CYCLE || erasedAncestorMethodsMap_computed == state().cycle()) {
@@ -1435,10 +1435,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsTypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:612
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:612
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:612")
+  @ASTNodeAnnotation.Source(aspect="GenericsTypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:612")
   public Collection<InterfaceDecl> implementedInterfaces() {
     ASTNode$State state = state();
     if (implementedInterfaces_computed == ASTNode$State.NON_CYCLE || implementedInterfaces_computed == state().cycle()) {
@@ -1471,7 +1471,7 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:490")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:490")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -1519,10 +1519,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505")
   public boolean supertypeClassDecl(ClassDecl type) {
     {
         if (super.supertypeClassDecl(type)) {
@@ -1540,10 +1540,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522")
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
     {
         if (super.supertypeInterfaceDecl(type)) {
@@ -1561,10 +1561,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:539
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:539
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:539")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:539")
   public boolean supertypeArrayDecl(ArrayDecl type) {
     {
         if (super.supertypeArrayDecl(type)) {
@@ -1592,10 +1592,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect Annotations
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/Annotations.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Annotations.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/Annotations.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Annotations.jrag:29")
   public boolean hasAnnotationFunctionalInterface() {
     ASTNode$State state = state();
     if (hasAnnotationFunctionalInterface_computed == ASTNode$State.NON_CYCLE || hasAnnotationFunctionalInterface_computed == state().cycle()) {
@@ -1624,10 +1624,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:30")
   public boolean isFunctionalInterface() {
     ASTNode$State state = state();
     if (isFunctionalInterface_computed == ASTNode$State.NON_CYCLE || isFunctionalInterface_computed == state().cycle()) {
@@ -1656,10 +1656,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:33")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:33")
   public boolean isFunctional() {
     ASTNode$State state = state();
     if (isFunctional_computed == ASTNode$State.NON_CYCLE || isFunctional_computed == state().cycle()) {
@@ -1715,10 +1715,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
    * a function type from a functional interface.
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:335
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:335
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:335")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:335")
   public java.util.List<MethodDecl> collectAbstractMethods() {
     ASTNode$State state = state();
     if (collectAbstractMethods_computed == ASTNode$State.NON_CYCLE || collectAbstractMethods_computed == state().cycle()) {
@@ -1790,10 +1790,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect FunctionDescriptor
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionDescriptor.jrag:97
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionDescriptor.jrag:97
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionDescriptor.jrag:97")
+  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionDescriptor.jrag:97")
   public boolean hasFunctionDescriptor() {
     ASTNode$State state = state();
     if (hasFunctionDescriptor_computed == ASTNode$State.NON_CYCLE || hasFunctionDescriptor_computed == state().cycle()) {
@@ -1831,10 +1831,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
    * type then {@code null} is returned.
    * @attribute syn
    * @aspect FunctionDescriptor
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionDescriptor.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionDescriptor.jrag:108
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionDescriptor.jrag:108")
+  @ASTNodeAnnotation.Source(aspect="FunctionDescriptor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionDescriptor.jrag:108")
   public FunctionDescriptor functionDescriptor() {
     ASTNode$State state = state();
     if (functionDescriptor_computed == ASTNode$State.NON_CYCLE || functionDescriptor_computed == state().cycle()) {
@@ -1959,7 +1959,7 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -2007,10 +2007,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378")
   public boolean strictSupertypeClassDecl(ClassDecl type) {
     {
         if (super.strictSupertypeClassDecl(type)) {
@@ -2029,10 +2029,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398")
   public boolean strictSupertypeInterfaceDecl(InterfaceDecl type) {
     {
         if (super.strictSupertypeInterfaceDecl(type)) {
@@ -2050,10 +2050,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:415
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:415
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:415")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:415")
   public boolean strictSupertypeArrayDecl(ArrayDecl type) {
     {
         if (super.strictSupertypeArrayDecl(type)) {
@@ -2080,10 +2080,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:1067
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:1067
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:1067")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:1067")
   public boolean hasOverridingMethodInSuper(MethodDecl m) {
     Object _parameters = m;
     if (hasOverridingMethodInSuper_MethodDecl_computed == null) hasOverridingMethodInSuper_MethodDecl_computed = new java.util.HashMap(4);
@@ -2133,10 +2133,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
   public String typeDescriptor() {
     ASTNode$State state = state();
     if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {
@@ -2155,10 +2155,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:1211
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1211
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:1211")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1211")
   public String arrayTypeDescriptor() {
     String arrayTypeDescriptor_value = constantPoolName();
     return arrayTypeDescriptor_value;
@@ -2175,10 +2175,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:325
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:325")
   public SimpleSet<MethodDecl> bridgeCandidates(String signature) {
     Object _parameters = signature;
     if (bridgeCandidates_String_computed == null) bridgeCandidates_String_computed = new java.util.HashMap(4);
@@ -2214,10 +2214,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:433
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:433")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433")
   public boolean needsSignatureAttribute() {
     ASTNode$State state = state();
     if (needsSignatureAttribute_computed == ASTNode$State.NON_CYCLE || needsSignatureAttribute_computed == state().cycle()) {
@@ -2256,10 +2256,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:492
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:492
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:492")
   public String classSignature() {
     ASTNode$State state = state();
     if (classSignature_computed == ASTNode$State.NON_CYCLE || classSignature_computed == state().cycle()) {
@@ -2287,21 +2287,21 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /**
    * @attribute inh
    * @aspect TypeConversion
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:113
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:113")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:113")
   public MethodDecl unknownMethod() {
     MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
     return unknownMethod_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:99
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:99
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -2313,12 +2313,12 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:76
    * @apilevel internal
    */
   public TypeDecl Define_hostType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:651
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:651
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return hostType();
     }
@@ -2330,12 +2330,12 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/SuppressWarnings.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:37
    * @apilevel internal
    */
   public boolean Define_withinSuppressWarnings(ASTNode _callerNode, ASTNode _childNode, String annot) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:420
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:420
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return hasAnnotationSuppressWarnings(annot) || withinSuppressWarnings(annot);
     }
@@ -2347,12 +2347,12 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:536
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:536
    * @apilevel internal
    */
   public boolean Define_withinDeprecatedAnnotation(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:547
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:547
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return isDeprecated() || withinDeprecatedAnnotation();
     }
@@ -2364,12 +2364,12 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:341
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:341
    * @apilevel internal
    */
   public boolean Define_inExtendsOrImplements(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getSuperInterfaceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:340
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:340
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return true;
     }
@@ -2389,7 +2389,7 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:209
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:209
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2398,7 +2398,7 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeHierarchyCheck.jrag:509
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:509
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

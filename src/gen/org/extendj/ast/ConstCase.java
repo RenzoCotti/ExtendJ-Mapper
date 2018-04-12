@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:202
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:202
  * @production ConstCase : {@link Case} ::= <span class="component">Value:{@link Expr}</span>;
 
  */
 public class ConstCase extends Case implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:253
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:253
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("case ");
@@ -194,7 +194,7 @@ public class ConstCase extends Case implements Cloneable {
   }
   /**
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:588
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:588
    */
   private boolean refined_NameCheck_ConstCase_constValue_Case(Case c)
 {
@@ -209,7 +209,7 @@ public class ConstCase extends Case implements Cloneable {
   }
   /**
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:671
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:671
    */
   private boolean refined_Enums_ConstCase_constValue_Case(Case c)
 {
@@ -225,10 +225,10 @@ public class ConstCase extends Case implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:555
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:555
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:555")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:555")
   public Collection<Problem> nameProblems() {
     {
         if (getValue().isConstant() && bind(this) != this) {
@@ -242,10 +242,10 @@ public class ConstCase extends Case implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:586
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:586
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:586")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:586")
   public boolean constValue(Case c) {
     {
         if (isDefaultCase() || c.isDefaultCase()) {
@@ -272,10 +272,10 @@ public class ConstCase extends Case implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:470
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:470
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:470")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:470")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -296,12 +296,12 @@ public class ConstCase extends Case implements Cloneable {
       }
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getValueNoTransform() != null && _callerNode == getValue()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:643
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:643
       return switchType().isEnumDecl()
             ? switchType().memberFields(name)
             : lookupVariable(name);
@@ -322,7 +322,7 @@ public class ConstCase extends Case implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:553
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:553
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -331,7 +331,7 @@ public class ConstCase extends Case implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:468
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:468
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

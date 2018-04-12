@@ -205,8 +205,6 @@ class CodeGeneration {
 	}
   }
 
-  private final List<Location> locations = new ArrayList<Location>();
-
   /**
    * Initializes code generation with narrow jumps. This will cause addLabel
    * and emitGoto to throw a JumpOffsetError if the required jump (or

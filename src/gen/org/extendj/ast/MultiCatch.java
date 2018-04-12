@@ -25,14 +25,14 @@ import java.io.DataInputStream;
 /**
  * A catch clause that can catch a multiple exception types.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/MultiCatch.ast:14
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/MultiCatch.ast:14
  * @production MultiCatch : {@link CatchClause} ::= <span class="component">Parameter:{@link CatchParameterDeclaration}</span> <span class="component">{@link Block}</span>;
 
  */
 public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PrettyPrint.jadd:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PrettyPrint.jadd:50
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("catch (");
@@ -44,7 +44,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
    * The Multi-Catch clause has two or more exception table entries
    * which all point to the same exception handler.
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:37
    */
   public void exceptionTableEntries(CodeGeneration gen, int begin_lbl, int end_lbl) {
     for (int i = 0; i < getParameter().getNumTypeAccess(); ++i) {
@@ -61,7 +61,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * Code gen.
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:53
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:53
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLabel(label());
@@ -265,10 +265,10 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @attribute syn
    * @aspect VariableScope
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:192
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:192
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:192")
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:192")
   public SimpleSet<Variable> parameterDeclaration(String name) {
     Object _parameters = name;
     if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
@@ -294,10 +294,10 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:279
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:279
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:279")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:279")
   public boolean handles(TypeDecl exceptionType) {
     {
         CatchParameterDeclaration param = getParameter();
@@ -313,10 +313,10 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:197
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:197
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:197")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:197")
   public Collection<Problem> reachabilityProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -334,10 +334,10 @@ public class MultiCatch extends CatchClause implements Cloneable {
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:65
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:65
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:65")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:65")
   public int localNum() {
     ASTNode$State state = state();
     if (localNum_computed == ASTNode$State.NON_CYCLE || localNum_computed == state().cycle()) {
@@ -364,12 +364,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
   protected int localNum_value;
 
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
    * @apilevel internal
    */
   public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:54
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:54
       return false;
     }
     else {
@@ -380,12 +380,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
    * @apilevel internal
    */
   public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:55
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:55
       return false;
     }
     else {
@@ -396,12 +396,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
    * @apilevel internal
    */
   public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:56
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:56
       return true;
     }
     else {
@@ -412,12 +412,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:127
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:127
       return parameterDeclaration(name);
     }
     else {
@@ -428,12 +428,12 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:180
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:180
       {
           boolean anyReachable = false;
           CatchParameterDeclaration param = getParameter();
@@ -457,16 +457,16 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:64
    * @apilevel internal
    */
   public int Define_localNum(ASTNode _callerNode, ASTNode _childNode) {
     if (getParameterNoTransform() != null && _callerNode == getParameter()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:68
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:68
       return localNum();
     }
     else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:67
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:67
       return localNum() + getParameter().type().variableSize();
     }
     else {
@@ -485,7 +485,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:195
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:195
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -494,7 +494,7 @@ public class MultiCatch extends CatchClause implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:289
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:289
     if (!getBlock().reachable() && reportUnreachable()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/BasicTWR.ast:1
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/BasicTWR.ast:1
  * @production BasicTWR : {@link Stmt} ::= <span class="component">Resource:{@link ResourceDeclaration}</span> <span class="component">{@link Block}</span>;
 
  */
@@ -100,7 +100,7 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
    * </pre></code>
    * 
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:156
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:156
    */
   public void createBCode(CodeGeneration gen) {
     ResourceDeclaration resource = getResource();
@@ -215,7 +215,7 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
   /**
    * Lookup the java.lang.Throwable.close() method.
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:270
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:270
    */
   private MethodDecl closeMethod() {
     TypeDecl autoCloseableType = lookupType("java.lang", "AutoCloseable");
@@ -233,7 +233,7 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
   /**
    * Lookup the java.lang.Throwable.addSuppressed(Throwable) method.
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:287
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:287
    */
   private MethodDecl addSuppressedMethod() {
     TypeDecl throwableType = lookupType("java.lang", "Throwable");
@@ -445,10 +445,10 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:100")
   public SimpleSet<Variable> localLookup(String name) {
     Object _parameters = name;
     if (localLookup_String_computed == null) localLookup_String_computed = new java.util.HashMap(4);
@@ -491,10 +491,10 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:108
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:108")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:108")
   public VariableDeclarator localVariableDeclaration(String name) {
     Object _parameters = name;
     if (localVariableDeclaration_String_computed == null) localVariableDeclaration_String_computed = new java.util.HashMap(4);
@@ -520,10 +520,10 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -531,10 +531,10 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113")
   public SimpleSet<Variable> lookupVariable(String name) {
     Object _parameters = name;
     if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
@@ -567,12 +567,12 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
   /** @apilevel internal */
   protected java.util.Map lookupVariable_String_computed;
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:98
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:98
       return localLookup(name);
     }
     else {
@@ -583,18 +583,18 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:64
    * @apilevel internal
    */
   public int Define_localNum(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:316
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:316
       return getResource().localNum()
             + getResource().type().variableSize()
             + 2 * lookupType("java.lang", "Throwable").variableSize();
     }
     else if (getResourceNoTransform() != null && _callerNode == getResource()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:305
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:305
       return localNum();
     }
     else {
@@ -605,12 +605,12 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:133
    * @apilevel internal
    */
   public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
     if (getResourceNoTransform() != null && _callerNode == getResource()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:321
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:321
       return getResource().getModifiers();
     }
     else {
@@ -621,12 +621,12 @@ public class BasicTWR extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:144
    * @apilevel internal
    */
   public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
     if (getResourceNoTransform() != null && _callerNode == getResource()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:323
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:323
       return getResource().getResourceType();
     }
     else {

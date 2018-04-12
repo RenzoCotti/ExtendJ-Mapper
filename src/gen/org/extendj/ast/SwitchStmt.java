@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:200
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:200
  * @production SwitchStmt : {@link BranchTargetStmt} ::= <span class="component">{@link Expr}</span> <span class="component">{@link Block}</span>;
 
  */
 public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:573
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:573
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("switch (");
@@ -41,7 +41,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2122
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2122
    */
   private int emitPad(CodeGeneration gen) {
     int pad = (4 - (gen.pos() % 4)) % 4;
@@ -58,7 +58,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * @return bytecode offset to default label (or zero if there is no
    * default label)
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2138
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2138
    */
   private int defaultOffset(CodeGeneration gen, int switch_label) {
     DefaultCase defaultCase = defaultCase();
@@ -70,7 +70,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   /**
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:166
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:166
    */
   private void genFirstSwitch(
       CodeGeneration gen,
@@ -194,7 +194,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   /**
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:287
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:287
    */
   private void genSecondSwitch(
       CodeGeneration gen,
@@ -251,7 +251,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * Generate invocation of method
    * {@code java.lang.Object.hashCode()}.
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:343
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:343
    */
   private MethodDecl hashCodeMethod() {
     TypeDecl objectType = lookupType("java.lang", "Object");
@@ -270,7 +270,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * Generate invocation of method
    * {@code java.lang.Object.equals(java.lang.Object)}.
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:361
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:361
    */
   private MethodDecl equalsMethod() {
     TypeDecl objectType = lookupType("java.lang", "Object");
@@ -479,7 +479,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AutoBoxingCodegen.jrag:208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:208
    */
     public void refined_AutoBoxingCodegen_SwitchStmt_createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -559,7 +559,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * The first switch statement computes a value for a variable that selects
    * a case in the second switch statement.
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:125
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:125
    */
     public void createBCode(CodeGeneration gen) {
     if (getExpr().type().isString()) {
@@ -606,10 +606,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * branch target of the given branch statement.
    * @attribute syn
    * @aspect BranchTarget
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BranchTarget.jrag:215
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/BranchTarget.jrag:215")
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215")
   public boolean potentialTargetOf(Stmt branch) {
     boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
     return potentialTargetOf_Stmt_value;
@@ -620,7 +620,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -686,10 +686,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:712
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:712
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:712")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:712")
   public boolean assignedAfterLastStmt(Variable v) {
     boolean assignedAfterLastStmt_Variable_value = getBlock().assignedAfter(v);
     return assignedAfterLastStmt_Variable_value;
@@ -700,7 +700,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   protected java.util.Map unassignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:899")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:899")
   public boolean unassignedAfter(Variable v) {
     Object _parameters = v;
     if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
@@ -769,7 +769,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   protected java.util.Map unassignedAfterLastStmt_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1381")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1381")
   public boolean unassignedAfterLastStmt(Variable v) {
     Object _parameters = v;
     if (unassignedAfterLastStmt_Variable_values == null) unassignedAfterLastStmt_Variable_values = new java.util.HashMap(4);
@@ -817,10 +817,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect DefiniteUnassignment
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1384
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1384
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1384")
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1384")
   public boolean switchLabelEndsBlock() {
     boolean switchLabelEndsBlock_value = getBlock().getNumStmt() > 0
           && getBlock().getStmt(getBlock().getNumStmt()-1) instanceof ConstCase;
@@ -829,10 +829,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:459
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:459
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:459")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:459")
   public Collection<Problem> typeProblems() {
     {
         TypeDecl type = getExpr().type();
@@ -846,10 +846,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:96
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:96")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:96")
   public boolean lastStmtCanCompleteNormally() {
     boolean lastStmtCanCompleteNormally_value = getBlock().canCompleteNormally();
     return lastStmtCanCompleteNormally_value;
@@ -857,10 +857,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:98
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:98")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:98")
   public boolean noStmts() {
     {
         for (int i = 0; i < getBlock().getNumStmt(); i++) {
@@ -874,10 +874,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:107
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:107
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:107")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:107")
   public boolean noStmtsAfterLastLabel() {
     boolean noStmtsAfterLastLabel_value = getBlock().getNumStmt() > 0
           && getBlock().getStmt(getBlock().getNumStmt()-1) instanceof Case;
@@ -886,10 +886,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:111
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:111
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:111")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:111")
   public boolean noDefaultLabel() {
     {
         for (int i = 0; i < getBlock().getNumStmt(); i++) {
@@ -913,10 +913,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
   public boolean canCompleteNormally() {
     ASTNode$State state = state();
     if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
@@ -937,10 +937,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -959,10 +959,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2016
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2016
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2016")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2016")
   public DefaultCase defaultCase() {
     ASTNode$State state = state();
     if (defaultCase_computed == ASTNode$State.NON_CYCLE || defaultCase_computed == state().cycle()) {
@@ -1000,10 +1000,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2025
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2025
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2025")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2025")
   public int end_label() {
     ASTNode$State state = state();
     if (end_label_computed == ASTNode$State.NON_CYCLE || end_label_computed == state().cycle()) {
@@ -1022,10 +1022,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2112
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2112")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2112")
   public int numCase() {
     {
         int result = 0;
@@ -1040,10 +1040,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2330
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2330
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2330")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2330")
   public int break_label() {
     int break_label_value = end_label();
     return break_label_value;
@@ -1065,10 +1065,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * and compute the jump target.
    * @attribute syn
    * @aspect EnumsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:126
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:126
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="EnumsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:126")
+  @ASTNodeAnnotation.Source(aspect="EnumsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:126")
   public Expr enumIndexExpr() {
     ASTNode$State state = state();
     if (enumIndexExpr_computed) {
@@ -1087,10 +1087,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /** @return a collection of the constant cases in this switch statement. 
    * @attribute syn
    * @aspect EnumsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:133
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:133
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EnumsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:133")
+  @ASTNodeAnnotation.Source(aspect="EnumsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:133")
   public Collection<ConstCase> constCases() {
     {
         Collection<ConstCase> cases = new LinkedList<ConstCase>();
@@ -1118,10 +1118,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * the switch cases.
    * @attribute syn
    * @aspect EnumsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:147
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:147
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EnumsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:147")
+  @ASTNodeAnnotation.Source(aspect="EnumsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:147")
   public Map<EnumConstant, Integer> enumIndices() {
     ASTNode$State state = state();
     if (enumIndices_computed == ASTNode$State.NON_CYCLE || enumIndices_computed == state().cycle()) {
@@ -1150,10 +1150,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:42
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:42
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:42")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:42")
   public boolean isSwitchWithString() {
     boolean isSwitchWithString_value = getExpr().type().isString();
     return isSwitchWithString_value;
@@ -1162,10 +1162,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * Local index for the first switch variable.
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:56
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:56")
   public int localNumA() {
     int localNumA_value = localNum();
     return localNumA_value;
@@ -1174,10 +1174,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * Local index for the second switch variable.
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:61")
   public int localNumB() {
     int localNumB_value = localNum() + typeInt().variableSize();
     return localNumB_value;
@@ -1186,10 +1186,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * Utility method to compute offsets between labels.
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:116
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:116")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:116")
   public int labelOffset(CodeGeneration gen, int lbl1, int lbl2) {
     int labelOffset_CodeGeneration_int_int_value = gen.addressOf(lbl1) - gen.addressOf(lbl2);
     return labelOffset_CodeGeneration_int_int_value;
@@ -1197,10 +1197,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect SpecialClasses
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:86")
   public TypeDecl typeInt() {
     ASTNode$State state = state();
     if (typeInt_computed == ASTNode$State.NON_CYCLE || typeInt_computed == state().cycle()) {
@@ -1230,10 +1230,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect SpecialClasses
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:88
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:88
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:88")
+  @ASTNodeAnnotation.Source(aspect="SpecialClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:88")
   public TypeDecl typeLong() {
     ASTNode$State state = state();
     if (typeLong_computed == ASTNode$State.NON_CYCLE || typeLong_computed == state().cycle()) {
@@ -1263,16 +1263,16 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute inh
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:45
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/StringsInSwitch.jrag:45")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/StringsInSwitch.jrag:45")
   public TypeDecl typeString() {
     TypeDecl typeString_value = getParent().Define_typeString(this, null);
     return typeString_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BranchTarget.jrag:230
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:230
    * @apilevel internal
    */
   public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
@@ -1283,16 +1283,16 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:733
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:733
       return getExpr().assignedAfter(v);
     }
     else if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:715
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:715
       {
           if (((ASTNode) v).isDescendantTo(this)) {
             return false;
@@ -1309,16 +1309,16 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:891
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
    * @apilevel internal
    */
   public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1391
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1391
       return getExpr().unassignedAfter(v);
     }
     else if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:1389
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:1389
       return unassignedBefore(v);
     }
     else {
@@ -1329,12 +1329,12 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:512
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:512
    * @apilevel internal
    */
   public boolean Define_insideSwitch(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:515
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:515
       return true;
     }
     else {
@@ -1345,12 +1345,12 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:569
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:569
    * @apilevel internal
    */
   public Case Define_bind(ASTNode _callerNode, ASTNode _childNode, Case c) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:571
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:571
       {
           Block b = getBlock();
           for (int i = 0; i < b.getNumStmt(); i++) {
@@ -1369,12 +1369,12 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:482
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
    * @apilevel internal
    */
   public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:483
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:483
       return getExpr().type();
     }
     else {
@@ -1385,12 +1385,12 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:125
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:125
       return reachable();
     }
     else {
@@ -1401,12 +1401,12 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:280
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    */
   public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:218
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:218
       return reachable();
     }
     else {
@@ -1417,7 +1417,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:64
    * @apilevel internal
    */
   public int Define_localNum(ASTNode _callerNode, ASTNode _childNode) {
@@ -1436,7 +1436,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:457
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:457
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1448,7 +1448,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     super.collect_contributors_CompilationUnit_problems(_root, _map);
   }
   protected void collect_contributors_TypeDecl_enumSwitchStatements(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/backend/EnumsCodegen.jrag:117
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnumsCodegen.jrag:117
     if (getExpr().type().isEnumDecl()) {
       {
         TypeDecl target = (TypeDecl) (hostType());

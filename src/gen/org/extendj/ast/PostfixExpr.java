@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:145
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:145
  * @production PostfixExpr : {@link Unary};
 
  */
 public abstract class PostfixExpr extends Unary implements Cloneable {
   /**
    * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:601
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:601
    */
   protected boolean checkDUeverywhere(Variable v) {
     if (getOperand().isVariable() && getOperand().varDecl() == v) {
@@ -149,12 +149,12 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     return (Expr) getChildNoTransform(0);
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
   public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:62
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:62
       return true;
     }
     else {
@@ -165,12 +165,12 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:66
    * @apilevel internal
    */
   public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:72
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:72
       return true;
     }
     else {
@@ -181,12 +181,12 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getOperandNoTransform() != null && _callerNode == getOperand()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:121
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:121
       return NameType.EXPRESSION_NAME;
     }
     else {
@@ -205,7 +205,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:82
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:82
     if (getOperand().isVariable()
               && getOperand().varDecl() != null
               && getOperand().varDecl().isFinal()) {
@@ -218,7 +218,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:401
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:401
     if (!getOperand().isVariable()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -229,7 +229,7 @@ public abstract class PostfixExpr extends Unary implements Cloneable {
         contributors.add(this);
       }
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:406
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:406
     if (!getOperand().type().isNumericType()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

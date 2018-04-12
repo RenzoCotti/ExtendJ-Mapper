@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect PathPart
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PathPart.jadd:304
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PathPart.jadd:304
  */
 public abstract class PathPart extends java.lang.Object {
   

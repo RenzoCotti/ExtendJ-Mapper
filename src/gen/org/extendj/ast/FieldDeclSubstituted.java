@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:51
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:51
  * @production FieldDeclSubstituted : {@link FieldDecl} ::= <span class="component">&lt;Original:FieldDecl&gt;</span>;
 
  */
@@ -344,12 +344,12 @@ public class FieldDeclSubstituted extends FieldDecl implements Cloneable {
     return tokenFieldDecl_Original;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1509
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1509
    * @apilevel internal
    */
   public FieldDeclarator Define_erasedField(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1513
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1513
       int index = _callerNode.getIndexOfChild(_childNode);
       return getOriginal().getDeclarator(index);
     }

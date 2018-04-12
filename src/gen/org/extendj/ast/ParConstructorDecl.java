@@ -24,35 +24,35 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/GenericMethods.ast:10
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/GenericMethods.ast:10
  * @production ParConstructorDecl : {@link ConstructorDecl} ::= <span class="component">TypeArgument:{@link Access}*</span> <span class="component">&lt;GenericConstructorDecl:GenericConstructorDecl&gt;</span> <span class="component">TypeParameter:{@link TypeVariable}*</span> <span class="component">&lt;Parameterization:Parameterization&gt;</span>;
 
  */
 public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1130
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1130
    */
   public boolean isRawType() {
     return false;
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1146
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1146
    */
   public int numTypeParameter() {
     return genericConstructorDecl().original().getNumTypeParameter();
   }
   /**
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1154
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1154
    */
   public TypeVariable typeParameter(int index) {
     return genericConstructorDecl().original().getTypeParameter(index);
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:272
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:272
    */
   public void emitInvokeConstructor(CodeGeneration gen) {
     genericConstructorDecl().emitInvokeConstructor(this, gen);
@@ -869,10 +869,10 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:54
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:54
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:54")
+  @ASTNodeAnnotation.Source(aspect="GenericMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:54")
   public GenericConstructorDecl genericConstructorDecl() {
     ASTNode$State state = state();
     if (genericConstructorDecl_computed == ASTNode$State.NON_CYCLE || genericConstructorDecl_computed == state().cycle()) {
@@ -902,10 +902,10 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1733
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1733
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1733")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1733")
   public ConstructorDecl sourceConstructorDecl() {
     ASTNode$State state = state();
     if (sourceConstructorDecl_computed == ASTNode$State.NON_CYCLE || sourceConstructorDecl_computed == state().cycle()) {
@@ -925,16 +925,16 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
    * The constructor that is called in bytecode.
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:1158
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1158
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:1158")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1158")
   public ConstructorDecl bytecodeTarget() {
     ConstructorDecl bytecodeTarget_value = sourceConstructorDecl().bytecodeTarget();
     return bytecodeTarget_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethods.jrag:231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:231
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_lookupType(ASTNode _callerNode, ASTNode _childNode, String name) {

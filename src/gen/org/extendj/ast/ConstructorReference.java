@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/ConstructorReference.ast:1
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/ConstructorReference.ast:1
  * @production ConstructorReference : {@link Expr} ::= <span class="component">TypeAccess:{@link Access}</span>;
 
  */
 public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @aspect Java8CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/CreateBCode.jrag:41
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/CreateBCode.jrag:41
    */
   public void createBCode(CodeGeneration gen) {
     toClass().createBCode(gen);
@@ -157,26 +157,26 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:68
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:68")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:68")
   public abstract boolean congruentTo(FunctionDescriptor f);
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:127
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:127
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:127")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:127")
   public abstract boolean isExact();
   /**
    * @attribute syn
    * @aspect ConstructorReferenceToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:93
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:93")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:93")
   public abstract Block toBlock();
   /** @apilevel internal */
   private void compatibleStrictContext_TypeDecl_reset() {
@@ -190,10 +190,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32")
   public boolean compatibleStrictContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -236,10 +236,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76")
   public boolean compatibleLooseContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -274,10 +274,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:104")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104")
   public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
     java.util.List _parameters = new java.util.ArrayList(3);
     _parameters.add(access);
@@ -351,10 +351,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
    * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:230
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:230")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230")
   public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type1);
@@ -447,10 +447,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -511,10 +511,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86")
   public boolean isPolyExpression() {
     ASTNode$State state = state();
     if (isPolyExpression_computed == ASTNode$State.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
@@ -542,10 +542,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:149
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:149")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149")
   public boolean assignConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -590,10 +590,10 @@ public abstract class ConstructorReference extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:161
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:161
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:161")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:161")
   public InterfaceDecl targetInterface() {
     ASTNode$State state = state();
     if (targetInterface_computed == ASTNode$State.NON_CYCLE || targetInterface_computed == state().cycle()) {
@@ -636,7 +636,7 @@ protected ASTNode$State.Cycle type_cycle = null;
   /** @apilevel internal */
   protected boolean type_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:97")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:97")
   public TypeDecl type() {
     if (type_computed) {
       return type_value;
@@ -690,10 +690,10 @@ protected ASTNode$State.Cycle type_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:371
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:371
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:371")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:371")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -798,10 +798,10 @@ protected ASTNode$State.Cycle type_cycle = null;
   /**
    * @attribute syn
    * @aspect ConstructorReferenceToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:55
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:55
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:55")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:55")
   public ClassInstanceExpr toClass() {
     ASTNode$State state = state();
     if (toClass_computed) {
@@ -866,10 +866,10 @@ protected ASTNode$State.Cycle type_cycle = null;
   /**
    * @attribute syn
    * @aspect ConstructorReferenceToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:95")
   public List<ParameterDeclaration> toParameterList() {
     ASTNode$State state = state();
     if (toParameterList_computed == ASTNode$State.NON_CYCLE || toParameterList_computed == state().cycle()) {
@@ -898,21 +898,21 @@ protected ASTNode$State.Cycle type_cycle = null;
   /**
    * @attribute inh
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:29")
   public ConstructorDecl unknownConstructor() {
     ConstructorDecl unknownConstructor_value = getParent().Define_unknownConstructor(this, null);
     return unknownConstructor_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:66
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:66
       return NameType.TYPE_NAME;
     }
     else {
@@ -923,12 +923,12 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:195
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:364
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:364
       return false;
     }
     else {
@@ -939,12 +939,12 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:196
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:365
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:365
       return false;
     }
     else {
@@ -955,12 +955,12 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:197
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:197
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:366
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:366
       return false;
     }
     else {
@@ -971,12 +971,12 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:198
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:367
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:367
       return false;
     }
     else {
@@ -987,12 +987,12 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:199
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:368
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:368
       return false;
     }
     else {
@@ -1011,7 +1011,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:368
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:368
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1023,7 +1023,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     super.collect_contributors_CompilationUnit_problems(_root, _map);
   }
   protected void collect_contributors_TypeDecl_nestedTypes(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:29
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:29
     {
       TypeDecl target = (TypeDecl) (hostType());
       java.util.Set<ASTNode> contributors = _map.get(target);

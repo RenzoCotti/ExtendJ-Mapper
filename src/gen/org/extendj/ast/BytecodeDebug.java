@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect JVMBytecodesDebug
- * @declaredat /Users/BMW/Downloads/extendj/java4/backend/JVMBytecodesDebug.jrag:34
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/JVMBytecodesDebug.jrag:34
  */
  class BytecodeDebug extends Bytecode {
   

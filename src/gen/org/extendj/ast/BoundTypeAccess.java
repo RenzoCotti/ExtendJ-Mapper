@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/BoundNames.ast:8
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/BoundNames.ast:8
  * @production BoundTypeAccess : {@link TypeAccess} ::= <span class="component">&lt;TypeDecl:TypeDecl&gt;</span>;
 
  */
 public class BoundTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @aspect GenericsTypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:405
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:405
    */
   public boolean isRaw() {
     return getTypeDecl().isRawType();
@@ -254,10 +254,10 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:298
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:298
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:298")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:298")
   public SimpleSet<TypeDecl> decls() {
     SimpleSet<TypeDecl> decls_value = getTypeDecl();
     return decls_value;
@@ -268,10 +268,10 @@ public class BoundTypeAccess extends TypeAccess implements Cloneable {
    * @return {@code true} if this is an unbounded wildcard access
    * @attribute syn
    * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/ReifiableTypes.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:106
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/ReifiableTypes.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:106")
   public boolean isWildcard() {
     boolean isWildcard_value = getTypeDecl() instanceof WildcardType;
     return isWildcard_value;

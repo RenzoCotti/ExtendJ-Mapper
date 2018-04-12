@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect GreatestLowerBoundFactory
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GLBTypeFactory.jadd:63
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GLBTypeFactory.jadd:63
  */
 public class GLBTypeFactory extends java.lang.Object {
   

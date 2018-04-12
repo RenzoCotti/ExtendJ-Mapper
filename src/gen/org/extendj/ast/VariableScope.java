@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect VariableScopePropagation
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:346
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:346
  */
  interface VariableScope {
 

@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BytecodeDescriptor
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/BytecodeDescriptor.jrag:124
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/BytecodeDescriptor.jrag:124
  */
  class MethodDescriptor extends java.lang.Object {
   

@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/Lambda.ast:1
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/Lambda.ast:1
  * @production LambdaExpr : {@link Expr} ::= <span class="component">{@link LambdaParameters}</span> <span class="component">{@link LambdaBody}</span>;
 
  */
 public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PrettyPrint.jadd:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PrettyPrint.jadd:113
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getLambdaParameters());
@@ -43,7 +43,7 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
    * lambda can't target generic methods, eventual type variables don't have to
    * be taken into account.
    * @aspect LambdaToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaAnonymousDecl.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaAnonymousDecl.jrag:44
    */
   protected TypeDecl buildAnonymousDecl() {
     List<Access> implementsList = new List<Access>();
@@ -76,7 +76,7 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   }
   /**
    * @aspect Java8CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/CreateBCode.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/CreateBCode.jrag:29
    */
   public void createBCode(CodeGeneration gen) {
     toClass().createBCode(gen);
@@ -281,10 +281,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:145
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:145")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getLambdaBody().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -304,10 +304,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /** Constructs an anonymous class instance expression based on this lambda. 
    * @attribute syn
    * @aspect LambdaToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaAnonymousDecl.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaAnonymousDecl.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="LambdaToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaAnonymousDecl.jrag:31")
+  @ASTNodeAnnotation.Source(aspect="LambdaToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaAnonymousDecl.jrag:31")
   public ClassInstanceExpr toClass() {
     ASTNode$State state = state();
     if (toClass_computed) {
@@ -326,10 +326,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect LambdaToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaAnonymousDecl.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaAnonymousDecl.jrag:37
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaAnonymousDecl.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="LambdaToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaAnonymousDecl.jrag:37")
   public TypeDecl anonymousDecl() {
     TypeDecl anonymousDecl_value = toClass().getTypeDecl();
     return anonymousDecl_value;
@@ -347,10 +347,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:40")
   public int arity() {
     ASTNode$State state = state();
     if (arity_computed == ASTNode$State.NON_CYCLE || arity_computed == state().cycle()) {
@@ -379,10 +379,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:43")
   public int numParameters() {
     ASTNode$State state = state();
     if (numParameters_computed == ASTNode$State.NON_CYCLE || numParameters_computed == state().cycle()) {
@@ -411,10 +411,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:69
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:69")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:69")
   public boolean isImplicit() {
     ASTNode$State state = state();
     if (isImplicit_computed == ASTNode$State.NON_CYCLE || isImplicit_computed == state().cycle()) {
@@ -443,10 +443,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:72
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:72")
   public boolean isExplicit() {
     ASTNode$State state = state();
     if (isExplicit_computed == ASTNode$State.NON_CYCLE || isExplicit_computed == state().cycle()) {
@@ -485,10 +485,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
    * function descriptor input to this method, then this check must be altered!
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:116
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:116
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:116")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:116")
   public boolean congruentTo(FunctionDescriptor f) {
     Object _parameters = f;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -523,10 +523,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32")
   public boolean compatibleStrictContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -569,10 +569,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76")
   public boolean compatibleLooseContext(TypeDecl type) {
     Object _parameters = type;
     if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
@@ -607,10 +607,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:104")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104")
   public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
     java.util.List _parameters = new java.util.ArrayList(3);
     _parameters.add(access);
@@ -699,10 +699,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
    * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:230
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:230")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230")
   public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type1);
@@ -840,10 +840,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -929,10 +929,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:86
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:86")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86")
   public boolean isPolyExpression() {
     ASTNode$State state = state();
     if (isPolyExpression_computed == ASTNode$State.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
@@ -960,10 +960,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:149
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/PolyExpressions.jrag:149")
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149")
   public boolean assignConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -1008,10 +1008,10 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect TargetType
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:141
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:141
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:141")
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:141")
   public InterfaceDecl targetInterface() {
     ASTNode$State state = state();
     if (targetInterface_computed == ASTNode$State.NON_CYCLE || targetInterface_computed == state().cycle()) {
@@ -1054,7 +1054,7 @@ protected ASTNode$State.Cycle type_cycle = null;
   /** @apilevel internal */
   protected boolean type_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:56")
   public TypeDecl type() {
     if (type_computed) {
       return type_value;
@@ -1111,10 +1111,10 @@ protected ASTNode$State.Cycle type_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:117
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:117
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:117")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:117")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -1196,10 +1196,10 @@ protected ASTNode$State.Cycle type_cycle = null;
   /**
    * @attribute inh
    * @aspect EnclosingLambda
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:38")
   public LambdaExpr enclosingLambda() {
     ASTNode$State state = state();
     if (enclosingLambda_computed == ASTNode$State.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
@@ -1227,12 +1227,12 @@ protected ASTNode$State.Cycle type_cycle = null;
   protected LambdaExpr enclosingLambda_value;
 
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
   public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:34
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:34
       return modifiedInScope(var);
     }
     else {
@@ -1243,20 +1243,20 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:37
    * @apilevel internal
    */
   public LambdaExpr Define_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == toClass_value) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/backend/ToClassInherited.jrag:34
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:34
       return this;
     }
     else if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:42
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:42
       return this;
     }
     else if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EnclosingLambda.jrag:41
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:41
       return this;
     }
     else {
@@ -1267,7 +1267,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BranchTarget.jrag:273
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:273
    * @apilevel internal
    */
   public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
@@ -1278,7 +1278,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BranchTarget.jrag:230
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:230
    * @apilevel internal
    */
   public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
@@ -1291,7 +1291,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:601
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:601
    * @apilevel internal
    */
   public SimpleSet<TypeDecl> Define_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
@@ -1302,12 +1302,12 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
    * @apilevel internal
    */
   public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:134
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:134
       {
           InterfaceDecl iDecl = targetInterface();
           if (iDecl == null) {
@@ -1331,7 +1331,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/AnonymousClasses.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:33
    * @apilevel internal
    */
   public TypeDecl Define_superType(ASTNode _callerNode, ASTNode _childNode) {
@@ -1342,12 +1342,12 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LookupVariable.jrag:56
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LookupVariable.jrag:56
       {
           if (getLambdaParameters() instanceof DeclaredLambdaParameters) {
             SimpleSet<Variable> decls = ((DeclaredLambdaParameters) getLambdaParameters())
@@ -1373,16 +1373,16 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:31
    * @apilevel internal
    */
   public VariableScope Define_outerScope(ASTNode _callerNode, ASTNode _childNode) {
     if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:36
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:36
       return this;
     }
     else if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:35
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:35
       return this;
     }
     else {
@@ -1393,16 +1393,16 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:32
    * @apilevel internal
    */
   public TypeDecl Define_unknownType(ASTNode _callerNode, ASTNode _childNode) {
     if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:34
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:34
       return unknownType();
     }
     else if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:33
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:33
       return unknownType();
     }
     else {
@@ -1413,7 +1413,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/VariableDeclaration.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableDeclaration.jrag:77
    * @apilevel internal
    */
   public TypeDecl Define_enclosingLambdaType(ASTNode _callerNode, ASTNode _childNode) {
@@ -1424,7 +1424,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:2544
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2544
    * @apilevel internal
    */
   public boolean Define_leavesMonitor(ASTNode _callerNode, ASTNode _childNode, Stmt branch, SynchronizedStmt monitor) {
@@ -1445,7 +1445,7 @@ protected ASTNode$State.Cycle type_cycle = null;
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:114
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:114
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

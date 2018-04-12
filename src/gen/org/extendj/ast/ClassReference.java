@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/ConstructorReference.ast:3
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/ConstructorReference.ast:3
  * @production ClassReference : {@link ConstructorReference} ::= <span class="component">TypeArgument:{@link Access}*</span>;
 
  */
 public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PrettyPrint.jadd:42
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PrettyPrint.jadd:42
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -334,10 +334,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:31")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:31")
   public ConstructorDecl targetConstructor(FunctionDescriptor f) {
     Object _parameters = f;
     if (targetConstructor_FunctionDescriptor_computed == null) targetConstructor_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -373,10 +373,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:34
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:34")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:34")
   public ClassInstanceExpr syntheticInstanceExpr(FunctionDescriptor f) {
     Object _parameters = f;
     if (syntheticInstanceExpr_FunctionDescriptor_values == null) syntheticInstanceExpr_FunctionDescriptor_values = new java.util.HashMap(4);
@@ -440,10 +440,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:68
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:68")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:68")
   public boolean congruentTo(FunctionDescriptor f) {
     Object _parameters = f;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -492,10 +492,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:100")
   public ArrayList<ConstructorDecl> potentiallyApplicableConstructors(FunctionDescriptor f) {
     Object _parameters = f;
     if (potentiallyApplicableConstructors_FunctionDescriptor_computed == null) potentiallyApplicableConstructors_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -557,10 +557,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:129
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:129
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:129")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:129")
   public ConstructorDecl exactCompileTimeDeclaration() {
     ASTNode$State state = state();
     if (exactCompileTimeDeclaration_computed == ASTNode$State.NON_CYCLE || exactCompileTimeDeclaration_computed == state().cycle()) {
@@ -625,10 +625,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:127
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:127
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:127")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:127")
   public boolean isExact() {
     ASTNode$State state = state();
     if (isExact_computed == ASTNode$State.NON_CYCLE || isExact_computed == state().cycle()) {
@@ -656,10 +656,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -707,10 +707,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect Java8NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:522
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:522")
   public Collection<Problem> nameProblems() {
     {
         for (int i = 0; i < getNumTypeArgument(); i++) {
@@ -736,10 +736,10 @@ public class ClassReference extends ConstructorReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstructorReferenceToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:93
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/backend/ConstructorReferenceToClass.jrag:93")
+  @ASTNodeAnnotation.Source(aspect="ConstructorReferenceToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ConstructorReferenceToClass.jrag:93")
   public Block toBlock() {
     ASTNode$State state = state();
     if (toBlock_computed == ASTNode$State.NON_CYCLE || toBlock_computed == state().cycle()) {
@@ -787,12 +787,12 @@ public class ClassReference extends ConstructorReference implements Cloneable {
       return new Block(stmtList);
     }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeArgumentListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/ConstructorReference.jrag:65
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:65
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -804,12 +804,12 @@ public class ClassReference extends ConstructorReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:30
    * @apilevel internal
    */
   public TypeDecl Define_targetType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == toClass_value) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/backend/ToClassInherited.jrag:44
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:44
       {
           return targetInterface().functionDescriptor().method.type();
         }
@@ -830,7 +830,7 @@ public class ClassReference extends ConstructorReference implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:520
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:520
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

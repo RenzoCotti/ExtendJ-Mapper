@@ -28,14 +28,14 @@ import java.io.DataInputStream;
  * under their simple name in the class and interface declarations of the
  * compilation unit in which the single-static import declaration appears.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/StaticImports.ast:12
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/StaticImports.ast:12
  * @production SingleStaticImportDecl : {@link StaticImportDecl} ::= <span class="component">&lt;ID:String&gt;</span>;
 
  */
 public class SingleStaticImportDecl extends StaticImportDecl implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/PrettyPrint.jadd:343
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/PrettyPrint.jadd:343
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("import static ");
@@ -264,7 +264,7 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
   /** @apilevel internal */
   protected boolean importedTypes_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:52")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:52")
   public SimpleSet<TypeDecl> importedTypes() {
     if (importedTypes_computed) {
       return importedTypes_value;
@@ -304,7 +304,7 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
   }
   protected java.util.Map importedFields_String_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:55")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:55")
   public SimpleSet<Variable> importedFields(String name) {
     Object _parameters = name;
     if (importedFields_String_values == null) importedFields_String_values = new java.util.HashMap(4);
@@ -369,10 +369,10 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:76")
   public Collection<MethodDecl> importedMethods(String name) {
     Object _parameters = name;
     if (importedMethods_String_computed == null) importedMethods_String_computed = new java.util.HashMap(4);
@@ -406,10 +406,10 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:98
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:98")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:98")
   public TypeDecl type() {
     TypeDecl type_value = getAccess().type();
     return type_value;
@@ -418,10 +418,10 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
    * The TypeName must be the canonical name of a class or interface type
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:110
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:110
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:110")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:110")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -438,21 +438,21 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:172
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:172
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:172")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:172")
   public String name() {
     String name_value = getID();
     return name_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:302
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:302
       return NameType.TYPE_NAME;
     }
     else {
@@ -471,7 +471,7 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:105
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:105
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -480,7 +480,7 @@ protected ASTNode$State.Cycle importedTypes_cycle = null;
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:162
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:162
     if (importedFields(name()).isEmpty()
               && importedMethods(name()).isEmpty()
               && importedTypes(name()).isEmpty()

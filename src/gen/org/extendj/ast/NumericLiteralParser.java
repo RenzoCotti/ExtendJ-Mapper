@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect Java7Literals
- * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:516
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:516
  */
 public class NumericLiteralParser extends java.lang.Object {
   

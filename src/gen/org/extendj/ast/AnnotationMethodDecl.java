@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Annotations.ast:3
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Annotations.ast:3
  * @production AnnotationMethodDecl : {@link MethodDecl} ::= <span class="component">[DefaultValue:{@link ElementValue}]</span>;
 
  */
 public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/PrettyPrint.jadd:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/PrettyPrint.jadd:68
    */
   public void prettyPrint(PrettyPrinter out) {
     if (hasDocComment()) {
@@ -619,10 +619,10 @@ public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect Attributes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/Attributes.jrag:273
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:273
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/Attributes.jrag:273")
+  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:273")
   public Collection<Attribute> attributes() {
     ASTNode$State state = state();
     if (attributes_computed == ASTNode$State.NON_CYCLE || attributes_computed == state().cycle()) {
@@ -650,7 +650,7 @@ public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
       return attributes;
     }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:713
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:713
    * @apilevel internal
    */
   public TypeDecl Define_declType(ASTNode _callerNode, ASTNode _childNode) {
@@ -669,7 +669,7 @@ public class AnnotationMethodDecl extends MethodDecl implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Annotations.jrag:254
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:254
     if (hasDefaultValue() && !type().commensurateWith(getDefaultValue())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

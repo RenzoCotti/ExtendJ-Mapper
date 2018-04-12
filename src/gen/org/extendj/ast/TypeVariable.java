@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:31
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:31
  * @production TypeVariable : {@link ReferenceType} ::= <span class="component">{@link Modifiers}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link BodyDecl}*</span> <span class="component">TypeBound:{@link Access}*</span>;
 
  */
 public class TypeVariable extends ReferenceType implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/PrettyPrint.jadd:355
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/PrettyPrint.jadd:355
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getID());
@@ -47,7 +47,7 @@ public class TypeVariable extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect NewGenerics
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1712
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1712
    */
   public Access createQualifiedAccess() {
     return createBoundAccess();
@@ -511,10 +511,10 @@ public class TypeVariable extends ReferenceType implements Cloneable {
   /** Convert var to interface. 
    * @attribute syn
    * @aspect GreatestLowerBoundFactory
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GLBTypeFactory.jadd:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GLBTypeFactory.jadd:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="GreatestLowerBoundFactory", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GLBTypeFactory.jadd:35")
+  @ASTNodeAnnotation.Source(aspect="GreatestLowerBoundFactory", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GLBTypeFactory.jadd:35")
   public InterfaceDecl toInterface() {
     ASTNode$State state = state();
     if (toInterface_computed) {
@@ -569,10 +569,10 @@ public class TypeVariable extends ReferenceType implements Cloneable {
   /** Mapping between Reference type and corresponding unboxed Primitive type. 
    * @attribute syn
    * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/AutoBoxing.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/AutoBoxing.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/AutoBoxing.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/AutoBoxing.jrag:77")
   public TypeDecl unboxed() {
     ASTNode$State state = state();
     if (unboxed_computed == ASTNode$State.NON_CYCLE || unboxed_computed == state().cycle()) {
@@ -608,10 +608,10 @@ public class TypeVariable extends ReferenceType implements Cloneable {
    * @return {@code true} if the argument type is in the bound of this type
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:61")
   public boolean boundOf(TypeDecl argument) {
     {
         for (int i = 0; i < getNumTypeBound(); ++i) {
@@ -626,10 +626,10 @@ public class TypeVariable extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:73
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:73")
   public boolean boundOfWildcard(WildcardType type) {
     boolean boundOfWildcard_WildcardType_value = true;
     return boundOfWildcard_WildcardType_value;
@@ -637,10 +637,10 @@ public class TypeVariable extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:77")
   public boolean boundOfWildcardExtends(WildcardExtendsType type) {
     boolean boundOfWildcardExtends_WildcardExtendsType_value = type.extendsType().subtype(this);
     return boundOfWildcardExtends_WildcardExtendsType_value;
@@ -648,10 +648,10 @@ public class TypeVariable extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:82
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:82
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:82")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:82")
   public boolean boundOfWildcardSuper(WildcardSuperType type) {
     boolean boundOfWildcardSuper_WildcardSuperType_value = type.superType().subtype(this);
     return boundOfWildcardSuper_WildcardSuperType_value;
@@ -659,10 +659,10 @@ public class TypeVariable extends ReferenceType implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:87
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericBoundCheck.jrag:87")
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87")
   public boolean boundOfArray(ArrayDecl type) {
     {
         // An array type is within the bounds of a type variable if the
@@ -690,7 +690,7 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /** @apilevel internal */
   protected boolean involvesTypeParameters_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:37")
+  @ASTNodeAnnotation.Source(aspect="GenericMethodsInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:37")
   public boolean involvesTypeParameters() {
     if (involvesTypeParameters_computed) {
       return involvesTypeParameters_value;
@@ -736,10 +736,10 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeConversion
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:100
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:100")
+  @ASTNodeAnnotation.Source(aspect="TypeConversion", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:100")
   public boolean castingConversionTo(TypeDecl type) {
     Object _parameters = type;
     if (castingConversionTo_TypeDecl_computed == null) castingConversionTo_TypeDecl_computed = new java.util.HashMap(4);
@@ -780,10 +780,10 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /**
    * @attribute syn
    * @aspect Generics
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:193
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:193
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:193")
+  @ASTNodeAnnotation.Source(aspect="Generics", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:193")
   public boolean isNestedType() {
     boolean isNestedType_value = false;
     return isNestedType_value;
@@ -802,10 +802,10 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsErasure
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:418
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:418
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsErasure", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:418")
+  @ASTNodeAnnotation.Source(aspect="GenericsErasure", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:418")
   public TypeDecl erasure() {
     ASTNode$State state = state();
     if (erasure_computed == ASTNode$State.NON_CYCLE || erasure_computed == state().cycle()) {
@@ -835,10 +835,10 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeName
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/QualifiedNames.jrag:84
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/QualifiedNames.jrag:84")
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:84")
   public String fullName() {
     ASTNode$State state = state();
     if (fullName_computed == ASTNode$State.NON_CYCLE || fullName_computed == state().cycle()) {
@@ -857,10 +857,10 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:801
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:801
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:801")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:801")
   public boolean sameSignature(Access a) {
     boolean sameSignature_Access_value = a.type() == this;
     return sameSignature_Access_value;
@@ -879,10 +879,10 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1160
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1160
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1160")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1160")
   public TypeDecl lubType() {
     ASTNode$State state = state();
     if (lubType_computed == ASTNode$State.NON_CYCLE || lubType_computed == state().cycle()) {
@@ -922,7 +922,7 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /** @apilevel internal */
   protected boolean usesTypeVariable_initialized = false;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1189")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1189")
   public boolean usesTypeVariable() {
     if (usesTypeVariable_computed) {
       return usesTypeVariable_value;
@@ -968,10 +968,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect AccessControl
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:72
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/AccessControl.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:72")
   public boolean accessibleFrom(TypeDecl type) {
     Object _parameters = type;
     if (accessibleFrom_TypeDecl_computed == null) accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
@@ -1008,10 +1008,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeName
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/QualifiedNames.jrag:95
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:95
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/QualifiedNames.jrag:95")
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:95")
   public String typeName() {
     ASTNode$State state = state();
     if (typeName_computed == ASTNode$State.NON_CYCLE || typeName_computed == state().cycle()) {
@@ -1030,10 +1030,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsParTypeDecl.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsParTypeDecl.jrag:104")
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:104")
   public boolean isTypeVariable() {
     boolean isTypeVariable_value = true;
     return isTypeVariable_value;
@@ -1041,10 +1041,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:69
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:69")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:69")
   public boolean supertypeWildcard(WildcardType type) {
     boolean supertypeWildcard_WildcardType_value = true;
     return supertypeWildcard_WildcardType_value;
@@ -1052,10 +1052,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:76")
   public boolean supertypeWildcardExtends(WildcardExtendsType type) {
     boolean supertypeWildcardExtends_WildcardExtendsType_value = type.extendsType().subtype(this);
     return supertypeWildcardExtends_WildcardExtendsType_value;
@@ -1063,10 +1063,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:85
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:85
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:85")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:85")
   public boolean supertypeWildcardSuper(WildcardSuperType type) {
     boolean supertypeWildcardSuper_WildcardSuperType_value = type.superType().subtype(this);
     return supertypeWildcardSuper_WildcardSuperType_value;
@@ -1077,7 +1077,7 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   }
   protected java.util.Map sameStructure_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:216")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:216")
   public boolean sameStructure(TypeDecl t) {
     Object _parameters = t;
     if (sameStructure_TypeDecl_values == null) sameStructure_TypeDecl_values = new java.util.HashMap(4);
@@ -1154,10 +1154,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:539
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:539
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:539")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:539")
   public boolean supertypeArrayDecl(ArrayDecl type) {
     {
         for (int i = 0; i < getNumTypeBound(); i++) {
@@ -1174,7 +1174,7 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   }
   protected java.util.Map subtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:490")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:490")
   public boolean subtype(TypeDecl type) {
     Object _parameters = type;
     if (subtype_TypeDecl_values == null) subtype_TypeDecl_values = new java.util.HashMap(4);
@@ -1222,10 +1222,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:362
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:362
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:362")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:362")
   public boolean supertypeTypeVariable(TypeVariable type) {
     {
         if (type == this) {
@@ -1249,10 +1249,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:505")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:505")
   public boolean supertypeClassDecl(ClassDecl type) {
     boolean supertypeClassDecl_ClassDecl_value = false;
     return supertypeClassDecl_ClassDecl_value;
@@ -1260,10 +1260,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericsSubtype.jrag:522")
+  @ASTNodeAnnotation.Source(aspect="GenericsSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsSubtype.jrag:522")
   public boolean supertypeInterfaceDecl(InterfaceDecl type) {
     boolean supertypeInterfaceDecl_InterfaceDecl_value = false;
     return supertypeInterfaceDecl_InterfaceDecl_value;
@@ -1280,10 +1280,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect TypeWideningAndIdentity
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:443
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:443
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:443")
+  @ASTNodeAnnotation.Source(aspect="TypeWideningAndIdentity", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:443")
   public boolean instanceOf(TypeDecl type) {
     Object _parameters = type;
     if (instanceOf_TypeDecl_computed == null) instanceOf_TypeDecl_computed = new java.util.HashMap(4);
@@ -1309,10 +1309,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:364
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:364
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:364")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:364")
   public Collection<Problem> nameProblems() {
     {
           if (extractSingleType(lookupType(name())) != this) {
@@ -1325,10 +1325,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericTypeVariables
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:58
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:58
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericTypeVariables", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:58")
+  @ASTNodeAnnotation.Source(aspect="GenericTypeVariables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:58")
   public TypeDecl lowerBound() {
     TypeDecl lowerBound_value = getTypeBound(0).type();
     return lowerBound_value;
@@ -1336,10 +1336,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect MemberMethods
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:332
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:332
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:332")
+  @ASTNodeAnnotation.Source(aspect="MemberMethods", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:332")
   public Collection<MethodDecl> memberMethods(String name) {
     {
         Collection<MethodDecl> methods = new HashSet<MethodDecl>();
@@ -1363,10 +1363,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect Fields
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:475
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupVariable.jrag:475")
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475")
   public SimpleSet<Variable> memberFields(String name) {
     Object _parameters = name;
     if (memberFields_String_computed == null) memberFields_String_computed = new java.util.HashMap(4);
@@ -1402,10 +1402,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenricTypeVariablesTypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:93
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenricTypeVariablesTypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:93")
+  @ASTNodeAnnotation.Source(aspect="GenricTypeVariablesTypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:93")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -1464,10 +1464,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
    * @see "JLS SE7 &sect;4.7"
    * @attribute syn
    * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/ReifiableTypes.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/ReifiableTypes.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
   public boolean isReifiable() {
     boolean isReifiable_value = false;
     return isReifiable_value;
@@ -1484,10 +1484,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect FunctionalInterface
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:144
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/FunctionalInterface.jrag:144")
+  @ASTNodeAnnotation.Source(aspect="FunctionalInterface", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionalInterface.jrag:144")
   public boolean sameType(TypeVariable tv2) {
     Object _parameters = tv2;
     if (sameType_TypeVariable_computed == null) sameType_TypeVariable_computed = new java.util.HashMap(4);
@@ -1547,10 +1547,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:68
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:68")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:68")
   public boolean strictSupertypeWildcard(WildcardType type) {
     boolean strictSupertypeWildcard_WildcardType_value = true;
     return strictSupertypeWildcard_WildcardType_value;
@@ -1558,10 +1558,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:79
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:79
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:79")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:79")
   public boolean strictSupertypeWildcardSuper(WildcardSuperType type) {
     boolean strictSupertypeWildcardSuper_WildcardSuperType_value = type.superType().strictSubtype(this);
     return strictSupertypeWildcardSuper_WildcardSuperType_value;
@@ -1569,10 +1569,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:415
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:415
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:415")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:415")
   public boolean strictSupertypeArrayDecl(ArrayDecl type) {
     boolean strictSupertypeArrayDecl_ArrayDecl_value = false;
     return strictSupertypeArrayDecl_ArrayDecl_value;
@@ -1583,7 +1583,7 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   }
   protected java.util.Map strictSubtype_TypeDecl_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:363")
   public boolean strictSubtype(TypeDecl type) {
     Object _parameters = type;
     if (strictSubtype_TypeDecl_values == null) strictSubtype_TypeDecl_values = new java.util.HashMap(4);
@@ -1631,10 +1631,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:281
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:281
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:281")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:281")
   public boolean strictSupertypeTypeVariable(TypeVariable type) {
     {
         if (typeVarInMethod() && type.typeVarInMethod()
@@ -1658,10 +1658,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:378")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:378")
   public boolean strictSupertypeClassDecl(ClassDecl type) {
     {
         return false;
@@ -1670,10 +1670,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect StrictSubtype
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/GenericsSubtype.jrag:398")
+  @ASTNodeAnnotation.Source(aspect="StrictSubtype", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:398")
   public boolean strictSupertypeInterfaceDecl(InterfaceDecl type) {
     {
         return false;
@@ -1684,10 +1684,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
    * given type variables.
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:572
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:572
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:572")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:572")
   public boolean mentionsTypeVariable(List<TypeVariable> vars) {
     {
         for (Access bound : getTypeBoundList()) {
@@ -1714,10 +1714,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:78")
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
   public String typeDescriptor() {
     ASTNode$State state = state();
     if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {
@@ -1736,10 +1736,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:1211
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1211
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/CreateBCode.jrag:1211")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1211")
   public String arrayTypeDescriptor() {
     String arrayTypeDescriptor_value = erasure().arrayTypeDescriptor();
     return arrayTypeDescriptor_value;
@@ -1766,10 +1766,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
    * @return constant pool name of this type
    * @attribute syn
    * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:44
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/ConstantPoolNames.jrag:44")
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:44")
   public String constantPoolName() {
     ASTNode$State state = state();
     if (constantPoolName_computed == ASTNode$State.NON_CYCLE || constantPoolName_computed == state().cycle()) {
@@ -1798,10 +1798,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:433
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:433")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433")
   public boolean needsSignatureAttribute() {
     ASTNode$State state = state();
     if (needsSignatureAttribute_computed == ASTNode$State.NON_CYCLE || needsSignatureAttribute_computed == state().cycle()) {
@@ -1820,10 +1820,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:535
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:535
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:535")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:535")
   public String formalTypeParameter() {
     {
         StringBuilder buf = new StringBuilder();
@@ -1856,10 +1856,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:552
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:552
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:552")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:552")
   public String fieldTypeSignature() {
     ASTNode$State state = state();
     if (fieldTypeSignature_computed == ASTNode$State.NON_CYCLE || fieldTypeSignature_computed == state().cycle()) {
@@ -1889,10 +1889,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:561
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:561
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:561")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:561")
   public String classTypeSignature() {
     ASTNode$State state = state();
     if (classTypeSignature_computed == ASTNode$State.NON_CYCLE || classTypeSignature_computed == state().cycle()) {
@@ -1922,10 +1922,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:622
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:622
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:622")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:622")
   public String classBound() {
     ASTNode$State state = state();
     if (classBound_computed == ASTNode$State.NON_CYCLE || classBound_computed == state().cycle()) {
@@ -1962,10 +1962,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:629
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:629
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Downloads/extendj/java5/backend/GenericsCodegen.jrag:629")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:629")
   public String interfaceBounds() {
     ASTNode$State state = state();
     if (interfaceBounds_computed == ASTNode$State.NON_CYCLE || interfaceBounds_computed == state().cycle()) {
@@ -1998,10 +1998,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
    * signature of the method or constructor.
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:789
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:789
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:789")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:789")
   public String typeVariableContext() {
     String typeVariableContext_value = getParent().Define_typeVariableContext(this, null);
     return typeVariableContext_value;
@@ -2009,10 +2009,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1158
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1158
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1158")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1158")
   public TypeDecl typeObject() {
     TypeDecl typeObject_value = getParent().Define_typeObject(this, null);
     return typeObject_value;
@@ -2020,10 +2020,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1168
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1168
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1168")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1168")
   public TypeDecl typeNull() {
     TypeDecl typeNull_value = getParent().Define_typeNull(this, null);
     return typeNull_value;
@@ -2031,10 +2031,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect TypeVariablePositions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeVariablePositions.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeVariablePositions.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:29")
   public int typeVarPosition() {
     ASTNode$State state = state();
     if (typeVarPosition_computed == ASTNode$State.NON_CYCLE || typeVarPosition_computed == state().cycle()) {
@@ -2063,10 +2063,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect TypeVariablePositions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeVariablePositions.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeVariablePositions.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:30")
   public int genericMethodLevel() {
     ASTNode$State state = state();
     if (genericMethodLevel_computed == ASTNode$State.NON_CYCLE || genericMethodLevel_computed == state().cycle()) {
@@ -2095,10 +2095,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute inh
    * @aspect TypeVariablePositions
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeVariablePositions.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeVariablePositions.jrag:32")
+  @ASTNodeAnnotation.Source(aspect="TypeVariablePositions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:32")
   public boolean typeVarInMethod() {
     ASTNode$State state = state();
     if (typeVarInMethod_computed == ASTNode$State.NON_CYCLE || typeVarInMethod_computed == state().cycle()) {
@@ -2125,12 +2125,12 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   protected boolean typeVarInMethod_value;
 
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeBoundListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:35
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:35
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -2143,14 +2143,14 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:40
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:40
     if (getNumTypeBound() == 0) {
       return rewriteRule0();
     }
     return super.rewriteTo();
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:40
    * @apilevel internal
    */
   private TypeVariable rewriteRule0() {
@@ -2163,14 +2163,14 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
     }  }
   /** @apilevel internal */
   public boolean canRewrite() {
-    // Declared at /Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:40
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:40
     if (getNumTypeBound() == 0) {
       return true;
     }
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericTypeVariables.jrag:91
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericTypeVariables.jrag:91
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

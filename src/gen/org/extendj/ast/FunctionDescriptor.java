@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect FunctionDescriptor
- * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/FunctionDescriptor.jrag:36
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/FunctionDescriptor.jrag:36
  */
  class FunctionDescriptor extends java.lang.Object {
   

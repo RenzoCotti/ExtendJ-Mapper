@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect Java7Constant
- * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Constant.jadd:33
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Constant.jadd:33
  */
  class Constant extends java.lang.Object {
   

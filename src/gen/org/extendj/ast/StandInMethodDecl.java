@@ -25,45 +25,45 @@ import java.io.DataInputStream;
 /**
  * Stand-in method for type inference on generic instance creation.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/Diamond.ast:9
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/Diamond.ast:9
  * @production StandInMethodDecl : {@link GenericMethodDecl};
 
  */
 public class StandInMethodDecl extends GenericMethodDecl implements Cloneable {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PrettyPrint.jadd:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PrettyPrint.jadd:66
    */
   public void prettyPrint(PrettyPrinter out) {
   }
   /**
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:45
    */
   public void nameCheck() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:46
    */
   public void typeCheck() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:47
    */
   public void exceptionHandling() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:48
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:48
    */
   public void checkUnreachableStmt() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:49
    */
   public void definiteAssignment() { }
   /**
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:50
    */
   public void checkModifiers() { }
   /**

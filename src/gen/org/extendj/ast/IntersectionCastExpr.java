@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/IntersectionCasts.ast:1
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/IntersectionCasts.ast:1
  * @production IntersectionCastExpr : {@link Expr} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">TypeList:{@link Access}*</span> <span class="component">{@link Expr}</span>;
 
  */
 public class IntersectionCastExpr extends Expr implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PrettyPrint.jadd:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PrettyPrint.jadd:98
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("(");
@@ -356,10 +356,10 @@ public class IntersectionCastExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:36")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {

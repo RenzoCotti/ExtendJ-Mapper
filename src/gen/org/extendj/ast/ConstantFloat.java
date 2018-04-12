@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect ConstantPool
- * @declaredat /Users/BMW/Downloads/extendj/java4/backend/ConstantPool.jrag:448
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPool.jrag:448
  */
 public class ConstantFloat extends CPInfo {
   

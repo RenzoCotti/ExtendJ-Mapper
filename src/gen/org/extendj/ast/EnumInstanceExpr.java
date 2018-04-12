@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Enums.ast:5
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Enums.ast:5
  * @production EnumInstanceExpr : {@link ClassInstanceExpr} ::= <span class="component">{@link Access}</span> <span class="component">Arg:{@link Expr}*</span> <span class="component">[{@link TypeDecl}]</span>;
 
  */
@@ -378,10 +378,10 @@ public class EnumInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:291
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:291
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:291")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:291")
   public Access getAccess() {
     ASTNode$State state = state();
     if (getAccess_computed) {
@@ -414,10 +414,10 @@ public class EnumInstanceExpr extends ClassInstanceExpr implements Cloneable {
   /**
    * @attribute syn nta
    * @aspect Enums
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:295
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Enums.jrag:295")
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:295")
   public List<Expr> getArgList() {
     ASTNode$State state = state();
     if (getArgList_computed) {

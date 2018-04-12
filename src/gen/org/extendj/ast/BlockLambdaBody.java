@@ -24,28 +24,28 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/Lambda.ast:12
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/Lambda.ast:12
  * @production BlockLambdaBody : {@link LambdaBody} ::= <span class="component">{@link Block}</span>;
 
  */
 public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PrettyPrint.jadd:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PrettyPrint.jadd:39
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getBlock());
   }
   /**
    * @aspect LambdaToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaAnonymousDecl.jrag:79
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaAnonymousDecl.jrag:79
    */
   protected Block toBlock() {
     return getBlock().treeCopyNoTransform();
   }
   /**
    * @aspect ReturnCompatible
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:57
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:57
    */
   public boolean noReturnsHasResult() {
     ArrayList<ReturnStmt> returnList = lambdaReturns();
@@ -58,7 +58,7 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   }
   /**
    * @aspect ReturnCompatible
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:67
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:67
    */
   public boolean allReturnsHasResult() {
     ArrayList<ReturnStmt> returnList = lambdaReturns();
@@ -233,10 +233,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43")
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
     return modifiedInScope_Variable_value;
@@ -254,10 +254,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaBody
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:29
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:29
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:29")
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:29")
   public boolean isBlockBody() {
     ASTNode$State state = state();
     if (isBlockBody_computed == ASTNode$State.NON_CYCLE || isBlockBody_computed == state().cycle()) {
@@ -286,10 +286,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaBody
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:30")
+  @ASTNodeAnnotation.Source(aspect="LambdaBody", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:30")
   public boolean isExprBody() {
     ASTNode$State state = state();
     if (isExprBody_computed == ASTNode$State.NON_CYCLE || isExprBody_computed == state().cycle()) {
@@ -318,10 +318,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect ReturnCompatible
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:40
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:40")
+  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:40")
   public boolean voidCompatible() {
     ASTNode$State state = state();
     if (voidCompatible_computed == ASTNode$State.NON_CYCLE || voidCompatible_computed == state().cycle()) {
@@ -350,10 +350,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect ReturnCompatible
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:41
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:41
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:41")
+  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:41")
   public boolean valueCompatible() {
     ASTNode$State state = state();
     if (valueCompatible_computed == ASTNode$State.NON_CYCLE || valueCompatible_computed == state().cycle()) {
@@ -381,10 +381,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute syn
    * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:74
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaExpr.jrag:74")
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74")
   public boolean congruentTo(FunctionDescriptor f) {
     Object _parameters = f;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -424,12 +424,12 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
       }
     }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:195
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:213
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:213
       return false;
     }
     else {
@@ -440,12 +440,12 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:196
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:214
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:214
       return false;
     }
     else {
@@ -456,12 +456,12 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:197
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:197
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:215
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:215
       return false;
     }
     else {
@@ -472,12 +472,12 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:198
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:216
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:216
       return false;
     }
     else {
@@ -488,12 +488,12 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:199
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:217
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:217
       return false;
     }
     else {
@@ -504,12 +504,12 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:534
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
    * @apilevel internal
    */
   public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:39
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:39
       {
           TypeDecl decl = enclosingLambda().targetType();
           if (decl == null) {
@@ -534,12 +534,12 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
   public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/UnreachableStatements.jrag:29
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/UnreachableStatements.jrag:29
       return true;
     }
     else {
@@ -560,10 +560,10 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   /**
    * @attribute coll
    * @aspect ReturnCompatible
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.COLL)
-  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/LambdaBody.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="ReturnCompatible", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaBody.jrag:47")
   public ArrayList<ReturnStmt> lambdaReturns() {
     ASTNode$State state = state();
     if (BlockLambdaBody_lambdaReturns_computed == ASTNode$State.NON_CYCLE || BlockLambdaBody_lambdaReturns_computed == state().cycle()) {
@@ -602,7 +602,7 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   protected ArrayList<ReturnStmt> BlockLambdaBody_lambdaReturns_value;
 
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:195
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:195
     if (!voidCompatible() && !valueCompatible()) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

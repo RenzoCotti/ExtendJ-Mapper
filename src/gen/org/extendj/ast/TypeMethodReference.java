@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/MethodReference.ast:4
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/MethodReference.ast:4
  * @production TypeMethodReference : {@link MethodReference} ::= <span class="component">TypeAccess:{@link Access}</span>;
 
  */
 public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @aspect Java8PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/PrettyPrint.jadd:118
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PrettyPrint.jadd:118
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -50,7 +50,7 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   }
   /**
    * @aspect Java8CreateBCode
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/CreateBCode.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/CreateBCode.jrag:37
    */
   public void createBCode(CodeGeneration gen) {
     toClass().createBCode(gen);
@@ -386,10 +386,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:66
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:66")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:66")
   public MethodDecl targetStaticMethod(FunctionDescriptor f) {
     Object _parameters = f;
     if (targetStaticMethod_FunctionDescriptor_computed == null) targetStaticMethod_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -434,10 +434,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:76")
   public MethodDecl targetInstanceMethod(FunctionDescriptor f) {
     Object _parameters = f;
     if (targetInstanceMethod_FunctionDescriptor_computed == null) targetInstanceMethod_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -487,10 +487,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:91
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:91
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:91")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:91")
   public boolean validStaticMethod(FunctionDescriptor f) {
     Object _parameters = f;
     if (validStaticMethod_FunctionDescriptor_computed == null) validStaticMethod_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -530,10 +530,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:96
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:96
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:96")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:96")
   public boolean validInstanceMethod(FunctionDescriptor f) {
     Object _parameters = f;
     if (validInstanceMethod_FunctionDescriptor_computed == null) validInstanceMethod_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -573,10 +573,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:119
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:119
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:119")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:119")
   public TypeDecl inferredReferenceType(FunctionDescriptor f) {
     Object _parameters = f;
     if (inferredReferenceType_FunctionDescriptor_computed == null) inferredReferenceType_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -629,10 +629,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:136
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:136
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:136")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:136")
   public Access syntheticStaticAccess(FunctionDescriptor f) {
     Object _parameters = f;
     if (syntheticStaticAccess_FunctionDescriptor_values == null) syntheticStaticAccess_FunctionDescriptor_values = new java.util.HashMap(4);
@@ -683,10 +683,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:153
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:153
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:153")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:153")
   public MethodAccess syntheticStaticMethodAccess(FunctionDescriptor f) {
     Object _parameters = f;
     if (syntheticStaticMethodAccess_FunctionDescriptor_computed == null) syntheticStaticMethodAccess_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -727,10 +727,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:158
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:158
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:158")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:158")
   public Access syntheticInstanceAccess(FunctionDescriptor f) {
     Object _parameters = f;
     if (syntheticInstanceAccess_FunctionDescriptor_values == null) syntheticInstanceAccess_FunctionDescriptor_values = new java.util.HashMap(4);
@@ -789,10 +789,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:183
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:183
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:183")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:183")
   public MethodAccess syntheticInstanceMethodAccess(FunctionDescriptor f) {
     Object _parameters = f;
     if (syntheticInstanceMethodAccess_FunctionDescriptor_computed == null) syntheticInstanceMethodAccess_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -832,10 +832,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:218
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:218
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:218")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:218")
   public boolean congruentTo(FunctionDescriptor f) {
     Object _parameters = f;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -893,10 +893,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:259
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:259
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:259")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:259")
   public ArrayList<MethodDecl> potentiallyApplicableMethods(FunctionDescriptor f) {
     Object _parameters = f;
     if (potentiallyApplicableMethods_FunctionDescriptor_computed == null) potentiallyApplicableMethods_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -957,10 +957,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:314
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:314
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:314")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:314")
   public MethodDecl exactCompileTimeDeclaration() {
     ASTNode$State state = state();
     if (exactCompileTimeDeclaration_computed == ASTNode$State.NON_CYCLE || exactCompileTimeDeclaration_computed == state().cycle()) {
@@ -1018,10 +1018,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodSignature.jrag:465")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465")
   public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(type);
@@ -1084,10 +1084,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReferenceToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/MethodReferenceToClass.jrag:145
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/MethodReferenceToClass.jrag:145
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="MethodReferenceToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/backend/MethodReferenceToClass.jrag:145")
+  @ASTNodeAnnotation.Source(aspect="MethodReferenceToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/MethodReferenceToClass.jrag:145")
   public ClassInstanceExpr toClass() {
     ASTNode$State state = state();
     if (toClass_computed) {
@@ -1150,10 +1150,10 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
   /**
    * @attribute syn
    * @aspect MethodReferenceToClass
-   * @declaredat /Users/BMW/Downloads/extendj/java8/backend/MethodReferenceToClass.jrag:181
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/MethodReferenceToClass.jrag:181
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReferenceToClass", declaredAt="/Users/BMW/Downloads/extendj/java8/backend/MethodReferenceToClass.jrag:181")
+  @ASTNodeAnnotation.Source(aspect="MethodReferenceToClass", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/MethodReferenceToClass.jrag:181")
   public Block toBlock() {
     ASTNode$State state = state();
     if (toBlock_computed == ASTNode$State.NON_CYCLE || toBlock_computed == state().cycle()) {
@@ -1211,12 +1211,12 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
       return new Block(stmtList);
     }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:195
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:195
       return NameType.TYPE_NAME;
     }
     else {
@@ -1227,12 +1227,12 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:195
    * @apilevel internal
    */
   public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:358
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:358
       return false;
     }
     else {
@@ -1243,12 +1243,12 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:196
    * @apilevel internal
    */
   public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:359
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:359
       return false;
     }
     else {
@@ -1259,12 +1259,12 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:197
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:197
    * @apilevel internal
    */
   public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:360
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:360
       return false;
     }
     else {
@@ -1275,12 +1275,12 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:198
    * @apilevel internal
    */
   public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:361
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:361
       return false;
     }
     else {
@@ -1291,12 +1291,12 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:199
    * @apilevel internal
    */
   public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
     if (getTypeAccessNoTransform() != null && _callerNode == getTypeAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TargetType.jrag:362
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:362
       return false;
     }
     else {
@@ -1307,12 +1307,12 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    */
   public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == toClass_value) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/backend/ToClassInherited.jrag:40
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:40
       {
           return targetInterface().functionDescriptor().method.type();
         }
@@ -1333,7 +1333,7 @@ public class TypeMethodReference extends MethodReference implements Cloneable {
     return false;
   }
   protected void collect_contributors_TypeDecl_nestedTypes(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java8/backend/MethodReferenceToClass.jrag:34
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/MethodReferenceToClass.jrag:34
     {
       TypeDecl target = (TypeDecl) (hostType());
       java.util.Set<ASTNode> contributors = _map.get(target);

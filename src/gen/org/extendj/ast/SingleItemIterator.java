@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect DataStructures
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:287
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:287
  */
 public class SingleItemIterator<T> extends java.lang.Object implements Iterator<T> {
   

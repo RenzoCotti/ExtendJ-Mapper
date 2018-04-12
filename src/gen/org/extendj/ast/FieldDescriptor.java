@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BytecodeDescriptor
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/BytecodeDescriptor.jrag:33
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/BytecodeDescriptor.jrag:33
  */
  class FieldDescriptor extends java.lang.Object {
   

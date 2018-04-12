@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect GenericMethodsInference
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/GenericMethodsInference.jrag:136
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:136
  */
  class Constraints extends java.lang.Object {
   

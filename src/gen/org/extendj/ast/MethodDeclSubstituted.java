@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:45
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:45
  * @production MethodDeclSubstituted : {@link MethodDecl} ::= <span class="component">&lt;Original:MethodDecl&gt;</span>;
 
  */
@@ -554,10 +554,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1524
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1524
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1524")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1524")
   public MethodDecl erasedMethod() {
     MethodDecl erasedMethod_value = getOriginal().erasedMethod();
     return erasedMethod_value;
@@ -576,10 +576,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect SourceDeclarations
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1729
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1729
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1729")
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1729")
   public MethodDecl sourceMethodDecl() {
     ASTNode$State state = state();
     if (sourceMethodDecl_computed == ASTNode$State.NON_CYCLE || sourceMethodDecl_computed == state().cycle()) {
@@ -601,10 +601,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
    * @return type parameters for this declaration.
    * @attribute syn
    * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:360
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:360
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/MethodSignature.jrag:360")
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:360")
   public List<TypeVariable> typeParameters() {
     List<TypeVariable> typeParameters_value = sourceMethodDecl().typeParameters();
     return typeParameters_value;
@@ -614,10 +614,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
    * according to the rules specified in JLS 8 &sect;9.9.
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:497
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:497
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:497")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:497")
   public MethodDecl nonWildcardParameterization() {
     {
         TypeDecl host = hostType();
@@ -645,10 +645,10 @@ public class MethodDeclSubstituted extends MethodDecl implements Cloneable {
    * the source declaration being identical to the given method.
    * @attribute syn
    * @aspect LambdaParametersInference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:524
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:524
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/TypeCheck.jrag:524")
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:524")
   public boolean isSubstitutionOf(MethodDecl method) {
     boolean isSubstitutionOf_MethodDecl_value = sourceMethodDecl() == method;
     return isSubstitutionOf_MethodDecl_value;

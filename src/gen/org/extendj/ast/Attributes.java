@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BytecodeAttributes
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/BytecodeAttributes.jrag:35
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/BytecodeAttributes.jrag:35
  */
  class Attributes extends java.lang.Object {
   

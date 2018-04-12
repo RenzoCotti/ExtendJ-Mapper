@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast enum
  * @aspect SyntacticClassification
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:47
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:47
  */
 // Circular.
 

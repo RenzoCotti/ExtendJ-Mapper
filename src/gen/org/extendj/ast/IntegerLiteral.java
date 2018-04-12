@@ -26,21 +26,21 @@ import java.io.DataInputStream;
  * Default Java integer literal. Should only be used for numbers
  * that can be stored in 32 bits binary.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/Literals.ast:48
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/Literals.ast:48
  * @production IntegerLiteral : {@link NumericLiteral};
 
  */
 public class IntegerLiteral extends NumericLiteral implements Cloneable {
   /**
    * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NodeConstructors.jrag:62
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:62
    */
   public IntegerLiteral(int i) {
     this(Integer.toString(i));
   }
   /** Push a constant value. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:122
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:122
    */
   public static void push(ASTNode<ASTNode> node, CodeGeneration gen, int value) {
     switch(value) {
@@ -82,7 +82,7 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/CodeGeneration.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:236
    */
   public void emitPushConstant(CodeGeneration gen) {
     type().emitPushConstant(this, gen, constant().intValue());
@@ -254,10 +254,10 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
   /**
    * @attribute syn
    * @aspect PositiveLiterals
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PositiveLiterals.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PositiveLiterals.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PositiveLiterals", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/PositiveLiterals.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="PositiveLiterals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PositiveLiterals.jrag:36")
   public boolean isPositive() {
     boolean isPositive_value = !getLITERAL().startsWith("-");
     return isPositive_value;
@@ -276,10 +276,10 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
@@ -298,10 +298,10 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:750
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:750
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:750")
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:750")
   public Problem sizeError() {
     Problem sizeError_value = errorf("The integer literal \"%s\" is too large for type int.", getLITERAL());
     return sizeError_value;
@@ -320,10 +320,10 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
   /**
    * @attribute syn
    * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ConstantExpression.jrag:38")
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:38")
   public Constant constant() {
     ASTNode$State state = state();
     if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
@@ -367,10 +367,10 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
    * @return true if this literal is a "raw", not-yet-parsed NumericLiteral
    * @attribute syn
    * @aspect Java7Literals
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:364
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:364
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Literals.jrag:364")
+  @ASTNodeAnnotation.Source(aspect="Java7Literals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Literals.jrag:364")
   public boolean needsRewrite() {
     boolean needsRewrite_value = false;
     return needsRewrite_value;
@@ -384,7 +384,7 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeCheck.jrag:754
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:754
     if (constant().error) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

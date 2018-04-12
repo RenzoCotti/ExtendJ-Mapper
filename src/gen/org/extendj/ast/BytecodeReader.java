@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect ClassPath
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ClassPath.jrag:45
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ClassPath.jrag:45
  */
 public interface BytecodeReader {
 

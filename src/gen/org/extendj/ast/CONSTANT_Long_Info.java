@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect BytecodeCONSTANT
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BytecodeCONSTANT.jrag:212
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BytecodeCONSTANT.jrag:212
  */
  class CONSTANT_Long_Info extends CONSTANT_Info {
   

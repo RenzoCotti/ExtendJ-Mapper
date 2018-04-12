@@ -24,19 +24,19 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/MethodReference.ast:9
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/MethodReference.ast:9
  * @production SyntheticTypeAccess : {@link Access};
 
  */
 public class SyntheticTypeAccess extends Access implements Cloneable {
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:379
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:379
    */
   private TypeDecl type;
   /**
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:380
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:380
    */
   public SyntheticTypeAccess(TypeDecl type) {
     this.type = type;
@@ -177,10 +177,10 @@ public class SyntheticTypeAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect Synthetics
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:383
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Synthetics", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:383")
+  @ASTNodeAnnotation.Source(aspect="Synthetics", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:383")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {

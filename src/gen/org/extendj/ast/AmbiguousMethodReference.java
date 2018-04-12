@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java8/grammar/MethodReference.ast:5
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/grammar/MethodReference.ast:5
  * @production AmbiguousMethodReference : {@link MethodReference} ::= <span class="component">AmbiguousName:{@link Access}</span>;
 
  */
@@ -349,10 +349,10 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:218
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:218
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:218")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:218")
   public boolean congruentTo(FunctionDescriptor f) {
     Object _parameters = f;
     if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -387,10 +387,10 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:259
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:259
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:259")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:259")
   public ArrayList<MethodDecl> potentiallyApplicableMethods(FunctionDescriptor f) {
     Object _parameters = f;
     if (potentiallyApplicableMethods_FunctionDescriptor_computed == null) potentiallyApplicableMethods_FunctionDescriptor_computed = new java.util.HashMap(4);
@@ -427,10 +427,10 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   /**
    * @attribute syn
    * @aspect MethodReference
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:314
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:314
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:314")
+  @ASTNodeAnnotation.Source(aspect="MethodReference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:314")
   public MethodDecl exactCompileTimeDeclaration() {
     ASTNode$State state = state();
     if (exactCompileTimeDeclaration_computed == ASTNode$State.NON_CYCLE || exactCompileTimeDeclaration_computed == state().cycle()) {
@@ -447,12 +447,12 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
     return exactCompileTimeDeclaration_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getAmbiguousNameNoTransform() != null && _callerNode == getAmbiguousName()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:196
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:196
       return NameType.AMBIGUOUS_NAME;
     }
     else {
@@ -464,18 +464,18 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:199
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:199
     if (!getAmbiguousName().isTypeAccess()) {
       return rewriteRule0();
     }
-    // Declared at /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:209
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:209
     if (getAmbiguousName().isTypeAccess()) {
       return rewriteRule1();
     }
     return super.rewriteTo();
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:199
    * @apilevel internal
    */
   private ExprMethodReference rewriteRule0() {
@@ -486,7 +486,7 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
             (Access) getAmbiguousName().treeCopy());
       }  }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:209
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:209
    * @apilevel internal
    */
   private TypeMethodReference rewriteRule1() {
@@ -498,11 +498,11 @@ public class AmbiguousMethodReference extends MethodReference implements Cloneab
       }  }
   /** @apilevel internal */
   public boolean canRewrite() {
-    // Declared at /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:199
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:199
     if (!getAmbiguousName().isTypeAccess()) {
       return true;
     }
-    // Declared at /Users/BMW/Downloads/extendj/java8/frontend/MethodReference.jrag:209
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:209
     if (getAmbiguousName().isTypeAccess()) {
       return true;
     }

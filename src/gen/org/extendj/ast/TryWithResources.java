@@ -25,14 +25,14 @@ import java.io.DataInputStream;
 /**
  * The JSR 334 try with resources statement.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/TryWithResources.ast:4
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/TryWithResources.ast:4
  * @production TryWithResources : {@link TryStmt} ::= <span class="component">Resource:{@link ResourceDeclaration}*</span> <span class="component">{@link Block}</span> <span class="component">{@link CatchClause}*</span> <span class="component">[Finally:{@link Block}]</span>;
 
  */
 public class TryWithResources extends TryStmt implements Cloneable, VariableScope {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PrettyPrint.jadd:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PrettyPrint.jadd:68
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("try (");
@@ -62,7 +62,7 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * Returns true if the try-with-resources statement can throw
    * an exception of type (or a subtype of) catchType.
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:236
    */
   protected boolean reachedException(TypeDecl catchType) {
     boolean found = false;
@@ -91,7 +91,7 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   /**
    * Code generation for the try-with-resources statement.
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:80
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:80
    */
   public void createBCode(CodeGeneration gen) {
 
@@ -568,10 +568,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * Exception error checks.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:63
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:63
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:63")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:63")
   public Collection<Problem> exceptionHandlingProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -599,10 +599,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * has a catch clause which handles the exception.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:88
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:88
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:88")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:88")
   public boolean catchHandlesException(TypeDecl exceptionType) {
     {
         for (int i = 0; i < getNumCatchClause(); i++) {
@@ -619,10 +619,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * within the directly enclosing method or initializer block.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:102
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:102
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:102")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:102")
   public boolean twrHandlesException(TypeDecl exceptionType) {
     {
         if (catchHandlesException(exceptionType)) {
@@ -638,10 +638,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * Lookup the close method declaration for the resource which is being used.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:127
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:127
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:127")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:127")
   public MethodDecl lookupClose(ResourceDeclaration resource) {
     {
         TypeDecl resourceType = resource.getTypeAccess().type();
@@ -668,10 +668,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:173
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:173
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:173")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:173")
   public SimpleSet<Variable> localLookup(String name) {
     Object _parameters = name;
     if (localLookup_String_computed == null) localLookup_String_computed = new java.util.HashMap(4);
@@ -714,10 +714,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:181
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:181
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:181")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:181")
   public VariableDeclarator localVariableDeclaration(String name) {
     Object _parameters = name;
     if (localVariableDeclaration_String_computed == null) localVariableDeclaration_String_computed = new java.util.HashMap(4);
@@ -755,7 +755,7 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   }
   protected java.util.Map assignedAfter_Variable_values;
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:264")
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:264")
   public boolean assignedAfter(Variable v) {
     Object _parameters = v;
     if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
@@ -805,10 +805,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * may throw an exception of type catchType.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:265
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:265
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:265")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:265")
   public boolean resourceClosingException(TypeDecl catchType) {
     {
         for (ResourceDeclaration resource : getResourceList()) {
@@ -831,10 +831,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * may throw an exception of type catchType.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:285
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:285
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:285")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:285")
   public boolean resourceInitializationException(TypeDecl catchType) {
     {
         for (ResourceDeclaration resource : getResourceList()) {
@@ -859,10 +859,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * a type assignable to the given type.
    * @attribute syn
    * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:289
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:289
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/ExceptionHandling.jrag:289")
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:289")
   public boolean catchableException(TypeDecl type) {
     Object _parameters = type;
     if (catchableException_TypeDecl_computed == null) catchableException_TypeDecl_computed = new java.util.HashMap(4);
@@ -906,10 +906,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * generation for try-with-resources statements.
    * @attribute syn
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:39")
   public Stmt getTransformed() {
     ASTNode$State state = state();
     if (getTransformed_computed) {
@@ -964,10 +964,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
    * Inherit the handlesException attribute from methoddecl.
    * @attribute inh
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:115")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115")
   public boolean handlesException(TypeDecl exceptionType) {
     Object _parameters = exceptionType;
     if (handlesException_TypeDecl_computed == null) handlesException_TypeDecl_computed = new java.util.HashMap(4);
@@ -1002,10 +1002,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   /**
    * @attribute inh
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:140
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:140
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:140")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:140")
   public TypeDecl typeError() {
     ASTNode$State state = state();
     if (typeError_computed == ASTNode$State.NON_CYCLE || typeError_computed == state().cycle()) {
@@ -1035,10 +1035,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   /**
    * @attribute inh
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:142
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:142
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:142")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:142")
   public TypeDecl typeRuntimeException() {
     ASTNode$State state = state();
     if (typeRuntimeException_computed == ASTNode$State.NON_CYCLE || typeRuntimeException_computed == state().cycle()) {
@@ -1068,10 +1068,10 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   /**
    * @attribute inh
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:192
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:192
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:192")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:192")
   public SimpleSet<Variable> lookupVariable(String name) {
     Object _parameters = name;
     if (lookupVariable_String_computed == null) lookupVariable_String_computed = new java.util.HashMap(4);
@@ -1106,25 +1106,25 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
   /**
    * @attribute inh
    * @aspect TryWithResources
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:198
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:198")
+  @ASTNodeAnnotation.Source(aspect="TryWithResources", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:198")
   public boolean resourcePreviouslyDeclared(String name) {
     boolean resourcePreviouslyDeclared_String_value = getParent().Define_resourcePreviouslyDeclared(this, null, name);
     return resourcePreviouslyDeclared_String_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
    * @apilevel internal
    */
   public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:120
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:120
       return twrHandlesException(exceptionType);
     }
     else if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:117
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:117
       int i = _callerNode.getIndexOfChild(_childNode);
       return twrHandlesException(exceptionType);
     }
@@ -1136,12 +1136,12 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/UnreachableStatements.jrag:182
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:182
    * @apilevel internal
    */
   public boolean Define_reachableCatchClause(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     if (_callerNode == getCatchClauseListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:144
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:144
       int childIndex = _callerNode.getIndexOfChild(_childNode);
       {
           for (int i = 0; i < childIndex; i++) {
@@ -1166,12 +1166,12 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
   public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:164
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:164
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           for (int i = index - 1; i >= 0; --i) {
@@ -1183,7 +1183,7 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
         }
     }
     else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:162
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:162
       return localLookup(name);
     }
     else {
@@ -1194,12 +1194,12 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/NameCheck.jrag:31
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:31
    * @apilevel internal
    */
   public VariableScope Define_outerScope(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:194
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:194
       int i = _callerNode.getIndexOfChild(_childNode);
       return this;
     }
@@ -1211,12 +1211,12 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:198
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:198
    * @apilevel internal
    */
   public boolean Define_resourcePreviouslyDeclared(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:200
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:200
       int index = _callerNode.getIndexOfChild(_childNode);
       {
           for (int i = 0; i < index; ++i) {
@@ -1235,18 +1235,18 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
   public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:227
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:227
       return getNumResource() == 0
             ? assignedBefore(v)
             : getResource(getNumResource() - 1).assignedAfter(v);
     }
     else if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:224
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:224
       int index = _callerNode.getIndexOfChild(_childNode);
       return index == 0 ? assignedBefore(v) : getResource(index - 1).assignedAfter(v);
     }
@@ -1258,12 +1258,12 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:133
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:133
    * @apilevel internal
    */
   public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:308
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:308
       int index = _callerNode.getIndexOfChild(_childNode);
       return getResource(index).getResourceModifiers();
     }
@@ -1275,12 +1275,12 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/VariableDeclaration.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:144
    * @apilevel internal
    */
   public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:311
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:311
       int index = _callerNode.getIndexOfChild(_childNode);
       return getResource(index).getResourceType();
     }
@@ -1292,16 +1292,16 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:64
    * @apilevel internal
    */
   public int Define_localNum(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:310
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:310
       return 100;
     }
     else if (_callerNode == getResourceListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/backend/TryWithResources.jrag:308
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/TryWithResources.jrag:308
       int index = _callerNode.getIndexOfChild(_childNode);
       return 50;
     }
@@ -1321,7 +1321,7 @@ public class TryWithResources extends TryStmt implements Cloneable, VariableScop
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/TryWithResources.jrag:58
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:58
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

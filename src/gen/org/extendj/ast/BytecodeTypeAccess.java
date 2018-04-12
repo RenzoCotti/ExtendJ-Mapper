@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/BoundNames.ast:10
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/BoundNames.ast:10
  * @production BytecodeTypeAccess : {@link TypeAccess};
 
  */
@@ -225,11 +225,11 @@ public class BytecodeTypeAccess extends TypeAccess implements Cloneable {
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
-    // Declared at /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:115
+    // Declared at /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:115
     return rewriteRule0();
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:115
    * @apilevel internal
    */
   private Access rewriteRule0() {

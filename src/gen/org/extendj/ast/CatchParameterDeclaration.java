@@ -25,14 +25,14 @@ import java.io.DataInputStream;
 /**
  * A catch parameter with disjunct exception type.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/MultiCatch.ast:19
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/MultiCatch.ast:19
  * @production CatchParameterDeclaration : {@link ASTNode} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}*</span> <span class="component">&lt;ID:String&gt;</span>;
 
  */
 public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Cloneable, Variable, SimpleSet<Variable> {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PrettyPrint.jadd:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PrettyPrint.jadd:35
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getModifiers());
@@ -47,7 +47,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:84
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:84
    */
   @Override
   public int size() {
@@ -55,7 +55,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:89
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:89
    */
   @Override
   public boolean isEmpty() {
@@ -63,7 +63,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:94
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:94
    */
   @Override
   public SimpleSet<Variable> add(Variable o) {
@@ -71,7 +71,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:99
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:99
    */
   @Override
   public boolean contains(Object o) {
@@ -79,7 +79,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:104
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:104
    */
   @Override
   public boolean isSingleton() {
@@ -87,7 +87,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:109
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:109
    */
   @Override
   public boolean isSingleton(Variable o) {
@@ -95,7 +95,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:114
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:114
    */
   @Override
   public Variable singletonValue() {
@@ -103,7 +103,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   }
   /**
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:119
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:119
    */
   @Override
   public Iterator<Variable> iterator() {
@@ -428,10 +428,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:39")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:39")
   public boolean isParameter() {
     boolean isParameter_value = true;
     return isParameter_value;
@@ -439,10 +439,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:42
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:42
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:42")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:42")
   public boolean isClassVariable() {
     boolean isClassVariable_value = false;
     return isClassVariable_value;
@@ -450,10 +450,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:43")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:43")
   public boolean isInstanceVariable() {
     boolean isInstanceVariable_value = false;
     return isInstanceVariable_value;
@@ -461,10 +461,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:47
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:47")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:47")
   public boolean isLocalVariable() {
     boolean isLocalVariable_value = false;
     return isLocalVariable_value;
@@ -472,10 +472,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:48
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:48
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:48")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:48")
   public boolean isField() {
     boolean isField_value = false;
     return isField_value;
@@ -483,10 +483,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:50
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:50")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:50")
   public boolean accessibleFrom(TypeDecl type) {
     boolean accessibleFrom_TypeDecl_value = false;
     return accessibleFrom_TypeDecl_value;
@@ -494,10 +494,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:51
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:51
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:51")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:51")
   public boolean isConstant() {
     boolean isConstant_value = false;
     return isConstant_value;
@@ -505,10 +505,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:52
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:52
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:52")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:52")
   public boolean isPublic() {
     boolean isPublic_value = false;
     return isPublic_value;
@@ -517,10 +517,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
    * The catch parameter of a multi-catch clause is implicitly final.
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:61")
   public boolean isFinal() {
     boolean isFinal_value = true;
     return isFinal_value;
@@ -528,10 +528,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:62
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:62
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:62")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:62")
   public boolean isVolatile() {
     boolean isVolatile_value = getModifiers().isVolatile();
     return isVolatile_value;
@@ -539,10 +539,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:63
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:63
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:63")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:63")
   public boolean isBlank() {
     boolean isBlank_value = false;
     return isBlank_value;
@@ -550,10 +550,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:64
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:64")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:64")
   public boolean isStatic() {
     boolean isStatic_value = false;
     return isStatic_value;
@@ -561,10 +561,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:66
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:66
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:66")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:66")
   public String name() {
     String name_value = getID();
     return name_value;
@@ -572,10 +572,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:68
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:68")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:68")
   public boolean hasInit() {
     boolean hasInit_value = false;
     return hasInit_value;
@@ -583,10 +583,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:69
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:69")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:69")
   public Expr getInit() {
     {
         throw new UnsupportedOperationException();
@@ -595,10 +595,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:72
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:72
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:72")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:72")
   public Constant constant() {
     {
         throw new UnsupportedOperationException();
@@ -607,10 +607,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:77")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:77")
   public boolean isSynthetic() {
     boolean isSynthetic_value = getModifiers().isSynthetic();
     return isSynthetic_value;
@@ -621,10 +621,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
    * subtypes of each other.
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:158
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:158
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:158")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:158")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -652,10 +652,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
    * @see "JLSv3 &sect;15.12.2.7"
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:218
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:218
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:218")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:218")
   public TypeDecl type() {
     {
         ArrayList<TypeDecl> list = new ArrayList<TypeDecl>();
@@ -669,10 +669,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
    * Duplicate declaration checking for catch parameters.
    * @attribute syn
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:234
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:234
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:234")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:234")
   public Collection<Problem> nameProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -722,10 +722,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:56
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:56")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:56")
   public Collection<TypeDecl> throwTypes() {
     ASTNode$State state = state();
     if (throwTypes_computed == ASTNode$State.NON_CYCLE || throwTypes_computed == state().cycle()) {
@@ -754,10 +754,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect EffectivelyFinal
-   * @declaredat /Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:144
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:144
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EffectivelyFinal", declaredAt="/Users/BMW/Downloads/extendj/java8/frontend/EffectivelyFinal.jrag:144")
+  @ASTNodeAnnotation.Source(aspect="EffectivelyFinal", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:144")
   public boolean isEffectivelyFinal() {
     ASTNode$State state = state();
     if (isEffectivelyFinal_computed == ASTNode$State.NON_CYCLE || isEffectivelyFinal_computed == state().cycle()) {
@@ -776,10 +776,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:281
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:281
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:281")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:281")
   public boolean isProtected() {
     boolean isProtected_value = getModifiers().isProtected();
     return isProtected_value;
@@ -787,10 +787,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute syn
    * @aspect Modifiers
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:283
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:283
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/Modifiers.jrag:283")
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:283")
   public boolean isPrivate() {
     boolean isPrivate_value = getModifiers().isPrivate();
     return isPrivate_value;
@@ -799,10 +799,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
    * Inherit the lookupVariable attribute.
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:36
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:36")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:36")
   public SimpleSet<Variable> lookupVariable(String name) {
     SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
     return lookupVariable_String_value;
@@ -810,10 +810,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:44")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44")
   public boolean isMethodParameter() {
     boolean isMethodParameter_value = getParent().Define_isMethodParameter(this, null);
     return isMethodParameter_value;
@@ -821,10 +821,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:45")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45")
   public boolean isConstructorParameter() {
     boolean isConstructorParameter_value = getParent().Define_isConstructorParameter(this, null);
     return isConstructorParameter_value;
@@ -832,10 +832,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:46")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46")
   public boolean isExceptionHandlerParameter() {
     boolean isExceptionHandlerParameter_value = getParent().Define_isExceptionHandlerParameter(this, null);
     return isExceptionHandlerParameter_value;
@@ -843,10 +843,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:76
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:76")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:76")
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
@@ -854,10 +854,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:210
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:210
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:210")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:210")
   public LUBType lookupLUBType(Collection<TypeDecl> bounds) {
     LUBType lookupLUBType_Collection_TypeDecl__value = getParent().Define_lookupLUBType(this, null, bounds);
     return lookupLUBType_Collection_TypeDecl__value;
@@ -865,10 +865,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:226
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:226
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:226")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:226")
   public VariableScope outerScope() {
     VariableScope outerScope_value = getParent().Define_outerScope(this, null);
     return outerScope_value;
@@ -876,10 +876,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:227
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:227
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:227")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:227")
   public BodyDecl enclosingBodyDecl() {
     BodyDecl enclosingBodyDecl_value = getParent().Define_enclosingBodyDecl(this, null);
     return enclosingBodyDecl_value;
@@ -887,10 +887,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:209
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:209
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/PreciseRethrow.jrag:209")
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:209")
   public CatchClause catchClause() {
     CatchClause catchClause_value = getParent().Define_catchClause(this, null);
     return catchClause_value;
@@ -899,10 +899,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
    * Local number used to store the exception parameter.
    * @attribute inh
    * @aspect MultiCatch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:64
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:64
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Downloads/extendj/java7/backend/MultiCatch.jrag:64")
+  @ASTNodeAnnotation.Source(aspect="MultiCatch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:64")
   public int localNum() {
     ASTNode$State state = state();
     if (localNum_computed == ASTNode$State.NON_CYCLE || localNum_computed == state().cycle()) {
@@ -931,10 +931,10 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect NestedTypes
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:641
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:641
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:641")
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:641")
   public String hostPackage() {
     String hostPackage_value = getParent().Define_hostPackage(this, null);
     return hostPackage_value;
@@ -942,21 +942,21 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
   /**
    * @attribute inh
    * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1249
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1249
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/Generics.jrag:1249")
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1249")
   public FieldDecl fieldDecl() {
     FieldDecl fieldDecl_value = getParent().Define_fieldDecl(this, null);
     return fieldDecl_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getTypeAccessListNoTransform()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:138
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:138
       int i = _callerNode.getIndexOfChild(_childNode);
       return NameType.TYPE_NAME;
     }
@@ -976,7 +976,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:151
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:151
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -985,7 +985,7 @@ public class CatchParameterDeclaration extends ASTNode<ASTNode> implements Clone
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/MultiCatch.jrag:229
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:229
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect PathPart
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PathPart.jadd:391
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PathPart.jadd:391
  */
 public abstract class FolderPath extends PathPart {
   

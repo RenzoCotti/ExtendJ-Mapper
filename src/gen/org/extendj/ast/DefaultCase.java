@@ -24,14 +24,14 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/Java.ast:203
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/Java.ast:203
  * @production DefaultCase : {@link Case};
 
  */
 public class DefaultCase extends Case implements Cloneable {
   /**
    * @aspect Java4PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/PrettyPrint.jadd:332
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:332
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("default:");
@@ -160,10 +160,10 @@ public class DefaultCase extends Case implements Cloneable {
   /**
    * @attribute syn
    * @aspect NameCheck
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:586
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:586
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:586")
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:586")
   public boolean constValue(Case c) {
     boolean constValue_Case_value = c instanceof DefaultCase;
     return constValue_Case_value;
@@ -171,10 +171,10 @@ public class DefaultCase extends Case implements Cloneable {
   /**
    * @attribute syn
    * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/StringsInSwitch.jrag:61
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/StringsInSwitch.jrag:61")
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61")
   public boolean isDefaultCase() {
     boolean isDefaultCase_value = true;
     return isDefaultCase_value;
@@ -188,7 +188,7 @@ public class DefaultCase extends Case implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java4/frontend/NameCheck.jrag:564
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:564
     if (bind(this) != this) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

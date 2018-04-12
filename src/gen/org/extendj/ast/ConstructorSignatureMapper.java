@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect InnerClasses
- * @declaredat /Users/BMW/Downloads/extendj/java4/backend/InnerClasses.jrag:500
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:500
  */
  class ConstructorSignatureMapper extends java.lang.Object {
   

@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect BytecodeSignatures
- * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/BytecodeSignatures.jrag:393
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/BytecodeSignatures.jrag:393
  */
 public interface Flags {
 

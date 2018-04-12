@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java4/grammar/BoundNames.ast:3
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/grammar/BoundNames.ast:3
  * @production BoundMethodAccess : {@link MethodAccess};
 
  */
@@ -37,7 +37,7 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
    * <p>Specifying the hostType changes the target qualifier type which is used
    * to invoke the bound method.
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:68
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:68
    */
   public BoundMethodAccess(String name, List args, MethodDecl methodDecl,
       TypeDecl hostType) {
@@ -47,19 +47,19 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
   }
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:75
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:75
    */
   public BoundMethodAccess(String name, List args, MethodDecl methodDecl) {
     this(name, args, methodDecl, methodDecl.hostType());
   }
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:79
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:79
    */
   private MethodDecl methodDecl;
   /**
    * @aspect BoundNames
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/BoundNames.jrag:81
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BoundNames.jrag:81
    */
   private TypeDecl boundHostType;
   /**
@@ -353,10 +353,10 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect LookupMethod
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:159
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:159
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupMethod.jrag:159")
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:159")
   public MethodDecl decl() {
     ASTNode$State state = state();
     if (decl_computed == ASTNode$State.NON_CYCLE || decl_computed == state().cycle()) {
@@ -375,10 +375,10 @@ public class BoundMethodAccess extends MethodAccess implements Cloneable {
   /**
    * @attribute syn
    * @aspect InnerClasses
-   * @declaredat /Users/BMW/Downloads/extendj/java4/backend/InnerClasses.jrag:85
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:85
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Downloads/extendj/java4/backend/InnerClasses.jrag:85")
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:85")
   public TypeDecl methodQualifierType() {
     TypeDecl methodQualifierType_value = boundHostType;
     return methodQualifierType_value;

@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast interface
  * @aspect DataStructures
- * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/DataStructures.jrag:39
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:39
  */
  interface SimpleSet<T> extends Iterable<T> {
 

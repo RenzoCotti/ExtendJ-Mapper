@@ -27,14 +27,14 @@ import java.io.DataInputStream;
  * members declared in the type named by a canonical name to be imported as
  * needed.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/StaticImports.ast:19
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/StaticImports.ast:19
  * @production StaticImportOnDemandDecl : {@link StaticImportDecl};
 
  */
 public class StaticImportOnDemandDecl extends StaticImportDecl implements Cloneable {
   /**
    * @aspect Java5PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/PrettyPrint.jadd:350
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/PrettyPrint.jadd:350
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print("import static ");
@@ -198,10 +198,10 @@ public class StaticImportOnDemandDecl extends StaticImportDecl implements Clonea
   /**
    * @attribute syn
    * @aspect StaticImports
-   * @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:98
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:98")
+  @ASTNodeAnnotation.Source(aspect="StaticImports", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:98")
   public TypeDecl type() {
     TypeDecl type_value = getAccess().type();
     return type_value;
@@ -209,21 +209,21 @@ public class StaticImportOnDemandDecl extends StaticImportDecl implements Clonea
   /**
    * @attribute syn
    * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:482
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:482
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/LookupType.jrag:482")
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:482")
   public boolean isOnDemand() {
     boolean isOnDemand_value = true;
     return isOnDemand_value;
   }
   /**
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/SyntacticClassification.jrag:36
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     if (getAccessNoTransform() != null && _callerNode == getAccess()) {
-      // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:303
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:303
       return NameType.TYPE_NAME;
     }
     else {
@@ -242,7 +242,7 @@ public class StaticImportOnDemandDecl extends StaticImportDecl implements Clonea
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java5/frontend/StaticImports.jrag:125
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/StaticImports.jrag:125
     if (!getAccess().type().typeName().equals(typeName())) {
       {
         java.util.Set<ASTNode> contributors = _map.get(_root);

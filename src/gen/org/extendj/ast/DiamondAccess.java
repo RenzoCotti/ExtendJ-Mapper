@@ -25,14 +25,14 @@ import java.io.DataInputStream;
 /**
  * Type access for a generic class with an empty type parameter list.
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java7/grammar/Diamond.ast:4
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/grammar/Diamond.ast:4
  * @production DiamondAccess : {@link Access} ::= <span class="component">TypeAccess:{@link Access}</span>;
 
  */
 public class DiamondAccess extends Access implements Cloneable {
   /**
    * @aspect Java7PrettyPrint
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/PrettyPrint.jadd:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PrettyPrint.jadd:46
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getTypeAccess());
@@ -40,7 +40,7 @@ public class DiamondAccess extends Access implements Cloneable {
   }
   /**
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:100
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:100
    */
   protected static SimpleSet<MethodDecl> mostSpecific(
       SimpleSet<MethodDecl> maxSpecific, MethodDecl decl) {
@@ -63,7 +63,7 @@ public class DiamondAccess extends Access implements Cloneable {
    * type arguments for the method, which can be used as the type
    * arguments of the generic type.
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:122
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:122
    */
   protected SimpleSet<MethodDecl> chooseConstructor() {
     ClassInstanceExpr instanceExpr = getClassInstanceExpr();
@@ -92,7 +92,7 @@ public class DiamondAccess extends Access implements Cloneable {
    * from a set of candidates.
    * Type inference is applied to the (potentially) applicable candidates.
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:246
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:246
    */
   protected Collection<MethodDecl> potentiallyApplicable(
       List<StandInMethodDecl> candidates) {
@@ -115,7 +115,7 @@ public class DiamondAccess extends Access implements Cloneable {
    * @param candidate candidate method
    * @return false if the candidate method is not applicable.
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:268
    */
   protected boolean potentiallyApplicable(
       GenericMethodDecl candidate) {
@@ -147,7 +147,7 @@ public class DiamondAccess extends Access implements Cloneable {
   /**
    * @return true if the method is applicable by subtyping
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:299
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:299
    */
   protected boolean applicableBySubtyping(ClassInstanceExpr expr, MethodDecl method) {
     if (method.getNumParameter() != expr.getNumArg()) {
@@ -163,7 +163,7 @@ public class DiamondAccess extends Access implements Cloneable {
   /**
    * @return true if the method is applicable by method invocation conversion
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:314
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:314
    */
   protected boolean applicableByMethodInvocationConversion(
       ClassInstanceExpr expr, MethodDecl method) {
@@ -181,7 +181,7 @@ public class DiamondAccess extends Access implements Cloneable {
   /**
    * @return true if the method is applicable by variable arity
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:331
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:331
    */
   protected boolean applicableByVariableArity(
       ClassInstanceExpr expr, MethodDecl method) {
@@ -368,10 +368,10 @@ public class DiamondAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Downloads/extendj/java4/frontend/TypeAnalysis.jrag:296")
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
   public TypeDecl type() {
     ASTNode$State state = state();
     if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
@@ -420,10 +420,10 @@ public class DiamondAccess extends Access implements Cloneable {
   /**
    * @attribute syn
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:87
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:87
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:87")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:87")
   public boolean isDiamond() {
     boolean isDiamond_value = true;
     return isDiamond_value;
@@ -435,10 +435,10 @@ public class DiamondAccess extends Access implements Cloneable {
    * part of a call to a generic constructor with explicit type arguments.
    * @attribute syn
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:445
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:445
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:445")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:445")
   public Collection<Problem> typeProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
@@ -463,10 +463,10 @@ public class DiamondAccess extends Access implements Cloneable {
    * if there is no enclosing class instance expression.
    * @attribute inh
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:94
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:94
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:94")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:94")
   public ClassInstanceExpr getClassInstanceExpr() {
     ClassInstanceExpr getClassInstanceExpr_value = getParent().Define_getClassInstanceExpr(this, null);
     return getClassInstanceExpr_value;
@@ -475,10 +475,10 @@ public class DiamondAccess extends Access implements Cloneable {
    * @return true if this access is part of an anonymous class declaration
    * @attribute inh
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:409
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:409
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:409")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:409")
   public boolean isAnonymousDecl() {
     boolean isAnonymousDecl_value = getParent().Define_isAnonymousDecl(this, null);
     return isAnonymousDecl_value;
@@ -488,10 +488,10 @@ public class DiamondAccess extends Access implements Cloneable {
    * with explicit type arguments
    * @attribute inh
    * @aspect Diamond
-   * @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:425
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:425
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:425")
+  @ASTNodeAnnotation.Source(aspect="Diamond", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:425")
   public boolean isExplicitGenericConstructorAccess() {
     boolean isExplicitGenericConstructorAccess_value = getParent().Define_isExplicitGenericConstructorAccess(this, null);
     return isExplicitGenericConstructorAccess_value;
@@ -505,7 +505,7 @@ public class DiamondAccess extends Access implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Downloads/extendj/java7/frontend/Diamond.jrag:437
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/Diamond.jrag:437
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {

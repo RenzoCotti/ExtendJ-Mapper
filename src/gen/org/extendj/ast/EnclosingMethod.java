@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect EnclosingMethodAttribute
- * @declaredat /Users/BMW/Downloads/extendj/java5/backend/EnclosingMethodAttribute.jrag:41
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/EnclosingMethodAttribute.jrag:41
  */
  class EnclosingMethod extends Attribute {
   

@@ -24,7 +24,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast node
- * @declaredat /Users/BMW/Downloads/extendj/java5/grammar/Generics.ast:46
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/grammar/Generics.ast:46
  * @production GenericMethodDeclSubstituted : {@link GenericMethodDecl} ::= <span class="component">&lt;Original:GenericMethodDecl&gt;</span>;
 
  */

@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect AnnotationsCodegen
- * @declaredat /Users/BMW/Downloads/extendj/java5/backend/AnnotationsCodegen.jrag:80
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AnnotationsCodegen.jrag:80
  */
  class AnnotationsAttribute extends Attribute {
   
