@@ -480,62 +480,62 @@ public abstract class TypeDecl extends ASTNode<ASTNode> implements Cloneable, Si
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:213
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:191
    */
   public void emitPushConstant(ASTNode<ASTNode> node, CodeGeneration gen, int value) {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:293
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:271
    */
   public void emitReturn(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:347
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325
    */
   public void emitLoadLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     error();
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:514
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:492
    */
   public void emitStoreLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     error();
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:596
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:574
    */
   public void emitDup(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.DUP);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:611
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:589
    */
   public void emitDup_x1(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.DUP_X1);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:626
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:604
    */
   public void emitDup_x2(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.DUP_X2);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:641
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:619
    */
   public void emitPop(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.POP);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:720
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:698
    */
   public void emitNew(ASTNode<ASTNode> node, CodeGeneration gen) {
     int index = gen.constantPool().addClass(constantPoolName());
@@ -543,342 +543,224 @@ public abstract class TypeDecl extends ASTNode<ASTNode> implements Cloneable, Si
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:733
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:711
    */
   void emitCastTo(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl type) {
     throw new Error("CastTo not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:777
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:755
    */
   void intToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     throw new Error("intToThis not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:808
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:786
    */
   void floatToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     throw new Error("floatToThis not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:839
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:817
    */
   void doubleToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     throw new Error("doubleToThis not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:870
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:848
    */
   void longToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     throw new Error("longToThis not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:901
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:879
    */
   void byteToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     throw new Error("byteToThis not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:924
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:902
    */
   void charToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     throw new Error("charToThis not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:951
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:929
    */
   void shortToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     throw new Error("shortToThis not implemented for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1043
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1021
    */
   void neg(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1063
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1041
    */
   void bitNot(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1075
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1053
    */
   void logNot(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1083
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1061
    */
   void add(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1103
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1081
    */
   void sub(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1123
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1101
    */
   void mul(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1143
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1121
    */
   void div(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1163
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1141
    */
   void rem(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1183
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1161
    */
   void shl(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1195
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1173
    */
   void shr(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1207
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1185
    */
   void ushr(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1219
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1197
    */
   void bitand(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1235
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1213
    */
   void bitor(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1251
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1229
    */
   void bitxor(ASTNode<ASTNode> node, CodeGeneration gen) {
     error();
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1270
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchLT(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-	  return null;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1277
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1248
    */
   public void branchLT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchLT not supported for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1309
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchLTInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1318
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1270
    */
   public void branchLTInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchLT(node, gen, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1330
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchLE(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1340
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1283
    */
   public void branchLE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchLE not supported for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1362
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchLEInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1372
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1306
    */
   public void branchLEInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchLE(node, gen, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1385
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchGE(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1394
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1318
    */
   public void branchGE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchGE not supported for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1415
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchGEInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1425
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1339
    */
   public void branchGEInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchGE(node, gen, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1438
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchGT(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1448
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1352
    */
   public void branchGT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchGT not supported for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1469
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchGTInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1373
    */
   public void branchGTInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchGT(node, gen, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1492
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchEQ(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1502
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1385
    */
   public void branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchEQ not supported for " + getClass().getName());
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1535
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchNE(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1544
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1417
    */
   public void branchNE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchNE not supported for " + getClass().getName());
@@ -1400,7 +1282,7 @@ public abstract class TypeDecl extends ASTNode<ASTNode> implements Cloneable, Si
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:374
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:359
    */
    
   void emitAssignConvTo(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl type) {
@@ -1685,7 +1567,7 @@ public abstract class TypeDecl extends ASTNode<ASTNode> implements Cloneable, Si
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:400
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:358
    */
   private Collection<Attribute> refined_GenericsCodegen_TypeDecl_attributes()
 {
@@ -1697,7 +1579,7 @@ public abstract class TypeDecl extends ASTNode<ASTNode> implements Cloneable, Si
   }
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:303
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:261
    */
   protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl_bridgeMethods = null;
 
@@ -6259,10 +6141,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303")
   public byte arrayLoad() {
     {
         throw new Error("Cannot create array load for TypeDecl");
@@ -6271,10 +6153,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457")
   public byte arrayStore() {
     {
         throw new Error("Cannot create array load for TypeDecl");
@@ -6598,10 +6480,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:795
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:662
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:795")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:662")
   public boolean needsAccessorFor(Variable v) {
     {
         if (!(v instanceof FieldDeclarator)) {
@@ -6616,20 +6498,20 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1211
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1035
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1211")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1035")
   public String arrayTypeDescriptor() {
     { throw new Error("Operation not supported"); }
   }
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040")
   public int arrayPrimitiveTypeDescriptor() {
     { error(); return -1; }
   }
@@ -7677,10 +7559,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:310
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:268
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:310")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:268")
   public Collection<MethodDecl> localBridgeMethods() {
     ASTNode$State state = state();
     if (localBridgeMethods_computed == ASTNode$State.NON_CYCLE || localBridgeMethods_computed == state().cycle()) {
@@ -7723,10 +7605,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:283
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:283")
   public SimpleSet<MethodDecl> bridgeCandidates(String signature) {
     Object _parameters = signature;
     if (bridgeCandidates_String_computed == null) bridgeCandidates_String_computed = new java.util.HashMap(4);
@@ -7761,10 +7643,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:337
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:295
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:337")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:295")
   public Collection<MethodDecl> bridgeMethods(MethodDecl decl) {
     Object _parameters = decl;
     if (bridgeMethods_MethodDecl_computed == null) bridgeMethods_MethodDecl_computed = new java.util.HashMap(4);
@@ -7829,10 +7711,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
    * @return bridge method declaration
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:368
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:326
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:368")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:326")
   public MethodDecl bridgeMethod(MethodDecl decl, MethodDecl erased) {
     java.util.List _parameters = new java.util.ArrayList(2);
     _parameters.add(decl);
@@ -7900,10 +7782,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:391
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:433")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:391")
   public boolean needsSignatureAttribute() {
     ASTNode$State state = state();
     if (needsSignatureAttribute_computed == ASTNode$State.NON_CYCLE || needsSignatureAttribute_computed == state().cycle()) {
@@ -7933,10 +7815,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:492
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:450
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:492")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:450")
   public String classSignature() {
     ASTNode$State state = state();
     if (classSignature_computed == ASTNode$State.NON_CYCLE || classSignature_computed == state().cycle()) {
@@ -7966,10 +7848,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:552
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:510
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:552")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:510")
   public String fieldTypeSignature() {
     ASTNode$State state = state();
     if (fieldTypeSignature_computed == ASTNode$State.NON_CYCLE || fieldTypeSignature_computed == state().cycle()) {
@@ -7999,10 +7881,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:561
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:519
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:561")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:519")
   public String classTypeSignature() {
     ASTNode$State state = state();
     if (classTypeSignature_computed == ASTNode$State.NON_CYCLE || classTypeSignature_computed == state().cycle()) {
@@ -8021,10 +7903,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:567
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:525
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:567")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:525")
   public String classTypeSignatureContents() {
     {
         StringBuilder buf = new StringBuilder();
@@ -8043,10 +7925,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:581
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:539
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:581")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:539")
   public String typeArgumentsOpt() {
     String typeArgumentsOpt_value = "";
     return typeArgumentsOpt_value;
@@ -9672,10 +9554,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
    * This is relevant for the Java 8 extension.
    * @attribute coll
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:303
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:261
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.COLL)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:303")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:261")
   public HashSet<MethodDecl> bridgeMethods() {
     ASTNode$State state = state();
     if (TypeDecl_bridgeMethods_computed == ASTNode$State.NON_CYCLE || TypeDecl_bridgeMethods_computed == state().cycle()) {
@@ -9759,7 +9641,7 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
     super.collect_contributors_TypeDecl_nestedTypes(_root, _map);
   }
   protected void collect_contributors_TypeDecl_bridgeMethods(TypeDecl _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:305
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:263
     {
       TypeDecl target = (TypeDecl) (this);
       java.util.Set<ASTNode> contributors = _map.get(target);

@@ -45,21 +45,21 @@ public class LongType extends IntegralType implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:220
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:198
    */
   public void emitPushConstant(ASTNode<ASTNode> node, CodeGeneration gen, int value) {
     LongLiteral.push(node, gen, value);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:305
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:283
    */
   public void emitReturn(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LRETURN);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:368
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:346
    */
   public void emitLoadLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     gen.maxLocals = Math.max(gen.maxLocals, pos+2);
@@ -79,7 +79,7 @@ public class LongType extends IntegralType implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:535
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:513
    */
   public void emitStoreLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     gen.maxLocals = Math.max(gen.maxLocals, pos+2);
@@ -99,216 +99,216 @@ public class LongType extends IntegralType implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:607
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:585
    */
   public void emitDup(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.DUP2);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:622
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:600
    */
   public void emitDup_x1(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.DUP2_X1);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:637
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:615
    */
   public void emitDup_x2(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.DUP2_X2);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:652
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:630
    */
   public void emitPop(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.POP2);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:755
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:733
    */
   void emitCastTo(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl type) {
     type.longToThis(node, gen);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:784
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:762
    */
   void intToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2L);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:831
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:809
    */
   void floatToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.F2L);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:863
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:841
    */
   void doubleToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.D2L);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:894
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:872
    */
   void longToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:916
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:894
    */
   void byteToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2L);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:943
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:921
    */
   void charToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2L);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:970
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:948
    */
   void shortToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2L);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1051
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1029
    */
   void neg(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LNEG);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1071
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1049
    */
   void bitNot(ASTNode<ASTNode> node, CodeGeneration gen) {
     emitPushConstant(node, gen, -1); gen.emit(node, Bytecode.LXOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1087
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1065
    */
   void add(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LADD);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1107
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1085
    */
   void sub(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LSUB);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1127
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1105
    */
   void mul(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LMUL);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1147
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1125
    */
   void div(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LDIV);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1167
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1145
    */
   void rem(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LREM);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1187
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1165
    */
   void shl(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LSHL);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1199
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1177
    */
   void shr(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LSHR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1211
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1189
    */
   void ushr(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LUSHR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1223
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1201
    */
   void bitand(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LAND);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1239
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1217
    */
   void bitor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1255
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1233
    */
   void bitxor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.LXOR);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1289
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1260
    */
   public void branchLT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.LCMP).emitCompare(node, Bytecode.IFLT, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1352
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1295
    */
   public void branchLE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.LCMP).emitCompare(node, Bytecode.IFLE, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1406
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1330
    */
   public void branchGE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.LCMP).emitCompare(node, Bytecode.IFGE, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1460
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1364
    */
   public void branchGT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.LCMP).emitCompare(node, Bytecode.IFGT, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1514
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1397
    */
   public void branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.LCMP).emitCompare(node, Bytecode.IFEQ, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1556
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1429
    */
   public void branchNE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.LCMP).emitCompare(node, Bytecode.IFNE, label);
@@ -948,10 +948,10 @@ public class LongType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303")
   public byte arrayLoad() {
     byte arrayLoad_value = Bytecode.LALOAD;
     return arrayLoad_value;
@@ -959,10 +959,10 @@ public class LongType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457")
   public byte arrayStore() {
     byte arrayStore_value = Bytecode.LASTORE;
     return arrayStore_value;
@@ -1003,10 +1003,10 @@ public class LongType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040")
   public int arrayPrimitiveTypeDescriptor() {
     int arrayPrimitiveTypeDescriptor_value = 11;
     return arrayPrimitiveTypeDescriptor_value;

@@ -50,20 +50,7 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1951
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(
-		  TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator,
-		  String contextMsg) {
-	  for (int i = 0; i < getNumStmt(); i++) {
-		  getStmt(i).generateExplanation(trace, generator, contextMsg);
-	  }
-	  return new NodeValueList();
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1962
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1565
    */
   public void createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();
@@ -704,10 +691,10 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:108
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:108")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:86")
   public int variableScopeEndLabel(CodeGeneration gen) {
     Object _parameters = gen;
     if (variableScopeEndLabel_CodeGeneration_computed == null) variableScopeEndLabel_CodeGeneration_computed = new java.util.HashMap(4);
@@ -1071,12 +1058,12 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
    * @apilevel internal
    */
   public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:110
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:88
       int i = _callerNode.getIndexOfChild(_childNode);
       return variableScopeEndLabel(gen);
     }

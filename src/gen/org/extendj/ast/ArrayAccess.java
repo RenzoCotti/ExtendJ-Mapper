@@ -40,14 +40,14 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:475
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:453
    */
   public void emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, type().arrayStore());
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:646
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:526
    */
   public void createPushAssignmentResult(CodeGeneration gen) {
     type().emitDup_x2(this, gen);
@@ -210,7 +210,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:493
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:478
    */
     public void createAssignSimpleLoadDest(CodeGeneration gen) {
     prevExpr().createBCode(gen);
@@ -219,7 +219,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:499
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:484
    */
     public void createAssignLoadDest(CodeGeneration gen) {
     prevExpr().createBCode(gen);
@@ -231,7 +231,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:486
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:471
    */
     public void createBCode(CodeGeneration gen) {
     prevExpr().createBCode(gen);

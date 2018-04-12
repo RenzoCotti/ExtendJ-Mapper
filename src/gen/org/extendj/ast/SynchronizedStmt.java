@@ -48,7 +48,7 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2501
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2027
    */
   public void emitMonitorEnter(CodeGeneration gen) {
     gen.emitDup(this);
@@ -58,12 +58,12 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2517
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2043
    */
   protected int monitorId = -1;
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2519
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2045
    */
   public void createBCode(CodeGeneration gen) {
     int lbl_start = gen.constantPool().newLabel();
@@ -511,10 +511,10 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2340
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1866
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2340")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1866")
   public int start_label() {
     ASTNode$State state = state();
     if (start_label_computed == ASTNode$State.NON_CYCLE || start_label_computed == state().cycle()) {
@@ -652,7 +652,7 @@ public class SynchronizedStmt extends Stmt implements Cloneable, FinallyHost {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2544
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2070
    * @apilevel internal
    */
   public boolean Define_leavesMonitor(ASTNode _callerNode, ASTNode _childNode, Stmt branch, SynchronizedStmt monitor) {

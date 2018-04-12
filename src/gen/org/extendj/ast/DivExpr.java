@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class DivExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1011
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:989
    */
   void emitOperation(CodeGeneration gen) {
     type().div(this, gen);

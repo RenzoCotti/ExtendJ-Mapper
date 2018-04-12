@@ -43,7 +43,7 @@ public class CharacterLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:240
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:218
    */
   public void emitPushConstant(CodeGeneration gen) {
     type().emitPushConstant(this, gen, constant().intValue());

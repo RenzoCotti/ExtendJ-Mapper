@@ -31,29 +31,14 @@ import java.io.DataInputStream;
 public class AddExpr extends AdditiveExpr implements Cloneable {
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:999
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:977
    */
   void emitOperation(CodeGeneration gen) {
     type().add(this, gen);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1353
-   */
-  @Override
-public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
-																		TraceGenerator<E, S> generator,
-																		String contextMsg) {
-	  if (!type().isString()) {
-		  return super.generateExplanation(trace, generator, contextMsg);
-	  }
-	  //TODO: do the else part
-
-	return new NodeValueList();
-}
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1365
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1145
    */
   public void createBCode(CodeGeneration gen) {
     if (!type().isString()) {

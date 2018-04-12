@@ -25,7 +25,7 @@ import java.io.DataInputStream;
 /**
  * @ast class
  * @aspect GenericsCodegen
- * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:425
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:383
  */
  class SignatureAttribute extends Attribute {
   

@@ -40,7 +40,7 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
   }
   /** Push a constant value. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:122
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:100
    */
   public static void push(ASTNode<ASTNode> node, CodeGeneration gen, int value) {
     switch(value) {
@@ -82,7 +82,7 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:236
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:214
    */
   public void emitPushConstant(CodeGeneration gen) {
     type().emitPushConstant(this, gen, constant().intValue());

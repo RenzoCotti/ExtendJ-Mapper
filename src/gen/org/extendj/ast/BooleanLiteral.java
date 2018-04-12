@@ -39,14 +39,14 @@ public class BooleanLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:209
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:187
    */
   public static void push(ASTNode<ASTNode> node, CodeGeneration gen, boolean value) {
     gen.emit(node, value ? Bytecode.ICONST_1 : Bytecode.ICONST_0);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:264
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:242
    */
   public void emitPushConstant(CodeGeneration gen) {
     BooleanLiteral.push(this, gen, constant().booleanValue());

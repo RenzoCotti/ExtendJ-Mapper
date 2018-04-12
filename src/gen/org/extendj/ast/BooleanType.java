@@ -45,42 +45,42 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1079
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1057
    */
   void logNot(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ICONST_1).emit(node, Bytecode.IXOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1231
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1209
    */
   void bitand(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IAND);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1247
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1225
    */
   void bitor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1263
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1241
    */
   void bitxor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IXOR);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1522
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1405
    */
   public void branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPEQ, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1564
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1437
    */
   public void branchNE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPNE, label);
@@ -575,10 +575,10 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303")
   public byte arrayLoad() {
     byte arrayLoad_value = Bytecode.BALOAD;
     return arrayLoad_value;
@@ -586,10 +586,10 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457")
   public byte arrayStore() {
     byte arrayStore_value = Bytecode.BASTORE;
     return arrayStore_value;
@@ -630,10 +630,10 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040")
   public int arrayPrimitiveTypeDescriptor() {
     int arrayPrimitiveTypeDescriptor_value = 4;
     return arrayPrimitiveTypeDescriptor_value;

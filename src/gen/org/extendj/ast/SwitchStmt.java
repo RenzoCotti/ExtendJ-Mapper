@@ -41,7 +41,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2122
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1713
    */
   private int emitPad(CodeGeneration gen) {
     int pad = (4 - (gen.pos() % 4)) % 4;
@@ -58,7 +58,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    * @return bytecode offset to default label (or zero if there is no
    * default label)
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2138
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1729
    */
   private int defaultOffset(CodeGeneration gen, int switch_label) {
     DefaultCase defaultCase = defaultCase();
@@ -479,7 +479,7 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:193
    */
     public void refined_AutoBoxingCodegen_SwitchStmt_createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -959,10 +959,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2016
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1607
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2016")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1607")
   public DefaultCase defaultCase() {
     ASTNode$State state = state();
     if (defaultCase_computed == ASTNode$State.NON_CYCLE || defaultCase_computed == state().cycle()) {
@@ -1000,10 +1000,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2025
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1616
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2025")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1616")
   public int end_label() {
     ASTNode$State state = state();
     if (end_label_computed == ASTNode$State.NON_CYCLE || end_label_computed == state().cycle()) {
@@ -1022,10 +1022,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1703
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2112")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1703")
   public int numCase() {
     {
         int result = 0;
@@ -1040,10 +1040,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2330
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1856
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2330")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1856")
   public int break_label() {
     int break_label_value = end_label();
     return break_label_value;

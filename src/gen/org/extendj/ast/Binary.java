@@ -42,44 +42,7 @@ public abstract class Binary extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1291
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
-  																		TraceGenerator<E, S> generator,
-  																		String contextMsg) {
-	  NodeValueList result = new ConceptNodeValueList();
-	  String operation = "";
-	  if (this instanceof AddExpr)
-		  operation = "addition";
-	  else if (this instanceof MulExpr)
-		  operation = "multiplication";
-	  else if (this instanceof SubExpr)
-		  operation = "subtraction";
-
-	  generator.generate(trace, Messages.ADD_BINARY_EXPR_ENTRY.replace("?", operation), new NodeValueList(), this, false);
-
-	  NodeValueList leftOpList = getLeftOperand().generateExplanation(trace, generator, "");
-	  generator.generate(trace, leftOpList.explanationToString() + Messages.ADD_BINARY_RETURN_VISIT, leftOpList, this, false);
-	  NodeValueList rightOpList = getRightOperand().generateExplanation(trace, generator, contextMsg);
-	  generator.generate(trace, rightOpList.explanationToString() + Messages.ADD_BINARY_RETURN_RETURN, rightOpList, this, false);
-
-	  System.out.println("leftOpList:\t"+leftOpList);
-	  result.addAll(leftOpList);
-	  System.out.println("result1:\t"+result);
-	  System.out.println("rightOpList:\t"+rightOpList);
-	  result.addAll(rightOpList);
-	  System.out.println("result2:\t"+result);
-	  String value = trace.checkAndFwd().value(0);
-	  result.add(new ConceptASTNodeValue(this, value));
-
-	  generator.generate(trace, Messages.ADD_BINARY_RETURN.replace("?", value), result, this, false);
-
-
-  	return result;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1116
    */
   public void createBCode(CodeGeneration gen) {
     getLeftOperand().createBCode(gen);
@@ -90,7 +53,7 @@ public abstract class Binary extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1333
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1124
    */
   public void emitShiftExpr(CodeGeneration gen) {
     getLeftOperand().createBCode(gen);

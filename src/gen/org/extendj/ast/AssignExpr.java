@@ -61,7 +61,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:566
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:460
    */
   public void emitShiftExpr(CodeGeneration gen) {
     TypeDecl dest = getDest().type();
@@ -80,7 +80,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   }
   /** Select the typed operation for a compound assign expression. 
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:688
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:568
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     throw new Error("Operation createAssignOp is not implemented for " + getClass().getName());
@@ -226,7 +226,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:404
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:389
    */
     public void createBCode(CodeGeneration gen) {
     TypeDecl dest = getDest().type();
@@ -569,10 +569,10 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:350
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:319
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:350")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:319")
   public boolean needsPop() {
     boolean needsPop_value = getDest().isVarAccessWithAccessor();
     return needsPop_value;

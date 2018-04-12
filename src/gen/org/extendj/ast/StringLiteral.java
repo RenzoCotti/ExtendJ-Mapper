@@ -43,7 +43,7 @@ public class StringLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:200
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:178
    */
   public static void push(ASTNode<ASTNode> node, CodeGeneration gen, String value) {
     int index = gen.constantPool().addConstant(value);
@@ -55,7 +55,7 @@ public class StringLiteral extends Literal implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:234
    */
   public void emitPushConstant(CodeGeneration gen) {
     StringLiteral.push(this, gen, getLITERAL());

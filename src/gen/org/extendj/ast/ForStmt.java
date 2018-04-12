@@ -82,55 +82,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2263
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-
-	  contextMsg +=  Messages.FOR_STMT_ENTRY;
-	  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-
-	  NodeValueList list = new NodeValueList();
-
-	  boolean hasInitializer = false;
-	  for (Stmt stmt : getInitStmtList()) {
-		  list.addAll(stmt.generateExplanation(trace, generator, ""));
-		  hasInitializer = true;
-	  }
-	  if (hasInitializer){
-		  generator.generate(trace, "Done with the initializers; now evaluating the loop condition.", new NodeValueList(), this, false);
-	  }else{
-		  generator.generate(trace, "No initializers found; now evaluating the loop condition.", new NodeValueList(), this, false);
-	  }
-
-	  if (hasCondition() && !getCondition().isConstant()) {
-	      getCondition().branchFalse(trace, generator, "");
-	    }
-
-	    	  NodeValueList condList = new NodeValueList();
-	  if (hasCondition() && !getCondition().isConstant()) {
-	      condList.addAll(getCondition().branchFalse(trace, generator, contextMsg));
-	    }
-	  generator.generate(trace, "Finished evaluating the condition", condList, this, false);
-
-	  NodeValueList body = new NodeValueList();
-	  if (!hasCondition() || getCondition().canBeTrue()) {
-		  generator.generate(trace, "Entering the body of the for-loop", new NodeValueList(), getStmt(), false);
-	      body.addAll(getStmt().generateExplanation(trace, generator, contextMsg));
-	      generator.generate(trace, "finished this iteration of the loop, now executing the update statements. ", new NodeValueList(), this, false);
-	      for (Stmt stmt : getUpdateStmtList()) {
-	        stmt.generateExplanation(trace, generator, contextMsg);
-	      }
-	      trace.checkAndFwd();
-	      generator.generate(trace, "Going back to the condition point of the for-loop", new NodeValueList(), this, false);
-	    }
-	return list;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2308
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1834
    */
   public void createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -1109,10 +1061,10 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:90
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:112")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:90")
   public int variableScopeEndLabel(CodeGeneration gen) {
     Object _parameters = gen;
     if (variableScopeEndLabel_CodeGeneration_computed == null) variableScopeEndLabel_CodeGeneration_computed = new java.util.HashMap(4);
@@ -1148,10 +1100,10 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2257
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1828
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2257")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1828")
   public int cond_label() {
     ASTNode$State state = state();
     if (cond_label_computed == ASTNode$State.NON_CYCLE || cond_label_computed == state().cycle()) {
@@ -1180,10 +1132,10 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2258
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1829
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2258")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1829")
   public int begin_label() {
     ASTNode$State state = state();
     if (begin_label_computed == ASTNode$State.NON_CYCLE || begin_label_computed == state().cycle()) {
@@ -1212,10 +1164,10 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2259
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1830
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2259")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1830")
   public int update_label() {
     ASTNode$State state = state();
     if (update_label_computed == ASTNode$State.NON_CYCLE || update_label_computed == state().cycle()) {
@@ -1244,10 +1196,10 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2260
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1831
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2260")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1831")
   public int end_label() {
     ASTNode$State state = state();
     if (end_label_computed == ASTNode$State.NON_CYCLE || end_label_computed == state().cycle()) {
@@ -1266,10 +1218,10 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2330
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1856
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2330")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1856")
   public int break_label() {
     int break_label_value = end_label();
     return break_label_value;
@@ -1277,10 +1229,10 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2355
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1881
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2355")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1881")
   public int continue_label() {
     int continue_label_value = update_label();
     return continue_label_value;
@@ -1566,12 +1518,12 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
    * @apilevel internal
    */
   public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     if (_callerNode == getInitStmtListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:114
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:92
       int i = _callerNode.getIndexOfChild(_childNode);
       return variableScopeEndLabel(gen);
     }

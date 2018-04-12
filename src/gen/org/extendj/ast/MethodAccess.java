@@ -229,28 +229,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:910
-   */
-  protected <E extends TraceElement<S>, S> NodeValueList createLoadQualifier(TraceIterator<E, S> trace,
-														TraceGenerator<E, S> generator,
-														String contextMsg) {
-	  NodeValueList list = new NodeValueList();
-	  MethodDecl m = decl();
-	  if (hasPrevExpr()){
-		  list.addAll(prevExpr().generateExplanation(trace, generator, ""));
-		  if (m.isStatic() && !prevExpr().isTypeAccess()) {
-		        trace.fwd();
-		   }
-	  } else if (!m.isStatic()) {
-	      generator.generate(trace, Messages.METHODACCESS_LOAD_QUALIFIER_THIS.replace("?", trace.checkAndFwd().value(0)), new NodeValueList(), this, false);
-	  } else {
-		  generator.generate(trace, Messages.METHODACCESS_LOAD_QUALIFIER_STATIC.replace("?", name()), new NodeValueList(), this, false);
-	  }
-	  return list;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:929
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:753
    */
   protected void createLoadQualifier(CodeGeneration gen) {
     MethodDecl m = decl();
@@ -281,51 +260,6 @@ public class MethodAccess extends Access implements Cloneable {
     isSuperAccessor = true;
     return this;
   }
-  /**
-   * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:143
-   */
-  @Override
-      public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
-      																		TraceGenerator<E, S> generator, 
-      																		String contextMsg) {
-      	
-      	final NodeValueList list = new NodeValueList();  //No upstream, just to avoid passing null
-      	MethodDecl decl = decl().erasedMethod();
-      	
-      	//Step 1: Entry
-      	generator.generate(trace, Messages.METHODACESS_ENTRY.replace("?", name()), new NodeValueList(), this, false);
-      	
-      	//Step 2: Load qualifier
-      	createLoadQualifier(trace, generator, contextMsg);
-      	
-      	//Step 3: Load arguments
-      	if (getNumArg()>0){
-      		generator.generate(trace, Messages.replace(Messages.METHODACCESS_ARGS_EVAL, new String[]{name(), String.valueOf(getNumArg())}), new NodeValueList(), getChild(0), false);
-      	}
-      	
-      	for (int i = 0; i < getNumArg(); ++i) {
-      		NodeValueList argExplanation = new NodeValueList();
-            argExplanation.addAll(getArg(i).generateExplanation(trace, generator, contextMsg));
-            
-            if (argExplanation.size() > 0){
-            	generator.generate(trace, argExplanation.explanationToString(), argExplanation, getArg(i), false);
-            }
-            //TODO add type conversion
-            
-            if (i < getNumArg() - 1){
-            	generator.generate(trace, Messages.replace(Messages.METHODACCESS_ARG_N, new String[]{String.valueOf(i + 1), String.valueOf(i + 2)}), argExplanation, getChild(0), false);
-            }
-          }
-
-      	//step 4: invocation
-         generator.generate(trace, Messages.METHODACCESS_INVOKE.replace("?", name()), new NodeValueList(), this, false);
-
-          if (decl.type() != decl().type().erasure()) {
-            generator.generate(trace, Messages.METHODACCESS_CHECKCAST.replace("?", trace.checkAndFwd().value(0)), new NodeValueList(), this, false);
-          }
-      	return list;
-      }
   /**
    * @declaredat ASTNode:1
    */
@@ -671,7 +605,7 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:186
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:144
    */
    
   public void createBCode(CodeGeneration gen) {

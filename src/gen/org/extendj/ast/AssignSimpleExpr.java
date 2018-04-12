@@ -30,26 +30,9 @@ import java.io.DataInputStream;
  */
 public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:463
-   */
-  @Override
-	public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
-																				TraceGenerator<E, S> generator,
-																				String contextMsg) {
-	    NodeValueList list = new NodeValueList();
-	  	generator.generate(trace, Messages.ASSIGN_SIMPLE_EXPR_ENTRY, list, this, false);
-	  	list.addAll(getDest().createAssignSimpleLoadDest(trace, generator, ""));
-	  	generator.generate(trace, Messages.ASSIGN_SIMPLE_EXPR_LHS_EVALUATED, list, this, false);
-	  	list.addAll(getSource().generateExplanation(trace, generator, ""));
-	  	//TODO: add explanation for convert and dup
-	  	generator.generate(trace, Messages.ASSIGN_SIMPLE_EXPR_RET.replace("?", trace.checkAndFwd().value(0)), list, this, false);
-		return list;
-	}
-  /**
    * Create bytecode for a simple assign expression.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:481
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:375
    */
   public void createBCode(CodeGeneration gen) {
     getDest().createAssignSimpleLoadDest(gen);

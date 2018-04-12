@@ -38,41 +38,41 @@ public class NullType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:321
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:299
    */
   public void emitReturn(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ARETURN);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:423
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:401
    */
   public void emitLoadLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     gen.emitLoadReference(node, pos);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:590
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:568
    */
   public void emitStoreLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     gen.emitStoreReference(node, pos);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:774
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:752
    */
   void emitCastTo(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl type) {
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1530
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1413
    */
   public void branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ACMPEQ, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1572
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1445
    */
   public void branchNE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ACMPNE, label);

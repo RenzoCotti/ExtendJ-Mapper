@@ -112,29 +112,14 @@ public abstract class Literal extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:232
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:210
    */
   public void emitPushConstant(CodeGeneration gen) {
     System.err.println("ERROR: Tried to generate bytecode for: " + getClass().getName());
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:323
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator, String contextMsg) {
-	  trace.checkAndFwd().value(0);
-	  String msg = Messages.LITERAL_LOAD.replace("?",  this.getLITERAL());
-	  System.out.println("Literal value is " +this.getLITERAL());
-	  ASTNodeValue nodeValue = new ASTNodeValue(this, this.getLITERAL(), msg);
-	  NodeValueList list = new NodeValueList();
-	  list.add(nodeValue);
-
-	  return list;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:336
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:305
    */
   public void createBCode(CodeGeneration gen) {
     emitPushConstant(gen);

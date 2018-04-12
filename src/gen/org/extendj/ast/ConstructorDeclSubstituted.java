@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class ConstructorDeclSubstituted extends ConstructorDecl implements Cloneable {
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:226
    */
   public void emitInvokeConstructor(CodeGeneration gen) {
     erasedConstructor().emitInvokeConstructor(this, gen);
@@ -646,10 +646,10 @@ public class ConstructorDeclSubstituted extends ConstructorDecl implements Clone
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:276
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:234
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:276")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:234")
   public ConstructorDecl erasedConstructor() {
     ConstructorDecl erasedConstructor_value = getOriginal().erasedConstructor();
     return erasedConstructor_value;

@@ -32,39 +32,17 @@
 aspect CodeGeneration {
 
   protected int ASTNode.bcStartIndex = -1;
-  
+
   protected int ASTNode.bcEndIndex = -1;
-  
+
   public int ASTNode.getBcStartIndex(){
   	return this.bcStartIndex;
   }
-  
+
   public int ASTNode.getBcEndIndex(){
   	return this.bcEndIndex;
   }
-  
-    public <E extends TraceElement<S>,S> NodeValueList ASTNode.generateExplanation(
-    																	TraceIterator<E,S> trace, 
-    																	TraceGenerator<E, S> generator,
-    																	String contextMsg){
-    NodeValueList list = new NodeValueList();    																	
-  	int bcIndex = trace.current().getEventIndex();
-  	
-  	System.out.println("[explanation]\tNode:\t"+this.getClass());
-  	System.out.println("[explanation]\tStartBc:\t"+this.bcStartIndex);
-  	System.out.println("[explanation]\tEndBc:\t"+this.bcEndIndex);
-  	System.out.println("[explanation]\tCurrBcIndex:\t"+bcIndex);
-    for (int i = 0; i < getNumChild(); i++) {
-        	System.out.println("child[i].start:\t"+getChild(i).getClass()+"\t,"+getChild(i).bcStartIndex);
-    	System.out.println("child[i].end:\t"+getChild(i).getClass()+"\t,"+getChild(i).bcEndIndex);
-    
-    	if (getChild(i).bcStartIndex <= bcIndex && bcIndex < getChild(i).bcEndIndex){
-    		list.addAll(getChild(i).generateExplanation(trace, generator, ""));
-    	}
-    }
-    
-    return list;
-  }
+
 
   public void ASTNode.setSourceLineNumber(int i) {
     setStart(ASTNode.makePosition(i, 1));
@@ -1267,13 +1245,6 @@ aspect CodeGenerationBinaryOperations {
 
 aspect CodeGenerationBranch {
 
-	public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchLT(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-	  return null;
-  }
-
   public void TypeDecl.branchLT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchLT not supported for " + getClass().getName());
   }
@@ -1290,30 +1261,11 @@ aspect CodeGenerationBranch {
     gen.emit(node, Bytecode.LCMP).emitCompare(node, Bytecode.IFLT, label);
   }
 
-	public <E extends TraceElement<S>, S> NodeValueList IntegralType.branchLT(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-			ASTNodeValue nodeValue = new ASTNodeValue(this, "", "checking if the left operand is less than the right operand");
-			list.add(nodeValue);
-			
-	  return list;
-  }
 
   public void IntegralType.branchLT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPLT, label);
   }
 
-	public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchLTInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
 
   public void TypeDecl.branchLTInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchLT(node, gen, label);
@@ -1325,15 +1277,6 @@ aspect CodeGenerationBranch {
 
   public void FloatType.branchLTInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.FCMPL).emitCompare(node, Bytecode.IFLT, label);
-  }
-
-	public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchLE(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
   }
 
 
@@ -1358,16 +1301,7 @@ aspect CodeGenerationBranch {
   public void IntegralType.branchLE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPLE, label);
   }
-  
-  	public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchLEInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  
+
 
   public void TypeDecl.branchLEInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchLE(node, gen, label);
@@ -1379,16 +1313,6 @@ aspect CodeGenerationBranch {
 
   public void FloatType.branchLEInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.FCMPL).emitCompare(node, Bytecode.IFLE, label);
-  }
-
-
-	public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchGE(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
   }
 
   public void TypeDecl.branchGE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
@@ -1412,16 +1336,6 @@ aspect CodeGenerationBranch {
   }
 
 
-	public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchGEInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-
-
   public void TypeDecl.branchGEInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchGE(node, gen, label);
   }
@@ -1433,17 +1347,7 @@ aspect CodeGenerationBranch {
   public void FloatType.branchGEInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.FCMPG).emitCompare(node, Bytecode.IFGE, label);
   }
-  
-  
-  	public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchGT(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  
+
 
   public void TypeDecl.branchGT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchGT not supported for " + getClass().getName());
@@ -1464,17 +1368,7 @@ aspect CodeGenerationBranch {
   public void IntegralType.branchGT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPGT, label);
   }
-  
-  
-    public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchGTInv(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-  
+
 
   public void TypeDecl.branchGTInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     branchGT(node, gen, label);
@@ -1487,17 +1381,6 @@ aspect CodeGenerationBranch {
   public void FloatType.branchGTInv(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emit(node, Bytecode.FCMPG).emitCompare(node, Bytecode.IFGT, label);
   }
-
-
-    public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchEQ(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
-  }
-
 
   public void TypeDecl.branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     throw new Error("branchEQ not supported for " + getClass().getName());
@@ -1529,16 +1412,6 @@ aspect CodeGenerationBranch {
 
   public void NullType.branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ACMPEQ, label);
-  }
-
-
-  public <E extends TraceElement<S>, S> NodeValueList TypeDecl.branchNE(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-	  return list;
   }
 
   public void TypeDecl.branchNE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {

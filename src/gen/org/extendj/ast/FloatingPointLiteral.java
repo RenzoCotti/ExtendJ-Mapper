@@ -33,7 +33,7 @@ import java.io.DataInputStream;
 public class FloatingPointLiteral extends NumericLiteral implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:183
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:161
    */
   public static void push(ASTNode<ASTNode> node, CodeGeneration gen, float value) {
     if (value == 0) {
@@ -53,7 +53,7 @@ public class FloatingPointLiteral extends NumericLiteral implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:244
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:222
    */
   public void emitPushConstant(CodeGeneration gen) {
     FloatingPointLiteral.push(this, gen, constant().floatValue());

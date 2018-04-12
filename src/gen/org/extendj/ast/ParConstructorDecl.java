@@ -52,7 +52,7 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:272
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:230
    */
   public void emitInvokeConstructor(CodeGeneration gen) {
     genericConstructorDecl().emitInvokeConstructor(this, gen);
@@ -925,10 +925,10 @@ public class ParConstructorDecl extends ConstructorDecl implements Cloneable {
    * The constructor that is called in bytecode.
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1158
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:982
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1158")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:982")
   public ConstructorDecl bytecodeTarget() {
     ConstructorDecl bytecodeTarget_value = sourceConstructorDecl().bytecodeTarget();
     return bytecodeTarget_value;

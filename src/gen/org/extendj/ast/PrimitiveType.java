@@ -45,14 +45,14 @@ public class PrimitiveType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:301
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:279
    */
   public void emitReturn(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IRETURN);
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:351
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:329
    */
   public void emitLoadLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     gen.maxLocals = Math.max(gen.maxLocals, pos+1);
@@ -72,7 +72,7 @@ public class PrimitiveType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:518
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:496
    */
   public void emitStoreLocal(ASTNode<ASTNode> node, CodeGeneration gen, int pos) {
     gen.maxLocals = Math.max(gen.maxLocals, pos+1);
@@ -775,10 +775,10 @@ public class PrimitiveType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:552
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:510
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:552")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:510")
   public String fieldTypeSignature() {
     ASTNode$State state = state();
     if (fieldTypeSignature_computed == ASTNode$State.NON_CYCLE || fieldTypeSignature_computed == state().cycle()) {
@@ -808,10 +808,10 @@ public class PrimitiveType extends TypeDecl implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:561
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:519
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:561")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:519")
   public String classTypeSignature() {
     ASTNode$State state = state();
     if (classTypeSignature_computed == ASTNode$State.NON_CYCLE || classTypeSignature_computed == state().cycle()) {

@@ -31,41 +31,12 @@ import java.io.DataInputStream;
 public abstract class RelationalExpr extends Binary implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1428
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1208
    */
   public void createBCode(CodeGeneration gen) { emitBooleanCondition(gen); }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1576
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchTrue(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-
-	  NodeValueList list = new NodeValueList();
-	// Branch when true.
-	    if (isConstant()) {
-	      if (isTrue()) {
-	        trace.checkAndFwd();
-	        ASTNodeValue nodeValue = new ASTNodeValue(this, "True", "Condition evaluated to the constant value True. ");
-	        list.add(nodeValue);
-	      }
-	    } else {
-	      TypeDecl type = getLeftOperand().type();
-	      if (type.isNumericType()) {
-	        type = binaryNumericPromotedType();
-	        list.addAll(getLeftOperand().generateExplanation(trace, generator, contextMsg));
-	        list.addAll(getRightOperand().generateExplanation(trace, generator, contextMsg));
-	      } else {
-	      }
-	      list.addAll(compareBranch(trace, generator, contextMsg, type));
-	    }
-	    return list;
-	}
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1605
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1357
    */
   public void branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -90,36 +61,7 @@ public abstract class RelationalExpr extends Binary implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1628
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchFalse(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-	  NodeValueList list = new NodeValueList();
-	// Branch when false.
-	    if (isConstant()) {
-	      if (isFalse()) {
-	    	  trace.checkAndFwd();
-		        ASTNodeValue nodeValue = new ASTNodeValue(this, "False", "Condition evaluated to the constant value 'False'. ");
-		        list.add(nodeValue);
-	      }
-	    } else {
-	      TypeDecl type = getLeftOperand().type();
-	      if (type.isNumericType()) {
-	    	  type = binaryNumericPromotedType();
-		        list.addAll(getLeftOperand().generateExplanation(trace, generator, contextMsg));
-		        list.addAll(getRightOperand().generateExplanation(trace, generator, contextMsg));
-	      } else {
-	      }
-	      list.addAll(compareNotBranch(trace, generator, contextMsg, type));
-	    }
-
-	  return list;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1743
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1468
    */
   public void branchFalse(CodeGeneration gen, int target) {
     // Branch when false.
@@ -144,36 +86,14 @@ public abstract class RelationalExpr extends Binary implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1765
-   */
-  public <E extends TraceElement<S>, S> NodeValueList compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return null;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1773
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1491
    */
   public void compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareBranch not implemented for " + getClass().getName());
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1854
-   */
-  public <E extends TraceElement<S>, S> NodeValueList compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return null;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1862
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1524
    */
   public void compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareNotBranch not implemented for " + getClass().getName());

@@ -40,7 +40,7 @@ public abstract class Unary extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1226
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1050
    */
   public void createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -48,7 +48,7 @@ public abstract class Unary extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:383
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:368
    */
   protected void boxingGen(CodeGeneration gen) {
     getOperand().createBCode(gen);
@@ -169,7 +169,7 @@ public abstract class Unary extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:285
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:270
    */
     public void emitPostfix(CodeGeneration gen, int constant) {
     Expr operand = getOperand();
@@ -190,7 +190,7 @@ public abstract class Unary extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:305
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:290
    */
     public void emitPrefix(CodeGeneration gen, int constant) {
     Expr operand = getOperand();

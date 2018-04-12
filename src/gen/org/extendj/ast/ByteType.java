@@ -38,49 +38,49 @@ public class ByteType extends IntegralType implements Cloneable {
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:759
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:737
    */
   void emitCastTo(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl type) {
     type.byteToThis(node, gen);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:796
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:774
    */
   void intToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2B);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:816
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:794
    */
   void floatToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.F2I).emit(node, Bytecode.I2B);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:847
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:825
    */
   void doubleToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.D2I).emit(node, Bytecode.I2B);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:878
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:856
    */
   void longToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.L2I).emit(node, Bytecode.I2B);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:931
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:909
    */
   void charToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2B);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:958
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:936
    */
   void shortToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2B);
@@ -577,10 +577,10 @@ public class ByteType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303")
   public byte arrayLoad() {
     byte arrayLoad_value = Bytecode.BALOAD;
     return arrayLoad_value;
@@ -588,10 +588,10 @@ public class ByteType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457")
   public byte arrayStore() {
     byte arrayStore_value = Bytecode.BASTORE;
     return arrayStore_value;
@@ -632,10 +632,10 @@ public class ByteType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040")
   public int arrayPrimitiveTypeDescriptor() {
     int arrayPrimitiveTypeDescriptor_value = 8;
     return arrayPrimitiveTypeDescriptor_value;

@@ -32,7 +32,7 @@ import java.io.DataInputStream;
 public class NullLiteral extends Literal implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:260
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:238
    */
   public void emitPushConstant(CodeGeneration gen) {
     gen.emit(this, Bytecode.ACONST_NULL);

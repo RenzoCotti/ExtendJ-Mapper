@@ -419,14 +419,12 @@ class CodeGeneration {
   }
 
   public void emitReturn(ASTNode<? extends ASTNode> node) {
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.RETURN, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
 	  bytes.emit(Bytecode.RETURN);
   }
 
   public void emitThrow(ASTNode<? extends ASTNode> node) {
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.ATHROW, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.ATHROW);
   }
 
@@ -435,8 +433,7 @@ class CodeGeneration {
         ? type.typeDescriptor()
         : type.constantPoolName());
 
-					addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.INSTANCEOF, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.INSTANCEOF).add2(p);
   }
 
@@ -445,62 +442,53 @@ class CodeGeneration {
         ? type.typeDescriptor()
         : type.constantPoolName());
 
-					addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.CHECKCAST, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.CHECKCAST).add2(p);
   }
 
   public void emitDup(ASTNode<? extends ASTNode> node) {
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.DUP, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.DUP);
   }
 
   public void emitDup2(ASTNode<? extends ASTNode> node) {
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.DUP2, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.DUP2);
   }
 
   public void emitPop(ASTNode<? extends ASTNode> node) {
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.POP, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.POP);
   }
 
   public void emitSwap(ASTNode<? extends ASTNode> node) {
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.SWAP, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.SWAP);
   }
 
   public void emitBranchNonNull(ASTNode<? extends ASTNode> node, int label) {
     int p = jump(label);
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(Bytecode.IFNONNULL, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(Bytecode.IFNONNULL).add2(p);
   }
 
   public void emitGoto(ASTNode<? extends ASTNode> node, int label) {
     int p = jump(label);
     if (wideGoto) {
-				addPositionEntryAtCurrentPC(node);
-			// locations.add(new Location(Bytecode.GOTO_W, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+			addPositionEntryAtCurrentPC(node);
       bytes.emitGoto(Bytecode.GOTO_W).add4(p);
     } else {
       if (p > Short.MAX_VALUE || p < Short.MIN_VALUE) {
         throw new JumpOffsetError();
       }
-				addPositionEntryAtCurrentPC(node);
-			// locations.add(new Location(Bytecode.GOTO, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+			addPositionEntryAtCurrentPC(node);
       bytes.emitGoto(Bytecode.GOTO).add2(p);
     }
   }
 
   public void emitCompare(ASTNode<? extends ASTNode> node, byte bytecode, int label) {
     int p = jump(label);
-			addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(bytecode, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
+		addPositionEntryAtCurrentPC(node);
     bytes.emit(bytecode).add2(p);
   }
 
@@ -555,7 +543,6 @@ class CodeGeneration {
 //	}
 
 		addPositionEntryAtCurrentPC(node);
-	// locations.add(new Location(b, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
     bytes.emit(b);
     return this;
   }
@@ -567,7 +554,6 @@ class CodeGeneration {
 //	  }
 
 		addPositionEntryAtCurrentPC(node);
-		// locations.add(new Location(b, pos(), node.lineNumber(), Symbol.getColumn(node.start()), Symbol.getColumn(node.getEnd())));
     bytes.emit(b, stackChange);
     return this;
   }

@@ -38,42 +38,42 @@ public class ShortType extends IntegralType implements Cloneable {
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:763
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:741
    */
   void emitCastTo(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl type) {
     type.shortToThis(node, gen);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:804
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:782
    */
   void intToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2S);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:820
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:798
    */
   void floatToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.F2I).emit(node, Bytecode.I2S);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:851
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:829
    */
   void doubleToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.D2I).emit(node, Bytecode.I2S);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:882
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:860
    */
   void longToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.L2I).emit(node, Bytecode.I2S);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:935
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:913
    */
   void charToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.I2S);
@@ -570,10 +570,10 @@ public class ShortType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:325")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303")
   public byte arrayLoad() {
     byte arrayLoad_value = Bytecode.SALOAD;
     return arrayLoad_value;
@@ -581,10 +581,10 @@ public class ShortType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:479")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:457")
   public byte arrayStore() {
     byte arrayStore_value = Bytecode.SASTORE;
     return arrayStore_value;
@@ -625,10 +625,10 @@ public class ShortType extends IntegralType implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1216")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1040")
   public int arrayPrimitiveTypeDescriptor() {
     int arrayPrimitiveTypeDescriptor_value = 9;
     return arrayPrimitiveTypeDescriptor_value;

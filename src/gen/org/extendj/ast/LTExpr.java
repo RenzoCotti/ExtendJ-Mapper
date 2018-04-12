@@ -31,36 +31,14 @@ import java.io.DataInputStream;
 public class LTExpr extends RelationalExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1777
-   */
-  public <E extends TraceElement<S>, S> NodeValueList compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchLT(trace, generator, contextMsg);
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1786
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1496
    */
   public void compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchLT(this, gen, label);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1867
-   */
-  public <E extends TraceElement<S>, S> NodeValueList compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchGEInv(trace, generator, contextMsg);
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1875
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1528
    */
   public void compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchGEInv(this, gen, label);

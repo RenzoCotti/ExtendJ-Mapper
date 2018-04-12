@@ -209,7 +209,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1070
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:894
    */
   private void emitLocalEnclosing(CodeGeneration gen, TypeDecl localClass) {
     if (!localClass.inStaticContext()) {
@@ -218,7 +218,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1076
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:900
    */
   private void emitInnerMemberEnclosing(CodeGeneration gen, TypeDecl innerClass) {
     if (hasPrevExpr()) {
@@ -242,7 +242,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1097
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:921
    */
   public void createBCode(CodeGeneration gen) {
     if (transformed() != this) {

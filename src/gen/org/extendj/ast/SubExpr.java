@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class SubExpr extends AdditiveExpr implements Cloneable {
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1003
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:981
    */
   void emitOperation(CodeGeneration gen) {
     type().sub(this, gen);

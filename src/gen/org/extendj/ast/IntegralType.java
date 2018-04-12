@@ -38,173 +38,158 @@ public abstract class IntegralType extends NumericType implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:216
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:194
    */
   public void emitPushConstant(ASTNode<ASTNode> node, CodeGeneration gen, int value) {
     IntegerLiteral.push(node, gen, value);
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:905
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:883
    */
   void byteToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:928
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:906
    */
   void charToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
   }
   /**
    * @aspect CodeGenerationConversions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:955
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:933
    */
   void shortToThis(ASTNode<ASTNode> node, CodeGeneration gen) {
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1047
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1025
    */
   void neg(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.INEG);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1067
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1045
    */
   void bitNot(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ICONST_M1).emit(node, Bytecode.IXOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1099
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1077
    */
   void add(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IADD);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1119
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1097
    */
   void sub(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ISUB);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1139
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1117
    */
   void mul(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IMUL);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1159
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1137
    */
   void div(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IDIV);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1179
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1157
    */
   void rem(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IREM);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1191
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1169
    */
   void shl(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ISHL);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1203
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1181
    */
   void shr(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.ISHR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1215
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1193
    */
   void ushr(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IUSHR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1227
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1205
    */
   void bitand(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IAND);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1243
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1221
    */
   void bitor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IOR);
   }
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1259
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1237
    */
   void bitxor(ASTNode<ASTNode> node, CodeGeneration gen) {
     gen.emit(node, Bytecode.IXOR);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1293
-   */
-  public <E extends TraceElement<S>, S> NodeValueList branchLT(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			NodeValueList list = new NodeValueList();
-			
-			ASTNodeValue nodeValue = new ASTNodeValue(this, "", "checking if the left operand is less than the right operand");
-			list.add(nodeValue);
-			
-	  return list;
-  }
-  /**
-   * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1305
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1265
    */
   public void branchLT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPLT, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1358
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1301
    */
   public void branchLE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPLE, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1410
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1334
    */
   public void branchGE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPGE, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1464
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1368
    */
   public void branchGT(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPGT, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1518
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1401
    */
   public void branchEQ(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPEQ, label);
   }
   /**
    * @aspect CodeGenerationBranch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1560
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1433
    */
   public void branchNE(ASTNode<ASTNode> node, CodeGeneration gen, int label) {
     gen.emitCompare(node, Bytecode.IF_ICMPNE, label);

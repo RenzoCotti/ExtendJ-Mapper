@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignMulExpr extends AssignMultiplicativeExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:692
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:572
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.mul(this, gen);

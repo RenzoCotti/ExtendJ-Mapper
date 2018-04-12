@@ -33,7 +33,7 @@ import java.io.DataInputStream;
 public class LongLiteral extends NumericLiteral implements Cloneable {
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:161
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:139
    */
   public static void push(ASTNode<ASTNode> node, CodeGeneration gen, long value) {
     if (value == 0) {
@@ -47,7 +47,7 @@ public class LongLiteral extends NumericLiteral implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:248
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:226
    */
   public void emitPushConstant(CodeGeneration gen) {
     LongLiteral.push(this, gen, constant().longValue());

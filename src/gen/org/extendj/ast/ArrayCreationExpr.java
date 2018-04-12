@@ -254,7 +254,7 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:323
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:308
    */
     public void createBCode(CodeGeneration gen) {
     if (hasArrayInit()){

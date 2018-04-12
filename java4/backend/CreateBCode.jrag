@@ -209,13 +209,6 @@ aspect CreateBCode {
     gen.addPositionEntryAtCurrentPC(this);
   }
 
-  public <E extends TraceElement<S>, S> NodeValueList MethodDecl.generateExplanation(
-																TraceIterator<E, S> trace,
-																TraceGenerator<E, S> generator,
-		  														String contextMsg) {
-		  generator.generate(trace, Messages.METHOD_DECL_ENTRY.replace("?", name()), new NodeValueList(), this, true);
-	return getBlock().generateExplanation(trace, generator, contextMsg);
-  }
 
   public void MethodDecl.createBCode(CodeGeneration gen) {
     try {
@@ -296,19 +289,6 @@ aspect CreateBCode {
     }
   }
 
-/*  public <E extends TraceElement<S>, S> NodeValueList ASTNode.generateExplanation(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-
-			NodeValueList list = new NodeValueList();
-
-			for (int i = 0; i < getNumChild(); i++) {
-      			list.addAll(getChild(i).generateExplanation(trace, generator, contextMsg));
-    		}
-
-			return list;
-	} */
 
   public void ASTNode.createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();
@@ -320,17 +300,6 @@ aspect CreateBCode {
     this.bcEndIndex = gen.pos();
   }
 
-  public <E extends TraceElement<S>, S> NodeValueList Literal.generateExplanation(TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator, String contextMsg) {
-	  trace.checkAndFwd().value(0);
-	  String msg = Messages.LITERAL_LOAD.replace("?",  this.getLITERAL());
-	  System.out.println("Literal value is " +this.getLITERAL());
-	  ASTNodeValue nodeValue = new ASTNodeValue(this, this.getLITERAL(), msg);
-	  NodeValueList list = new NodeValueList();
-	  list.add(nodeValue);
-
-	  return list;
-  }
 
 
   public void Literal.createBCode(CodeGeneration gen) {
@@ -365,31 +334,6 @@ aspect CreateBCode {
   eq AbstractDot.isVarAccessWithAccessor() = lastAccess().isVarAccessWithAccessor();
   eq VarAccess.isVarAccessWithAccessor() = decl().isInstanceVariable() && requiresAccessor();
 
-  public <E extends TraceElement<S>, S> NodeValueList VarDeclStmt.generateExplanation(
-		  TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator,
-		  String contextMsg) {
-	  PrimitiveTypeAccess type = ((PrimitiveTypeAccess)getChild(1));
-
-	  String varNames = getDeclaratorList().getNumChild() > 1 ? "the variables " : "the variable ";
-
-	  for (Iterator<VariableDeclarator> it = getDeclaratorList().iterator(); it.hasNext(); ) {
-		  varNames += "'"+it.next().name()+"'";
-	      if (it.hasNext()){
-	    	  varNames += ", ";
-	      }
-	  }
-
-
-	  contextMsg +=  Messages.replace(Messages.VAR_DECL_STMT_ENTRY, new String[]{varNames, type.getID()});
-	  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-
-	  for (VariableDeclarator decl : getDeclaratorList()) {
-	      decl.generateExplanation(trace, generator, "");
-	  }
-
-	  return new NodeValueList();
-  }
 
   public void VarDeclStmt.createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();
@@ -402,42 +346,6 @@ aspect CreateBCode {
     this.bcEndIndex = gen.pos();
   }
 
-
-  public <E extends TraceElement<S>, S> NodeValueList VariableDeclarator.generateExplanation(
-		  															TraceIterator<E, S> trace,
-		  															TraceGenerator<E, S> generator,
-		  															String contextMsg) {
-	  if (hasInit()){
-		  contextMsg +=  Messages.VAR_DECLARATOR_HASINIT.replace("?", name());
-		  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-
-		  NodeValueList list = new NodeValueList();
-		  list.addAll(getInit().generateExplanation(trace, generator, ""));
-
-		  //TODO: check for cast before assignment
-		  //emitInitializer
-		  //getInit().createBCode(gen);
-		  //getInit().type().emitAssignConvTo(this, gen, type());
-
-
-//		  getInit().type().emitAssignConvTo(this, gen, type());
-		  String initVal = trace.checkAndFwd().value(0);
-		  System.out.println("Value initialized is "+initVal);
-		String[] replacements = new String[]{
-		  								name(),
-				  						initVal
-				  						};
-
-//		  String rhsMsg = list.explanationToString();
-		  String storeMsg = Messages.replace(Messages.VAR_DECLARATOR_STORE_LOCAL, replacements);
-		  generator.generate(trace, storeMsg, list, this, false);
-
-	  }else{
-		  contextMsg+= Messages.VAR_DECLARATOR_NOT_HASINIT.replace("?", name());
-		  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-	  }
-	  return new NodeValueList();
-  }
 
 
   public void VariableDeclarator.createBCode(CodeGeneration gen) {
@@ -459,20 +367,6 @@ aspect CreateBCode {
     getInit().type().emitAssignConvTo(this, gen, type());
   }
 
-
-  @Override
-	public <E extends TraceElement<S>, S> NodeValueList AssignSimpleExpr.generateExplanation(TraceIterator<E, S> trace,
-																				TraceGenerator<E, S> generator,
-																				String contextMsg) {
-	    NodeValueList list = new NodeValueList();
-	  	generator.generate(trace, Messages.ASSIGN_SIMPLE_EXPR_ENTRY, list, this, false);
-	  	list.addAll(getDest().createAssignSimpleLoadDest(trace, generator, ""));
-	  	generator.generate(trace, Messages.ASSIGN_SIMPLE_EXPR_LHS_EVALUATED, list, this, false);
-	  	list.addAll(getSource().generateExplanation(trace, generator, ""));
-	  	//TODO: add explanation for convert and dup
-	  	generator.generate(trace, Messages.ASSIGN_SIMPLE_EXPR_RET.replace("?", trace.checkAndFwd().value(0)), list, this, false);
-		return list;
-	}
 
 
   /**
@@ -591,26 +485,12 @@ aspect CreateBCode {
     emitShiftExpr(gen);
   }
 
-  // Generate explanation for Loading left hand side of destination in a simple assign expression.
-  public <E extends TraceElement<S>, S> NodeValueList Expr.createAssignSimpleLoadDest(TraceIterator<E, S> trace,
-																				TraceGenerator<E, S> generator,
-																				String contextMsg) {
-	  return new NodeValueList();
-  }
-
   // Load left hand side of destination in a simple assign expression.
   public void Expr.createAssignSimpleLoadDest(CodeGeneration gen) {
   }
 
   public void AbstractDot.createAssignSimpleLoadDest(CodeGeneration gen) {
     lastAccess().createAssignSimpleLoadDest(gen);
-  }
-
-  public <E extends TraceElement<S>, S> NodeValueList VarAccess.createAssignSimpleLoadDest(TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-	  System.out.println("[VARACESS]");
-	  return createLoadQualifier(trace, generator, contextMsg, decl());
   }
 
   public void VarAccess.createAssignSimpleLoadDest(CodeGeneration gen) {
@@ -745,19 +625,6 @@ aspect CreateBCode {
     emitLoadVariable(gen, decl());
   }
 
-  @Override
-  public <E extends TraceElement<S>, S> NodeValueList VarAccess.generateExplanation(TraceIterator<E, S> trace,
-		  																	TraceGenerator<E, S> generator,
-		  																	String contextMsg) {
-	  String value = trace.checkAndFwd().value(0);
-	  String msg = Messages.replace(Messages.VARACSESS_LOAD, new String[]{name(), value});
-	  ASTNodeValue nodeValue = new ASTNodeValue(this, value, msg);
-	  NodeValueList list = new NodeValueList();
-	  list.add(nodeValue);
-
-	return list;
-  }
-
 
   /**
    * Generate bytecode to load a field, local variable, or parameter.
@@ -816,31 +683,6 @@ aspect CreateBCode {
       gen.emit(this, Bytecode.ALOAD_0);
       gen.emit(this, Bytecode.GETFIELD, v.type().variableSize() - 1).add2(index);
     }
-  }
-
-  protected <E extends TraceElement<S>, S> NodeValueList Access.createLoadQualifier(TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg,
-			Variable v) {
-	  NodeValueList list = new NodeValueList();
-	    if (v.isField()) {
-	        if (hasPrevExpr()) {
-	          // Load explicit qualifier.
-	          list.addAll(prevExpr().generateExplanation(trace, generator, contextMsg+Messages.ACCESS_LOAD_LHS_FIELD));
-	          // Pop qualifier stack element for class variables.
-	          // This qualifier must be computed to ensure side effects are evaluated.
-	          if (!prevExpr().isTypeAccess() && v.isClassVariable()) {
-	        	  trace.fwd();
-	          }
-	        } else if (v.isInstanceVariable()) {
-	          generator.generate(trace, contextMsg + Messages.ACCESS_LOAD_LHS_THIS, new NodeValueList(), this, false);
-	          trace.fwd();
-	        }
-	      }else{
-	    	  generator.generate(trace, contextMsg + Messages.ACCESS_LOAD_LHS_VAR.replace("?", v.name()), new NodeValueList(), this, false);
-	      }
-
-	  return list;
   }
 
   /**
@@ -905,24 +747,6 @@ aspect CreateBCode {
     } else {
       decl().emitInvokeMethod(gen, methodQualifierType());
     }
-  }
-
-  protected <E extends TraceElement<S>, S> NodeValueList MethodAccess.createLoadQualifier(TraceIterator<E, S> trace,
-														TraceGenerator<E, S> generator,
-														String contextMsg) {
-	  NodeValueList list = new NodeValueList();
-	  MethodDecl m = decl();
-	  if (hasPrevExpr()){
-		  list.addAll(prevExpr().generateExplanation(trace, generator, ""));
-		  if (m.isStatic() && !prevExpr().isTypeAccess()) {
-		        trace.fwd();
-		   }
-	  } else if (!m.isStatic()) {
-	      generator.generate(trace, Messages.METHODACCESS_LOAD_QUALIFIER_THIS.replace("?", trace.checkAndFwd().value(0)), new NodeValueList(), this, false);
-	  } else {
-		  generator.generate(trace, Messages.METHODACCESS_LOAD_QUALIFIER_STATIC.replace("?", name()), new NodeValueList(), this, false);
-	  }
-	  return list;
   }
 
 
@@ -1288,39 +1112,6 @@ aspect CreateBCode {
 public void Expr.addOperator(Object o){
     System.out.println("Operator class is "+o.getClass());
    }
-public <E extends TraceElement<S>, S> NodeValueList Binary.generateExplanation(TraceIterator<E, S> trace,
-  																		TraceGenerator<E, S> generator,
-  																		String contextMsg) {
-	  NodeValueList result = new ConceptNodeValueList();
-	  String operation = "";
-	  if (this instanceof AddExpr)
-		  operation = "addition";
-	  else if (this instanceof MulExpr)
-		  operation = "multiplication";
-	  else if (this instanceof SubExpr)
-		  operation = "subtraction";
-
-	  generator.generate(trace, Messages.ADD_BINARY_EXPR_ENTRY.replace("?", operation), new NodeValueList(), this, false);
-
-	  NodeValueList leftOpList = getLeftOperand().generateExplanation(trace, generator, "");
-	  generator.generate(trace, leftOpList.explanationToString() + Messages.ADD_BINARY_RETURN_VISIT, leftOpList, this, false);
-	  NodeValueList rightOpList = getRightOperand().generateExplanation(trace, generator, contextMsg);
-	  generator.generate(trace, rightOpList.explanationToString() + Messages.ADD_BINARY_RETURN_RETURN, rightOpList, this, false);
-
-	  System.out.println("leftOpList:\t"+leftOpList);
-	  result.addAll(leftOpList);
-	  System.out.println("result1:\t"+result);
-	  System.out.println("rightOpList:\t"+rightOpList);
-	  result.addAll(rightOpList);
-	  System.out.println("result2:\t"+result);
-	  String value = trace.checkAndFwd().value(0);
-	  result.add(new ConceptASTNodeValue(this, value));
-
-	  generator.generate(trace, Messages.ADD_BINARY_RETURN.replace("?", value), result, this, false);
-
-
-  	return result;
-  }
 
   public void Binary.createBCode(CodeGeneration gen) {
     getLeftOperand().createBCode(gen);
@@ -1350,17 +1141,6 @@ public <E extends TraceElement<S>, S> NodeValueList Binary.generateExplanation(T
     emitShiftExpr(gen);
   }
 
-  @Override
-public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(TraceIterator<E, S> trace,
-																		TraceGenerator<E, S> generator,
-																		String contextMsg) {
-	  if (!type().isString()) {
-		  return super.generateExplanation(trace, generator, contextMsg);
-	  }
-	  //TODO: do the else part
-
-	return new NodeValueList();
-}
 
   public void AddExpr.createBCode(CodeGeneration gen) {
     if (!type().isString()) {
@@ -1573,34 +1353,6 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
     }
   }
 
-      public <E extends TraceElement<S>, S> NodeValueList RelationalExpr.branchTrue(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-
-	  NodeValueList list = new NodeValueList();
-	// Branch when true.
-	    if (isConstant()) {
-	      if (isTrue()) {
-	        trace.checkAndFwd();
-	        ASTNodeValue nodeValue = new ASTNodeValue(this, "True", "Condition evaluated to the constant value True. ");
-	        list.add(nodeValue);
-	      }
-	    } else {
-	      TypeDecl type = getLeftOperand().type();
-	      if (type.isNumericType()) {
-	        type = binaryNumericPromotedType();
-	        list.addAll(getLeftOperand().generateExplanation(trace, generator, contextMsg));
-	        list.addAll(getRightOperand().generateExplanation(trace, generator, contextMsg));
-	      } else {
-	      }
-	      list.addAll(compareBranch(trace, generator, contextMsg, type));
-	    }
-	    return list;
-	}
-
-
-
 
   public void RelationalExpr.branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -1622,33 +1374,6 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
       }
       compareBranch(gen, target, type);
     }
-  }
-
-
-  public <E extends TraceElement<S>, S> NodeValueList RelationalExpr.branchFalse(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-	  NodeValueList list = new NodeValueList();
-	// Branch when false.
-	    if (isConstant()) {
-	      if (isFalse()) {
-	    	  trace.checkAndFwd();
-		        ASTNodeValue nodeValue = new ASTNodeValue(this, "False", "Condition evaluated to the constant value 'False'. ");
-		        list.add(nodeValue);
-	      }
-	    } else {
-	      TypeDecl type = getLeftOperand().type();
-	      if (type.isNumericType()) {
-	    	  type = binaryNumericPromotedType();
-		        list.addAll(getLeftOperand().generateExplanation(trace, generator, contextMsg));
-		        list.addAll(getRightOperand().generateExplanation(trace, generator, contextMsg));
-	      } else {
-	      }
-	      list.addAll(compareNotBranch(trace, generator, contextMsg, type));
-	    }
-
-	  return list;
   }
 
   /**
@@ -1762,24 +1487,9 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
     }
   }
 
-    public <E extends TraceElement<S>, S> NodeValueList RelationalExpr.compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return null;
-  }
 
   public void RelationalExpr.compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareBranch not implemented for " + getClass().getName());
-  }
-
-  public <E extends TraceElement<S>, S> NodeValueList LTExpr.compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchLT(trace, generator, contextMsg);
   }
 
 
@@ -1787,39 +1497,13 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
     typeDecl.branchLT(this, gen, label);
   }
 
-    public <E extends TraceElement<S>, S> NodeValueList LEExpr.compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchLE(trace, generator, contextMsg);
-  }
-
 
   public void LEExpr.compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchLE(this, gen, label);
   }
 
-
-  public <E extends TraceElement<S>, S> NodeValueList GEExpr.compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchGE(trace, generator, contextMsg);
-  }
-
   public void GEExpr.compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchGE(this, gen, label);
-  }
-
-
-	public <E extends TraceElement<S>, S> NodeValueList GTExpr.compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchGT(trace, generator, contextMsg);
   }
 
   public void GTExpr.compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
@@ -1827,86 +1511,31 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
   }
 
 
-	public <E extends TraceElement<S>, S> NodeValueList EQExpr.compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchEQ(trace, generator, contextMsg);
-  }
-
   public void EQExpr.compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchEQ(this, gen, label);
   }
 
-	public <E extends TraceElement<S>, S> NodeValueList NEExpr.compareBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchNE(trace, generator, contextMsg);
-  }
 
   public void NEExpr.compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchNE(this, gen, label);
   }
 
-  public <E extends TraceElement<S>, S> NodeValueList RelationalExpr.compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return null;
-  }
 
   public void RelationalExpr.compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareNotBranch not implemented for " + getClass().getName());
-  }
-
-
-	public <E extends TraceElement<S>, S> NodeValueList LTExpr.compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchGEInv(trace, generator, contextMsg);
   }
 
   public void LTExpr.compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchGEInv(this, gen, label);
   }
 
-	public <E extends TraceElement<S>, S> NodeValueList LEExpr.compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchGTInv(trace, generator, contextMsg);
-  }
-
   public void LEExpr.compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchGTInv(this, gen, label);
   }
 
-	public <E extends TraceElement<S>, S> NodeValueList GEExpr.compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchLTInv(trace, generator, contextMsg);
-  }
 
   public void GEExpr.compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchLTInv(this, gen, label);
-  }
-
-
-	public <E extends TraceElement<S>, S> NodeValueList GTExpr.compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchLEInv(trace, generator, contextMsg);
   }
 
   public void GTExpr.compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
@@ -1914,25 +1543,8 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
   }
 
 
-	public <E extends TraceElement<S>, S> NodeValueList EQExpr.compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchNE(trace, generator, contextMsg);
-  }
-
   public void EQExpr.compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     typeDecl.branchNE(this, gen, label);
-  }
-
-
-	public <E extends TraceElement<S>, S> NodeValueList NEExpr.compareNotBranch(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg
-			, TypeDecl typeDecl) {
-	  return typeDecl.branchEQ(trace, generator, contextMsg);
   }
 
   public void NEExpr.compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
@@ -1948,15 +1560,6 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
     gen.addLineNumberEntryAtCurrentPC(this);
   }
 
-  public <E extends TraceElement<S>, S> NodeValueList Block.generateExplanation(
-		  TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator,
-		  String contextMsg) {
-	  for (int i = 0; i < getNumStmt(); i++) {
-		  getStmt(i).generateExplanation(trace, generator, contextMsg);
-	  }
-	  return new NodeValueList();
-  }
 
 
   public void Block.createBCode(CodeGeneration gen) {
@@ -1988,18 +1591,6 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
     gen.addLabel(label());
     getStmt().createBCode(gen);
     gen.addLabel(end_label());
-  }
-
-  public <E extends TraceElement<S>, S> NodeValueList ExprStmt.generateExplanation(
-		  TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator,
-		  String contextMsg) {
-	  NodeValueList list = new NodeValueList();
-	  list.addAll(getExpr().generateExplanation(trace, generator, contextMsg));
-	  if (needsPop()){
-		  generator.generate(trace, Messages.EXPR_STMT_NEEDSPOP.replace("?", trace.checkAndFwd().value(0)), new NodeValueList(), this, false);
-	  }
-	  return list;
   }
 
 
@@ -2165,26 +1756,6 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
   private int IfStmt.elseBCStart = -1;
   private int IfStmt.elseBCEnd = -1;
 
-/*  public String IfStmt.generateExplanation(){
-     String expl = "";
-     //expl+="Entered If statemetn
-     return "";
-  }*/
-
-
-    @Override
-  public <E extends TraceElement<S>, S> NodeValueList IfStmt.generateExplanation(
-		  												TraceIterator<E, S> trace,
-		  												TraceGenerator<E, S> generator,
-		  												String contextMsg) {
-	  generator.generate(trace, "Entering the if-statement block; first evaluate the condition.", new NodeValueList(), this, false);
-	  NodeValueList condExpl = new NodeValueList();
-	  if (!getCondition().isConstant()) {
-     	  condExpl.addAll(getCondition().branchFalse(trace, generator, contextMsg));
-      }
-
-	return super.generateExplanation(trace, generator, contextMsg);
-}
 
 
   public void IfStmt.createBCode(CodeGeneration gen) {
@@ -2259,51 +1830,6 @@ public <E extends TraceElement<S>, S> NodeValueList AddExpr.generateExplanation(
   syn lazy int ForStmt.update_label() = hostType().constantPool().newLabel();
   syn lazy int ForStmt.end_label() = hostType().constantPool().newLabel();
 
-
-  public <E extends TraceElement<S>, S> NodeValueList ForStmt.generateExplanation(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-
-	  contextMsg +=  Messages.FOR_STMT_ENTRY;
-	  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-
-	  NodeValueList list = new NodeValueList();
-
-	  boolean hasInitializer = false;
-	  for (Stmt stmt : getInitStmtList()) {
-		  list.addAll(stmt.generateExplanation(trace, generator, ""));
-		  hasInitializer = true;
-	  }
-	  if (hasInitializer){
-		  generator.generate(trace, "Done with the initializers; now evaluating the loop condition.", new NodeValueList(), this, false);
-	  }else{
-		  generator.generate(trace, "No initializers found; now evaluating the loop condition.", new NodeValueList(), this, false);
-	  }
-
-	  if (hasCondition() && !getCondition().isConstant()) {
-	      getCondition().branchFalse(trace, generator, "");
-	    }
-
-	    	  NodeValueList condList = new NodeValueList();
-	  if (hasCondition() && !getCondition().isConstant()) {
-	      condList.addAll(getCondition().branchFalse(trace, generator, contextMsg));
-	    }
-	  generator.generate(trace, "Finished evaluating the condition", condList, this, false);
-
-	  NodeValueList body = new NodeValueList();
-	  if (!hasCondition() || getCondition().canBeTrue()) {
-		  generator.generate(trace, "Entering the body of the for-loop", new NodeValueList(), getStmt(), false);
-	      body.addAll(getStmt().generateExplanation(trace, generator, contextMsg));
-	      generator.generate(trace, "finished this iteration of the loop, now executing the update statements. ", new NodeValueList(), this, false);
-	      for (Stmt stmt : getUpdateStmtList()) {
-	        stmt.generateExplanation(trace, generator, contextMsg);
-	      }
-	      trace.checkAndFwd();
-	      generator.generate(trace, "Going back to the condition point of the for-loop", new NodeValueList(), this, false);
-	    }
-	return list;
-  }
 
   public void ForStmt.createBCode(CodeGeneration gen) {
     super.createBCode(gen);

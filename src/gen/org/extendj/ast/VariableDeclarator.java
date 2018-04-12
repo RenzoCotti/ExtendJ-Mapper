@@ -31,46 +31,7 @@ import java.io.DataInputStream;
 public class VariableDeclarator extends Declarator implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:406
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(
-		  															TraceIterator<E, S> trace,
-		  															TraceGenerator<E, S> generator,
-		  															String contextMsg) {
-	  if (hasInit()){
-		  contextMsg +=  Messages.VAR_DECLARATOR_HASINIT.replace("?", name());
-		  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-
-		  NodeValueList list = new NodeValueList();
-		  list.addAll(getInit().generateExplanation(trace, generator, ""));
-
-		  //TODO: check for cast before assignment
-		  //emitInitializer
-		  //getInit().createBCode(gen);
-		  //getInit().type().emitAssignConvTo(this, gen, type());
-
-
-//		  getInit().type().emitAssignConvTo(this, gen, type());
-		  String initVal = trace.checkAndFwd().value(0);
-		  System.out.println("Value initialized is "+initVal);
-		String[] replacements = new String[]{
-		  								name(),
-				  						initVal
-				  						};
-
-//		  String rhsMsg = list.explanationToString();
-		  String storeMsg = Messages.replace(Messages.VAR_DECLARATOR_STORE_LOCAL, replacements);
-		  generator.generate(trace, storeMsg, list, this, false);
-
-	  }else{
-		  contextMsg+= Messages.VAR_DECLARATOR_NOT_HASINIT.replace("?", name());
-		  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-	  }
-	  return new NodeValueList();
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:443
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:351
    */
   public void createBCode(CodeGeneration gen) {
     if (hasInit()) {
@@ -861,10 +822,10 @@ public class VariableDeclarator extends Declarator implements Cloneable {
   /**
    * @attribute inh
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:106")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84")
   public int variableScopeEndLabel(CodeGeneration gen) {
     int variableScopeEndLabel_CodeGeneration_value = getParent().Define_variableScopeEndLabel(this, null, gen);
     return variableScopeEndLabel_CodeGeneration_value;

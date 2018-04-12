@@ -225,7 +225,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:656
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:634
    */
   public void emitInvokeMethod(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl hostType) {
     if (hostType.isInterfaceDecl()) {
@@ -259,7 +259,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:687
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:665
    */
   public void emitInvokeSpecialMethod(ASTNode<ASTNode> node, CodeGeneration gen, TypeDecl hostType) {
     String classname = hostType.constantPoolName();
@@ -302,18 +302,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:212
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(
-																TraceIterator<E, S> trace,
-																TraceGenerator<E, S> generator,
-		  														String contextMsg) {
-		  generator.generate(trace, Messages.METHOD_DECL_ENTRY.replace("?", name()), new NodeValueList(), this, true);
-	return getBlock().generateExplanation(trace, generator, contextMsg);
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:220
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:213
    */
   public void createBCode(CodeGeneration gen) {
     try {
@@ -2490,10 +2479,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:465
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:423
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:465")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:423")
   public boolean needsSignatureAttribute() {
     {
         if (type().needsSignatureAttribute()) {
@@ -2510,10 +2499,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:596
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:554
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:596")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:554")
   public String methodTypeSignature() {
     {
         StringBuilder buf = new StringBuilder();

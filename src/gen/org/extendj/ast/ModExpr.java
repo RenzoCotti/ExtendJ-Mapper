@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class ModExpr extends MultiplicativeExpr implements Cloneable {
   /**
    * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1015
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:993
    */
   void emitOperation(CodeGeneration gen) {
     type().rem(this, gen);

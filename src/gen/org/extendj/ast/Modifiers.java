@@ -174,7 +174,7 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
   public static final int ACC_ENUM = 0x4000;
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:284
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:242
    */
   public static final int ACC_BRIDGE = 0x0040;
   /**

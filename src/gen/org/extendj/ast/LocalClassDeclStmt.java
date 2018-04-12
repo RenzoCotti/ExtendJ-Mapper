@@ -38,7 +38,7 @@ public class LocalClassDeclStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2574
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2100
    */
   public void createBCode(CodeGeneration gen) {
   }

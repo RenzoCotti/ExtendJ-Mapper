@@ -141,7 +141,6 @@ public class JavaCompiler extends Frontend {
     switch (mode) {
       case COMPILE:
         unit.generateClassfile();
-//        unit.generateExplanation()
         return;
       case PRETTY_PRINT:
         try {

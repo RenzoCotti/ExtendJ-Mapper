@@ -173,22 +173,7 @@ aspect AutoBoxingCodegen {
       refined(gen, target);
     }
   }
-  
-   public <E extends TraceElement<S>, S> NodeValueList Expr.branchTrue(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			return new NodeValueList();
-	}
 
-  
-  
-  public <E extends TraceElement<S>, S> NodeValueList Expr.branchFalse(
-			TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-			return new NodeValueList();
-	}
 
 
 

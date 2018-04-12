@@ -524,40 +524,14 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:46
-   */
-  public <E extends TraceElement<S>,S> NodeValueList generateExplanation(
-    																	TraceIterator<E,S> trace, 
-    																	TraceGenerator<E, S> generator,
-    																	String contextMsg){
-    NodeValueList list = new NodeValueList();    																	
-  	int bcIndex = trace.current().getEventIndex();
-  	
-  	System.out.println("[explanation]\tNode:\t"+this.getClass());
-  	System.out.println("[explanation]\tStartBc:\t"+this.bcStartIndex);
-  	System.out.println("[explanation]\tEndBc:\t"+this.bcEndIndex);
-  	System.out.println("[explanation]\tCurrBcIndex:\t"+bcIndex);
-    for (int i = 0; i < getNumChild(); i++) {
-        	System.out.println("child[i].start:\t"+getChild(i).getClass()+"\t,"+getChild(i).bcStartIndex);
-    	System.out.println("child[i].end:\t"+getChild(i).getClass()+"\t,"+getChild(i).bcEndIndex);
-    
-    	if (getChild(i).bcStartIndex <= bcIndex && bcIndex < getChild(i).bcEndIndex){
-    		list.addAll(getChild(i).generateExplanation(trace, generator, ""));
-    	}
-    }
-    
-    return list;
-  }
-  /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:69
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:47
    */
   public void setSourceLineNumber(int i) {
     setStart(ASTNode.makePosition(i, 1));
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:71
    */
   protected int findFirstSourceLineNumber() {
     if (getStart() != 0) {
@@ -573,7 +547,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:268
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:246
    */
   public void error() {
     Throwable t = new Throwable();
@@ -583,7 +557,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /** Generate bytecode to load this field. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:428
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:406
    */
   protected static void emitLoadField(ASTNode<ASTNode> node, CodeGeneration gen, Variable field,
       TypeDecl hostType) {
@@ -603,7 +577,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /** Generate bytecode to store a field in the given hostType. 
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:502
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:480
    */
   protected void emitStoreField(ASTNode<ASTNode> node, CodeGeneration gen, Variable var, TypeDecl hostType) {
     String classname = hostType.constantPoolName();
@@ -618,7 +592,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:313
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:293
    */
   public void createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();
@@ -1139,7 +1113,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:303
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:261
    */
     protected void collect_contributors_TypeDecl_bridgeMethods(TypeDecl _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -1197,10 +1171,10 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51")
   public int sourceLineNumber() {
     int sourceLineNumber_value = getStart() != 0 ? getLine(getStart()) : -1;
     return sourceLineNumber_value;
@@ -3371,7 +3345,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:114
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:92
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute variableScopeEndLabel
    */

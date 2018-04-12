@@ -2624,7 +2624,7 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:106
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
    * @apilevel internal
    */
   public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {

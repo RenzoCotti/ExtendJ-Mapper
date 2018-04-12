@@ -47,36 +47,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:368
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(
-		  TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator,
-		  String contextMsg) {
-	  PrimitiveTypeAccess type = ((PrimitiveTypeAccess)getChild(1));
-
-	  String varNames = getDeclaratorList().getNumChild() > 1 ? "the variables " : "the variable ";
-
-	  for (Iterator<VariableDeclarator> it = getDeclaratorList().iterator(); it.hasNext(); ) {
-		  varNames += "'"+it.next().name()+"'";
-	      if (it.hasNext()){
-	    	  varNames += ", ";
-	      }
-	  }
-
-
-	  contextMsg +=  Messages.replace(Messages.VAR_DECL_STMT_ENTRY, new String[]{varNames, type.getID()});
-	  generator.generate(trace, contextMsg, new NodeValueList(), this, false);
-
-	  for (VariableDeclarator decl : getDeclaratorList()) {
-	      decl.generateExplanation(trace, generator, "");
-	  }
-
-	  return new NodeValueList();
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:394
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:338
    */
   public void createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();

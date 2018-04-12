@@ -116,7 +116,7 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
   /**
    * Generate variable initialization bytecode.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:457
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:365
    */
   protected void emitInitializerBCode(CodeGeneration gen) {
     getInit().createBCode(gen);

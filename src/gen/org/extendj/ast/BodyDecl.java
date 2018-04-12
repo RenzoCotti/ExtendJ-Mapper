@@ -598,10 +598,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:463
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:421
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:463")
+  @ASTNodeAnnotation.Source(aspect="GenericsCodegen", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:421")
   public boolean needsSignatureAttribute() {
     boolean needsSignatureAttribute_value = false;
     return needsSignatureAttribute_value;
@@ -957,7 +957,7 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2544
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2070
    * @apilevel internal
    */
   public boolean Define_leavesMonitor(ASTNode _callerNode, ASTNode _childNode, Stmt branch, SynchronizedStmt monitor) {

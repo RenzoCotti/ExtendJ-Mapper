@@ -50,7 +50,7 @@ public class ContinueStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2366
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1892
    */
   public void createBCode(CodeGeneration gen) {
     super.createBCode(gen);

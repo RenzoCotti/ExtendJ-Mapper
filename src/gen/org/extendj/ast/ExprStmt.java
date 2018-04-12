@@ -39,22 +39,7 @@ public class ExprStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1993
-   */
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(
-		  TraceIterator<E, S> trace,
-		  TraceGenerator<E, S> generator,
-		  String contextMsg) {
-	  NodeValueList list = new NodeValueList();
-	  list.addAll(getExpr().generateExplanation(trace, generator, contextMsg));
-	  if (needsPop()){
-		  generator.generate(trace, Messages.EXPR_STMT_NEEDSPOP.replace("?", trace.checkAndFwd().value(0)), new NodeValueList(), this, false);
-	  }
-	  return list;
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2006
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1597
    */
   public void createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();
@@ -370,10 +355,10 @@ public class ExprStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:73
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:73")
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51")
   public int sourceLineNumber() {
     int sourceLineNumber_value = getExpr().findFirstSourceLineNumber();
     return sourceLineNumber_value;
@@ -381,10 +366,10 @@ public class ExprStmt extends Stmt implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:348
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:317
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:348")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:317")
   public boolean needsPop() {
     boolean needsPop_value = getExpr().needsPop();
     return needsPop_value;

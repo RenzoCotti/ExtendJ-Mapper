@@ -31,14 +31,14 @@ import java.io.DataInputStream;
 public class AssignRShiftExpr extends AssignShiftExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:586
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:480
    */
   public void createBCode(CodeGeneration gen) {
     emitShiftExpr(gen);
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:716
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:596
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.shr(this, gen);

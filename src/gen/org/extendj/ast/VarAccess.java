@@ -72,7 +72,7 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:453
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:431
    */
   public void refined_CodeGeneration_VarAccess_emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
     Variable v = decl();
@@ -97,24 +97,14 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:609
-   */
-  public <E extends TraceElement<S>, S> NodeValueList createAssignSimpleLoadDest(TraceIterator<E, S> trace,
-			TraceGenerator<E, S> generator,
-			String contextMsg) {
-	  System.out.println("[VARACESS]");
-	  return createLoadQualifier(trace, generator, contextMsg, decl());
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:616
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:496
    */
   public void createAssignSimpleLoadDest(CodeGeneration gen) {
     createLoadQualifier(gen, decl());
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:635
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:515
    */
   public void createPushAssignmentResult(CodeGeneration gen) {
     if (hostType().needsAccessorFor(decl())) {
@@ -128,7 +118,7 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:658
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:538
    */
   public void refined_CreateBCode_VarAccess_createAssignLoadDest(CodeGeneration gen) {
     createLoadQualifier(gen, decl());
@@ -152,26 +142,10 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:744
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:624
    */
   public void createBCode(CodeGeneration gen) {
     emitLoadVariable(gen, decl());
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:748
-   */
-  @Override
-  public <E extends TraceElement<S>, S> NodeValueList generateExplanation(TraceIterator<E, S> trace,
-		  																	TraceGenerator<E, S> generator,
-		  																	String contextMsg) {
-	  String value = trace.checkAndFwd().value(0);
-	  String msg = Messages.replace(Messages.VARACSESS_LOAD, new String[]{name(), value});
-	  ASTNodeValue nodeValue = new ASTNodeValue(this, value, msg);
-	  NodeValueList list = new NodeValueList();
-	  list.add(nodeValue);
-
-	return list;
   }
   /**
    * @aspect InnerClasses
@@ -451,7 +425,7 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:263
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:221
    */
   private TypeDecl refined_GenericsCodegen_VarAccess_fieldQualifierType()
 {
@@ -1071,10 +1045,10 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:363
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:332
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:363")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:332")
   public boolean isVarAccessWithAccessor() {
     boolean isVarAccessWithAccessor_value = decl().isInstanceVariable() && requiresAccessor();
     return isVarAccessWithAccessor_value;
