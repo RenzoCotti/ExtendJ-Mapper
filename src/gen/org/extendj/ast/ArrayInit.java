@@ -289,7 +289,7 @@ public class ArrayInit extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:337
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:341
    */
     public void createBCode(CodeGeneration gen) {
     IntegerLiteral.push(this, gen, getNumInit());

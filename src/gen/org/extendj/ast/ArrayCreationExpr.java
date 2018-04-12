@@ -257,6 +257,8 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:308
    */
     public void createBCode(CodeGeneration gen) {
+    this.bcEndIndex = gen.pos();
+
     if (hasArrayInit()){
       getArrayInit().createBCode(gen);
     } else {
@@ -275,6 +277,8 @@ public class ArrayCreationExpr extends PrimaryExpr implements Cloneable {
         }
       }
     }
+
+    this.bcEndIndex = gen.pos();
   }
   /**
    * @attribute syn

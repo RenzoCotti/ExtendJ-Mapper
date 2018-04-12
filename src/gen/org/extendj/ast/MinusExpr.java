@@ -38,7 +38,7 @@ public class MinusExpr extends Unary implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:377
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:381
    */
   public void createBCode(CodeGeneration gen) {
     boxingGen(gen);

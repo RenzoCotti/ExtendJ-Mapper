@@ -40,7 +40,7 @@ public abstract class Unary extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1050
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1055
    */
   public void createBCode(CodeGeneration gen) {
     super.createBCode(gen);
@@ -48,7 +48,7 @@ public abstract class Unary extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:368
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:372
    */
   protected void boxingGen(CodeGeneration gen) {
     getOperand().createBCode(gen);

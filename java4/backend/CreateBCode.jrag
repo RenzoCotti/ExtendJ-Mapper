@@ -918,63 +918,68 @@ aspect CreateBCode {
     }
   }
 
-  public void ClassInstanceExpr.createBCode(CodeGeneration gen) {
-    if (transformed() != this) {
-      // Ensure bytecode is generated for the transformed access.
-      transformed().createBCode(gen);
-      return;
-    }
+	public void ClassInstanceExpr.createBCode(CodeGeneration gen) {
+	this.bcStartIndex = gen.pos();
 
-    type().emitNew(this, gen);
-    type().emitDup(this, gen);
+		if (transformed() != this) {
+			// Ensure bytecode is generated for the transformed access.
+			transformed().createBCode(gen);
+			return;
+		}
 
-    // 15.9.2 first part
-    if (type().isAnonymous()) {
-      if (isAnonymousInNonStaticContext()) {
-        if (type().inExplicitConstructorInvocation()) {
-          gen.emit(this, Bytecode.ALOAD_1);
-        } else {
-          gen.emit(this, Bytecode.ALOAD_0);
-        }
-      }
-      // 15.9.2 second part
-      ClassDecl C = (ClassDecl) type();
-      TypeDecl S = C.superclass();
-      if (S.isLocalClass()) {
-        if (!type().inStaticContext()) {
-          emitLocalEnclosing(gen, S);
-        }
-      } else if (S.isInnerType()) {
-        emitInnerMemberEnclosing(gen, S);
-      }
-    } else if (type().isLocalClass()) {
-      if (!type().inStaticContext()) {
-        emitLocalEnclosing(gen, type());
-      }
-    } else if (type().isInnerType()) {
-      emitInnerMemberEnclosing(gen, type());
-    }
+		type().emitNew(this, gen);
+		type().emitDup(this, gen);
 
-    ConstructorDecl decl = decl().bytecodeTarget();
+		// 15.9.2 first part
+		if (type().isAnonymous()) {
+			if (isAnonymousInNonStaticContext()) {
+				if (type().inExplicitConstructorInvocation()) {
+					gen.emit(this, Bytecode.ALOAD_1);
+				} else {
+					gen.emit(this, Bytecode.ALOAD_0);
+				}
+			}
+			// 15.9.2 second part
+			ClassDecl C = (ClassDecl) type();
+			TypeDecl S = C.superclass();
+			if (S.isLocalClass()) {
+				if (!type().inStaticContext()) {
+					emitLocalEnclosing(gen, S);
+				}
+			} else if (S.isInnerType()) {
+				emitInnerMemberEnclosing(gen, S);
+			}
+		} else if (type().isLocalClass()) {
+			if (!type().inStaticContext()) {
+				emitLocalEnclosing(gen, type());
+			}
+		} else if (type().isInnerType()) {
+			emitInnerMemberEnclosing(gen, type());
+		}
 
-    // Push formal arguments.
-    for (int i = 0; i < getNumArg(); ++i) {
-      getArg(i).createBCode(gen);
-      // Method invocation conversion:
-      getArg(i).type().emitCastTo(this, gen, decl.getParameter(i).type());
-    }
-    // Push enclosing variable arguments.
-    for (Variable var : decl.hostType().enclosingVariables()) {
-      emitLoadVariable(gen, var);
-    }
+		ConstructorDecl decl = decl().bytecodeTarget();
 
-    if (decl.isPrivate() && type() != hostType()) {
-      gen.emit(this, Bytecode.ACONST_NULL);
-      decl.createAccessor().emitInvokeConstructor(this, gen);
-    } else {
-      decl.emitInvokeConstructor(this, gen);
-    }
-  }
+		// Push formal arguments.
+		for (int i = 0; i < getNumArg(); ++i) {
+			getArg(i).createBCode(gen);
+			// Method invocation conversion:
+			getArg(i).type().emitCastTo(this, gen, decl.getParameter(i).type());
+		}
+		// Push enclosing variable arguments.
+		for (Variable var : decl.hostType().enclosingVariables()) {
+			emitLoadVariable(gen, var);
+		}
+
+		if (decl.isPrivate() && type() != hostType()) {
+			gen.emit(this, Bytecode.ACONST_NULL);
+			decl.createAccessor().emitInvokeConstructor(this, gen);
+		} else {
+			decl.emitInvokeConstructor(this, gen);
+		}
+
+		this.bcEndIndex = gen.pos();
+	}
+
 
   /**
    * The constructor that is called in bytecode.

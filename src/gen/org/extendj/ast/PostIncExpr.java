@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class PostIncExpr extends PostfixExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1079
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1084
    */
   public void createBCode(CodeGeneration gen) {
     emitPostfix(gen, 1);

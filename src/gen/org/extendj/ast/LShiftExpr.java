@@ -38,7 +38,7 @@ public class LShiftExpr extends ShiftExpr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1132
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1137
    */
   public void createBCode(CodeGeneration gen) {
     emitShiftExpr(gen);

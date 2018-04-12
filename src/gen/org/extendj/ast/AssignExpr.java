@@ -226,7 +226,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:389
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:393
    */
     public void createBCode(CodeGeneration gen) {
     TypeDecl dest = getDest().type();

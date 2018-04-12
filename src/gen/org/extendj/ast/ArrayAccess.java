@@ -210,7 +210,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:478
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:482
    */
     public void createAssignSimpleLoadDest(CodeGeneration gen) {
     prevExpr().createBCode(gen);
@@ -219,7 +219,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:484
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:488
    */
     public void createAssignLoadDest(CodeGeneration gen) {
     prevExpr().createBCode(gen);
@@ -231,7 +231,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:471
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:475
    */
     public void createBCode(CodeGeneration gen) {
     prevExpr().createBCode(gen);

@@ -38,7 +38,7 @@ public class BitNotExpr extends Unary implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:385
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:389
    */
   public void createBCode(CodeGeneration gen) {
     boxingGen(gen);

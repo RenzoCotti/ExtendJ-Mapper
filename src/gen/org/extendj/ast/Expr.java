@@ -294,14 +294,14 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1117
    */
   public void addOperator(Object o){
     System.out.println("Operator class is "+o.getClass());
    }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1212
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1217
    */
   protected void emitBooleanCondition(CodeGeneration gen) {
     int end_label = -1;
@@ -335,7 +335,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @param gen code generator
    * @param target target label to jump to if the condition was true
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1273
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1278
    */
   public void refined_CreateBCode_Expr_branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -355,7 +355,7 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
    * @param gen code generator
    * @param target target label to jump to if the condition was false
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1386
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1391
    */
   public void refined_CreateBCode_Expr_branchFalse(CodeGeneration gen, int target) {
     // Branch when false.
@@ -1668,10 +1668,10 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1184
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1189
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1184")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1189")
   public boolean canBeTrue() {
     boolean canBeTrue_value = !isFalse();
     return canBeTrue_value;
@@ -1679,10 +1679,10 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1201
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1196")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1201")
   public boolean canBeFalse() {
     boolean canBeFalse_value = !isTrue();
     return canBeFalse_value;

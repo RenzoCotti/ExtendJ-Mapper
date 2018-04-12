@@ -31,12 +31,12 @@ import java.io.DataInputStream;
 public abstract class RelationalExpr extends Binary implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1208
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1213
    */
   public void createBCode(CodeGeneration gen) { emitBooleanCondition(gen); }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1357
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1362
    */
   public void branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -61,7 +61,7 @@ public abstract class RelationalExpr extends Binary implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1468
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1473
    */
   public void branchFalse(CodeGeneration gen, int target) {
     // Branch when false.
@@ -86,14 +86,14 @@ public abstract class RelationalExpr extends Binary implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1491
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1496
    */
   public void compareBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareBranch not implemented for " + getClass().getName());
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1524
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1529
    */
   public void compareNotBranch(CodeGeneration gen, int label, TypeDecl typeDecl) {
     throw new Error("compareNotBranch not implemented for " + getClass().getName());

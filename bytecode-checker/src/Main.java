@@ -27,6 +27,7 @@ public class Main {
                 HashMap<Integer, String> currentBC = new HashMap<>();
 
 
+
                 for(String line; (line = br.readLine()) != null; ) {
 
                     if(line.isEmpty()){
@@ -34,6 +35,9 @@ public class Main {
                         line = br.readLine();
                         currentMethod = line.trim();
                     } else if(line.contains("stack=") && line.contains("locals=")){
+                        //start of PC
+                        boolean openParethesis = false;
+
 
                         HashMap<Integer, String> bytecodeInstructions = new HashMap<>();
                         while (true){
@@ -42,6 +46,16 @@ public class Main {
                                 break;
                             } else {
                                 line = line.trim();
+                            }
+
+                            if(line.contains("{")){
+                                openParethesis = true;
+                            } else if(openParethesis){
+                                String temp = "";
+                                while(!temp.contains("}")){
+                                    temp = br.readLine();
+                                }
+                                line = br.readLine().trim();
                             }
 
                             String [] splitLine = line.split(": ");
@@ -64,15 +78,13 @@ public class Main {
                         }
 
                         currentBC = bytecodeInstructions;
-//
-//                        for(Integer i : bytecodeInstructions.keySet()){
-//                            System.out.println(bytecodeInstructions.get(i));
-//                        }
+
 
                     } else if(line.trim().contains("PositionTable: length")){
 
                         ArrayList<String> tempHexValues = new ArrayList<>();
                         HashMap<Integer, Position> positions = new HashMap<>();
+
 
                         while(true){
                             line = br.readLine().trim();

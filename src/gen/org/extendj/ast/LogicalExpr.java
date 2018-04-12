@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public abstract class LogicalExpr extends Binary implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1210
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1215
    */
   public void createBCode(CodeGeneration gen) { emitBooleanCondition(gen); }
   /**

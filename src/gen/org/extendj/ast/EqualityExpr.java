@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public abstract class EqualityExpr extends RelationalExpr implements Cloneable {
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:412
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:416
    */
   public void branchTrue(CodeGeneration gen, int target) {
     // Branch when true.
@@ -64,7 +64,7 @@ public abstract class EqualityExpr extends RelationalExpr implements Cloneable {
   }
   /**
    * @aspect AutoBoxingCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:442
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/AutoBoxingCodegen.jrag:446
    */
   public void branchFalse(CodeGeneration gen, int target) {
     // Branch when false.

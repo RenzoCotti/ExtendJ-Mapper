@@ -305,7 +305,9 @@ aspect AutoBoxingCodegen {
     access.emitStore(this, gen);
   }
 
-  refine CreateBCode public void ArrayCreationExpr.createBCode(CodeGeneration gen) {
+	refine CreateBCode public void ArrayCreationExpr.createBCode(CodeGeneration gen) {
+    this.bcEndIndex = gen.pos();
+
     if (hasArrayInit()){
       getArrayInit().createBCode(gen);
     } else {
@@ -324,6 +326,8 @@ aspect AutoBoxingCodegen {
         }
       }
     }
+
+    this.bcEndIndex = gen.pos();
   }
 
   refine CreateBCode public void ArrayTypeWithSizeAccess.createBCode(CodeGeneration gen) {
