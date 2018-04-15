@@ -1943,10 +1943,12 @@ public void Expr.addOperator(Object o){
     }
   }
 
-  public void ThrowStmt.createBCode(CodeGeneration gen) {
+	public void ThrowStmt.createBCode(CodeGeneration gen) {
+    this.bcStartIndex = gen.pos();
     super.createBCode(gen);
     getExpr().createBCode(gen);
     gen.emitThrow(this);
+    this.bcEndIndex = gen.pos();
   }
 
   syn lazy int TryStmt.fallthrough_label() =
@@ -2099,6 +2101,8 @@ public void Expr.addOperator(Object o){
    * version of the assert statement.
    */
   public void AssertStmt.createBCode(CodeGeneration gen) {
+		this.bcStartIndex = gen.pos();
+		this.bcEndIndex = gen.pos();
     transformed().createBCode(gen);
   }
 

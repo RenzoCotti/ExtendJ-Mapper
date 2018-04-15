@@ -24,14 +24,13 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast class
- * @aspect Attributes
- * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:194
+ * @aspect PositionTable
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/PositionTable.jrag:2
  */
 public class PositionTableAttribute extends Attribute {
   
 		public PositionTableAttribute(CodeGeneration gen) {
 			super(gen.constantPool(), "PositionTable");
-			//u2(gen.positionTable.size());
 			for (CodeGeneration.PositionEntry e : gen.positionTable) {
 				u2(e.start_pc);
 				u2(e.start_line);

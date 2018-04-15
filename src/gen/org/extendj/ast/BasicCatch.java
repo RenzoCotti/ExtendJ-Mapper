@@ -53,7 +53,7 @@ public class BasicCatch extends CatchClause implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2040
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2042
    */
   public void createBCode(CodeGeneration gen) {
     gen.addLabel(label());

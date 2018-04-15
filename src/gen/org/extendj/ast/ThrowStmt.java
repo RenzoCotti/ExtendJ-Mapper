@@ -55,9 +55,11 @@ public class ThrowStmt extends Stmt implements Cloneable {
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1946
    */
   public void createBCode(CodeGeneration gen) {
+    this.bcStartIndex = gen.pos();
     super.createBCode(gen);
     getExpr().createBCode(gen);
     gen.emitThrow(this);
+    this.bcEndIndex = gen.pos();
   }
   /**
    * @declaredat ASTNode:1
