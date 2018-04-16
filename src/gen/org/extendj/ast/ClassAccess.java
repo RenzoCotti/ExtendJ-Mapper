@@ -38,7 +38,7 @@ public class ClassAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2112
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2109
    */
   public void createBCode(CodeGeneration gen) {
     if (prevExpr().type().isPrimitiveType() || prevExpr().type().isVoid()) {

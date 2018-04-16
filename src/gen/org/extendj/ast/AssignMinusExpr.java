@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignMinusExpr extends AssignAdditiveExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:588
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:585
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.sub(this, gen);

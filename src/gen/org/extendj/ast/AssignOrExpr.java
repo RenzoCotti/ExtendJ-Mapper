@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignOrExpr extends AssignBitwiseExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:612
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:609
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.bitor(this, gen);

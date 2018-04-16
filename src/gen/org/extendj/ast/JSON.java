@@ -24,20 +24,23 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 /**
  * @ast class
- * @aspect PositionTable
- * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/PositionTable.jrag:2
+ * @aspect Converter
+ * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:3
  */
-public class PositionTableAttribute extends Attribute {
+ class JSON extends java.lang.Object {
   
-		public PositionTableAttribute(CodeGeneration gen) {
-			super(gen.constantPool(), "PositionTable");
-			for (CodeGeneration.PositionEntry e : gen.positionTable) {
-				u2(e.pc);
-				u2(e.start_line);
-				u2(e.start_column);
-				u2(e.end_line);
-				u2(e.end_column);
-			}
+		private int asd;
+
+  
+
+		public JSON(int a){
+			this.asd = a;
+		}
+
+  
+
+		public int getAsd(){
+			return asd;
 		}
 
 

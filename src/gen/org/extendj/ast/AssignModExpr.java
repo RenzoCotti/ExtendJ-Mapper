@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignModExpr extends AssignMultiplicativeExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:580
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:577
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.rem(this, gen);

@@ -622,7 +622,7 @@ class CodeGeneration {
   }
 
 	static class PositionEntry {
-		int start_pc;
+		int pc;
 		int start_line;
 		int start_column;
 		int end_line;
@@ -635,9 +635,9 @@ class CodeGeneration {
 		int el = node.endLine();
 		int ec = node.endColumn();
 		//case the node isn't an empty list
-		if (sl != 0 && sc != 0 && el != 0 && ec != 0) {
+		if (sl != 0 && el != 0) {
 			PositionEntry pe = new PositionEntry();
-			pe.start_pc = pos();
+			pe.pc = pos();
 			pe.start_line = node.startLine();
 			pe.start_column = node.startColumn();
 			pe.end_line = node.endLine();

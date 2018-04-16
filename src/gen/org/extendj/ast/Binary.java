@@ -42,7 +42,7 @@ public abstract class Binary extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1121
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1118
    */
   public void createBCode(CodeGeneration gen) {
     getLeftOperand().createBCode(gen);
@@ -53,7 +53,7 @@ public abstract class Binary extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1129
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1126
    */
   public void emitShiftExpr(CodeGeneration gen) {
     getLeftOperand().createBCode(gen);

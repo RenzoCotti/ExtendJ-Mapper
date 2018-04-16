@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignDivExpr extends AssignMultiplicativeExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:576
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:573
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.div(this, gen);

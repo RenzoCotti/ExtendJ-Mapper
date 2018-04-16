@@ -52,7 +52,7 @@ public class ThrowStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1946
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1943
    */
   public void createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();

@@ -32,7 +32,7 @@ public class AssignSimpleExpr extends AssignExpr implements Cloneable {
   /**
    * Create bytecode for a simple assign expression.
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:375
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:372
    */
   public void createBCode(CodeGeneration gen) {
     getDest().createAssignSimpleLoadDest(gen);

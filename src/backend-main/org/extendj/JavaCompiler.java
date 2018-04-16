@@ -40,7 +40,6 @@ import org.extendj.ast.Program;
 
 import java.io.IOException;
 import java.io.PrintStream;
-
 /**
  * Compile Java programs.
  */
@@ -138,6 +137,7 @@ public class JavaCompiler extends Frontend {
 
   @Override
   protected void processNoErrors(CompilationUnit unit) {
+		unit.process();
     switch (mode) {
       case COMPILE:
         unit.generateClassfile();

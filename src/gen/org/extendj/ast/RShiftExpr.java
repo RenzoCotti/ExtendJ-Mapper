@@ -38,7 +38,7 @@ public class RShiftExpr extends ShiftExpr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1141
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1138
    */
   public void createBCode(CodeGeneration gen) {
     emitShiftExpr(gen);

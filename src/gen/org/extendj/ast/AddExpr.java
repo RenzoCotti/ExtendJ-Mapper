@@ -38,7 +38,7 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1150
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1147
    */
   public void createBCode(CodeGeneration gen) {
     if (!type().isString()) {

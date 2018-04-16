@@ -499,6 +499,43 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     }
   }
   /**
+   * { a: b, c: d, e: [a: b, c: d]}
+   * 
+   * 
+   * @aspect Converter
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:26
+   */
+  public String toJSON(int depth){
+		// System.out.println("current depth "+depth);
+		String finalString = "{\"type\": \""+getClass()+"\", ";
+		finalString+="\"children\": [ ";
+
+		// System.out.println(getClass());
+
+		if(children != null) {
+			// System.out.println("n. children: "+numChildren);
+			for(int i = 0; i < numChildren; i++){
+				// System.out.println("getting child "+i);
+				ASTNode currentChild = children[i];
+
+				String temp = currentChild.toJSON(++depth);
+
+				if(i == numChildren-1){
+					finalString += temp;
+				} else {
+					finalString += temp + ", ";
+				}
+			}
+		} else {
+			// System.out.println("this node has no children");
+		}
+		// System.out.println("closing children at depth "+depth);
+
+
+		finalString+="] }";
+		return finalString;
+	}
+  /**
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:34
    */
@@ -592,7 +629,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:293
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:290
    */
   public void createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();

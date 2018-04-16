@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignAndExpr extends AssignBitwiseExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:604
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:601
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.bitand(this, gen);

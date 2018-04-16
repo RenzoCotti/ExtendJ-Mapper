@@ -47,7 +47,7 @@ public class VarDeclStmt extends Stmt implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:338
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:335
    */
   public void createBCode(CodeGeneration gen) {
     this.bcStartIndex = gen.pos();

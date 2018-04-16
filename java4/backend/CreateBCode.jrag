@@ -111,7 +111,6 @@ aspect CreateBCode {
       emitStoreField(this, gen, assertionsDisabled(), this);
     }
     gen.emitReturn(this);
-    gen.addPositionEntryAtCurrentPC(this);
   }
 
   protected String TypeDecl.destination_compute() {
@@ -165,7 +164,6 @@ aspect CreateBCode {
       gen.emitReturn(this);
     }
     gen.addVariableScopeLabel(label);
-    gen.addPositionEntryAtCurrentPC(this);
   }
 
   syn lazy CodeGeneration ConstructorDecl.bytecodes(ConstantPool constantPool) {
@@ -206,7 +204,6 @@ aspect CreateBCode {
     createBCode(gen);
     gen.emitReturn(this);
     gen.addVariableScopeLabel(label);
-    gen.addPositionEntryAtCurrentPC(this);
   }
 
 
@@ -1115,7 +1112,7 @@ aspect CreateBCode {
   }
 
 public void Expr.addOperator(Object o){
-    System.out.println("Operator class is "+o.getClass());
+    // System.out.println("Operator class is "+o.getClass());
    }
 
   public void Binary.createBCode(CodeGeneration gen) {
@@ -2102,8 +2099,8 @@ public void Expr.addOperator(Object o){
    */
   public void AssertStmt.createBCode(CodeGeneration gen) {
 		this.bcStartIndex = gen.pos();
-		this.bcEndIndex = gen.pos();
     transformed().createBCode(gen);
+		this.bcEndIndex = gen.pos();
   }
 
   public void LocalClassDeclStmt.createBCode(CodeGeneration gen) {

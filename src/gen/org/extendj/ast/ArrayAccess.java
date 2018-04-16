@@ -47,7 +47,7 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:526
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:523
    */
   public void createPushAssignmentResult(CodeGeneration gen) {
     type().emitDup_x2(this, gen);

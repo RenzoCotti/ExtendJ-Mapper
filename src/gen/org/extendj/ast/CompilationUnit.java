@@ -107,6 +107,15 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
    */
   protected Collection<Problem> parseErrors = new ArrayList<Problem>();
   /**
+   * @aspect Converter
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:15
+   */
+  public void process(){
+		// System.out.println("This gets run after the code is compiled.");
+		String s = toJSON(0);
+		System.out.println(s);
+	}
+  /**
    * @aspect GenerateClassfile
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:40
    */

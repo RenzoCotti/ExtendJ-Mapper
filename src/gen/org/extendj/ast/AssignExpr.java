@@ -61,7 +61,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:460
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:457
    */
   public void emitShiftExpr(CodeGeneration gen) {
     TypeDecl dest = getDest().type();
@@ -80,7 +80,7 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   }
   /** Select the typed operation for a compound assign expression. 
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:568
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:565
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     throw new Error("Operation createAssignOp is not implemented for " + getClass().getName());
@@ -569,10 +569,10 @@ public abstract class AssignExpr extends Expr implements Cloneable {
   /**
    * @attribute syn
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:319
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:316
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:319")
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:316")
   public boolean needsPop() {
     boolean needsPop_value = getDest().isVarAccessWithAccessor();
     return needsPop_value;

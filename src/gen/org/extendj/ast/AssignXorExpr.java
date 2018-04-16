@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignXorExpr extends AssignBitwiseExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:608
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:605
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.bitxor(this, gen);

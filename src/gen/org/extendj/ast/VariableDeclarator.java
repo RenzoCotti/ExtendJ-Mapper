@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class VariableDeclarator extends Declarator implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:351
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:348
    */
   public void createBCode(CodeGeneration gen) {
     if (hasInit()) {

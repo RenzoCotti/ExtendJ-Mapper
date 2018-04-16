@@ -1,0 +1,35 @@
+aspect Converter {
+
+	public void CompilationUnit.process(){
+		// System.out.println("This gets run after the code is compiled.");
+		String s = toJSON(0);
+		System.out.println(s);
+	}
+
+	/**
+	*{ a: b, c: d, e: [a: b, c: d]}
+	**/
+
+	public String ASTNode.toJSON(int depth){
+		String finalString = "{\"type\": \""+getClass()+"\", ";
+		finalString+="\"children\": [ ";
+
+
+		if(children != null) {
+			for(int i = 0; i < numChildren; i++){
+				ASTNode currentChild = children[i];
+
+				String temp = currentChild.toJSON(++depth);
+
+				if(i == numChildren-1){
+					finalString += temp;
+				} else {
+					finalString += temp + ", ";
+				}
+			}
+		}
+
+		finalString+="] }";
+		return finalString;
+	}
+}

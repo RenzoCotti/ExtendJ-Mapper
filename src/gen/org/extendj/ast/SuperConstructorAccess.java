@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class SuperConstructorAccess extends ConstructorAccess implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:842
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:839
    */
   public void createBCode(CodeGeneration gen) {
     if (transformed() != this) {

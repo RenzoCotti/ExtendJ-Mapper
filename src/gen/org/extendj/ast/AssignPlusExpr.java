@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 public class AssignPlusExpr extends AssignAdditiveExpr implements Cloneable {
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:410
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:407
    */
   public void createBCode(CodeGeneration gen) {
     // TODO(joqvist): use StringBuilder instead of StringBuffer (StringBuilder is not concurrent).
@@ -83,7 +83,7 @@ public class AssignPlusExpr extends AssignAdditiveExpr implements Cloneable {
   }
   /**
    * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:584
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:581
    */
   public void createAssignOp(CodeGeneration gen, TypeDecl type) {
     type.add(this, gen);

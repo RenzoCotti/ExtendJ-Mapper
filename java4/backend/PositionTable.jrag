@@ -3,7 +3,7 @@ aspect PositionTable{
 		public PositionTableAttribute(CodeGeneration gen) {
 			super(gen.constantPool(), "PositionTable");
 			for (CodeGeneration.PositionEntry e : gen.positionTable) {
-				u2(e.start_pc);
+				u2(e.pc);
 				u2(e.start_line);
 				u2(e.start_column);
 				u2(e.end_line);
