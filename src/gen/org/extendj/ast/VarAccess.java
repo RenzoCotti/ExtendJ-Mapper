@@ -1056,10 +1056,10 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:355
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:368
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:355")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:368")
   public boolean requiresFieldAccessor() {
     boolean requiresFieldAccessor_value = requiresAccessor() && isSource();
     return requiresFieldAccessor_value;
@@ -1067,10 +1067,10 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:364
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:377
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:364")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:377")
   public boolean requiresFieldWriteAccessor() {
     boolean requiresFieldWriteAccessor_value = requiresAccessor() && isDest();
     return requiresFieldWriteAccessor_value;
@@ -1240,7 +1240,7 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
     super.collect_contributors_CompilationUnit_problems(_root, _map);
   }
   protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:349
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:362
     if (requiresFieldAccessor()) {
       {
         TypeDecl target = (TypeDecl) (fieldQualifierType());
@@ -1252,7 +1252,7 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
         contributors.add(this);
       }
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:358
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:371
     if (requiresFieldWriteAccessor()) {
       {
         TypeDecl target = (TypeDecl) (fieldQualifierType());

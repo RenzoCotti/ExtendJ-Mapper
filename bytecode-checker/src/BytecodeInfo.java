@@ -37,7 +37,7 @@ public class BytecodeInfo {
         for(Integer i : getPcAndPositions().keySet()){
             Position p = getPcAndPositions().get(i);
             System.out.println("PC: "+i+" Start: "+p.getStartLine()+"-"+p.getStartColumn()
-                    +" End: "+p.getEndLine()+"-"+p.getEndColumn());
+                    +" End: "+p.getEndLine()+"-"+p.getEndColumn()+" ID: "+p.getId());
         }
         System.out.println();
         System.out.println();

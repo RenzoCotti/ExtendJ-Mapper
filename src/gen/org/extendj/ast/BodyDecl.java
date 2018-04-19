@@ -65,13 +65,13 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:285
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:298
    */
   public void generateMethod(DataOutputStream out, ConstantPool cp) throws IOException {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:310
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:323
    */
   public void touchMethod(ConstantPool cp) {
   }
@@ -565,10 +565,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
    * @return all fields declared in this body decl
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:370
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:370")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:383")
   public Collection<FieldDeclarator> fieldDeclarations() {
     Collection<FieldDeclarator> fieldDeclarations_value = Collections.emptyList();
     return fieldDeclarations_value;
@@ -576,10 +576,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:444
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:457
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:444")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:457")
   public boolean isField() {
     boolean isField_value = false;
     return isField_value;
@@ -587,10 +587,10 @@ public abstract class BodyDecl extends ASTNode<ASTNode> implements Cloneable {
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:461
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:461")
   public boolean isMethodOrConstructor() {
     boolean isMethodOrConstructor_value = false;
     return isMethodOrConstructor_value;

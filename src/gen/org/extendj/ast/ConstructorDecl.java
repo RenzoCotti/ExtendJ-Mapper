@@ -266,7 +266,7 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:299
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:312
    */
   public void generateMethod(DataOutputStream out, ConstantPool cp)
       throws IOException {
@@ -280,7 +280,7 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:319
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:332
    */
   public void touchMethod(ConstantPool cp) {
     cp.addUtf8("<init>");
@@ -2338,10 +2338,10 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:461
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:461")
   public boolean isMethodOrConstructor() {
     boolean isMethodOrConstructor_value = true;
     return isMethodOrConstructor_value;

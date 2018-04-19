@@ -95,7 +95,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:181
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:194
    */
   public void generateClassfile() {
     super.generateClassfile();

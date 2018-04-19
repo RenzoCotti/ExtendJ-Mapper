@@ -1,18 +1,52 @@
 aspect Converter {
 
 	public void CompilationUnit.process(){
-		// System.out.println("This gets run after the code is compiled.");
-		String s = toJSON(0);
-		System.out.println(s);
+
+		// int id = setID(0);
+
+		String tree = toJSON(0);
+		String fileAST = pathName().substring(0, pathName().length()-5)+"AST.txt";
+
+		try{
+			File treeDump = new File(fileAST);
+			FileOutputStream fos = new FileOutputStream(fileAST);
+			DataOutputStream outAST = new DataOutputStream(new BufferedOutputStream(fos));
+			outAST.writeBytes(tree);
+			outAST.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
 	}
+
+	// syn int ASTNode.ID() = -1;
 
 	/**
 	*{ a: b, c: d, e: [a: b, c: d]}
 	**/
 
+	// public int ASTNode.setID(int id){
+	// 	//todo add pos
+	// 	ID() = id;
+	//
+	// 	int to_return = id;
+	//
+	// 	if(children != null) {
+	// 		for(int i = 0; i < numChildren; i++){
+	// 			ASTNode currentChild = children[i];
+	// 			to_return = currentChild.setID(++id);
+	// 		}
+	// 	}
+	//
+	// 	return to_return;
+	// }
+
 	public String ASTNode.toJSON(int depth){
-		String finalString = "{\"type\": \""+getClass()+"\", ";
-		finalString+="\"children\": [ ";
+		//todo add pos
+		String finalString = "{\"id\": "+getId()+", \"type\": \"";
+		finalString+=getClass()+"\", \"position\": {\"start_line\": ";
+		finalString+=startLine()+", \"start_column\": "+startColumn()+ ", \"end_line\": ";
+		finalString+=endLine()+", \"end_column\": "+endColumn()+"}, \"children\": [ ";
 
 
 		if(children != null) {

@@ -106,13 +106,14 @@ public class Main {
                             hexValues.add(s1+s2);
                         }
 
-                        for(int i = 0; i < hexValues.size(); i+=5){
+                        for(int i = 0; i < hexValues.size(); i+=6){
                             Integer PC = Integer.parseInt(hexValues.get(i), 16);
                             Integer startLine = Integer.parseInt(hexValues.get(i+1), 16);
                             Integer startColumn = Integer.parseInt(hexValues.get(i+2), 16);
                             Integer endLine = Integer.parseInt(hexValues.get(i+3), 16);
                             Integer endColumn = Integer.parseInt(hexValues.get(i+4), 16);
-                            Position p = new Position(startLine, startColumn, endLine, endColumn);
+                            Integer id = Integer.parseInt(hexValues.get(i+5), 16);
+                            Position p = new Position(startLine, startColumn, endLine, endColumn, id);
 
                             positions.put(PC, p);
                         }

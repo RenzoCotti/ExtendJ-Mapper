@@ -347,7 +347,7 @@ public class Dot extends AbstractDot implements Cloneable {
     return false;
   }
   protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:400
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:413
     if (requiresSuperAccessor()) {
       {
         TypeDecl target = (TypeDecl) (((SuperAccess) leftSide()).superAccessorTarget());

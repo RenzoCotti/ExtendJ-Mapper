@@ -627,6 +627,7 @@ class CodeGeneration {
 		int start_column;
 		int end_line;
 		int end_column;
+		int id;
   }
 
 	public void addPositionEntryAtCurrentPC(ASTNode node){
@@ -634,14 +635,16 @@ class CodeGeneration {
 		int sc = node.startColumn();
 		int el = node.endLine();
 		int ec = node.endColumn();
+		int id = node.getId();
 		//case the node isn't an empty list
 		if (sl != 0 && el != 0) {
 			PositionEntry pe = new PositionEntry();
 			pe.pc = pos();
-			pe.start_line = node.startLine();
-			pe.start_column = node.startColumn();
-			pe.end_line = node.endLine();
-			pe.end_column = node.endColumn();
+			pe.start_line = sl;
+			pe.start_column = sc;
+			pe.end_line = el;
+			pe.end_column = ec;
+			pe.id = id;
 			positionTable.add(pe);
 		}
 	}

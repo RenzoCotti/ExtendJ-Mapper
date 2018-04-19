@@ -37,6 +37,7 @@ public class PositionTableAttribute extends Attribute {
 				u2(e.start_column);
 				u2(e.end_line);
 				u2(e.end_column);
+				u2(e.id);
 			}
 		}
 

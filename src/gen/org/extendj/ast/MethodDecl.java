@@ -318,7 +318,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:288
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:301
    */
   public void generateMethod(DataOutputStream out, ConstantPool cp) throws IOException {
   // System.out.println("[MethodDecl]\tname:\t"+name()+", desc:\t"+descName()+", host:\t"+hostType().typeName()+",\t"+hostType().packageName());
@@ -332,7 +332,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:313
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:326
    */
   public void touchMethod(ConstantPool cp) {
     cp.addUtf8(name());
@@ -2362,10 +2362,10 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   /**
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:461
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:448")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:461")
   public boolean isMethodOrConstructor() {
     boolean isMethodOrConstructor_value = true;
     return isMethodOrConstructor_value;

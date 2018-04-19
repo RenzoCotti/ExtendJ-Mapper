@@ -501,21 +501,19 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   /**
    * { a: b, c: d, e: [a: b, c: d]}
    * 
-   * 
    * @aspect Converter
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:26
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:44
    */
   public String toJSON(int depth){
-		// System.out.println("current depth "+depth);
-		String finalString = "{\"type\": \""+getClass()+"\", ";
-		finalString+="\"children\": [ ";
+		//todo add pos
+		String finalString = "{\"id\": "+getId()+", \"type\": \"";
+		finalString+=getClass()+"\", \"position\": {\"start_line\": ";
+		finalString+=startLine()+", \"start_column\": "+startColumn()+ ", \"end_line\": ";
+		finalString+=endLine()+", \"end_column\": "+endColumn()+"}, \"children\": [ ";
 
-		// System.out.println(getClass());
 
 		if(children != null) {
-			// System.out.println("n. children: "+numChildren);
 			for(int i = 0; i < numChildren; i++){
-				// System.out.println("getting child "+i);
 				ASTNode currentChild = children[i];
 
 				String temp = currentChild.toJSON(++depth);
@@ -526,11 +524,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 					finalString += temp + ", ";
 				}
 			}
-		} else {
-			// System.out.println("this node has no children");
 		}
-		// System.out.println("closing children at depth "+depth);
-
 
 		finalString+="] }";
 		return finalString;
@@ -1114,7 +1108,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:347
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:360
    */
     protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
     for (int i = 0; i < getNumChild(); i++) {
@@ -1303,8 +1297,8 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     {
     		// returns " - [ L1C3 - L2C4 ]" string, for example
     
-    		return " - [ L"+startLine()+"C"+startColumn()+" - L"+
-    			+endLine()+"C"+endColumn()+" ] ";
+    		return startLine()+","+startColumn()+"-"+
+    			+endLine()+","+endColumn();
     
     	}
   }

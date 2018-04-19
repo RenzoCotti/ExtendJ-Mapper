@@ -108,12 +108,25 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   protected Collection<Problem> parseErrors = new ArrayList<Problem>();
   /**
    * @aspect Converter
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:15
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:3
    */
   public void process(){
-		// System.out.println("This gets run after the code is compiled.");
-		String s = toJSON(0);
-		System.out.println(s);
+
+		// int id = setID(0);
+
+		String tree = toJSON(0);
+		String fileAST = pathName().substring(0, pathName().length()-5)+"AST.txt";
+
+		try{
+			File treeDump = new File(fileAST);
+			FileOutputStream fos = new FileOutputStream(fileAST);
+			DataOutputStream outAST = new DataOutputStream(new BufferedOutputStream(fos));
+			outAST.writeBytes(tree);
+			outAST.close();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
 	}
   /**
    * @aspect GenerateClassfile
@@ -612,7 +625,7 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:347
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:360
    */
   protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl_accessors = null;
 

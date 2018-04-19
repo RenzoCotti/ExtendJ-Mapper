@@ -98,6 +98,19 @@ aspect GenerateClassfile {
       }
       attributes();
 
+			//TODO JSON here
+			cp.addUtf8("node "+getId()+" is class "+ name());
+
+
+			// String tree = compilationUnit().toJSON(0);
+			// String fileAST = fileName.substring(0, fileName.length() - 6)+"AST.txt";
+			// File treeDump = new File(fileAST);
+			// FileOutputStream fos = new FileOutputStream(fileAST);
+			// DataOutputStream outAST = new DataOutputStream(new BufferedOutputStream(fos));
+			// outAST.writeBytes(tree);
+			// outAST.close();
+
+
       // Actual ClassFile generation.
       File dest = new File(fileName);
       File parentFile = dest.getParentFile();

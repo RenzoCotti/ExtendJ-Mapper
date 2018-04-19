@@ -459,7 +459,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:328
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:341
    */
   private Collection<FieldDeclarator> refined_GenerateClassfile_ReferenceType_fieldDeclarations()
 {
@@ -476,7 +476,7 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:437
    */
   private Collection<BodyDecl> refined_GenerateClassfile_ReferenceType_methodsAndConstructors()
 {
@@ -805,10 +805,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /** @return a collection of the fields declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:326
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:339
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:326")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:339")
   public Collection<FieldDeclarator> fieldDeclarations() {
     ASTNode$State state = state();
     if (fieldDeclarations_computed == ASTNode$State.NON_CYCLE || fieldDeclarations_computed == state().cycle()) {
@@ -836,10 +836,10 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   /** @return a collection of the methods and constructors declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:437
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:424")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:437")
   public Collection<BodyDecl> methodsAndConstructors() {
     {
         Collection<BodyDecl> original = refined_GenerateClassfile_ReferenceType_methodsAndConstructors();

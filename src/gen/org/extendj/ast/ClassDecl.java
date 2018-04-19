@@ -254,6 +254,19 @@ public class ClassDecl extends ReferenceType implements Cloneable {
       }
       attributes();
 
+			//TODO JSON here
+			cp.addUtf8("node "+getId()+" is class "+ name());
+
+
+			// String tree = compilationUnit().toJSON(0);
+			// String fileAST = fileName.substring(0, fileName.length() - 6)+"AST.txt";
+			// File treeDump = new File(fileAST);
+			// FileOutputStream fos = new FileOutputStream(fileAST);
+			// DataOutputStream outAST = new DataOutputStream(new BufferedOutputStream(fos));
+			// outAST.writeBytes(tree);
+			// outAST.close();
+
+
       // Actual ClassFile generation.
       File dest = new File(fileName);
       File parentFile = dest.getParentFile();
@@ -2610,10 +2623,10 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
   /** @return a collection of the methods and constructors declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:424
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:437
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:424")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:437")
   public Collection<BodyDecl> methodsAndConstructors() {
     {
         Collection<BodyDecl> methods = new ArrayList<BodyDecl>();

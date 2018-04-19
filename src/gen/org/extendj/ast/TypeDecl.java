@@ -828,7 +828,7 @@ public abstract class TypeDecl extends ASTNode<ASTNode> implements Cloneable, Si
   }
   /** Generate bytecode attributes for the fields in this type. 
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:160
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:173
    */
   protected void generateFields(DataOutputStream out, ConstantPool cp) throws IOException {
     Collection<FieldDeclarator> fields = fieldDeclarations();
@@ -6620,10 +6620,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
   /** @return a collection of the fields declared in this type. 
    * @attribute syn
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:326
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:339
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:326")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:339")
   public Collection<FieldDeclarator> fieldDeclarations() {
     ASTNode$State state = state();
     if (fieldDeclarations_computed == ASTNode$State.NON_CYCLE || fieldDeclarations_computed == state().cycle()) {
@@ -9413,10 +9413,10 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
    * type or its supertypes.
    * @attribute coll
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:347
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:360
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.COLL)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:347")
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:360")
   public HashSet<BodyDecl> accessors() {
     ASTNode$State state = state();
     if (TypeDecl_accessors_computed == ASTNode$State.NON_CYCLE || TypeDecl_accessors_computed == state().cycle()) {
