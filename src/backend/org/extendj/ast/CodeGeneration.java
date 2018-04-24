@@ -635,7 +635,7 @@ class CodeGeneration {
 		int sc = node.startColumn();
 		int el = node.endLine();
 		int ec = node.endColumn();
-		int id = node.getId();
+		int id = Counter.getId(node);
 		//case the node isn't an empty list
 		if (sl != 0 && el != 0) {
 			PositionEntry pe = new PositionEntry();

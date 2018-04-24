@@ -95,7 +95,7 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
   }
   /**
    * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:194
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:196
    */
   public void generateClassfile() {
     super.generateClassfile();
@@ -131,6 +131,9 @@ public class InterfaceDecl extends ReferenceType implements Cloneable {
         cp.addUtf8("()V");
         clinit_attributes();
       }
+
+			cp.addUtf8("node "+Counter.getId(this)+" is interface "+ name());
+
 
       // Actual classfile generation.
       File dest = new File(fileName);

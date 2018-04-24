@@ -502,11 +502,11 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * { a: b, c: d, e: [a: b, c: d]}
    * 
    * @aspect Converter
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:58
    */
   public String toJSON(int depth){
 		//todo add pos
-		String finalString = "{\"id\": "+getId()+", \"type\": \"";
+		String finalString = "{\"id\": "+Counter.getId(this)+", \"type\": \"";
 		finalString+=getClass()+"\", \"position\": {\"start_line\": ";
 		finalString+=startLine()+", \"start_column\": "+startColumn()+ ", \"end_line\": ";
 		finalString+=endLine()+", \"end_column\": "+endColumn()+"}, \"children\": [ ";
@@ -1108,7 +1108,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:360
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:365
    */
     protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
     for (int i = 0; i < getNumChild(); i++) {

@@ -1,5 +1,19 @@
 aspect Converter {
 
+	public class Counter {
+		private static HashMap<ASTNode,Integer> IDS = new HashMap<ASTNode, Integer>();
+		private static int CURRENT_ID = 0;
+		public static int getId(ASTNode n) {
+			Integer id = IDS.get(n);
+			if (id==null) {
+				id = CURRENT_ID++;
+				IDS.put(n, id);
+			}
+			// System.out.println(CURRENT_ID+" "+n.getClass());
+			return id;
+		}
+	}
+
 	public void CompilationUnit.process(){
 
 		// int id = setID(0);
@@ -43,7 +57,7 @@ aspect Converter {
 
 	public String ASTNode.toJSON(int depth){
 		//todo add pos
-		String finalString = "{\"id\": "+getId()+", \"type\": \"";
+		String finalString = "{\"id\": "+Counter.getId(this)+", \"type\": \"";
 		finalString+=getClass()+"\", \"position\": {\"start_line\": ";
 		finalString+=startLine()+", \"start_column\": "+startColumn()+ ", \"end_line\": ";
 		finalString+=endLine()+", \"end_column\": "+endColumn()+"}, \"children\": [ ";
