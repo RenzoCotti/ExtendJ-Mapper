@@ -108,11 +108,10 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   protected Collection<Problem> parseErrors = new ArrayList<Problem>();
   /**
    * @aspect Converter
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:17
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:16
    */
   public void process(){
 
-		// int id = setID(0);
 
 		String tree = toJSON(0);
 		String fileAST = pathName().substring(0, pathName().length()-5)+"AST.txt";
@@ -625,7 +624,7 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:365
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:354
    */
   protected java.util.Map<ASTNode, java.util.Set<ASTNode>> contributorMap_TypeDecl_accessors = null;
 

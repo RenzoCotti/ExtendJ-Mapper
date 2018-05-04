@@ -49,13 +49,14 @@ public class Main {
                             }
 
                             if(line.contains("{")){
-                                openParethesis = true;
-                            } else if(openParethesis){
+//                                openParethesis = true;
+//                            } else if(openParethesis){
                                 String temp = "";
-                                while(!temp.contains("}")){
+                                while(!temp.trim().equals("}")){
                                     temp = br.readLine();
                                 }
                                 line = br.readLine().trim();
+
                             }
 
                             String [] splitLine = line.split(": ");

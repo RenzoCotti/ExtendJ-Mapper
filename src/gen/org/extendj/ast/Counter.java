@@ -41,7 +41,6 @@ public class Counter extends java.lang.Object {
 				id = CURRENT_ID++;
 				IDS.put(n, id);
 			}
-			// System.out.println(CURRENT_ID+" "+n.getClass());
 			return id;
 		}
 

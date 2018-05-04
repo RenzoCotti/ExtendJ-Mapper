@@ -2191,7 +2191,7 @@ public class ClassInstanceExpr extends Access implements Cloneable {
     super.collect_contributors_CompilationUnit_problems(_root, _map);
   }
   protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:410
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:399
     if (decl().isPrivate() && type() != hostType()) {
       {
         TypeDecl target = (TypeDecl) (decl().createAccessor().hostType());

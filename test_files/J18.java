@@ -10,13 +10,24 @@ abstract class Java implements Language{
 	public float getVersion() {
 		return version;
 	}
+
+	public static void doNothing(){
+		return;
+	}
 }
 
-class J14 extends Java{
-    private static String name;
+enum TypeOfLanguage
+{
+  FUNCTIONAL, IMPERATIVE
+}
 
-    public J14(String name){
+class J18 extends Java{
+    private static String name;
+		private TypeOfLanguage type;
+
+    public J18(String name){
 				this.name = name;
+				this.type = TypeOfLanguage.IMPERATIVE;
     }
 
     public int assertion(int x) {
@@ -33,7 +44,7 @@ class J14 extends Java{
 			}
 		}
 
-		public int loops() {
+		public int loops(int... items) {
 			int counter = 0;
 			for (int i = 0; i <= 10; i++){
 				++counter;
@@ -54,15 +65,24 @@ class J14 extends Java{
 			counter*=1;
 			counter/=1;
 
+			ArrayList<Integer> m = new ArrayList<>();
+
+			for (int x : items){
+				m.add(x);
+			}
+
+			m.forEach(x -> System.out.println(x));
+
 			return counter;
 		}
 
 		public void bitwise(){
-			int a = 5;
+			int a = 5_5;
 			a = a^3;
 			a = a|3;
 			a = a&3;
 			a = a << 3;
+			a = 0b0010001;
 
 			double b = (double) a;
 		}
@@ -70,18 +90,21 @@ class J14 extends Java{
 
 		public boolean ifStatements(){
 
-			char a = 'a';
+			String s = "hello";
 
-			switch(a){
-				case 'b':
-					a = 'c';
+			switch(s){
+				case "hello":
+					s = "world";
 					break;
 				default:
 					break;
 			}
 
+
 			InnerClass ic = null;
 			ic = new InnerClass(3);
+
+			Integer a = 3;
 
 			if(false && false && ic != null){
 				return true? false : true;
@@ -101,6 +124,10 @@ class J14 extends Java{
 				a[4] = 4;
 			} catch(IndexOutOfBoundsException e){
 				throw new Exception("A chained Exception has been thrown.");
+			} catch (Exception e){
+				a[0] = 1;
+			} finally {
+				a[0] = 3;
 			}
 		}
 

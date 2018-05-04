@@ -9,14 +9,12 @@ aspect Converter {
 				id = CURRENT_ID++;
 				IDS.put(n, id);
 			}
-			// System.out.println(CURRENT_ID+" "+n.getClass());
 			return id;
 		}
 	}
 
 	public void CompilationUnit.process(){
 
-		// int id = setID(0);
 
 		String tree = toJSON(0);
 		String fileAST = pathName().substring(0, pathName().length()-5)+"AST.txt";
@@ -33,30 +31,8 @@ aspect Converter {
 
 	}
 
-	// syn int ASTNode.ID() = -1;
-
-	/**
-	*{ a: b, c: d, e: [a: b, c: d]}
-	**/
-
-	// public int ASTNode.setID(int id){
-	// 	//todo add pos
-	// 	ID() = id;
-	//
-	// 	int to_return = id;
-	//
-	// 	if(children != null) {
-	// 		for(int i = 0; i < numChildren; i++){
-	// 			ASTNode currentChild = children[i];
-	// 			to_return = currentChild.setID(++id);
-	// 		}
-	// 	}
-	//
-	// 	return to_return;
-	// }
 
 	public String ASTNode.toJSON(int depth){
-		//todo add pos
 		String finalString = "{\"id\": "+Counter.getId(this)+", \"type\": \"";
 		finalString+=getClass()+"\", \"position\": {\"start_line\": ";
 		finalString+=startLine()+", \"start_column\": "+startColumn()+ ", \"end_line\": ";

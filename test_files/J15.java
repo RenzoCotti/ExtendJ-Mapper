@@ -12,11 +12,18 @@ abstract class Java implements Language{
 	}
 }
 
-class J14 extends Java{
-    private static String name;
+enum TypeOfLanguage
+{
+  FUNCTIONAL, IMPERATIVE
+}
 
-    public J14(String name){
+class J15 extends Java{
+    private static String name;
+		private TypeOfLanguage type;
+
+    public J15(String name){
 				this.name = name;
+				this.type = TypeOfLanguage.IMPERATIVE;
     }
 
     public int assertion(int x) {
@@ -33,7 +40,7 @@ class J14 extends Java{
 			}
 		}
 
-		public int loops() {
+		public int loops(int... items) {
 			int counter = 0;
 			for (int i = 0; i <= 10; i++){
 				++counter;
@@ -53,6 +60,13 @@ class J14 extends Java{
 			counter-=1;
 			counter*=1;
 			counter/=1;
+
+			ArrayList<Integer> m = new ArrayList<Integer>();
+
+			for (int x : items){
+				m.add(x);
+			}
+
 
 			return counter;
 		}
@@ -79,6 +93,8 @@ class J14 extends Java{
 				default:
 					break;
 			}
+
+
 
 			InnerClass ic = null;
 			ic = new InnerClass(3);
