@@ -419,13 +419,13 @@ class CodeGeneration {
   }
 
   public void emitReturn(ASTNode<? extends ASTNode> node) {
-		addPositionEntryAtCurrentPC(node);
-	  bytes.emit(Bytecode.RETURN);
+		// addPositionEntryAtCurrentPC(node);
+	  emit(node, Bytecode.RETURN);
   }
 
   public void emitThrow(ASTNode<? extends ASTNode> node) {
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.ATHROW);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.ATHROW);
   }
 
   public void emitInstanceof(ASTNode<? extends ASTNode> node, TypeDecl type) {
@@ -433,8 +433,8 @@ class CodeGeneration {
         ? type.typeDescriptor()
         : type.constantPoolName());
 
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.INSTANCEOF).add2(p);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.INSTANCEOF).add2(p);
   }
 
   public void emitCheckCast(ASTNode<? extends ASTNode> node, TypeDecl type) {
@@ -442,54 +442,54 @@ class CodeGeneration {
         ? type.typeDescriptor()
         : type.constantPoolName());
 
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.CHECKCAST).add2(p);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.CHECKCAST).add2(p);
   }
 
   public void emitDup(ASTNode<? extends ASTNode> node) {
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.DUP);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.DUP);
   }
 
   public void emitDup2(ASTNode<? extends ASTNode> node) {
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.DUP2);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.DUP2);
   }
 
   public void emitPop(ASTNode<? extends ASTNode> node) {
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.POP);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.POP);
   }
 
   public void emitSwap(ASTNode<? extends ASTNode> node) {
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.SWAP);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.SWAP);
   }
 
   public void emitBranchNonNull(ASTNode<? extends ASTNode> node, int label) {
     int p = jump(label);
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(Bytecode.IFNONNULL).add2(p);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, Bytecode.IFNONNULL).add2(p);
   }
 
   public void emitGoto(ASTNode<? extends ASTNode> node, int label) {
     int p = jump(label);
     if (wideGoto) {
-			addPositionEntryAtCurrentPC(node);
+			// addPositionEntryAtCurrentPC(node);
       bytes.emitGoto(Bytecode.GOTO_W).add4(p);
     } else {
       if (p > Short.MAX_VALUE || p < Short.MIN_VALUE) {
         throw new JumpOffsetError();
       }
-			addPositionEntryAtCurrentPC(node);
+			// addPositionEntryAtCurrentPC(node);
       bytes.emitGoto(Bytecode.GOTO).add2(p);
     }
   }
 
   public void emitCompare(ASTNode<? extends ASTNode> node, byte bytecode, int label) {
     int p = jump(label);
-		addPositionEntryAtCurrentPC(node);
-    bytes.emit(bytecode).add2(p);
+		// addPositionEntryAtCurrentPC(node);
+    emit(node, bytecode).add2(p);
   }
 
   @Override

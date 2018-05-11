@@ -1,12 +1,8 @@
-import javafx.geometry.Pos;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class Main {
 
@@ -14,12 +10,14 @@ public class Main {
         if(args.length == 0){
             System.err.println("Please provide at least an argument");
         } else {
-            if(args.length != 2){
-                System.err.println("Args: [print|missing|percent] filename");
+            if(args.length > 3 || args.length < 2){
+                System.err.println("Args: [print|missing|percent|source] filename (optional source file)");
                 return;
             }
+
             String mode = args[0];
             String fileName = args[1];
+
             try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
                 //hashmap of method signatures and respective BC/PC
                 ArrayList<BytecodeInfo> classFileInfo = new ArrayList<>();
@@ -153,6 +151,75 @@ public class Main {
                             Math.round(number*100.0)/100.0+"% ("+covered+"/"+total+")");
                 }
 
+                if(mode.equals("source")){
+                    String sourceFile = args[2];
+                    Scanner reader = new Scanner(System.in);
+
+
+                    //for each method
+                    for(BytecodeInfo bc : classFileInfo){
+                        String methodName = bc.getMethodName();
+                        HashMap<Integer, Position> pcAndPosition = bc.getPcAndPositions();
+                        HashMap<Integer, String> pcAndBC = bc.getPcAndBC();
+
+                        System.out.println("\n\n\n\n");
+                        System.out.println(methodName);
+
+                        for(int k : pcAndBC.keySet()){
+                            reader.nextLine();
+
+                            System.out.println("-------------------------");
+                            System.out.println("PC: "+k+" - "+pcAndBC.get(k).toUpperCase());
+                            Position p = pcAndPosition.get(k);
+                            if(p == null) {
+                                System.out.println("NOT MAPPED");
+                                continue;
+                            }
+
+                            //we wait for enter
+
+                            try(BufferedReader src = new BufferedReader(new FileReader(sourceFile))){
+                                int lineNum = 1;
+                                String line = src.readLine();
+                                String out = "";
+
+                                while (lineNum != p.getStartLine()){
+                                    lineNum++;
+                                    line = src.readLine();
+                                }
+                                if(p.getEndLine() != p.getStartLine()){
+                                    out += line.substring(p.getStartColumn()-1, line.length()) + '\n';
+                                    while (lineNum != p.getEndLine()){
+                                        line = src.readLine();
+                                        out += line +'\n';
+                                        lineNum++;
+                                    }
+
+                                    out += line.substring(0, p.getEndColumn());
+                                } else {
+                                    out += line.substring(p.getStartColumn()-1, p.getEndColumn());
+                                }
+
+
+                                System.out.println(out);
+
+                            } catch (FileNotFoundException e){
+                                System.err.println("Source file not found");
+                            }
+                            catch (Exception e){
+                                for(BytecodeInfo bcode : classFileInfo){
+                                    bcode.printInfo();
+                                }
+                                System.out.println(e);
+                            }
+                        }
+
+
+
+                    }
+
+                }
+
 
 
 
@@ -160,7 +227,7 @@ public class Main {
 
 
             } catch (FileNotFoundException e){
-                System.err.println("File not found");
+                System.err.println("File not found: "+fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }
