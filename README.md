@@ -1,3 +1,41 @@
+
+Bytecode to source code mapper
+===============================
+
+This is an extension for ExtendJ which allows for bytecode to source code mapping with a finer granularity,
+meaning it would be possible to find the precise portion of Java code that generated a certain bytecode instruction.
+
+How to use ExtendJ
+=============
+Inside the main folder, run: `./gradlew --rerun-tasks` to generate extendj.jar, the compiler.
+
+Then, run `java -jar extendj.jar file_to_compile.java` to compile a certain file using ExtendJ.
+
+How to use the testing suite
+========================
+
+First, compile a file using ExtendJ
+Then, run `javap -verbose -c compiled_file.class > decompiled_file.txt` to decompile the .class file.
+
+At this point, go inside `bytecode-checker/src/` and run `javac Main.java` to compile the files of the testing suite.
+Then, run `java Main [print|missing|percent|source] path_to_decompiled_file.txt path_to_original_file.java`.
+
+A few notes:
+- feeding the original .java file is necessary only for the `source` option.
+- `print` just prints information derived from the class file in a structured way
+- `missing` prints the bytecode instructions that do not have relevant information inside the PositionTable
+- `percent` prints the percentage of coverage (bytecode instruction mapped/total bytecode instructions)
+- `source` allows for interactive stepping from bytecode instruction to bytecode instruction, while printing the corresponding source code fragment.
+
+
+
+
+
+
+
+
+(what follows is the original ExtendJ readme)
+
 ExtendJ
 ========
 
