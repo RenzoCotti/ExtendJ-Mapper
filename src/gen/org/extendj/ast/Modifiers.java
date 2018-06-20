@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -173,15 +173,15 @@ public class Modifiers extends ASTNode<ASTNode> implements Cloneable {
    */
   public static final int ACC_ENUM = 0x4000;
   /**
-   * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:242
-   */
-  public static final int ACC_BRIDGE = 0x0040;
-  /**
    * @aspect VariableArityParametersCodegen
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/VariableArityParametersCodegen.jrag:153
    */
   public static final int ACC_VARARGS = 0x0080;
+  /**
+   * @aspect GenericsCodegen
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:242
+   */
+  public static final int ACC_BRIDGE = 0x0040;
   /**
    * @declaredat ASTNode:1
    */

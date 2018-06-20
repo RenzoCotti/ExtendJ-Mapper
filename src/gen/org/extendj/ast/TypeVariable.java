@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -108,7 +108,6 @@ public class TypeVariable extends ReferenceType implements Cloneable {
     super.flushAttrCache();
     rewrittenNode_reset();
     toInterface_reset();
-    unboxed_reset();
     involvesTypeParameters_reset();
     castingConversionTo_TypeDecl_reset();
     erasure_reset();
@@ -117,6 +116,7 @@ public class TypeVariable extends ReferenceType implements Cloneable {
     usesTypeVariable_reset();
     accessibleFrom_TypeDecl_reset();
     typeName_reset();
+    unboxed_reset();
     sameStructure_TypeDecl_reset();
     subtype_TypeDecl_reset();
     instanceOf_TypeDecl_reset();
@@ -555,124 +555,32 @@ public class TypeVariable extends ReferenceType implements Cloneable {
       }
       return ITj;
     }
-  /** @apilevel internal */
-  private void unboxed_reset() {
-    unboxed_computed = null;
-    unboxed_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle unboxed_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl unboxed_value;
-
-  /** Mapping between Reference type and corresponding unboxed Primitive type. 
+  /**
    * @attribute syn
-   * @aspect AutoBoxing
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/AutoBoxing.jrag:77
+   * @aspect GenericsParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:104
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/AutoBoxing.jrag:77")
-  public TypeDecl unboxed() {
-    ASTNode$State state = state();
-    if (unboxed_computed == ASTNode$State.NON_CYCLE || unboxed_computed == state().cycle()) {
-      return unboxed_value;
-    }
-    unboxed_value = unboxed_compute();
-    if (state().inCircle()) {
-      unboxed_computed = state().cycle();
-    
-    } else {
-      unboxed_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return unboxed_value;
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:104")
+  public boolean isTypeVariable() {
+    boolean isTypeVariable_value = true;
+    return isTypeVariable_value;
   }
-  /** @apilevel internal */
-  private TypeDecl unboxed_compute() {
-      for (Access bound: getTypeBoundList()) {
-        TypeDecl unboxed = bound.type().unboxed();
-        if (!unboxed.isUnknown()) {
-          return unboxed;
-        }
-      }
-      return unknownType();
-    }
   /**
-   * Check if a given type is within the bound of this type, given a specific
-   * parameterization of this type.
+   * A type is reifiable if it either refers to a non-parameterized type,
+   * is a raw type, is a parameterized type with only unbound wildcard
+   * parameters or is an array type with a reifiable type parameter.
    * 
-   * See JLS SE7 $4.5
-   * 
-   * @param argument argument type
-   * @return {@code true} if the argument type is in the bound of this type
+   * @see "JLS SE7 &sect;4.7"
    * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:61
+   * @aspect ReifiableTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:61")
-  public boolean boundOf(TypeDecl argument) {
-    {
-        for (int i = 0; i < getNumTypeBound(); ++i) {
-          TypeDecl bound = getTypeBound(i).type();
-          if (!argument.subtype(bound)) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:73
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:73")
-  public boolean boundOfWildcard(WildcardType type) {
-    boolean boundOfWildcard_WildcardType_value = true;
-    return boundOfWildcard_WildcardType_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:77
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:77")
-  public boolean boundOfWildcardExtends(WildcardExtendsType type) {
-    boolean boundOfWildcardExtends_WildcardExtendsType_value = type.extendsType().subtype(this);
-    return boundOfWildcardExtends_WildcardExtendsType_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:82
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:82")
-  public boolean boundOfWildcardSuper(WildcardSuperType type) {
-    boolean boundOfWildcardSuper_WildcardSuperType_value = type.superType().subtype(this);
-    return boundOfWildcardSuper_WildcardSuperType_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87")
-  public boolean boundOfArray(ArrayDecl type) {
-    {
-        // An array type is within the bounds of a type variable if the
-        // type variable has a single type bound that is an array type bound,
-        // or if there are no type bounds for the type variable.
-        if (getNumTypeBound() == 1) {
-          return getTypeBound(0).type().boundOfArray(type);
-        }
-        return getNumTypeBound() == 0;
-      }
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
+  public boolean isReifiable() {
+    boolean isReifiable_value = false;
+    return isReifiable_value;
   }
 /** @apilevel internal */
 protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
@@ -1027,17 +935,49 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
     }
     return typeName_value;
   }
-  /**
+  /** @apilevel internal */
+  private void unboxed_reset() {
+    unboxed_computed = null;
+    unboxed_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle unboxed_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl unboxed_value;
+
+  /** Mapping between Reference type and corresponding unboxed Primitive type. 
    * @attribute syn
-   * @aspect GenericsParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:104
+   * @aspect AutoBoxing
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/AutoBoxing.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:104")
-  public boolean isTypeVariable() {
-    boolean isTypeVariable_value = true;
-    return isTypeVariable_value;
+  @ASTNodeAnnotation.Source(aspect="AutoBoxing", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/AutoBoxing.jrag:77")
+  public TypeDecl unboxed() {
+    ASTNode$State state = state();
+    if (unboxed_computed == ASTNode$State.NON_CYCLE || unboxed_computed == state().cycle()) {
+      return unboxed_value;
+    }
+    unboxed_value = unboxed_compute();
+    if (state().inCircle()) {
+      unboxed_computed = state().cycle();
+    
+    } else {
+      unboxed_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return unboxed_value;
   }
+  /** @apilevel internal */
+  private TypeDecl unboxed_compute() {
+      for (Access bound: getTypeBoundList()) {
+        TypeDecl unboxed = bound.type().unboxed();
+        if (!unboxed.isUnknown()) {
+          return unboxed;
+        }
+      }
+      return unknownType();
+    }
   /**
    * @attribute syn
    * @aspect GenericsSubtype
@@ -1307,6 +1247,82 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
     return instanceOf_TypeDecl_value;
   }
   /**
+   * Check if a given type is within the bound of this type, given a specific
+   * parameterization of this type.
+   * 
+   * See JLS SE7 $4.5
+   * 
+   * @param argument argument type
+   * @return {@code true} if the argument type is in the bound of this type
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:61
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:61")
+  public boolean boundOf(TypeDecl argument) {
+    {
+        for (int i = 0; i < getNumTypeBound(); ++i) {
+          TypeDecl bound = getTypeBound(i).type();
+          if (!argument.subtype(bound)) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:73
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:73")
+  public boolean boundOfWildcard(WildcardType type) {
+    boolean boundOfWildcard_WildcardType_value = true;
+    return boundOfWildcard_WildcardType_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:77
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:77")
+  public boolean boundOfWildcardExtends(WildcardExtendsType type) {
+    boolean boundOfWildcardExtends_WildcardExtendsType_value = type.extendsType().subtype(this);
+    return boundOfWildcardExtends_WildcardExtendsType_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:82
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:82")
+  public boolean boundOfWildcardSuper(WildcardSuperType type) {
+    boolean boundOfWildcardSuper_WildcardSuperType_value = type.superType().subtype(this);
+    return boundOfWildcardSuper_WildcardSuperType_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87")
+  public boolean boundOfArray(ArrayDecl type) {
+    {
+        // An array type is within the bounds of a type variable if the
+        // type variable has a single type bound that is an array type bound,
+        // or if there are no type bounds for the type variable.
+        if (getNumTypeBound() == 1) {
+          return getTypeBound(0).type().boundOfArray(type);
+        }
+        return getNumTypeBound() == 0;
+      }
+  }
+  /**
    * @attribute syn
    * @aspect NameCheck
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:364
@@ -1455,22 +1471,6 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
         }
         return problems;
       }
-  }
-  /**
-   * A type is reifiable if it either refers to a non-parameterized type,
-   * is a raw type, is a parameterized type with only unbound wildcard
-   * parameters or is an array type with a reifiable type parameter.
-   * 
-   * @see "JLS SE7 &sect;4.7"
-   * @attribute syn
-   * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
-  public boolean isReifiable() {
-    boolean isReifiable_value = false;
-    return isReifiable_value;
   }
   /** @apilevel internal */
   private void sameType_TypeVariable_reset() {

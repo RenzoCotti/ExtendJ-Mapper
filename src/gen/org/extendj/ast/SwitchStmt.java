@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -327,10 +327,10 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    canCompleteNormally_reset();
     assignedAfter_Variable_reset();
     unassignedAfter_Variable_reset();
     unassignedAfterLastStmt_Variable_reset();
-    canCompleteNormally_reset();
     defaultCase_reset();
     end_label_reset();
     enumIndexExpr_reset();
@@ -602,17 +602,95 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     }
   }
   /**
-   * @return <code>true</code> if this statement is a potential
-   * branch target of the given branch statement.
    * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:96
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215")
-  public boolean potentialTargetOf(Stmt branch) {
-    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
-    return potentialTargetOf_Stmt_value;
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:96")
+  public boolean lastStmtCanCompleteNormally() {
+    boolean lastStmtCanCompleteNormally_value = getBlock().canCompleteNormally();
+    return lastStmtCanCompleteNormally_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:98
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:98")
+  public boolean noStmts() {
+    {
+        for (int i = 0; i < getBlock().getNumStmt(); i++) {
+          if (!(getBlock().getStmt(i) instanceof Case)) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:107
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:107")
+  public boolean noStmtsAfterLastLabel() {
+    boolean noStmtsAfterLastLabel_value = getBlock().getNumStmt() > 0
+          && getBlock().getStmt(getBlock().getNumStmt()-1) instanceof Case;
+    return noStmtsAfterLastLabel_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:111
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:111")
+  public boolean noDefaultLabel() {
+    {
+        for (int i = 0; i < getBlock().getNumStmt(); i++) {
+          if (getBlock().getStmt(i) instanceof DefaultCase) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  /** @apilevel internal */
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
+
+  /** @apilevel internal */
+  protected boolean canCompleteNormally_value;
+
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
+    ASTNode$State state = state();
+    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
+    }
+    canCompleteNormally_value = lastStmtCanCompleteNormally() || noStmts()
+          || noStmtsAfterLastLabel()
+          || noDefaultLabel() || reachableBreak();
+    if (state().inCircle()) {
+      canCompleteNormally_computed = state().cycle();
+    
+    } else {
+      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return canCompleteNormally_value;
   }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
@@ -844,95 +922,17 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
       }
   }
   /**
+   * @return <code>true</code> if this statement is a potential
+   * branch target of the given branch statement.
    * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:96
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:96")
-  public boolean lastStmtCanCompleteNormally() {
-    boolean lastStmtCanCompleteNormally_value = getBlock().canCompleteNormally();
-    return lastStmtCanCompleteNormally_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:98
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:98")
-  public boolean noStmts() {
-    {
-        for (int i = 0; i < getBlock().getNumStmt(); i++) {
-          if (!(getBlock().getStmt(i) instanceof Case)) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:107
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:107")
-  public boolean noStmtsAfterLastLabel() {
-    boolean noStmtsAfterLastLabel_value = getBlock().getNumStmt() > 0
-          && getBlock().getStmt(getBlock().getNumStmt()-1) instanceof Case;
-    return noStmtsAfterLastLabel_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:111
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:111")
-  public boolean noDefaultLabel() {
-    {
-        for (int i = 0; i < getBlock().getNumStmt(); i++) {
-          if (getBlock().getStmt(i) instanceof DefaultCase) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
-
-  /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
-
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
-    ASTNode$State state = state();
-    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
-    }
-    canCompleteNormally_value = lastStmtCanCompleteNormally() || noStmts()
-          || noStmtsAfterLastLabel()
-          || noDefaultLabel() || reachableBreak();
-    if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
-    
-    } else {
-      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return canCompleteNormally_value;
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215")
+  public boolean potentialTargetOf(Stmt branch) {
+    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
+    return potentialTargetOf_Stmt_value;
   }
   /**
    * @attribute syn
@@ -1272,14 +1272,35 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return typeString_value;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:230
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
-  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return branch.canBranchTo(this) ? this : branchTarget(branch);
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:125
+      return reachable();
+    }
+    else {
+      return getParent().Define_reachable(this, _callerNode);
+    }
   }
-  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
+   * @apilevel internal
+   */
+  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:218
+      return reachable();
+    }
+    else {
+      return getParent().Define_reportUnreachable(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -1329,6 +1350,22 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
+   * @apilevel internal
+   */
+  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:483
+      return getExpr().type();
+    }
+    else {
+      return getParent().Define_switchType(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:512
    * @apilevel internal
    */
@@ -1369,51 +1406,14 @@ public class SwitchStmt extends BranchTargetStmt implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:230
    * @apilevel internal
    */
-  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:483
-      return getExpr().type();
-    }
-    else {
-      return getParent().Define_switchType(this, _callerNode);
-    }
+  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return branch.canBranchTo(this) ? this : branchTarget(branch);
   }
-  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
-   * @apilevel internal
-   */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:125
-      return reachable();
-    }
-    else {
-      return getParent().Define_reachable(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
-   * @apilevel internal
-   */
-  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:218
-      return reachable();
-    }
-    else {
-      return getParent().Define_reportUnreachable(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
     return true;
   }
   /**

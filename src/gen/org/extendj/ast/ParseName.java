@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -250,28 +250,6 @@ public class ParseName extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563")
-  public SimpleSet<TypeDecl> qualifiedLookupType(String name) {
-    SimpleSet<TypeDecl> qualifiedLookupType_String_value = emptySet();
-    return qualifiedLookupType_String_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264")
-  public SimpleSet<Variable> qualifiedLookupVariable(String name) {
-    SimpleSet<Variable> qualifiedLookupVariable_String_value = emptySet();
-    return qualifiedLookupVariable_String_value;
-  }
-  /**
-   * @attribute syn
    * @aspect NameResolution
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:484
    */
@@ -299,6 +277,28 @@ public class ParseName extends Access implements Cloneable {
         }
         return sb.toString();
       }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563")
+  public SimpleSet<TypeDecl> qualifiedLookupType(String name) {
+    SimpleSet<TypeDecl> qualifiedLookupType_String_value = emptySet();
+    return qualifiedLookupType_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect VariableScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264")
+  public SimpleSet<Variable> qualifiedLookupVariable(String name) {
+    SimpleSet<Variable> qualifiedLookupVariable_String_value = emptySet();
+    return qualifiedLookupVariable_String_value;
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {

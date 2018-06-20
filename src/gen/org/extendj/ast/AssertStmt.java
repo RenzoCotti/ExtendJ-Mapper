@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -380,17 +380,6 @@ public class AssertStmt extends Stmt implements Cloneable {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
   }
-  /**
-   * @attribute syn
-   * @aspect Java2Rewrites
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97")
-  public boolean hasAssertStatementRecursive() {
-    boolean hasAssertStatementRecursive_value = true;
-    return hasAssertStatementRecursive_value;
-  }
   /** @apilevel internal */
   private void transformed_reset() {
     transformed_computed = false;
@@ -449,6 +438,17 @@ public class AssertStmt extends Stmt implements Cloneable {
                   new Opt())),
           new Opt());
     }
+  /**
+   * @attribute syn
+   * @aspect Java2Rewrites
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97")
+  public boolean hasAssertStatementRecursive() {
+    boolean hasAssertStatementRecursive_value = true;
+    return hasAssertStatementRecursive_value;
+  }
   /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal

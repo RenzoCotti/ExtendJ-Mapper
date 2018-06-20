@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -89,9 +89,9 @@ public class RawInterfaceDecl extends ParInterfaceDecl implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    firstTypeArgument_reset();
     subtype_TypeDecl_reset();
     instanceOf_TypeDecl_reset();
+    firstTypeArgument_reset();
     strictSubtype_TypeDecl_reset();
   }
   /** @apilevel internal 
@@ -583,40 +583,32 @@ public class RawInterfaceDecl extends ParInterfaceDecl implements Cloneable {
   public List<BodyDecl> getBodyDeclsNoTransform() {
     return getBodyDeclListNoTransform();
   }
-  /** @apilevel internal */
-  private void firstTypeArgument_reset() {
-    firstTypeArgument_computed = null;
-    firstTypeArgument_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle firstTypeArgument_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl firstTypeArgument_value;
-
   /**
-   * Returns the first type argument of this type, if it is parameterized, otherwise returns
-   * java.lang.Object.
    * @attribute syn
-   * @aspect EnhancedFor
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119
+   * @aspect GenericsParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119")
-  public TypeDecl firstTypeArgument() {
-    ASTNode$State state = state();
-    if (firstTypeArgument_computed == ASTNode$State.NON_CYCLE || firstTypeArgument_computed == state().cycle()) {
-      return firstTypeArgument_value;
-    }
-    firstTypeArgument_value = typeObject();
-    if (state().inCircle()) {
-      firstTypeArgument_computed = state().cycle();
-    
-    } else {
-      firstTypeArgument_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return firstTypeArgument_value;
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55")
+  public String nameWithArgs() {
+    String nameWithArgs_value = name();
+    return nameWithArgs_value;
+  }
+  /**
+   * A type is reifiable if it either refers to a non-parameterized type,
+   * is a raw type, is a parameterized type with only unbound wildcard
+   * parameters or is an array type with a reifiable type parameter.
+   * 
+   * @see "JLS SE7 &sect;4.7"
+   * @attribute syn
+   * @aspect ReifiableTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
+  public boolean isReifiable() {
+    boolean isReifiable_value = true;
+    return isReifiable_value;
   }
   /**
    * @attribute syn
@@ -661,17 +653,6 @@ public class RawInterfaceDecl extends ParInterfaceDecl implements Cloneable {
   public boolean sameSignature(Access a) {
     boolean sameSignature_Access_value = a instanceof TypeAccess && a.type() == this;
     return sameSignature_Access_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenericsParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55")
-  public String nameWithArgs() {
-    String nameWithArgs_value = name();
-    return nameWithArgs_value;
   }
   /**
    * @attribute syn
@@ -806,21 +787,40 @@ public class RawInterfaceDecl extends ParInterfaceDecl implements Cloneable {
     }
     return instanceOf_TypeDecl_value;
   }
+  /** @apilevel internal */
+  private void firstTypeArgument_reset() {
+    firstTypeArgument_computed = null;
+    firstTypeArgument_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle firstTypeArgument_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl firstTypeArgument_value;
+
   /**
-   * A type is reifiable if it either refers to a non-parameterized type,
-   * is a raw type, is a parameterized type with only unbound wildcard
-   * parameters or is an array type with a reifiable type parameter.
-   * 
-   * @see "JLS SE7 &sect;4.7"
+   * Returns the first type argument of this type, if it is parameterized, otherwise returns
+   * java.lang.Object.
    * @attribute syn
-   * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
+   * @aspect EnhancedFor
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
-  public boolean isReifiable() {
-    boolean isReifiable_value = true;
-    return isReifiable_value;
+  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119")
+  public TypeDecl firstTypeArgument() {
+    ASTNode$State state = state();
+    if (firstTypeArgument_computed == ASTNode$State.NON_CYCLE || firstTypeArgument_computed == state().cycle()) {
+      return firstTypeArgument_value;
+    }
+    firstTypeArgument_value = typeObject();
+    if (state().inCircle()) {
+      firstTypeArgument_computed = state().cycle();
+    
+    } else {
+      firstTypeArgument_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return firstTypeArgument_value;
   }
   /**
    * @attribute syn

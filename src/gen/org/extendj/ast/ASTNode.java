@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -151,29 +151,61 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     }
   }
   /**
-   * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:123
+   * @aspect VariableDeclarationTransformation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:121
    */
-  protected void collectExceptions(Collection<TypeDecl> exceptions, ASTNode target) {
-    for (int i = 0; i < getNumChild(); i++) {
-      getChild(i).collectExceptions(exceptions, target);
+  public void clearLocations() {
+    setStart(0);
+    setEnd(0);
+    for (int i = 0; i < getNumChildNoTransform(); i++) {
+      getChildNoTransform(i).clearLocations();
     }
   }
   /**
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:94
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:292
    */
-  public void collectBranches(Collection<Stmt> c) {
+  protected boolean reachedException(TypeDecl type) {
     for (int i = 0; i < getNumChild(); i++) {
-      getChild(i).collectBranches(c);
+      if (getChild(i).reachedException(type)) {
+        return true;
+      }
     }
+    return false;
   }
   /**
-   * @aspect DataStructures
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:312
+   * Helper method to throw an error when prevExpr is evaluated somewhere where
+   * the attribute can not be evaluated.
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:130
    */
-  public static <T> SimpleSet<T> emptySet() {
-    return (SimpleSet<T>) SimpleSet.EMPTY_SET;
+  protected Expr prevExprError() {
+    throw new Error("prevExpr can not be evaluated outside of the right side of a Dot access.");
+  }
+  /**
+   * Helper method to throw an error when nextAccess is evaluated somewhere
+   * where the attribute can not be evaluated.
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:152
+   */
+  protected Access nextAccessError() {
+    throw new Error("nextAccess can not be evaluated outside of the left side of a Dot access.");
+  }
+  /** @return a copy of the block as an NTAFinallyBlock. 
+   * @aspect NTAFinally
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:33
+   */
+  protected static NTAFinallyBlock ntaFinallyBlock(FinallyHost origin,
+      Stmt branch, Block block) {
+    NTAFinallyBlock ntaBlock = new NTAFinallyBlock(origin);
+    ntaBlock.addStmt((Block) block.treeCopyNoTransform());
+    if (block.canCompleteNormally()) {
+      FinallyHost enclosing = block.enclosingFinally(branch);
+      if (enclosing != null) {
+        ntaBlock.addStmt(ntaFinallyBlock(enclosing, branch, enclosing.getFinallyBlock()));
+      }
+    }
+    return ntaBlock;
   }
   /**
    * @aspect DefiniteAssignment
@@ -199,6 +231,60 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
       return false;
     }
     return getParent().isDescendantTo(node);
+  }
+  /**
+   * @aspect VariableScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:299
+   */
+  public SimpleSet<Variable> removeInstanceVariables(SimpleSet<Variable> vars) {
+    SimpleSet<Variable> newSet = emptySet();
+    for (Variable v : vars) {
+      if (!v.isInstanceVariable()) {
+        newSet = newSet.add(v);
+      }
+    }
+    return newSet;
+  }
+  /**
+   * @aspect NameCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:33
+   */
+  public TypeDecl extractSingleType(SimpleSet<TypeDecl> types) {
+    return types.isSingleton() ? types.singletonValue() : null;
+  }
+  /**
+   * @aspect PrimitiveTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrimitiveTypes.jrag:35
+   */
+  protected static final String PRIMITIVE_PACKAGE_NAME = "@primitive";
+  /**
+   * Returns a filtered collection of methods, keeping only the static methods
+   * from the input collection.
+   * @aspect LookupMethod
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:107
+   */
+  public static Collection<MethodDecl> keepStaticMethods(
+      Collection<MethodDecl> methods) {
+    Collection<MethodDecl> result = new LinkedList<MethodDecl>();
+    for (MethodDecl method : methods) {
+      if (method.isStatic()) {
+        result.add(method);
+      }
+    }
+    return result;
+  }
+  /**
+   * Utility method to add a single item in a SimpleSet based signature map.
+   * @aspect MemberMethods
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:566
+   */
+  protected static <E> void putSimpleSetElement(Map<String, SimpleSet<E>> map,
+      String key, E value) {
+    SimpleSet<E> result = map.get(key);
+    if (result == null) {
+      result = emptySet();
+    }
+    map.put(key, result.add(value));
   }
   /**
    * @aspect ErrorCheck
@@ -318,81 +404,29 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
         Problem.Severity.WARNING, Problem.Kind.SEMANTIC);
   }
   /**
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:292
+   * @aspect DataStructures
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DataStructures.jrag:312
    */
-  protected boolean reachedException(TypeDecl type) {
+  public static <T> SimpleSet<T> emptySet() {
+    return (SimpleSet<T>) SimpleSet.EMPTY_SET;
+  }
+  /**
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:94
+   */
+  public void collectBranches(Collection<Stmt> c) {
     for (int i = 0; i < getNumChild(); i++) {
-      if (getChild(i).reachedException(type)) {
-        return true;
-      }
+      getChild(i).collectBranches(c);
     }
-    return false;
   }
   /**
-   * Returns a filtered collection of methods, keeping only the static methods
-   * from the input collection.
-   * @aspect LookupMethod
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:107
+   * @aspect AnonymousClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:123
    */
-  public static Collection<MethodDecl> keepStaticMethods(
-      Collection<MethodDecl> methods) {
-    Collection<MethodDecl> result = new LinkedList<MethodDecl>();
-    for (MethodDecl method : methods) {
-      if (method.isStatic()) {
-        result.add(method);
-      }
+  protected void collectExceptions(Collection<TypeDecl> exceptions, ASTNode target) {
+    for (int i = 0; i < getNumChild(); i++) {
+      getChild(i).collectExceptions(exceptions, target);
     }
-    return result;
-  }
-  /**
-   * Utility method to add a single item in a SimpleSet based signature map.
-   * @aspect MemberMethods
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:566
-   */
-  protected static <E> void putSimpleSetElement(Map<String, SimpleSet<E>> map,
-      String key, E value) {
-    SimpleSet<E> result = map.get(key);
-    if (result == null) {
-      result = emptySet();
-    }
-    map.put(key, result.add(value));
-  }
-  /**
-   * @aspect VariableScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:299
-   */
-  public SimpleSet<Variable> removeInstanceVariables(SimpleSet<Variable> vars) {
-    SimpleSet<Variable> newSet = emptySet();
-    for (Variable v : vars) {
-      if (!v.isInstanceVariable()) {
-        newSet = newSet.add(v);
-      }
-    }
-    return newSet;
-  }
-  /**
-   * @aspect NameCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:33
-   */
-  public TypeDecl extractSingleType(SimpleSet<TypeDecl> types) {
-    return types.isSingleton() ? types.singletonValue() : null;
-  }
-  /** @return a copy of the block as an NTAFinallyBlock. 
-   * @aspect NTAFinally
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:33
-   */
-  protected static NTAFinallyBlock ntaFinallyBlock(FinallyHost origin,
-      Stmt branch, Block block) {
-    NTAFinallyBlock ntaBlock = new NTAFinallyBlock(origin);
-    ntaBlock.addStmt((Block) block.treeCopyNoTransform());
-    if (block.canCompleteNormally()) {
-      FinallyHost enclosing = block.enclosingFinally(branch);
-      if (enclosing != null) {
-        ntaBlock.addStmt(ntaFinallyBlock(enclosing, branch, enclosing.getFinallyBlock()));
-      }
-    }
-    return ntaBlock;
   }
   /**
    * Pretty-print this ASTNode.
@@ -426,40 +460,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:60
    */
   public void prettyPrint(PrettyPrinter out) {
-  }
-  /**
-   * @aspect PrimitiveTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrimitiveTypes.jrag:35
-   */
-  protected static final String PRIMITIVE_PACKAGE_NAME = "@primitive";
-  /**
-   * Helper method to throw an error when prevExpr is evaluated somewhere where
-   * the attribute can not be evaluated.
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:130
-   */
-  protected Expr prevExprError() {
-    throw new Error("prevExpr can not be evaluated outside of the right side of a Dot access.");
-  }
-  /**
-   * Helper method to throw an error when nextAccess is evaluated somewhere
-   * where the attribute can not be evaluated.
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:152
-   */
-  protected Access nextAccessError() {
-    throw new Error("nextAccess can not be evaluated outside of the left side of a Dot access.");
-  }
-  /**
-   * @aspect VariableDeclarationTransformation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:121
-   */
-  public void clearLocations() {
-    setStart(0);
-    setEnd(0);
-    for (int i = 0; i < getNumChildNoTransform(); i++) {
-      getChildNoTransform(i).clearLocations();
-    }
   }
   /**
    * Create a copy of the access list where each access has been erased.
@@ -499,6 +499,26 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     }
   }
   /**
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:204
+   */
+  public void collectEnclosingVariables(Collection<Variable> vars, TypeDecl typeDecl) {
+    for (int i = 0; i < getNumChild(); i++) {
+      getChild(i).collectEnclosingVariables(vars, typeDecl);
+    }
+  }
+  /**
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:386
+   */
+  protected static Access createAccess(Variable var) {
+    if (var instanceof FieldDeclarator) {
+      return ((FieldDeclarator) var).createAccess();
+    } else {
+      throw new Error("Trying to create accessor for non-field.");
+    }
+  }
+  /**
    * @aspect Converter
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ASTToJSON.jrag:35
    */
@@ -526,6 +546,36 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 		finalString+="] }";
 		return finalString;
 	}
+  /**
+   * Imperative transformation of the AST.
+   * This should be removed.
+   * 
+   * <p>Usage: this.replaceWith(replacement)
+   * 
+   * @param replacement node to replace this node with
+   * @return the new node
+   * @deprecated
+   * @aspect Transformations
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Transformations.jrag:118
+   */
+  @Deprecated
+  protected void replaceWith(ASTNode replacement) {
+	  int replacePos = getParent().getIndexOfChild(this);
+	  getParent().setChild(replacement, replacePos);
+  }
+  /**
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:290
+   */
+  public void createBCode(CodeGeneration gen) {
+    this.bcStartIndex = gen.pos();
+
+    for (int i = 0; i < getNumChild(); i++) {
+      getChild(i).createBCode(gen);
+    }
+
+    this.bcEndIndex = gen.pos();
+  }
   /**
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:34
@@ -617,56 +667,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     } else {
       gen.emit(node, Bytecode.PUTFIELD, -var.type().variableSize() - 1).add2(index);
     }
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:290
-   */
-  public void createBCode(CodeGeneration gen) {
-    this.bcStartIndex = gen.pos();
-
-    for (int i = 0; i < getNumChild(); i++) {
-      getChild(i).createBCode(gen);
-    }
-
-    this.bcEndIndex = gen.pos();
-  }
-  /**
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:204
-   */
-  public void collectEnclosingVariables(Collection<Variable> vars, TypeDecl typeDecl) {
-    for (int i = 0; i < getNumChild(); i++) {
-      getChild(i).collectEnclosingVariables(vars, typeDecl);
-    }
-  }
-  /**
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:386
-   */
-  protected static Access createAccess(Variable var) {
-    if (var instanceof FieldDeclarator) {
-      return ((FieldDeclarator) var).createAccess();
-    } else {
-      throw new Error("Trying to create accessor for non-field.");
-    }
-  }
-  /**
-   * Imperative transformation of the AST.
-   * This should be removed.
-   * 
-   * <p>Usage: this.replaceWith(replacement)
-   * 
-   * @param replacement node to replace this node with
-   * @return the new node
-   * @deprecated
-   * @aspect Transformations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Transformations.jrag:118
-   */
-  @Deprecated
-  protected void replaceWith(ASTNode replacement) {
-	  int replacePos = getParent().getIndexOfChild(this);
-	  getParent().setChild(replacement, replacePos);
   }
   /**
    * Finds one method with the given name, and no parameters, in the specified
@@ -1105,18 +1105,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
 
   /**
    * @aspect <NoAspect>
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:354
-   */
-    protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    for (int i = 0; i < getNumChild(); i++) {
-      getChild(i).collect_contributors_TypeDecl_accessors(_root, _map);
-    }
-  }
-  protected void contributeTo_TypeDecl_accessors(HashSet<BodyDecl> collection) {
-  }
-
-  /**
-   * @aspect <NoAspect>
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:155
    */
     protected void collect_contributors_TypeDecl_nestedTypes(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -1125,6 +1113,18 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     }
   }
   protected void contributeTo_TypeDecl_nestedTypes(LinkedList<TypeDecl> collection) {
+  }
+
+  /**
+   * @aspect <NoAspect>
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:354
+   */
+    protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    for (int i = 0; i < getNumChild(); i++) {
+      getChild(i).collect_contributors_TypeDecl_accessors(_root, _map);
+    }
+  }
+  protected void contributeTo_TypeDecl_accessors(HashSet<BodyDecl> collection) {
   }
 
   /**
@@ -1198,17 +1198,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
   /**
    * @attribute syn
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51")
-  public int sourceLineNumber() {
-    int sourceLineNumber_value = getStart() != 0 ? getLine(getStart()) : -1;
-    return sourceLineNumber_value;
-  }
-  /**
-   * @attribute syn
    * @aspect InnerClasses
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:128
    */
@@ -1217,23 +1206,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   public boolean isStringAdd() {
     boolean isStringAdd_value = false;
     return isStringAdd_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Java2Rewrites
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97")
-  public boolean hasAssertStatementRecursive() {
-    {
-        for (ASTNode child : astChildren()) {
-          if (child.hasAssertStatementRecursive()) {
-            return true;
-          }
-        }
-        return false;
-      }
   }
   /**
    * @attribute syn
@@ -1300,6 +1272,34 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     	}
   }
   /**
+   * @attribute syn
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51")
+  public int sourceLineNumber() {
+    int sourceLineNumber_value = getStart() != 0 ? getLine(getStart()) : -1;
+    return sourceLineNumber_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Java2Rewrites
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:97")
+  public boolean hasAssertStatementRecursive() {
+    {
+        for (ASTNode child : astChildren()) {
+          if (child.hasAssertStatementRecursive()) {
+            return true;
+          }
+        }
+        return false;
+      }
+  }
+  /**
    * @attribute inh
    * @aspect AddOptionsToProgram
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Options.jadd:40
@@ -1341,6 +1341,26 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
+  public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_enclosingFinally(self, _callerNode, branch)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_enclosingFinally(self, _callerNode, branch);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ExtraInheritedEqs.jrag:29
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
+   */
+  protected boolean canDefine_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    return false;
+  }
+  /** @apilevel internal */
   public Program Define_program(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -1361,243 +1381,103 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
-  public TypeDecl Define_superType(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_superType(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_isMethodParameter(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_superType(self, _callerNode);
+    return parent.Define_isMethodParameter(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LookupType.jrag:92
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:54
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute superType
+   * @return {@code true} if this node has an equation for the inherited attribute isMethodParameter
    */
-  protected boolean canDefine_superType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public ConstructorDecl Define_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_constructorDecl(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_isConstructorParameter(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_constructorDecl(self, _callerNode);
+    return parent.Define_isConstructorParameter(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:118
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:55
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute constructorDecl
+   * @return {@code true} if this node has an equation for the inherited attribute isConstructorParameter
    */
-  protected boolean canDefine_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public TypeDecl Define_componentType(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_componentType(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_isExceptionHandlerParameter(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_componentType(self, _callerNode);
+    return parent.Define_isExceptionHandlerParameter(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:54
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:56
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute componentType
+   * @return {@code true} if this node has an equation for the inherited attribute isExceptionHandlerParameter
    */
-  protected boolean canDefine_componentType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
+  public Collection<ConstructorDecl> Define_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_lookupLabel(self, _callerNode, name)) {
+    while (parent != null && !parent.canDefine_lookupConstructor(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_lookupLabel(self, _callerNode, name);
+    return parent.Define_lookupConstructor(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:260
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:39
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupLabel
+   * @return {@code true} if this node has an equation for the inherited attribute lookupConstructor
    */
-  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public CompilationUnit Define_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
+  public Collection<ConstructorDecl> Define_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_compilationUnit(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_lookupSuperConstructor(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_compilationUnit(self, _callerNode);
+    return parent.Define_lookupSuperConstructor(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ClassPath.jrag:107
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:45
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute compilationUnit
+   * @return {@code true} if this node has an equation for the inherited attribute lookupSuperConstructor
    */
-  protected boolean canDefine_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_blockIndex(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_blockIndex(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:40
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute blockIndex
-   */
-  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_declaredBefore(self, _callerNode, decl)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_declaredBefore(self, _callerNode, decl);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:62
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute declaredBefore
-   */
-  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_isDest(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_isDest(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:62
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isDest
-   */
-  protected boolean canDefine_isDest(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_isSource(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_isSource(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:61
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isSource
-   */
-  protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_isIncOrDec(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_isIncOrDec(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:69
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
-   */
-  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_assignedBefore(self, _callerNode, v)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_assignedBefore(self, _callerNode, v);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:227
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
-   */
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_unassignedBefore(self, _callerNode, v)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_unassignedBefore(self, _callerNode, v);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:212
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
-   */
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  protected boolean canDefine_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
@@ -1721,83 +1601,223 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
-  public Collection<ConstructorDecl> Define_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_lookupConstructor(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_reportUnreachable(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_lookupConstructor(self, _callerNode);
+    return parent.Define_reportUnreachable(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:281
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupConstructor
+   * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
    */
-  protected boolean canDefine_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public Collection<ConstructorDecl> Define_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  public CompilationUnit Define_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_lookupSuperConstructor(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_compilationUnit(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_lookupSuperConstructor(self, _callerNode);
+    return parent.Define_compilationUnit(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:45
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ClassPath.jrag:107
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupSuperConstructor
+   * @return {@code true} if this node has an equation for the inherited attribute compilationUnit
    */
-  protected boolean canDefine_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public Expr Define_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_nestedScope(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_isDest(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_nestedScope(self, _callerNode);
+    return parent.Define_isDest(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:62
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute nestedScope
+   * @return {@code true} if this node has an equation for the inherited attribute isDest
    */
-  protected boolean canDefine_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isDest(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+  public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_lookupMethod(self, _callerNode, name)) {
+    while (parent != null && !parent.canDefine_isSource(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_lookupMethod(self, _callerNode, name);
+    return parent.Define_isSource(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:93
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:61
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
+   * @return {@code true} if this node has an equation for the inherited attribute isSource
    */
-  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_isIncOrDec(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_isIncOrDec(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:69
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute isIncOrDec
+   */
+  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_assignedBefore(self, _callerNode, v)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_assignedBefore(self, _callerNode, v);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:227
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignedBefore
+   */
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_unassignedBefore(self, _callerNode, v)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_unassignedBefore(self, _callerNode, v);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:212
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute unassignedBefore
+   */
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return false;
+  }
+  /** @apilevel internal */
+  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_methodHost(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_methodHost(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:773
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute methodHost
+   */
+  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_inExplicitConstructorInvocation(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_inExplicitConstructorInvocation(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:194
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inExplicitConstructorInvocation
+   */
+  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_enclosingExplicitConstructorHostType(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_enclosingExplicitConstructorHostType(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:204
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingExplicitConstructorHostType
+   */
+  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_inStaticContext(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_inStaticContext(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:210
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
+   */
+  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
@@ -2153,7 +2173,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:335
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethods.jrag:246
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute lookupType
    */
@@ -2161,23 +2181,63 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
-  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_lookupVariable(self, _callerNode, name)) {
+    while (parent != null && !parent.canDefine_switchType(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_lookupVariable(self, _callerNode, name);
+    return parent.Define_switchType(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:98
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:483
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
+   * @return {@code true} if this node has an equation for the inherited attribute switchType
    */
-  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_returnType(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_returnType(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:39
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute returnType
+   */
+  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_enclosingInstance(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_enclosingInstance(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:688
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingInstance
+   */
+  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
@@ -2401,6 +2461,26 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
+  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_lookupVariable(self, _callerNode, name)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_lookupVariable(self, _callerNode, name);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:98
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupVariable
+   */
+  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return false;
+  }
+  /** @apilevel internal */
   public ASTNode Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -2501,6 +2581,66 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
+  public TypeDecl Define_componentType(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_componentType(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_componentType(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:54
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute componentType
+   */
+  protected boolean canDefine_componentType(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_blockIndex(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_blockIndex(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:40
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute blockIndex
+   */
+  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_declaredBefore(self, _callerNode, decl)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_declaredBefore(self, _callerNode, decl);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:62
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute declaredBefore
+   */
+  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    return false;
+  }
+  /** @apilevel internal */
   public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -2513,11 +2653,111 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodReference.jrag:196
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ConstructorReference.jrag:65
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute nameType
    */
   protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public Expr Define_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_nestedScope(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_nestedScope(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:44
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute nestedScope
+   */
+  protected boolean canDefine_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_lookupMethod(self, _callerNode, name)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_lookupMethod(self, _callerNode, name);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:93
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupMethod
+   */
+  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return false;
+  }
+  /** @apilevel internal */
+  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_lookupLabel(self, _callerNode, name)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_lookupLabel(self, _callerNode, name);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:260
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute lookupLabel
+   */
+  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return false;
+  }
+  /** @apilevel internal */
+  public TypeDecl Define_superType(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_superType(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_superType(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LookupType.jrag:92
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute superType
+   */
+  protected boolean canDefine_superType(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public ConstructorDecl Define_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_constructorDecl(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_constructorDecl(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:118
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute constructorDecl
+   */
+  protected boolean canDefine_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
@@ -2681,223 +2921,63 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
-  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
+  public TypeDecl Define_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_switchType(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_genericDecl(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_switchType(self, _callerNode);
+    return parent.Define_genericDecl(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:483
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:90
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute switchType
+   * @return {@code true} if this node has an equation for the inherited attribute genericDecl
    */
-  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
+  public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_returnType(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_assignConvertedType(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_returnType(self, _callerNode);
+    return parent.Define_assignConvertedType(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:39
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:40
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute returnType
+   * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
    */
-  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
-  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_enclosingInstance(self, _callerNode)) {
+    while (parent != null && !parent.canDefine_variableArityValid(self, _callerNode)) {
       _callerNode = self;
       self = parent;
       parent = self.getParent();
     }
-    return parent.Define_enclosingInstance(self, _callerNode);
+    return parent.Define_variableArityValid(self, _callerNode);
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:688
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableArityParameters.jrag:30
    * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingInstance
+   * @return {@code true} if this node has an equation for the inherited attribute variableArityValid
    */
-  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_methodHost(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_methodHost(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:773
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute methodHost
-   */
-  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_inExplicitConstructorInvocation(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_inExplicitConstructorInvocation(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:194
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inExplicitConstructorInvocation
-   */
-  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_enclosingExplicitConstructorHostType(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_enclosingExplicitConstructorHostType(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:204
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingExplicitConstructorHostType
-   */
-  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_inStaticContext(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_inStaticContext(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:210
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute inStaticContext
-   */
-  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_reportUnreachable(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_reportUnreachable(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:281
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute reportUnreachable
-   */
-  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_isMethodParameter(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_isMethodParameter(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:54
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isMethodParameter
-   */
-  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_isConstructorParameter(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_isConstructorParameter(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:55
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isConstructorParameter
-   */
-  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_isExceptionHandlerParameter(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_isExceptionHandlerParameter(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:56
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute isExceptionHandlerParameter
-   */
-  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
@@ -2913,7 +2993,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:147
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:134
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute mayUseAnnotationTarget
    */
@@ -3018,26 +3098,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @return {@code true} if this node has an equation for the inherited attribute enclosingAnnotationDecl
    */
   protected boolean canDefine_enclosingAnnotationDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_assignConvertedType(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_assignConvertedType(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:40
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignConvertedType
-   */
-  protected boolean canDefine_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
@@ -3181,46 +3241,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
-  public TypeDecl Define_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_genericDecl(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_genericDecl(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:90
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute genericDecl
-   */
-  protected boolean canDefine_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_variableArityValid(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_variableArityValid(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableArityParameters.jrag:30
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute variableArityValid
-   */
-  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
   public ClassInstanceExpr Define_getClassInstanceExpr(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -3353,31 +3373,11 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:125
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:188
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute targetType
    */
   protected boolean canDefine_targetType(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_variableScopeEndLabel(self, _callerNode, gen)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_variableScopeEndLabel(self, _callerNode, gen);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:92
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute variableScopeEndLabel
-   */
-  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     return false;
   }
   /** @apilevel internal */
@@ -3458,6 +3458,26 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @return {@code true} if this node has an equation for the inherited attribute resultSaveLocalNum
    */
   protected boolean canDefine_resultSaveLocalNum(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_variableScopeEndLabel(self, _callerNode, gen)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_variableScopeEndLabel(self, _callerNode, gen);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:92
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute variableScopeEndLabel
+   */
+  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     return false;
   }
   /** @apilevel internal */
@@ -3601,6 +3621,26 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
+  public String Define_typeVariableContext(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_typeVariableContext(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_typeVariableContext(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:791
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute typeVariableContext
+   */
+  protected boolean canDefine_typeVariableContext(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
   public boolean Define_isOriginalEnumConstructor(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -3641,146 +3681,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
-  public String Define_typeVariableContext(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_typeVariableContext(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_typeVariableContext(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:791
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute typeVariableContext
-   */
-  protected boolean canDefine_typeVariableContext(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public LambdaExpr Define_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_enclosingLambda(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_enclosingLambda(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:34
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingLambda
-   */
-  protected boolean canDefine_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_assignmentContext(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_assignmentContext(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:358
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
-   */
-  protected boolean canDefine_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_invocationContext(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_invocationContext(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:359
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute invocationContext
-   */
-  protected boolean canDefine_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_castContext(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_castContext(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:360
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute castContext
-   */
-  protected boolean canDefine_castContext(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_stringContext(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_stringContext(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:361
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute stringContext
-   */
-  protected boolean canDefine_stringContext(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
-  public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_numericContext(self, _callerNode)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_numericContext(self, _callerNode);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:362
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute numericContext
-   */
-  protected boolean canDefine_numericContext(ASTNode _callerNode, ASTNode _childNode) {
-    return false;
-  }
-  /** @apilevel internal */
   public int Define_typeVarPosition(ASTNode _callerNode, ASTNode _childNode) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -3793,7 +3693,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:40
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarPosition
    */
@@ -3813,7 +3713,7 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
   }
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:47
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:41
    * @apilevel internal
    * @return {@code true} if this node has an equation for the inherited attribute typeVarInMethod
    */
@@ -3838,6 +3738,126 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @return {@code true} if this node has an equation for the inherited attribute genericMethodLevel
    */
   protected boolean canDefine_genericMethodLevel(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_assignmentContext(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_assignmentContext(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:364
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute assignmentContext
+   */
+  protected boolean canDefine_assignmentContext(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_invocationContext(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_invocationContext(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:365
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute invocationContext
+   */
+  protected boolean canDefine_invocationContext(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_castContext(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_castContext(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_castContext(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:366
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute castContext
+   */
+  protected boolean canDefine_castContext(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_stringContext(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_stringContext(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_stringContext(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:367
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute stringContext
+   */
+  protected boolean canDefine_stringContext(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public boolean Define_numericContext(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_numericContext(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_numericContext(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:368
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute numericContext
+   */
+  protected boolean canDefine_numericContext(ASTNode _callerNode, ASTNode _childNode) {
+    return false;
+  }
+  /** @apilevel internal */
+  public LambdaExpr Define_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_enclosingLambda(self, _callerNode)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_enclosingLambda(self, _callerNode);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:34
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute enclosingLambda
+   */
+  protected boolean canDefine_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
     return false;
   }
   /** @apilevel internal */
@@ -3961,46 +3981,6 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
     return false;
   }
   /** @apilevel internal */
-  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_branchTarget(self, _callerNode, branch)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_branchTarget(self, _callerNode, branch);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ExtraInheritedEqs.jrag:30
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute branchTarget
-   */
-  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    return false;
-  }
-  /** @apilevel internal */
-  public FinallyHost Define_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    ASTNode self = this;
-    ASTNode parent = getParent();
-    while (parent != null && !parent.canDefine_enclosingFinally(self, _callerNode, branch)) {
-      _callerNode = self;
-      self = parent;
-      parent = self.getParent();
-    }
-    return parent.Define_enclosingFinally(self, _callerNode, branch);
-  }
-
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ExtraInheritedEqs.jrag:29
-   * @apilevel internal
-   * @return {@code true} if this node has an equation for the inherited attribute enclosingFinally
-   */
-  protected boolean canDefine_enclosingFinally(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    return false;
-  }
-  /** @apilevel internal */
   public SimpleSet<TypeDecl> Define_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
     ASTNode self = this;
     ASTNode parent = getParent();
@@ -4018,6 +3998,26 @@ public class ASTNode<T extends ASTNode> extends beaver.Symbol implements Cloneab
    * @return {@code true} if this node has an equation for the inherited attribute otherLocalClassDecls
    */
   protected boolean canDefine_otherLocalClassDecls(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return false;
+  }
+  /** @apilevel internal */
+  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    ASTNode self = this;
+    ASTNode parent = getParent();
+    while (parent != null && !parent.canDefine_branchTarget(self, _callerNode, branch)) {
+      _callerNode = self;
+      self = parent;
+      parent = self.getParent();
+    }
+    return parent.Define_branchTarget(self, _callerNode, branch);
+  }
+
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/ExtraInheritedEqs.jrag:30
+   * @apilevel internal
+   * @return {@code true} if this node has an equation for the inherited attribute branchTarget
+   */
+  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
     return false;
   }
   /** @apilevel internal */

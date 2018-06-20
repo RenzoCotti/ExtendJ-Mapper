@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -135,8 +135,8 @@ public class ShortType extends IntegralType implements Cloneable {
     narrowingConversionTo_TypeDecl_reset();
     unaryNumericPromotion_reset();
     boxed_reset();
-    typeDescriptor_reset();
     jvmName_reset();
+    typeDescriptor_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:47
@@ -569,6 +569,28 @@ public class ShortType extends IntegralType implements Cloneable {
   }
   /**
    * @attribute syn
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122")
+  public TypeDecl stringPromotion() {
+    TypeDecl stringPromotion_value = typeInt();
+    return stringPromotion_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042")
+  public int arrayPrimitiveTypeDescriptor() {
+    int arrayPrimitiveTypeDescriptor_value = 9;
+    return arrayPrimitiveTypeDescriptor_value;
+  }
+  /**
+   * @attribute syn
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
@@ -588,61 +610,6 @@ public class ShortType extends IntegralType implements Cloneable {
   public byte arrayStore() {
     byte arrayStore_value = Bytecode.SASTORE;
     return arrayStore_value;
-  }
-  /** @apilevel internal */
-  private void typeDescriptor_reset() {
-    typeDescriptor_computed = null;
-    typeDescriptor_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle typeDescriptor_computed = null;
-
-  /** @apilevel internal */
-  protected String typeDescriptor_value;
-
-  /**
-   * @attribute syn
-   * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
-  public String typeDescriptor() {
-    ASTNode$State state = state();
-    if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {
-      return typeDescriptor_value;
-    }
-    typeDescriptor_value = "S";
-    if (state().inCircle()) {
-      typeDescriptor_computed = state().cycle();
-    
-    } else {
-      typeDescriptor_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return typeDescriptor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042")
-  public int arrayPrimitiveTypeDescriptor() {
-    int arrayPrimitiveTypeDescriptor_value = 9;
-    return arrayPrimitiveTypeDescriptor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122")
-  public TypeDecl stringPromotion() {
-    TypeDecl stringPromotion_value = typeInt();
-    return stringPromotion_value;
   }
   /** @apilevel internal */
   private void jvmName_reset() {
@@ -687,6 +654,39 @@ public class ShortType extends IntegralType implements Cloneable {
   public String primitiveClassName() {
     String primitiveClassName_value = "Short";
     return primitiveClassName_value;
+  }
+  /** @apilevel internal */
+  private void typeDescriptor_reset() {
+    typeDescriptor_computed = null;
+    typeDescriptor_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle typeDescriptor_computed = null;
+
+  /** @apilevel internal */
+  protected String typeDescriptor_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantPoolNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
+  public String typeDescriptor() {
+    ASTNode$State state = state();
+    if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {
+      return typeDescriptor_value;
+    }
+    typeDescriptor_value = "S";
+    if (state().inCircle()) {
+      typeDescriptor_computed = state().cycle();
+    
+    } else {
+      typeDescriptor_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return typeDescriptor_value;
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {

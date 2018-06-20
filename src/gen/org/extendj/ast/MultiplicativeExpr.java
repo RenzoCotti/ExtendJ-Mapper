@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -164,6 +164,25 @@ public abstract class MultiplicativeExpr extends ArithmeticExpr implements Clone
   public Expr getRightOperandNoTransform() {
     return (Expr) getChildNoTransform(1);
   }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:207
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:207")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        if (!getLeftOperand().type().isNumericType()) {
+          problems.add(errorf("%s is not numeric", getLeftOperand().type().typeName()));
+        }
+        if (!getRightOperand().type().isNumericType()) {
+          problems.add(errorf("%s is not numeric", getRightOperand().type().typeName()));
+        }
+        return problems;
+      }
+  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -196,25 +215,6 @@ public abstract class MultiplicativeExpr extends ArithmeticExpr implements Clone
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:207
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:207")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        if (!getLeftOperand().type().isNumericType()) {
-          problems.add(errorf("%s is not numeric", getLeftOperand().type().typeName()));
-        }
-        if (!getRightOperand().type().isNumericType()) {
-          problems.add(errorf("%s is not numeric", getRightOperand().type().typeName()));
-        }
-        return problems;
-      }
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {

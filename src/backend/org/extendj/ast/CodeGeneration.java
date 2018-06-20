@@ -475,13 +475,13 @@ class CodeGeneration {
   public void emitGoto(ASTNode<? extends ASTNode> node, int label) {
     int p = jump(label);
     if (wideGoto) {
-			// addPositionEntryAtCurrentPC(node);
+			addPositionEntryAtCurrentPC(node);
       bytes.emitGoto(Bytecode.GOTO_W).add4(p);
     } else {
       if (p > Short.MAX_VALUE || p < Short.MIN_VALUE) {
         throw new JumpOffsetError();
       }
-			// addPositionEntryAtCurrentPC(node);
+			addPositionEntryAtCurrentPC(node);
       bytes.emitGoto(Bytecode.GOTO).add2(p);
     }
   }

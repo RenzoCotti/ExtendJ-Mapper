@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -147,8 +147,8 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   public void flushAttrCache() {
     super.flushAttrCache();
     boxed_reset();
-    typeDescriptor_reset();
     jvmName_reset();
+    typeDescriptor_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:45
@@ -574,6 +574,17 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   }
   /**
    * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042")
+  public int arrayPrimitiveTypeDescriptor() {
+    int arrayPrimitiveTypeDescriptor_value = 4;
+    return arrayPrimitiveTypeDescriptor_value;
+  }
+  /**
+   * @attribute syn
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
@@ -593,50 +604,6 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   public byte arrayStore() {
     byte arrayStore_value = Bytecode.BASTORE;
     return arrayStore_value;
-  }
-  /** @apilevel internal */
-  private void typeDescriptor_reset() {
-    typeDescriptor_computed = null;
-    typeDescriptor_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle typeDescriptor_computed = null;
-
-  /** @apilevel internal */
-  protected String typeDescriptor_value;
-
-  /**
-   * @attribute syn
-   * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
-  public String typeDescriptor() {
-    ASTNode$State state = state();
-    if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {
-      return typeDescriptor_value;
-    }
-    typeDescriptor_value = "Z";
-    if (state().inCircle()) {
-      typeDescriptor_computed = state().cycle();
-    
-    } else {
-      typeDescriptor_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return typeDescriptor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1042")
-  public int arrayPrimitiveTypeDescriptor() {
-    int arrayPrimitiveTypeDescriptor_value = 4;
-    return arrayPrimitiveTypeDescriptor_value;
   }
   /** @apilevel internal */
   private void jvmName_reset() {
@@ -681,6 +648,39 @@ public class BooleanType extends PrimitiveType implements Cloneable {
   public String primitiveClassName() {
     String primitiveClassName_value = "Boolean";
     return primitiveClassName_value;
+  }
+  /** @apilevel internal */
+  private void typeDescriptor_reset() {
+    typeDescriptor_computed = null;
+    typeDescriptor_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle typeDescriptor_computed = null;
+
+  /** @apilevel internal */
+  protected String typeDescriptor_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantPoolNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:78")
+  public String typeDescriptor() {
+    ASTNode$State state = state();
+    if (typeDescriptor_computed == ASTNode$State.NON_CYCLE || typeDescriptor_computed == state().cycle()) {
+      return typeDescriptor_value;
+    }
+    typeDescriptor_value = "Z";
+    if (state().inCircle()) {
+      typeDescriptor_computed = state().cycle();
+    
+    } else {
+      typeDescriptor_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return typeDescriptor_value;
   }
   /** @apilevel internal */
   public ASTNode rewriteTo() {

@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -305,17 +305,6 @@ public abstract class Access extends Expr implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect LookupMethod
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:40
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:40")
-  public Expr unqualifiedScope() {
-    Expr unqualifiedScope_value = isQualified() ? nestedScope() : this;
-    return unqualifiedScope_value;
-  }
-  /**
-   * @attribute syn
    * @aspect QualifiedNames
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:156
    */
@@ -384,6 +373,17 @@ public abstract class Access extends Expr implements Cloneable {
         }
       }
   }
+  /**
+   * @attribute syn
+   * @aspect LookupMethod
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:40
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:40")
+  public Expr unqualifiedScope() {
+    Expr unqualifiedScope_value = isQualified() ? nestedScope() : this;
+    return unqualifiedScope_value;
+  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -418,18 +418,6 @@ public abstract class Access extends Expr implements Cloneable {
     return type_value;
   }
   /**
-   * Creates a copy of this access where parameterized types have been erased.
-   * @attribute syn
-   * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462")
-  public Access erasedCopy() {
-    Access erasedCopy_value = treeCopyNoTransform();
-    return erasedCopy_value;
-  }
-  /**
    * WARNING: this attribute is not the same as TypeDecl.isWildcard,
    * which returns true for any wildcard type (even bounded wildcard types).
    * @return {@code true} if this is an unbounded wildcard access
@@ -442,6 +430,18 @@ public abstract class Access extends Expr implements Cloneable {
   public boolean isWildcard() {
     boolean isWildcard_value = false;
     return isWildcard_value;
+  }
+  /**
+   * Creates a copy of this access where parameterized types have been erased.
+   * @attribute syn
+   * @aspect LookupParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1462")
+  public Access erasedCopy() {
+    Access erasedCopy_value = treeCopyNoTransform();
+    return erasedCopy_value;
   }
   /**
    * @attribute syn
@@ -480,29 +480,6 @@ public abstract class Access extends Expr implements Cloneable {
   public boolean mentionsTypeVariable(TypeVariable var) {
     boolean mentionsTypeVariable_TypeVariable_value = false;
     return mentionsTypeVariable_TypeVariable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51")
-  public int sourceLineNumber() {
-    int sourceLineNumber_value = findFirstSourceLineNumber();
-    return sourceLineNumber_value;
-  }
-  /**
-   * @return {@code true} if this access is a method call of a non-static method.
-   * @attribute syn
-   * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426")
-  public boolean isInstanceMethodAccess() {
-    boolean isInstanceMethodAccess_value = false;
-    return isInstanceMethodAccess_value;
   }
   /**
    * @attribute syn
@@ -547,15 +524,27 @@ public abstract class Access extends Expr implements Cloneable {
       }
   }
   /**
-   * @attribute inh
-   * @aspect LookupMethod
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:42
+   * @attribute syn
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51
    */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:42")
-  public Expr nestedScope() {
-    Expr nestedScope_value = getParent().Define_nestedScope(this, null);
-    return nestedScope_value;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:51")
+  public int sourceLineNumber() {
+    int sourceLineNumber_value = findFirstSourceLineNumber();
+    return sourceLineNumber_value;
+  }
+  /**
+   * @return {@code true} if this access is a method call of a non-static method.
+   * @attribute syn
+   * @aspect GenerateClassfile
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426")
+  public boolean isInstanceMethodAccess() {
+    boolean isInstanceMethodAccess_value = false;
+    return isInstanceMethodAccess_value;
   }
   /**
    * @attribute inh
@@ -578,6 +567,17 @@ public abstract class Access extends Expr implements Cloneable {
   public Variable unknownField() {
     Variable unknownField_value = getParent().Define_unknownField(this, null);
     return unknownField_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect LookupMethod
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:42
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:42")
+  public Expr nestedScope() {
+    Expr nestedScope_value = getParent().Define_nestedScope(this, null);
+    return nestedScope_value;
   }
   /**
    * @attribute inh

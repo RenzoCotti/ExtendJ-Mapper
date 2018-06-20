@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -28,7 +28,7 @@ import java.io.DataInputStream;
  * @production Declarator : {@link ASTNode} ::= <span class="component">TypeAccess:{@link Access}</span> <span class="component">&lt;ID:String&gt;</span> <span class="component">{@link Dims}*</span> <span class="component">[Init:{@link Expr}]</span>;
 
  */
-public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, SimpleSet<Variable>, Variable {
+public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, Variable, SimpleSet<Variable> {
   /**
    * @aspect Java4PrettyPrint
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:324
@@ -174,10 +174,10 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    assignedAfter_Variable_reset();
-    unassignedAfter_Variable_reset();
     getModifiers_reset();
     getTypeAccess_reset();
+    assignedAfter_Variable_reset();
+    unassignedAfter_Variable_reset();
     throwTypes_reset();
     declarationModifiers_reset();
     declarationType_reset();
@@ -438,6 +438,71 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
   protected int getTypeAccessChildPosition() {
     return 2;
   }
+  /** @apilevel internal */
+  private void getModifiers_reset() {
+    getModifiers_computed = null;
+    getModifiers_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle getModifiers_computed = null;
+
+  /** @apilevel internal */
+  protected Modifiers getModifiers_value;
+
+  /** Modifiers are same as the parent declaration (e.g. VarDeclStmt). 
+   * @attribute syn
+   * @aspect VariableDeclarationTransformation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:130
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:130")
+  public Modifiers getModifiers() {
+    ASTNode$State state = state();
+    if (getModifiers_computed == ASTNode$State.NON_CYCLE || getModifiers_computed == state().cycle()) {
+      return getModifiers_value;
+    }
+    getModifiers_value = declarationModifiers();
+    if (state().inCircle()) {
+      getModifiers_computed = state().cycle();
+    
+    } else {
+      getModifiers_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return getModifiers_value;
+  }
+  /** @apilevel internal */
+  private void getTypeAccess_reset() {
+    getTypeAccess_computed = false;
+    
+    getTypeAccess_value = null;
+  }
+  /** @apilevel internal */
+  protected boolean getTypeAccess_computed = false;
+
+  /** @apilevel internal */
+  protected Access getTypeAccess_value;
+
+  /** Type access is copied from the parent declaration, with added array dimensions. 
+   * @attribute syn nta
+   * @aspect VariableDeclarationTransformation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:140
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:140")
+  public Access getTypeAccess() {
+    ASTNode$State state = state();
+    if (getTypeAccess_computed) {
+      return (Access) getChild(getTypeAccessChildPosition());
+    }
+    state().enterLazyAttribute();
+    getTypeAccess_value = ((Access) declarationType().treeCopyNoTransform()).addArrayDims(getDimsList());
+    setChild(getTypeAccess_value, getTypeAccessChildPosition());
+    getTypeAccess_computed = true;
+    state().leaveLazyAttribute();
+    Access node = (Access) this.getChild(getTypeAccessChildPosition());
+    return node;
+  }
   /**
    * @attribute syn
    * @aspect AccessControl
@@ -448,18 +513,6 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
   public boolean accessibleFrom(TypeDecl type) {
     boolean accessibleFrom_TypeDecl_value = false;
     return accessibleFrom_TypeDecl_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:360
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:360")
-  public boolean isConstant() {
-    boolean isConstant_value = isFinal() && hasInit() && getInit().isConstant()
-          && (type() instanceof PrimitiveType || type().isString());
-    return isConstant_value;
   }
   /**
    * @attribute syn
@@ -603,6 +656,18 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
     }
   /**
    * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:360
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:360")
+  public boolean isConstant() {
+    boolean isConstant_value = isFinal() && hasInit() && getInit().isConstant()
+          && (type() instanceof PrimitiveType || type().isString());
+    return isConstant_value;
+  }
+  /**
+   * @attribute syn
    * @aspect Modifiers
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:254
    */
@@ -644,71 +709,6 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
   public TypeDecl type() {
     TypeDecl type_value = getTypeAccess().type();
     return type_value;
-  }
-  /** @apilevel internal */
-  private void getModifiers_reset() {
-    getModifiers_computed = null;
-    getModifiers_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle getModifiers_computed = null;
-
-  /** @apilevel internal */
-  protected Modifiers getModifiers_value;
-
-  /** Modifiers are same as the parent declaration (e.g. VarDeclStmt). 
-   * @attribute syn
-   * @aspect VariableDeclarationTransformation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:130
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:130")
-  public Modifiers getModifiers() {
-    ASTNode$State state = state();
-    if (getModifiers_computed == ASTNode$State.NON_CYCLE || getModifiers_computed == state().cycle()) {
-      return getModifiers_value;
-    }
-    getModifiers_value = declarationModifiers();
-    if (state().inCircle()) {
-      getModifiers_computed = state().cycle();
-    
-    } else {
-      getModifiers_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return getModifiers_value;
-  }
-  /** @apilevel internal */
-  private void getTypeAccess_reset() {
-    getTypeAccess_computed = false;
-    
-    getTypeAccess_value = null;
-  }
-  /** @apilevel internal */
-  protected boolean getTypeAccess_computed = false;
-
-  /** @apilevel internal */
-  protected Access getTypeAccess_value;
-
-  /** Type access is copied from the parent declaration, with added array dimensions. 
-   * @attribute syn nta
-   * @aspect VariableDeclarationTransformation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:140
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="VariableDeclarationTransformation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:140")
-  public Access getTypeAccess() {
-    ASTNode$State state = state();
-    if (getTypeAccess_computed) {
-      return (Access) getChild(getTypeAccessChildPosition());
-    }
-    state().enterLazyAttribute();
-    getTypeAccess_value = ((Access) declarationType().treeCopyNoTransform()).addArrayDims(getDimsList());
-    setChild(getTypeAccess_value, getTypeAccessChildPosition());
-    getTypeAccess_computed = true;
-    state().leaveLazyAttribute();
-    Access node = (Access) this.getChild(getTypeAccessChildPosition());
-    return node;
   }
   /** @apilevel internal */
   private void throwTypes_reset() {
@@ -793,50 +793,6 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
     boolean isPrivate_value = getModifiers().isPrivate();
     return isPrivate_value;
   }
-  /**
-   * @attribute inh
-   * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:258
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:258")
-  public boolean assignedBefore(Variable v) {
-    boolean assignedBefore_Variable_value = getParent().Define_assignedBefore(this, null, v);
-    return assignedBefore_Variable_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect DefiniteUnassignment
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:893
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:893")
-  public boolean unassignedBefore(Variable v) {
-    boolean unassignedBefore_Variable_value = getParent().Define_unassignedBefore(this, null, v);
-    return unassignedBefore_Variable_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect VariableScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:45
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:45")
-  public SimpleSet<Variable> lookupVariable(String name) {
-    SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
-    return lookupVariable_String_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect NestedTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:659
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:659")
-  public TypeDecl hostType() {
-    TypeDecl hostType_value = getParent().Define_hostType(this, null);
-    return hostType_value;
-  }
   /** Inherited attribute computing the modifiers of the parent declaration. 
    * @attribute inh
    * @aspect VariableDeclarationTransformation
@@ -905,6 +861,50 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
 
   /**
    * @attribute inh
+   * @aspect DefiniteAssignment
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:258
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:258")
+  public boolean assignedBefore(Variable v) {
+    boolean assignedBefore_Variable_value = getParent().Define_assignedBefore(this, null, v);
+    return assignedBefore_Variable_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect DefiniteUnassignment
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:893
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:893")
+  public boolean unassignedBefore(Variable v) {
+    boolean unassignedBefore_Variable_value = getParent().Define_unassignedBefore(this, null, v);
+    return unassignedBefore_Variable_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect VariableScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:45
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:45")
+  public SimpleSet<Variable> lookupVariable(String name) {
+    SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
+    return lookupVariable_String_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect NestedTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:659
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:659")
+  public TypeDecl hostType() {
+    TypeDecl hostType_value = getParent().Define_hostType(this, null);
+    return hostType_value;
+  }
+  /**
+   * @attribute inh
    * @aspect SuppressWarnings
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:35
    */
@@ -935,6 +935,50 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
   public FieldDecl fieldDecl() {
     FieldDecl fieldDecl_value = getParent().Define_fieldDecl(this, null);
     return fieldDecl_value;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:78
+   * @apilevel internal
+   */
+  public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  protected boolean canDefine_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93
+   * @apilevel internal
+   */
+  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110
+   * @apilevel internal
+   */
+  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return prevExprError();
+  }
+  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:134
+   * @apilevel internal
+   */
+  public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return nextAccessError();
+  }
+  protected boolean canDefine_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
   }
   /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:44
@@ -982,50 +1026,6 @@ public abstract class Declarator extends ASTNode<ASTNode> implements Cloneable, 
     }
   }
   protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:78
-   * @apilevel internal
-   */
-  public boolean Define_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_isLeftChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93
-   * @apilevel internal
-   */
-  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110
-   * @apilevel internal
-   */
-  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return prevExprError();
-  }
-  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:134
-   * @apilevel internal
-   */
-  public Access Define_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return nextAccessError();
-  }
-  protected boolean canDefine_nextAccess(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**

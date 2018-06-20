@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -103,10 +103,10 @@ public abstract class Binary extends Expr implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    isConstant_reset();
     assignedAfterTrue_Variable_reset();
     assignedAfterFalse_Variable_reset();
     unassignedAfter_Variable_reset();
+    isConstant_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:36
@@ -230,95 +230,6 @@ public abstract class Binary extends Expr implements Cloneable {
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
   @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:242")
   public abstract String printOp();
-/** @apilevel internal */
-protected ASTNode$State.Cycle isConstant_cycle = null;
-  /** @apilevel internal */
-  private void isConstant_reset() {
-    isConstant_computed = false;
-    isConstant_initialized = false;
-    isConstant_cycle = null;
-  }
-  /** @apilevel internal */
-  protected boolean isConstant_computed = false;
-
-  /** @apilevel internal */
-  protected boolean isConstant_value;
-  /** @apilevel internal */
-  protected boolean isConstant_initialized = false;
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:401")
-  public boolean isConstant() {
-    if (isConstant_computed) {
-      return isConstant_value;
-    }
-    ASTNode$State state = state();
-    if (!isConstant_initialized) {
-      isConstant_initialized = true;
-      isConstant_value = false;
-    }
-    if (!state.inCircle() || state.calledByLazyAttribute()) {
-      state.enterCircle();
-      do {
-        isConstant_cycle = state.nextCycle();
-        boolean new_isConstant_value = getLeftOperand().isConstant() && getRightOperand().isConstant();
-        if (new_isConstant_value != isConstant_value) {
-          state.setChangeInCycle();
-        }
-        isConstant_value = new_isConstant_value;
-      } while (state.testAndClearChangeInCycle());
-      isConstant_computed = true;
-
-      state.leaveCircle();
-    } else if (isConstant_cycle != state.cycle()) {
-      isConstant_cycle = state.cycle();
-      boolean new_isConstant_value = getLeftOperand().isConstant() && getRightOperand().isConstant();
-      if (new_isConstant_value != isConstant_value) {
-        state.setChangeInCycle();
-      }
-      isConstant_value = new_isConstant_value;
-    } else {
-    }
-    return isConstant_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:457
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:457")
-  public Expr left() {
-    Expr left_value = getLeftOperand();
-    return left_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:459
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:459")
-  public Expr right() {
-    Expr right_value = getRightOperand();
-    return right_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:461
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:461")
-  public TypeDecl binaryNumericPromotedType() {
-    {
-        TypeDecl leftType = left().type();
-        TypeDecl rightType = right().type();
-        if (leftType.isBoolean() && rightType.isBoolean()) {
-          return leftType.isReferenceType() ? leftType.unboxed() : leftType;
-        }
-        return refined_ConstantExpression_Binary_binaryNumericPromotedType();
-      }
-  }
   /** @apilevel internal */
   private void assignedAfterTrue_Variable_reset() {
     assignedAfterTrue_Variable_values = null;
@@ -482,6 +393,95 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
     } else {
       return (Boolean) _value.value;
     }
+  }
+/** @apilevel internal */
+protected ASTNode$State.Cycle isConstant_cycle = null;
+  /** @apilevel internal */
+  private void isConstant_reset() {
+    isConstant_computed = false;
+    isConstant_initialized = false;
+    isConstant_cycle = null;
+  }
+  /** @apilevel internal */
+  protected boolean isConstant_computed = false;
+
+  /** @apilevel internal */
+  protected boolean isConstant_value;
+  /** @apilevel internal */
+  protected boolean isConstant_initialized = false;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:401")
+  public boolean isConstant() {
+    if (isConstant_computed) {
+      return isConstant_value;
+    }
+    ASTNode$State state = state();
+    if (!isConstant_initialized) {
+      isConstant_initialized = true;
+      isConstant_value = false;
+    }
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      do {
+        isConstant_cycle = state.nextCycle();
+        boolean new_isConstant_value = getLeftOperand().isConstant() && getRightOperand().isConstant();
+        if (new_isConstant_value != isConstant_value) {
+          state.setChangeInCycle();
+        }
+        isConstant_value = new_isConstant_value;
+      } while (state.testAndClearChangeInCycle());
+      isConstant_computed = true;
+
+      state.leaveCircle();
+    } else if (isConstant_cycle != state.cycle()) {
+      isConstant_cycle = state.cycle();
+      boolean new_isConstant_value = getLeftOperand().isConstant() && getRightOperand().isConstant();
+      if (new_isConstant_value != isConstant_value) {
+        state.setChangeInCycle();
+      }
+      isConstant_value = new_isConstant_value;
+    } else {
+    }
+    return isConstant_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:457
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:457")
+  public Expr left() {
+    Expr left_value = getLeftOperand();
+    return left_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:459
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:459")
+  public Expr right() {
+    Expr right_value = getRightOperand();
+    return right_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:461
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:461")
+  public TypeDecl binaryNumericPromotedType() {
+    {
+        TypeDecl leftType = left().type();
+        TypeDecl rightType = right().type();
+        if (leftType.isBoolean() && rightType.isBoolean()) {
+          return leftType.isReferenceType() ? leftType.unboxed() : leftType;
+        }
+        return refined_ConstantExpression_Binary_binaryNumericPromotedType();
+      }
   }
   /**
    * @attribute syn

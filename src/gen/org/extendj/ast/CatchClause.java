@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -78,9 +78,9 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     super.flushAttrCache();
     parameterDeclaration_String_reset();
     label_reset();
+    reachableCatchClause_TypeDecl_reset();
     typeThrowable_reset();
     lookupVariable_String_reset();
-    reachableCatchClause_TypeDecl_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:36
@@ -241,6 +241,45 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
     return label_value;
   }
   /**
+   * @return true if an exception of type exceptionType is catchable by the catch clause
+   * @attribute inh
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:182
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:182")
+  public boolean reachableCatchClause(TypeDecl exceptionType) {
+    Object _parameters = exceptionType;
+    if (reachableCatchClause_TypeDecl_computed == null) reachableCatchClause_TypeDecl_computed = new java.util.HashMap(4);
+    if (reachableCatchClause_TypeDecl_values == null) reachableCatchClause_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (reachableCatchClause_TypeDecl_values.containsKey(_parameters) && reachableCatchClause_TypeDecl_computed != null
+        && reachableCatchClause_TypeDecl_computed.containsKey(_parameters)
+        && (reachableCatchClause_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || reachableCatchClause_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) reachableCatchClause_TypeDecl_values.get(_parameters);
+    }
+    boolean reachableCatchClause_TypeDecl_value = getParent().Define_reachableCatchClause(this, null, exceptionType);
+    if (state().inCircle()) {
+      reachableCatchClause_TypeDecl_values.put(_parameters, reachableCatchClause_TypeDecl_value);
+      reachableCatchClause_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      reachableCatchClause_TypeDecl_values.put(_parameters, reachableCatchClause_TypeDecl_value);
+      reachableCatchClause_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return reachableCatchClause_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private void reachableCatchClause_TypeDecl_reset() {
+    reachableCatchClause_TypeDecl_computed = new java.util.HashMap(4);
+    reachableCatchClause_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map reachableCatchClause_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map reachableCatchClause_TypeDecl_computed;
+  /**
    * @attribute inh
    * @aspect SpecialClasses
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:93
@@ -311,45 +350,6 @@ public abstract class CatchClause extends ASTNode<ASTNode> implements Cloneable,
   protected java.util.Map lookupVariable_String_values;
   /** @apilevel internal */
   protected java.util.Map lookupVariable_String_computed;
-  /**
-   * @return true if an exception of type exceptionType is catchable by the catch clause
-   * @attribute inh
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:182
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:182")
-  public boolean reachableCatchClause(TypeDecl exceptionType) {
-    Object _parameters = exceptionType;
-    if (reachableCatchClause_TypeDecl_computed == null) reachableCatchClause_TypeDecl_computed = new java.util.HashMap(4);
-    if (reachableCatchClause_TypeDecl_values == null) reachableCatchClause_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (reachableCatchClause_TypeDecl_values.containsKey(_parameters) && reachableCatchClause_TypeDecl_computed != null
-        && reachableCatchClause_TypeDecl_computed.containsKey(_parameters)
-        && (reachableCatchClause_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || reachableCatchClause_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) reachableCatchClause_TypeDecl_values.get(_parameters);
-    }
-    boolean reachableCatchClause_TypeDecl_value = getParent().Define_reachableCatchClause(this, null, exceptionType);
-    if (state().inCircle()) {
-      reachableCatchClause_TypeDecl_values.put(_parameters, reachableCatchClause_TypeDecl_value);
-      reachableCatchClause_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      reachableCatchClause_TypeDecl_values.put(_parameters, reachableCatchClause_TypeDecl_value);
-      reachableCatchClause_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return reachableCatchClause_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private void reachableCatchClause_TypeDecl_reset() {
-    reachableCatchClause_TypeDecl_computed = new java.util.HashMap(4);
-    reachableCatchClause_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map reachableCatchClause_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map reachableCatchClause_TypeDecl_computed;
   /**
    * @attribute inh
    * @aspect PreciseRethrow

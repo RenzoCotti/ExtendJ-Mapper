@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -69,13 +69,13 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    reachableBreak_reset();
+    reachableContinue_reset();
     targetBranches_reset();
     escapedBranches_reset();
     branches_reset();
     targetContinues_reset();
     targetBreaks_reset();
-    reachableBreak_reset();
-    reachableContinue_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:34
@@ -117,6 +117,88 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
    * @declaredat ASTNode:65
    */
   public abstract BranchTargetStmt treeCopy();
+  /** @apilevel internal */
+  private void reachableBreak_reset() {
+    reachableBreak_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle reachableBreak_computed = null;
+
+  /** @apilevel internal */
+  protected boolean reachableBreak_value;
+
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:85
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:85")
+  public boolean reachableBreak() {
+    ASTNode$State state = state();
+    if (reachableBreak_computed == ASTNode$State.NON_CYCLE || reachableBreak_computed == state().cycle()) {
+      return reachableBreak_value;
+    }
+    reachableBreak_value = reachableBreak_compute();
+    if (state().inCircle()) {
+      reachableBreak_computed = state().cycle();
+    
+    } else {
+      reachableBreak_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return reachableBreak_value;
+  }
+  /** @apilevel internal */
+  private boolean reachableBreak_compute() {
+      for (BreakStmt stmt : targetBreaks()) {
+        if (stmt.reachable()) {
+          return true;
+        }
+      }
+      return false;
+    }
+  /** @apilevel internal */
+  private void reachableContinue_reset() {
+    reachableContinue_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle reachableContinue_computed = null;
+
+  /** @apilevel internal */
+  protected boolean reachableContinue_value;
+
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:140
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:140")
+  public boolean reachableContinue() {
+    ASTNode$State state = state();
+    if (reachableContinue_computed == ASTNode$State.NON_CYCLE || reachableContinue_computed == state().cycle()) {
+      return reachableContinue_value;
+    }
+    reachableContinue_value = reachableContinue_compute();
+    if (state().inCircle()) {
+      reachableContinue_computed = state().cycle();
+    
+    } else {
+      reachableContinue_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return reachableContinue_value;
+  }
+  /** @apilevel internal */
+  private boolean reachableContinue_compute() {
+      for (Stmt stmt : targetContinues()) {
+        if (stmt.reachable()) {
+          return true;
+        }
+      }
+      return false;
+    }
   /** @apilevel internal */
   private void targetBranches_reset() {
     targetBranches_computed = null;
@@ -349,88 +431,6 @@ public abstract class BranchTargetStmt extends Stmt implements Cloneable {
         }
       }
       return set;
-    }
-  /** @apilevel internal */
-  private void reachableBreak_reset() {
-    reachableBreak_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle reachableBreak_computed = null;
-
-  /** @apilevel internal */
-  protected boolean reachableBreak_value;
-
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:85
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:85")
-  public boolean reachableBreak() {
-    ASTNode$State state = state();
-    if (reachableBreak_computed == ASTNode$State.NON_CYCLE || reachableBreak_computed == state().cycle()) {
-      return reachableBreak_value;
-    }
-    reachableBreak_value = reachableBreak_compute();
-    if (state().inCircle()) {
-      reachableBreak_computed = state().cycle();
-    
-    } else {
-      reachableBreak_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return reachableBreak_value;
-  }
-  /** @apilevel internal */
-  private boolean reachableBreak_compute() {
-      for (BreakStmt stmt : targetBreaks()) {
-        if (stmt.reachable()) {
-          return true;
-        }
-      }
-      return false;
-    }
-  /** @apilevel internal */
-  private void reachableContinue_reset() {
-    reachableContinue_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle reachableContinue_computed = null;
-
-  /** @apilevel internal */
-  protected boolean reachableContinue_value;
-
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:140
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:140")
-  public boolean reachableContinue() {
-    ASTNode$State state = state();
-    if (reachableContinue_computed == ASTNode$State.NON_CYCLE || reachableContinue_computed == state().cycle()) {
-      return reachableContinue_value;
-    }
-    reachableContinue_value = reachableContinue_compute();
-    if (state().inCircle()) {
-      reachableContinue_computed = state().cycle();
-    
-    } else {
-      reachableContinue_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return reachableContinue_value;
-  }
-  /** @apilevel internal */
-  private boolean reachableContinue_compute() {
-      for (Stmt stmt : targetContinues()) {
-        if (stmt.reachable()) {
-          return true;
-        }
-      }
-      return false;
     }
   /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:273

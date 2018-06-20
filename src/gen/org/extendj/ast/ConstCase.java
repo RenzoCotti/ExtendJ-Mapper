@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -224,6 +224,32 @@ public class ConstCase extends Case implements Cloneable {
   }
   /**
    * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:470
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:470")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        boolean isEnumConstant = getValue().isEnumConstant();
+        TypeDecl switchType = switchType();
+        TypeDecl type = getValue().type();
+        if (switchType.isEnumDecl() && !isEnumConstant) {
+          problems.add(error("Unqualified enumeration constant required"));
+        }
+        if (!type.assignConversionTo(switchType, getValue())) {
+          problems.add(errorf("Case label has incompatible type %s, expected type compatible with %s",
+              switchType.name(), type.name()));
+        }
+        if (!getValue().isConstant() && !getValue().type().isUnknown() && !isEnumConstant) {
+          problems.add(error("Case label must have constant expression"));
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
    * @aspect NameCheck
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:555
    */
@@ -270,32 +296,6 @@ public class ConstCase extends Case implements Cloneable {
       }
   }
   /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:470
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:470")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        boolean isEnumConstant = getValue().isEnumConstant();
-        TypeDecl switchType = switchType();
-        TypeDecl type = getValue().type();
-        if (switchType.isEnumDecl() && !isEnumConstant) {
-          problems.add(error("Unqualified enumeration constant required"));
-        }
-        if (!type.assignConversionTo(switchType, getValue())) {
-          problems.add(errorf("Case label has incompatible type %s, expected type compatible with %s",
-              switchType.name(), type.name()));
-        }
-        if (!getValue().isConstant() && !getValue().type().isUnknown() && !isEnumConstant) {
-          problems.add(error("Case label must have constant expression"));
-        }
-        return problems;
-      }
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
@@ -322,7 +322,7 @@ public class ConstCase extends Case implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:553
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:468
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -331,7 +331,7 @@ public class ConstCase extends Case implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:468
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:553
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -344,10 +344,10 @@ public class ConstCase extends Case implements Cloneable {
   }
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
-    for (Problem value : nameProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeProblems()) {
+    for (Problem value : nameProblems()) {
       collection.add(value);
     }
   }

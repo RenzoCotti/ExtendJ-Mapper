@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -151,6 +151,7 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    canCompleteNormally_reset();
     assignedAfter_Variable_reset();
     unassignedAfter_Variable_reset();
     unassignedAfterInit_Variable_reset();
@@ -158,12 +159,11 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     unassignedAfterUpdate_Variable_reset();
     localLookup_String_reset();
     localVariableDeclaration_String_reset();
-    canCompleteNormally_reset();
-    variableScopeEndLabel_CodeGeneration_reset();
     cond_label_reset();
     begin_label_reset();
     update_label_reset();
     end_label_reset();
+    variableScopeEndLabel_CodeGeneration_reset();
     lookupVariable_String_reset();
   }
   /** @apilevel internal 
@@ -550,18 +550,38 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   public Stmt getStmtNoTransform() {
     return (Stmt) getChildNoTransform(3);
   }
+  /** @apilevel internal */
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
+
+  /** @apilevel internal */
+  protected boolean canCompleteNormally_value;
+
   /**
-   * @return <code>true</code> if this statement is a potential
-   * branch target of the given branch statement.
    * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215")
-  public boolean potentialTargetOf(Stmt branch) {
-    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
-    return potentialTargetOf_Stmt_value;
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
+    ASTNode$State state = state();
+    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
+    }
+    canCompleteNormally_value = reachable() && hasCondition()
+          && (!getCondition().isConstant() || !getCondition().isTrue()) || reachableBreak();
+    if (state().inCircle()) {
+      canCompleteNormally_computed = state().cycle();
+    
+    } else {
+      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return canCompleteNormally_value;
   }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
@@ -994,38 +1014,18 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     boolean continueLabel_value = true;
     return continueLabel_value;
   }
-  /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
-
-  /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
-
   /**
+   * @return <code>true</code> if this statement is a potential
+   * branch target of the given branch statement.
    * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
-    ASTNode$State state = state();
-    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
-    }
-    canCompleteNormally_value = reachable() && hasCondition()
-          && (!getCondition().isConstant() || !getCondition().isTrue()) || reachableBreak();
-    if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
-    
-    } else {
-      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return canCompleteNormally_value;
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:215")
+  public boolean potentialTargetOf(Stmt branch) {
+    boolean potentialTargetOf_Stmt_value = branch.canBranchTo(this);
+    return potentialTargetOf_Stmt_value;
   }
   /**
    * @attribute syn
@@ -1048,44 +1048,6 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
         }
         return getStmt().modifiedInScope(var);
       }
-  }
-  /** @apilevel internal */
-  private void variableScopeEndLabel_CodeGeneration_reset() {
-    variableScopeEndLabel_CodeGeneration_computed = new java.util.HashMap(4);
-    variableScopeEndLabel_CodeGeneration_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map variableScopeEndLabel_CodeGeneration_values;
-  /** @apilevel internal */
-  protected java.util.Map variableScopeEndLabel_CodeGeneration_computed;
-  /**
-   * @attribute syn
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:90
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:90")
-  public int variableScopeEndLabel(CodeGeneration gen) {
-    Object _parameters = gen;
-    if (variableScopeEndLabel_CodeGeneration_computed == null) variableScopeEndLabel_CodeGeneration_computed = new java.util.HashMap(4);
-    if (variableScopeEndLabel_CodeGeneration_values == null) variableScopeEndLabel_CodeGeneration_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (variableScopeEndLabel_CodeGeneration_values.containsKey(_parameters) && variableScopeEndLabel_CodeGeneration_computed != null
-        && variableScopeEndLabel_CodeGeneration_computed.containsKey(_parameters)
-        && (variableScopeEndLabel_CodeGeneration_computed.get(_parameters) == ASTNode$State.NON_CYCLE || variableScopeEndLabel_CodeGeneration_computed.get(_parameters) == state().cycle())) {
-      return (Integer) variableScopeEndLabel_CodeGeneration_values.get(_parameters);
-    }
-    int variableScopeEndLabel_CodeGeneration_value = gen.variableScopeLabel();
-    if (state().inCircle()) {
-      variableScopeEndLabel_CodeGeneration_values.put(_parameters, variableScopeEndLabel_CodeGeneration_value);
-      variableScopeEndLabel_CodeGeneration_computed.put(_parameters, state().cycle());
-    
-    } else {
-      variableScopeEndLabel_CodeGeneration_values.put(_parameters, variableScopeEndLabel_CodeGeneration_value);
-      variableScopeEndLabel_CodeGeneration_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return variableScopeEndLabel_CodeGeneration_value;
   }
   /** @apilevel internal */
   private void cond_label_reset() {
@@ -1237,6 +1199,44 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     int continue_label_value = update_label();
     return continue_label_value;
   }
+  /** @apilevel internal */
+  private void variableScopeEndLabel_CodeGeneration_reset() {
+    variableScopeEndLabel_CodeGeneration_computed = new java.util.HashMap(4);
+    variableScopeEndLabel_CodeGeneration_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map variableScopeEndLabel_CodeGeneration_values;
+  /** @apilevel internal */
+  protected java.util.Map variableScopeEndLabel_CodeGeneration_computed;
+  /**
+   * @attribute syn
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:90
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:90")
+  public int variableScopeEndLabel(CodeGeneration gen) {
+    Object _parameters = gen;
+    if (variableScopeEndLabel_CodeGeneration_computed == null) variableScopeEndLabel_CodeGeneration_computed = new java.util.HashMap(4);
+    if (variableScopeEndLabel_CodeGeneration_values == null) variableScopeEndLabel_CodeGeneration_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (variableScopeEndLabel_CodeGeneration_values.containsKey(_parameters) && variableScopeEndLabel_CodeGeneration_computed != null
+        && variableScopeEndLabel_CodeGeneration_computed.containsKey(_parameters)
+        && (variableScopeEndLabel_CodeGeneration_computed.get(_parameters) == ASTNode$State.NON_CYCLE || variableScopeEndLabel_CodeGeneration_computed.get(_parameters) == state().cycle())) {
+      return (Integer) variableScopeEndLabel_CodeGeneration_values.get(_parameters);
+    }
+    int variableScopeEndLabel_CodeGeneration_value = gen.variableScopeLabel();
+    if (state().inCircle()) {
+      variableScopeEndLabel_CodeGeneration_values.put(_parameters, variableScopeEndLabel_CodeGeneration_value);
+      variableScopeEndLabel_CodeGeneration_computed.put(_parameters, state().cycle());
+    
+    } else {
+      variableScopeEndLabel_CodeGeneration_values.put(_parameters, variableScopeEndLabel_CodeGeneration_value);
+      variableScopeEndLabel_CodeGeneration_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return variableScopeEndLabel_CodeGeneration_value;
+  }
   /**
    * @attribute inh
    * @aspect VariableScope
@@ -1276,14 +1276,36 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
   /** @apilevel internal */
   protected java.util.Map lookupVariable_String_computed;
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:230
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
-  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return branch.canBranchTo(this) ? this : branchTarget(branch);
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:155
+      return reachable()
+            && (!hasCondition() || (!getCondition().isConstant() || !getCondition().isFalse()));
+    }
+    else {
+      return getParent().Define_reachable(this, _callerNode);
+    }
   }
-  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
+   * @apilevel internal
+   */
+  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:211
+      return reachable();
+    }
+    else {
+      return getParent().Define_reportUnreachable(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -1459,36 +1481,14 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:230
    * @apilevel internal
    */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:155
-      return reachable()
-            && (!hasCondition() || (!getCondition().isConstant() || !getCondition().isFalse()));
-    }
-    else {
-      return getParent().Define_reachable(this, _callerNode);
-    }
+  public Stmt Define_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return branch.canBranchTo(this) ? this : branchTarget(branch);
   }
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
-   * @apilevel internal
-   */
-  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (getStmtNoTransform() != null && _callerNode == getStmt()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:211
-      return reachable();
-    }
-    else {
-      return getParent().Define_reportUnreachable(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_branchTarget(ASTNode _callerNode, ASTNode _childNode, Stmt branch) {
     return true;
   }
   /**
@@ -1515,23 +1515,6 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     }
   }
   protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
-   * @apilevel internal
-   */
-  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
-    if (_callerNode == getInitStmtListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:92
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return variableScopeEndLabel(gen);
-    }
-    else {
-      return getParent().Define_variableScopeEndLabel(this, _callerNode, gen);
-    }
-  }
-  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     return true;
   }
   /**
@@ -1566,6 +1549,23 @@ public class ForStmt extends BranchTargetStmt implements Cloneable, VariableScop
     }
   }
   protected boolean canDefine_localNum(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
+   * @apilevel internal
+   */
+  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
+    if (_callerNode == getInitStmtListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:92
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return variableScopeEndLabel(gen);
+    }
+    else {
+      return getParent().Define_variableScopeEndLabel(this, _callerNode, gen);
+    }
+  }
+  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     return true;
   }
   /** @apilevel internal */

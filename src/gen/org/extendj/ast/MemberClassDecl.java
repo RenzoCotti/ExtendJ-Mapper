@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -238,22 +238,6 @@ public class MemberClassDecl extends MemberTypeDecl implements Cloneable {
     return modifiedInScope_Variable_value;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:588
-   * @apilevel internal
-   */
-  public boolean Define_isMemberType(ASTNode _callerNode, ASTNode _childNode) {
-    if (getClassDeclNoTransform() != null && _callerNode == getClassDecl()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:589
-      return true;
-    }
-    else {
-      return getParent().Define_isMemberType(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_isMemberType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
    * @apilevel internal
    */
@@ -267,6 +251,22 @@ public class MemberClassDecl extends MemberTypeDecl implements Cloneable {
     }
   }
   protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:588
+   * @apilevel internal
+   */
+  public boolean Define_isMemberType(ASTNode _callerNode, ASTNode _childNode) {
+    if (getClassDeclNoTransform() != null && _callerNode == getClassDecl()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:589
+      return true;
+    }
+    else {
+      return getParent().Define_isMemberType(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_isMemberType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /** @apilevel internal */

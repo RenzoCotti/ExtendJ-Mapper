@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -35,6 +35,15 @@ public class VarAccess extends Access implements Cloneable {
    */
   public void prettyPrint(PrettyPrinter out) {
     out.print(getID());
+  }
+  /**
+   * @aspect NodeConstructors
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:52
+   */
+  public VarAccess(String name, int start, int end) {
+    this(name);
+    this.start = this.IDstart = start;
+    this.end = this.IDend = end;
   }
   /**
    * @aspect DefiniteAssignment
@@ -62,38 +71,15 @@ public class VarAccess extends Access implements Cloneable {
     return null;
   }
   /**
-   * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:52
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:210
    */
-  public VarAccess(String name, int start, int end) {
-    this(name);
-    this.start = this.IDstart = start;
-    this.end = this.IDend = end;
-  }
-  /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:431
-   */
-  public void refined_CodeGeneration_VarAccess_emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
+  public void collectEnclosingVariables(Collection<Variable> vars, TypeDecl typeDecl) {
     Variable v = decl();
-    if (v instanceof VariableDeclarator) {
-      VariableDeclarator var = (VariableDeclarator) v;
-      if (unassignedBefore(v)) {
-         gen.addLocalVariableEntryAtCurrentPC(var.name(), var.type().typeDescriptor(),
-             var.localNum(), var.variableScopeEndLabel(gen));
-      }
-      var.type().emitStoreLocal(node, gen, var.localNum());
-    } else if (v.isField()) {
-      if (v.isPrivate() && !hostType().hasField(v.name())) {
-        fieldWriteAccessor(v, fieldQualifierType())
-            .emitInvokeMethod(node, gen, fieldQualifierType());
-      } else {
-        emitStoreField(node, gen, v, fieldQualifierType());
-      }
-    } else if (v instanceof ParameterDeclaration) {
-      ParameterDeclaration decl = (ParameterDeclaration) v;
-      decl.type().emitStoreLocal(node, gen, decl.localNum());
+    if (!v.isInstanceVariable() && !v.isClassVariable() && v.hostType() == typeDecl) {
+      vars.add(v);
     }
+    super.collectEnclosingVariables(vars, typeDecl);
   }
   /**
    * @aspect CreateBCode
@@ -148,15 +134,29 @@ public class VarAccess extends Access implements Cloneable {
     emitLoadVariable(gen, decl());
   }
   /**
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:210
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:431
    */
-  public void collectEnclosingVariables(Collection<Variable> vars, TypeDecl typeDecl) {
+  public void refined_CodeGeneration_VarAccess_emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
     Variable v = decl();
-    if (!v.isInstanceVariable() && !v.isClassVariable() && v.hostType() == typeDecl) {
-      vars.add(v);
+    if (v instanceof VariableDeclarator) {
+      VariableDeclarator var = (VariableDeclarator) v;
+      if (unassignedBefore(v)) {
+         gen.addLocalVariableEntryAtCurrentPC(var.name(), var.type().typeDescriptor(),
+             var.localNum(), var.variableScopeEndLabel(gen));
+      }
+      var.type().emitStoreLocal(node, gen, var.localNum());
+    } else if (v.isField()) {
+      if (v.isPrivate() && !hostType().hasField(v.name())) {
+        fieldWriteAccessor(v, fieldQualifierType())
+            .emitInvokeMethod(node, gen, fieldQualifierType());
+      } else {
+        emitStoreField(node, gen, v, fieldQualifierType());
+      }
+    } else if (v instanceof ParameterDeclaration) {
+      ParameterDeclaration decl = (ParameterDeclaration) v;
+      decl.type().emitStoreLocal(node, gen, decl.localNum());
     }
-    super.collectEnclosingVariables(vars, typeDecl);
   }
   /**
    * @aspect GenericsCodegen
@@ -212,11 +212,11 @@ public class VarAccess extends Access implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    isConstant_reset();
+    isFieldAccess_reset();
     unassignedAfter_Variable_reset();
+    isConstant_reset();
     decls_reset();
     decl_reset();
-    isFieldAccess_reset();
     type_reset();
     enclosingLambda_reset();
   }
@@ -347,26 +347,6 @@ public class VarAccess extends Access implements Cloneable {
   }
   /**
    * @aspect GenericsCodegen
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:73
-   */
-   
-  public void emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
-    Variable v = decl();
-    if (v.isField()) {
-      if (v instanceof FieldDeclarator) {
-        v = ((FieldDeclarator) v).erasedField();
-      }
-      if (requiresAccessor()) {
-        fieldWriteAccessor(v, fieldQualifierType()).emitInvokeMethod(node, gen, fieldQualifierType());
-      } else {
-        emitStoreField(node, gen, v, fieldQualifierType());
-      }
-    } else {
-      refined_CodeGeneration_VarAccess_emitStore(node, gen);
-    }
-  }
-  /**
-   * @aspect GenericsCodegen
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:90
    */
     public void refined_GenericsCodegen_VarAccess_createAssignLoadDest(CodeGeneration gen) {
@@ -386,6 +366,26 @@ public class VarAccess extends Access implements Cloneable {
       }
     } else {
       refined_CreateBCode_VarAccess_createAssignLoadDest(gen);
+    }
+  }
+  /**
+   * @aspect GenericsCodegen
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/backend/GenericsCodegen.jrag:73
+   */
+   
+  public void emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
+    Variable v = decl();
+    if (v.isField()) {
+      if (v instanceof FieldDeclarator) {
+        v = ((FieldDeclarator) v).erasedField();
+      }
+      if (requiresAccessor()) {
+        fieldWriteAccessor(v, fieldQualifierType()).emitInvokeMethod(node, gen, fieldQualifierType());
+      } else {
+        emitStoreField(node, gen, v, fieldQualifierType());
+      }
+    } else {
+      refined_CodeGeneration_VarAccess_emitStore(node, gen);
     }
   }
   /**
@@ -432,78 +432,38 @@ public class VarAccess extends Access implements Cloneable {
     TypeDecl typeDecl = refined_InnerClasses_VarAccess_fieldQualifierType();
     return typeDecl == null ? null : typeDecl.erasure();
   }
+  /** @apilevel internal */
+  private void isFieldAccess_reset() {
+    isFieldAccess_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle isFieldAccess_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isFieldAccess_value;
+
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:45
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32")
-  public Constant constant() {
-    Constant constant_value = type().cast(decl().getInit().constant());
-    return constant_value;
-  }
-/** @apilevel internal */
-protected ASTNode$State.Cycle isConstant_cycle = null;
-  /** @apilevel internal */
-  private void isConstant_reset() {
-    isConstant_computed = false;
-    isConstant_initialized = false;
-    isConstant_cycle = null;
-  }
-  /** @apilevel internal */
-  protected boolean isConstant_computed = false;
-
-  /** @apilevel internal */
-  protected boolean isConstant_value;
-  /** @apilevel internal */
-  protected boolean isConstant_initialized = false;
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:423")
-  public boolean isConstant() {
-    if (isConstant_computed) {
-      return isConstant_value;
-    }
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:45")
+  public boolean isFieldAccess() {
     ASTNode$State state = state();
-    if (!isConstant_initialized) {
-      isConstant_initialized = true;
-      isConstant_value = false;
+    if (isFieldAccess_computed == ASTNode$State.NON_CYCLE || isFieldAccess_computed == state().cycle()) {
+      return isFieldAccess_value;
     }
-    if (!state.inCircle() || state.calledByLazyAttribute()) {
-      state.enterCircle();
-      do {
-        isConstant_cycle = state.nextCycle();
-        boolean new_isConstant_value = isConstant_compute();
-        if (new_isConstant_value != isConstant_value) {
-          state.setChangeInCycle();
-        }
-        isConstant_value = new_isConstant_value;
-      } while (state.testAndClearChangeInCycle());
-      isConstant_computed = true;
-
-      state.leaveCircle();
-    } else if (isConstant_cycle != state.cycle()) {
-      isConstant_cycle = state.cycle();
-      boolean new_isConstant_value = isConstant_compute();
-      if (new_isConstant_value != isConstant_value) {
-        state.setChangeInCycle();
-      }
-      isConstant_value = new_isConstant_value;
+    isFieldAccess_value = decl().isClassVariable() || decl().isInstanceVariable();
+    if (state().inCircle()) {
+      isFieldAccess_computed = state().cycle();
+    
     } else {
+      isFieldAccess_computed = ASTNode$State.NON_CYCLE;
+    
     }
-    return isConstant_value;
+    return isFieldAccess_value;
   }
-  /** @apilevel internal */
-  private boolean isConstant_compute() {
-      Variable v = decl();
-      if (v.isField()) {
-        return v.isConstant() && (!isQualified() || (isQualified() && qualifier().isTypeAccess()));
-      } else {
-        return v.isFinal() && v.hasInit()
-            && v.getInit().isConstant() && (v.type().isPrimitive() || v.type().isString())
-            && (!isQualified() || (isQualified() && qualifier().isTypeAccess()));
-      }
-    }
   /**
    * @attribute syn
    * @aspect DefiniteAssignment
@@ -668,6 +628,89 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
     } else {
       return (Boolean) _value.value;
     }
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32")
+  public Constant constant() {
+    Constant constant_value = type().cast(decl().getInit().constant());
+    return constant_value;
+  }
+/** @apilevel internal */
+protected ASTNode$State.Cycle isConstant_cycle = null;
+  /** @apilevel internal */
+  private void isConstant_reset() {
+    isConstant_computed = false;
+    isConstant_initialized = false;
+    isConstant_cycle = null;
+  }
+  /** @apilevel internal */
+  protected boolean isConstant_computed = false;
+
+  /** @apilevel internal */
+  protected boolean isConstant_value;
+  /** @apilevel internal */
+  protected boolean isConstant_initialized = false;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:423")
+  public boolean isConstant() {
+    if (isConstant_computed) {
+      return isConstant_value;
+    }
+    ASTNode$State state = state();
+    if (!isConstant_initialized) {
+      isConstant_initialized = true;
+      isConstant_value = false;
+    }
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      do {
+        isConstant_cycle = state.nextCycle();
+        boolean new_isConstant_value = isConstant_compute();
+        if (new_isConstant_value != isConstant_value) {
+          state.setChangeInCycle();
+        }
+        isConstant_value = new_isConstant_value;
+      } while (state.testAndClearChangeInCycle());
+      isConstant_computed = true;
+
+      state.leaveCircle();
+    } else if (isConstant_cycle != state.cycle()) {
+      isConstant_cycle = state.cycle();
+      boolean new_isConstant_value = isConstant_compute();
+      if (new_isConstant_value != isConstant_value) {
+        state.setChangeInCycle();
+      }
+      isConstant_value = new_isConstant_value;
+    } else {
+    }
+    return isConstant_value;
+  }
+  /** @apilevel internal */
+  private boolean isConstant_compute() {
+      Variable v = decl();
+      if (v.isField()) {
+        return v.isConstant() && (!isQualified() || (isQualified() && qualifier().isTypeAccess()));
+      } else {
+        return v.isFinal() && v.hasInit()
+            && v.getInit().isConstant() && (v.type().isPrimitive() || v.type().isString())
+            && (!isQualified() || (isQualified() && qualifier().isTypeAccess()));
+      }
+    }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33")
+  public boolean isVariable() {
+    boolean isVariable_value = true;
+    return isVariable_value;
   }
   /** @apilevel internal */
   private void decls_reset() {
@@ -899,49 +942,6 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
     return inDeclaringClass_value;
   }
   /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:35
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:35")
-  public String name() {
-    String name_value = getID();
-    return name_value;
-  }
-  /** @apilevel internal */
-  private void isFieldAccess_reset() {
-    isFieldAccess_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle isFieldAccess_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isFieldAccess_value;
-
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:45
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:45")
-  public boolean isFieldAccess() {
-    ASTNode$State state = state();
-    if (isFieldAccess_computed == ASTNode$State.NON_CYCLE || isFieldAccess_computed == state().cycle()) {
-      return isFieldAccess_value;
-    }
-    isFieldAccess_value = decl().isClassVariable() || decl().isInstanceVariable();
-    if (state().inCircle()) {
-      isFieldAccess_computed = state().cycle();
-    
-    } else {
-      isFieldAccess_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return isFieldAccess_value;
-  }
-  /**
    * Defines the expected kind of name for the left hand side in a qualified
    * expression.
    * @attribute syn
@@ -953,6 +953,17 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
   public NameType predNameType() {
     NameType predNameType_value = NameType.AMBIGUOUS_NAME;
     return predNameType_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:35
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:35")
+  public String name() {
+    String name_value = getID();
+    return name_value;
   }
   /** @apilevel internal */
   private void type_reset() {
@@ -986,17 +997,6 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33")
-  public boolean isVariable() {
-    boolean isVariable_value = true;
-    return isVariable_value;
   }
   /**
    * @attribute syn
@@ -1041,39 +1041,6 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
   public boolean isVariable(Variable var) {
     boolean isVariable_Variable_value = decl() == var;
     return isVariable_Variable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:329
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:329")
-  public boolean isVarAccessWithAccessor() {
-    boolean isVarAccessWithAccessor_value = decl().isInstanceVariable() && requiresAccessor();
-    return isVarAccessWithAccessor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:362
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:362")
-  public boolean requiresFieldAccessor() {
-    boolean requiresFieldAccessor_value = requiresAccessor() && isSource();
-    return requiresFieldAccessor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:371
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:371")
-  public boolean requiresFieldWriteAccessor() {
-    boolean requiresFieldWriteAccessor_value = requiresAccessor() && isDest();
-    return requiresFieldWriteAccessor_value;
   }
   /**
    * @attribute syn
@@ -1125,6 +1092,39 @@ protected ASTNode$State.Cycle isConstant_cycle = null;
         }
         return false;
       }
+  }
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:329
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:329")
+  public boolean isVarAccessWithAccessor() {
+    boolean isVarAccessWithAccessor_value = decl().isInstanceVariable() && requiresAccessor();
+    return isVarAccessWithAccessor_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenerateClassfile
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:362
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:362")
+  public boolean requiresFieldAccessor() {
+    boolean requiresFieldAccessor_value = requiresAccessor() && isSource();
+    return requiresFieldAccessor_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenerateClassfile
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:371
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:371")
+  public boolean requiresFieldWriteAccessor() {
+    boolean requiresFieldWriteAccessor_value = requiresAccessor() && isDest();
+    return requiresFieldWriteAccessor_value;
   }
   /**
    * @attribute inh

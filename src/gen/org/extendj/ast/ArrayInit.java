@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -313,27 +313,6 @@ public class ArrayInit extends Expr implements Cloneable {
     }
   }
   /**
-   * representableIn(T) is true if and only if the the expression is a
-   * compile-time constant of type byte, char, short or int, and the value
-   * of the expression can be represented (by an expression) in the type T
-   * where T must be byte, char or short.
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328")
-  public boolean representableIn(TypeDecl t) {
-    {
-        for (int i = 0; i < getNumInit(); i++) {
-          if (!getInit(i).representableIn(t)) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /**
    * @attribute syn
    * @aspect DefiniteAssignment
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268
@@ -525,6 +504,51 @@ public class ArrayInit extends Expr implements Cloneable {
       }
       return getInit(childIndex-1).unassignedAfter(v);
     }
+  /**
+   * representableIn(T) is true if and only if the the expression is a
+   * compile-time constant of type byte, char, short or int, and the value
+   * of the expression can be represented (by an expression) in the type T
+   * where T must be byte, char or short.
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328")
+  public boolean representableIn(TypeDecl t) {
+    {
+        for (int i = 0; i < getNumInit(); i++) {
+          if (!getInit(i).representableIn(t)) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:188
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:188")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        TypeDecl initializerType = declType().componentType();
+        if (initializerType.isUnknown()) {
+          problems.add(error("the dimension of the initializer is larger than the expected dimension"));
+        }
+        for (int i = 0; i < getNumInit(); i++) {
+          Expr e = getInit(i);
+          if (!e.type().assignConversionTo(initializerType, e)) {
+            problems.add(errorf("the type %s of the initializer is not compatible with %s",
+                e.type().name(), initializerType.name()));
+          }
+        }
+        return problems;
+      }
+  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -557,30 +581,6 @@ public class ArrayInit extends Expr implements Cloneable {
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:188
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:188")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        TypeDecl initializerType = declType().componentType();
-        if (initializerType.isUnknown()) {
-          problems.add(error("the dimension of the initializer is larger than the expected dimension"));
-        }
-        for (int i = 0; i < getNumInit(); i++) {
-          Expr e = getInit(i);
-          if (!e.type().assignConversionTo(initializerType, e)) {
-            problems.add(errorf("the type %s of the initializer is not compatible with %s",
-                e.type().name(), initializerType.name()));
-          }
-        }
-        return problems;
-      }
   }
   /**
    * @attribute syn

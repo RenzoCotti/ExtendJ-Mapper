@@ -1,0 +1,681 @@
+Classfile /Users/BMW/Documents/Git/ExtendJ-Mapper/test_files/J17.class
+  Last modified 20-Jun-2018; size 4936 bytes
+  MD5 checksum 0092c74b2c8ca87b67176594facb5dcc
+  Compiled from "J17.java"
+class J17 extends Java
+  minor version: 0
+  major version: 49
+  flags: ACC_SUPER
+Constant pool:
+    #1 = Utf8               J17
+    #2 = Class              #1            // J17
+    #3 = Utf8               Java
+    #4 = Class              #3            // Java
+    #5 = Utf8               name
+    #6 = Utf8               Ljava/lang/String;
+    #7 = Utf8               Signature
+    #8 = Utf8               type
+    #9 = Utf8               LTypeOfLanguage;
+   #10 = Utf8               $assertiosDisabled
+   #11 = Utf8               Z
+   #12 = Utf8               <init>
+   #13 = Utf8               (Ljava/lang/String;)V
+   #14 = Utf8               this
+   #15 = Utf8               LJ17;
+   #16 = Utf8               ()V
+   #17 = NameAndType        #12:#16       // "<init>":()V
+   #18 = Methodref          #4.#17        // Java."<init>":()V
+   #19 = NameAndType        #5:#6         // name:Ljava/lang/String;
+   #20 = Fieldref           #2.#19        // J17.name:Ljava/lang/String;
+   #21 = Utf8               TypeOfLanguage
+   #22 = Class              #21           // TypeOfLanguage
+   #23 = Utf8               IMPERATIVE
+   #24 = NameAndType        #23:#9        // IMPERATIVE:LTypeOfLanguage;
+   #25 = Fieldref           #22.#24       // TypeOfLanguage.IMPERATIVE:LTypeOfLanguage;
+   #26 = NameAndType        #8:#9         // type:LTypeOfLanguage;
+   #27 = Fieldref           #2.#26        // J17.type:LTypeOfLanguage;
+   #28 = Utf8               Code
+   #29 = Utf8               LineNumberTable
+   #30 = Utf8               PositionTable
+   #31 = Utf8               LocalVariableTable
+   #32 = Utf8               Exceptions
+   #33 = Utf8               assertion
+   #34 = Utf8               (I)I
+   #35 = Utf8               x
+   #36 = Utf8               I
+   #37 = Utf8               a
+   #38 = NameAndType        #10:#11       // $assertiosDisabled:Z
+   #39 = Fieldref           #2.#38        // J17.$assertiosDisabled:Z
+   #40 = Utf8               java/lang/AssertionError
+   #41 = Class              #40           // java/lang/AssertionError
+   #42 = Methodref          #41.#17       // java/lang/AssertionError."<init>":()V
+   #43 = Utf8               loops
+   #44 = Utf8               ([I)I
+   #45 = Utf8               items
+   #46 = Utf8               [I
+   #47 = Utf8               counter
+   #48 = Utf8               i
+   #49 = Utf8               m
+   #50 = Utf8               Ljava/util/ArrayList;
+   #51 = Utf8               java/util/ArrayList
+   #52 = Class              #51           // java/util/ArrayList
+   #53 = Methodref          #52.#17       // java/util/ArrayList."<init>":()V
+   #54 = Utf8               java/lang/Integer
+   #55 = Class              #54           // java/lang/Integer
+   #56 = Utf8               valueOf
+   #57 = Utf8               (I)Ljava/lang/Integer;
+   #58 = NameAndType        #56:#57       // valueOf:(I)Ljava/lang/Integer;
+   #59 = Methodref          #55.#58       // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+   #60 = Utf8               add
+   #61 = Utf8               (Ljava/lang/Object;)Z
+   #62 = NameAndType        #60:#61       // add:(Ljava/lang/Object;)Z
+   #63 = Methodref          #52.#62       // java/util/ArrayList.add:(Ljava/lang/Object;)Z
+   #64 = Utf8               bitwise
+   #65 = Utf8               b
+   #66 = Utf8               D
+   #67 = Utf8               ifStatements
+   #68 = Utf8               ()Z
+   #69 = Utf8               s
+   #70 = Utf8               hello
+   #71 = String             #70           // hello
+   #72 = Utf8               java/lang/Object
+   #73 = Class              #72           // java/lang/Object
+   #74 = Utf8               hashCode
+   #75 = Utf8               ()I
+   #76 = NameAndType        #74:#75       // hashCode:()I
+   #77 = Methodref          #73.#76       // java/lang/Object.hashCode:()I
+   #78 = Utf8               equals
+   #79 = NameAndType        #78:#61       // equals:(Ljava/lang/Object;)Z
+   #80 = Methodref          #73.#79       // java/lang/Object.equals:(Ljava/lang/Object;)Z
+   #81 = Utf8               world
+   #82 = String             #81           // world
+   #83 = Utf8               Ljava/lang/Integer;
+   #84 = Utf8               ic
+   #85 = Utf8               LJ17$InnerClass;
+   #86 = Utf8               J17$InnerClass
+   #87 = Class              #86           // J17$InnerClass
+   #88 = Utf8               (LJ17;I)V
+   #89 = NameAndType        #12:#88       // "<init>":(LJ17;I)V
+   #90 = Methodref          #87.#89       // J17$InnerClass."<init>":(LJ17;I)V
+   #91 = Utf8               exceptionThrower
+   #92 = Utf8               java/lang/Exception
+   #93 = Class              #92           // java/lang/Exception
+   #94 = Utf8               A chained Exception has been thrown.
+   #95 = String             #94           // A chained Exception has been thrown.
+   #96 = NameAndType        #12:#13       // "<init>":(Ljava/lang/String;)V
+   #97 = Methodref          #93.#96       // java/lang/Exception."<init>":(Ljava/lang/String;)V
+   #98 = Utf8               java/lang/IndexOutOfBoundsException
+   #99 = Class              #98           // java/lang/IndexOutOfBoundsException
+  #100 = Utf8               <clinit>
+  #101 = Utf8               java/lang/Class
+  #102 = Class              #101          // java/lang/Class
+  #103 = Utf8               desiredAssertionStatus
+  #104 = NameAndType        #103:#68      // desiredAssertionStatus:()Z
+  #105 = Methodref          #102.#104     // java/lang/Class.desiredAssertionStatus:()Z
+  #106 = Utf8               InnerClasses
+  #107 = Utf8               InnerClass
+  #108 = Utf8               SourceFile
+  #109 = Utf8               J17.java
+  #110 = Utf8               This class file was generated by node 117
+{
+  static final boolean $assertiosDisabled;
+    descriptor: Z
+    flags: ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  public J17(java.lang.String) throws ;
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=2
+         0: aload_0
+         1: invokespecial #18                 // Method Java."<init>":()V
+         4: aload_0
+         5: pop
+         6: aload_1
+         7: putstatic     #20                 // Field name:Ljava/lang/String;
+        10: aload_0
+        11: getstatic     #25                 // Field TypeOfLanguage.IMPERATIVE:LTypeOfLanguage;
+        14: putfield      #27                 // Field type:LTypeOfLanguage;
+        17: return
+      LineNumberTable:
+        line 25: 4
+        line 26: 10
+Error: unknown attribute
+        PositionTable: length = 0x60
+         00 04 00 19 00 05 00 19 00 08 00 A1 00 05 00 19
+         00 0A 00 19 00 0D 02 95 00 06 00 19 00 11 00 19
+         00 14 02 96 00 07 00 19 00 05 00 19 00 14 00 9F
+         00 0A 00 1A 00 05 00 1A 00 08 00 A7 00 0B 00 1A
+         00 20 00 1A 00 29 02 97 00 0E 00 1A 00 05 00 1A
+         00 29 00 A5 00 11 00 18 00 05 00 1B 00 05 00 91
+
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  this   LJ17;
+            0      18     1  name   Ljava/lang/String;
+    Exceptions:
+      throws
+
+  public int assertion(int) throws ;
+    descriptor: (I)I
+    flags: ACC_PUBLIC
+    Exceptions:
+      throws
+    Code:
+      stack=2, locals=5, args_size=2
+         0: iconst_3
+         1: istore_3
+         2: iload_3
+         3: iconst_5
+         4: iadd
+         5: istore_3
+         6: getstatic     #39                 // Field $assertiosDisabled:Z
+         9: ifne          26
+        12: iload_3
+        13: bipush        8
+        15: if_icmpeq     26
+        18: new           #41                 // class java/lang/AssertionError
+        21: dup
+        22: invokespecial #42                 // Method java/lang/AssertionError."<init>":()V
+        25: athrow
+        26: iload_1
+        27: iload_3
+        28: imul
+        29: ireturn
+      LineNumberTable:
+        line 30: 0
+        line 31: 2
+        line 33: 26
+Error: unknown attribute
+        PositionTable: length = 0x9C
+         00 00 00 1E 00 11 00 1E 00 11 02 98 00 01 00 1E
+         00 0D 00 1E 00 11 00 C0 00 02 00 1F 00 0B 00 1F
+         00 0B 02 99 00 03 00 1F 00 0D 00 1F 00 0D 02 9A
+         00 04 00 1F 00 0B 00 1F 00 0D 00 C8 00 05 00 1F
+         00 07 00 1F 00 0D 00 C6 00 0C 00 20 00 0E 00 20
+         00 0E 02 9C 00 0D 00 20 00 13 00 20 00 13 02 9D
+         00 0F 00 20 00 0E 00 20 00 13 02 9E 00 1A 00 21
+         00 10 00 21 00 10 02 A1 00 1B 00 21 00 14 00 21
+         00 14 02 A2 00 1C 00 21 00 10 00 21 00 14 00 D3
+         00 1D 00 21 00 09 00 21 00 15 00 D1
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      30     0  this   LJ17;
+            0      30     1     x   I
+            0      30     3     a   I
+
+  public int loops(int...) throws ;
+    descriptor: ([I)I
+    flags: ACC_PUBLIC, ACC_VARARGS
+    Exceptions:
+      throws
+    Code:
+      stack=2, locals=9, args_size=2
+         0: iconst_0
+         1: istore_3
+         2: iconst_0
+         3: istore        4
+         5: iload         4
+         7: bipush        10
+         9: if_icmpgt     25
+        12: iload_3
+        13: iconst_1
+        14: iadd
+        15: istore_3
+        16: iload         4
+        18: iconst_1
+        19: iadd
+        20: istore        4
+        22: goto          5
+        25: iload_3
+        26: iconst_5
+        27: if_icmple     37
+        30: iload_3
+        31: iconst_m1
+        32: iadd
+        33: istore_3
+        34: goto          25
+        37: iload_3
+        38: iconst_1
+        39: iadd
+        40: istore_3
+        41: iload_3
+        42: bipush        10
+        44: if_icmplt     37
+        47: iload_3
+        48: iconst_m1
+        49: iadd
+        50: istore_3
+        51: iload_3
+        52: iconst_1
+        53: iadd
+        54: istore_3
+        55: iload_3
+        56: iconst_1
+        57: isub
+        58: istore_3
+        59: iload_3
+        60: iconst_1
+        61: imul
+        62: istore_3
+        63: iload_3
+        64: iconst_1
+        65: idiv
+        66: istore_3
+        67: new           #52                 // class java/util/ArrayList
+        70: dup
+        71: invokespecial #53                 // Method java/util/ArrayList."<init>":()V
+        74: astore        4
+        76: aload_1
+        77: astore        5
+        79: iconst_0
+        80: istore        6
+        82: iload         6
+        84: aload         5
+        86: arraylength
+        87: if_icmpge     114
+        90: aload         5
+        92: iload         6
+        94: iaload
+        95: istore        7
+        97: aload         4
+        99: iload         7
+       101: invokestatic  #59                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       104: invokevirtual #63                 // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+       107: pop
+       108: iinc          6, 1
+       111: goto          82
+       114: iload_3
+       115: ireturn
+      LineNumberTable:
+        line 44: 0
+        line 45: 2
+        line 45: 2
+        line 46: 12
+        line 45: 16
+        line 49: 25
+        line 50: 30
+        line 51: 34
+        line 54: 37
+        line 55: 37
+        line 57: 47
+        line 59: 51
+        line 60: 55
+        line 61: 59
+        line 62: 63
+        line 64: 67
+        line 67: 97
+        line 70: 114
+Error: unknown attribute
+        PositionTable: length = 0x378
+         00 00 00 2C 00 12 00 2C 00 12 02 A3 00 01 00 2C
+         00 08 00 2C 00 12 01 13 00 02 00 2D 00 11 00 2D
+         00 11 02 A4 00 03 00 2D 00 0D 00 2D 00 11 01 1F
+         00 05 00 2D 00 14 00 2D 00 14 02 A5 00 07 00 2D
+         00 19 00 2D 00 1A 02 A6 00 09 00 2D 00 14 00 2D
+         00 1A 01 25 00 0C 00 2E 00 07 00 2E 00 0D 02 A7
+         00 0D 00 2E 00 05 00 2E 00 0D 01 2F 00 0E 00 2E
+         00 05 00 2E 00 0D 01 2F 00 0F 00 2E 00 05 00 2E
+         00 0D 01 2F 00 10 00 2D 00 1D 00 2D 00 1D 02 A8
+         00 12 00 2D 00 1D 00 2D 00 1F 01 2A 00 13 00 2D
+         00 1D 00 2D 00 1F 01 2A 00 14 00 2D 00 1D 00 2D
+         00 1F 01 2A 00 16 00 2D 00 04 00 2F 00 04 01 18
+         00 19 00 31 00 0B 00 31 00 11 02 A9 00 1A 00 31
+         00 15 00 31 00 15 02 AA 00 1B 00 31 00 0B 00 31
+         00 15 01 32 00 1E 00 32 00 05 00 32 00 0B 02 AB
+         00 1F 00 32 00 05 00 32 00 0D 01 38 00 20 00 32
+         00 05 00 32 00 0D 01 38 00 21 00 32 00 05 00 32
+         00 0D 01 38 00 22 00 33 00 05 00 33 00 0D 01 3A
+         00 25 00 37 00 05 00 37 00 0B 02 AC 00 26 00 37
+         00 05 00 37 00 0D 01 40 00 27 00 37 00 05 00 37
+         00 0D 01 40 00 28 00 37 00 05 00 37 00 0D 01 40
+         00 29 00 38 00 0D 00 38 00 13 02 AD 00 2A 00 38
+         00 17 00 38 00 18 02 AE 00 2C 00 38 00 0D 00 38
+         00 18 01 42 00 2F 00 39 00 06 00 39 00 0C 02 AF
+         00 30 00 39 00 04 00 39 00 0C 01 46 00 31 00 39
+         00 04 00 39 00 0C 01 46 00 32 00 39 00 04 00 39
+         00 0C 01 46 00 33 00 3B 00 04 00 3B 00 0A 02 B0
+         00 34 00 3B 00 0D 00 3B 00 0D 02 B1 00 35 00 3B
+         00 04 00 3B 00 0D 01 49 00 36 00 3B 00 04 00 3B
+         00 0D 01 49 00 37 00 3C 00 04 00 3C 00 0A 02 B2
+         00 38 00 3C 00 0D 00 3C 00 0D 02 B3 00 39 00 3C
+         00 04 00 3C 00 0D 01 4D 00 3A 00 3C 00 04 00 3C
+         00 0D 01 4D 00 3B 00 3D 00 04 00 3D 00 0A 02 B4
+         00 3C 00 3D 00 0D 00 3D 00 0D 02 B5 00 3D 00 3D
+         00 04 00 3D 00 0D 01 51 00 3E 00 3D 00 04 00 3D
+         00 0D 01 51 00 3F 00 3E 00 04 00 3E 00 0A 02 B6
+         00 40 00 3E 00 0D 00 3E 00 0D 02 B7 00 41 00 3E
+         00 04 00 3E 00 0D 01 55 00 42 00 3E 00 04 00 3E
+         00 0D 01 55 00 43 00 40 00 1B 00 40 00 2B 01 63
+         00 46 00 40 00 1B 00 40 00 2B 01 63 00 47 00 40
+         00 1B 00 40 00 2B 01 63 00 4A 00 40 00 17 00 40
+         00 2B 01 60 00 4C 00 42 00 11 00 42 00 15 02 B8
+         00 4D 00 42 00 04 00 44 00 04 01 6C 00 4F 00 42
+         00 04 00 44 00 04 01 6C 00 50 00 42 00 04 00 44
+         00 04 01 6C 00 52 00 42 00 04 00 44 00 04 01 6C
+         00 54 00 42 00 04 00 44 00 04 01 6C 00 56 00 42
+         00 04 00 44 00 04 01 6C 00 57 00 42 00 04 00 44
+         00 04 01 6C 00 5A 00 42 00 04 00 44 00 04 01 6C
+         00 5C 00 42 00 04 00 44 00 04 01 6C 00 5E 00 42
+         00 04 00 44 00 04 01 6C 00 5F 00 42 00 04 00 44
+         00 04 01 6C 00 61 00 43 00 05 00 43 00 05 02 B9
+         00 63 00 43 00 0B 00 43 00 0B 02 BA 00 6B 00 43
+         00 05 00 43 00 0D 01 77 00 6C 00 42 00 04 00 44
+         00 04 01 6C 00 6F 00 42 00 04 00 44 00 04 01 6C
+         00 72 00 46 00 0B 00 46 00 11 02 BB 00 73 00 46
+         00 04 00 46 00 12 01 7D
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     116     0  this   LJ17;
+            0     116     1 items   [I
+            0     116     3 counter   I
+            2      23     4     i   I
+           67      49     4     m   Ljava/util/ArrayList;
+           76      38     5     x   I
+
+  public void bitwise() throws ;
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Exceptions:
+      throws
+    Code:
+      stack=2, locals=5, args_size=1
+         0: bipush        55
+         2: istore_1
+         3: iload_1
+         4: iconst_3
+         5: ixor
+         6: istore_1
+         7: iload_1
+         8: iconst_3
+         9: ior
+        10: istore_1
+        11: iload_1
+        12: iconst_3
+        13: iand
+        14: istore_1
+        15: iload_1
+        16: iconst_3
+        17: ishl
+        18: istore_1
+        19: bipush        17
+        21: istore_1
+        22: iload_1
+        23: i2d
+        24: dstore_2
+        25: return
+      LineNumberTable:
+        line 74: 0
+        line 75: 3
+        line 76: 7
+        line 77: 11
+        line 78: 15
+        line 79: 19
+        line 81: 22
+Error: unknown attribute
+        PositionTable: length = 0x120
+         00 00 00 4A 00 0C 00 4A 00 0E 02 BC 00 02 00 4A
+         00 08 00 4A 00 0E 01 90 00 03 00 4B 00 08 00 4B
+         00 08 02 BD 00 04 00 4B 00 0A 00 4B 00 0A 02 BE
+         00 05 00 4B 00 08 00 4B 00 0A 01 98 00 06 00 4B
+         00 04 00 4B 00 0A 01 96 00 07 00 4C 00 08 00 4C
+         00 08 02 BF 00 08 00 4C 00 0A 00 4C 00 0A 02 C0
+         00 09 00 4C 00 08 00 4C 00 0A 01 9E 00 0A 00 4C
+         00 04 00 4C 00 0A 01 9C 00 0B 00 4D 00 08 00 4D
+         00 08 02 C1 00 0C 00 4D 00 0A 00 4D 00 0A 02 C2
+         00 0D 00 4D 00 08 00 4D 00 0A 01 A4 00 0E 00 4D
+         00 04 00 4D 00 0A 01 A2 00 0F 00 4E 00 08 00 4E
+         00 08 02 C3 00 10 00 4E 00 0D 00 4E 00 0D 02 C4
+         00 11 00 4E 00 08 00 4E 00 0D 01 AA 00 12 00 4E
+         00 04 00 4E 00 0D 01 A8 00 13 00 4F 00 08 00 4F
+         00 10 02 C5 00 15 00 4F 00 04 00 4F 00 10 01 AE
+         00 16 00 51 00 18 00 51 00 18 02 C6 00 17 00 51
+         00 0F 00 51 00 18 01 B9 00 18 00 51 00 0B 00 51
+         00 18 01 B6 00 19 00 49 00 03 00 52 00 03 01 81
+
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      26     0  this   LJ17;
+            0      25     1     a   I
+           22       3     2     b   D
+
+  public boolean ifStatements() throws ;
+    descriptor: ()Z
+    flags: ACC_PUBLIC
+    Exceptions:
+      throws
+    Code:
+      stack=4, locals=6, args_size=1
+         0: ldc           #71                 // String hello
+         2: astore_2
+         3: iconst_0
+         4: istore_3
+         5: aload_2
+         6: dup
+         7: astore        4
+         9: invokevirtual #77                 // Method java/lang/Object.hashCode:()I
+        12: lookupswitch  { // 1
+                99162322: 32
+                 default: 32
+            }
+        32: aload         4
+        34: ldc           #71                 // String hello
+        36: invokevirtual #80                 // Method java/lang/Object.equals:(Ljava/lang/Object;)Z
+        39: ifeq          47
+        42: iconst_1
+        43: istore_3
+        44: goto          47
+        47: iload_3
+        48: tableswitch   { // 0 to 1
+                       0: 78
+                       1: 72
+                 default: 72
+            }
+        72: ldc           #82                 // String world
+        74: astore_2
+        75: goto          81
+        78: goto          81
+        81: iconst_3
+        82: invokestatic  #59                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        85: astore_3
+        86: aconst_null
+        87: astore        4
+        89: new           #87                 // class J17$InnerClass
+        92: dup
+        93: aload_0
+        94: iconst_3
+        95: invokespecial #90                 // Method J17$InnerClass."<init>":(LJ17;I)V
+        98: astore        4
+       100: goto          103
+       103: iconst_1
+       104: ireturn
+      LineNumberTable:
+        line 87: 0
+        line 89: 3
+        line 91: 72
+        line 92: 75
+        line 94: 78
+        line 97: 81
+        line 99: 86
+        line 100: 89
+        line 102: 100
+        line 104: 103
+        line 105: 103
+Error: unknown attribute
+        PositionTable: length = 0x1F8
+         00 00 00 57 00 0F 00 57 00 15 01 CF 00 02 00 57
+         00 0B 00 57 00 15 01 CC 00 03 00 59 00 04 00 5F
+         00 04 01 D1 00 04 00 59 00 04 00 5F 00 04 01 D1
+         00 05 00 59 00 0B 00 59 00 0B 02 C7 00 06 00 59
+         00 04 00 5F 00 04 01 D1 00 07 00 59 00 04 00 5F
+         00 04 01 D1 00 09 00 59 00 04 00 5F 00 04 01 D1
+         00 0C 00 59 00 04 00 5F 00 04 01 D1 00 0D 00 59
+         00 04 00 5F 00 04 01 D1 00 0E 00 59 00 04 00 5F
+         00 04 01 D1 00 0F 00 59 00 04 00 5F 00 04 01 D1
+         00 20 00 59 00 04 00 5F 00 04 01 D1 00 22 00 59
+         00 04 00 5F 00 04 01 D1 00 24 00 59 00 04 00 5F
+         00 04 01 D1 00 27 00 59 00 04 00 5F 00 04 01 D1
+         00 2A 00 59 00 04 00 5F 00 04 01 D1 00 2B 00 59
+         00 04 00 5F 00 04 01 D1 00 2C 00 59 00 04 00 5F
+         00 04 01 D1 00 2F 00 59 00 04 00 5F 00 04 01 D1
+         00 30 00 59 00 04 00 5F 00 04 01 D1 00 31 00 59
+         00 04 00 5F 00 04 01 D1 00 32 00 59 00 04 00 5F
+         00 04 01 D1 00 33 00 59 00 04 00 5F 00 04 01 D1
+         00 48 00 5B 00 0A 00 5B 00 10 01 DA 00 4A 00 5B
+         00 06 00 5B 00 10 01 D8 00 4B 00 5C 00 06 00 5C
+         00 0B 01 DB 00 4E 00 5E 00 06 00 5E 00 0B 01 DE
+         00 51 00 61 00 10 00 61 00 10 02 C8 00 52 00 61
+         00 0C 00 61 00 10 01 E5 00 55 00 61 00 0C 00 61
+         00 10 01 E5 00 56 00 63 00 14 00 63 00 17 01 F2
+         00 57 00 63 00 0F 00 63 00 17 01 EF 00 59 00 64
+         00 09 00 64 00 19 01 F7 00 5C 00 64 00 09 00 64
+         00 19 01 F7 00 5D 00 64 00 09 00 64 00 19 01 F7
+         00 5E 00 64 00 18 00 64 00 18 02 C9 00 5F 00 64
+         00 09 00 64 00 19 01 F7 00 62 00 64 00 04 00 64
+         00 19 01 F5 00 64 00 66 00 07 00 66 00 0B 01 FF
+         00 67 00 69 00 0C 00 69 00 0F 02 1A 00 68 00 69
+         00 05 00 69 00 10 02 18
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     105     0  this   LJ17;
+            0     105     2     s   Ljava/lang/String;
+           81      24     3     a   Ljava/lang/Integer;
+           86      19     4    ic   LJ17$InnerClass;
+
+  public void exceptionThrower() throws java.lang.Exception;
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Exceptions:
+      throws java.lang.Exception
+    Code:
+      stack=4, locals=6, args_size=1
+         0: iconst_2
+         1: newarray       int
+         3: astore_1
+         4: iconst_3
+         5: newarray       int
+         7: dup
+         8: iconst_0
+         9: iconst_1
+        10: iastore
+        11: dup
+        12: iconst_1
+        13: iconst_2
+        14: iastore
+        15: dup
+        16: iconst_2
+        17: iconst_3
+        18: iastore
+        19: astore_2
+        20: aload_1
+        21: iconst_4
+        22: iconst_4
+        23: iastore
+        24: goto          57
+        27: astore        4
+        29: new           #93                 // class java/lang/Exception
+        32: dup
+        33: ldc           #95                 // String A chained Exception has been thrown.
+        35: invokespecial #97                 // Method java/lang/Exception."<init>":(Ljava/lang/String;)V
+        38: athrow
+        39: astore        4
+        41: aload_1
+        42: iconst_0
+        43: iconst_1
+        44: iastore
+        45: goto          57
+        48: astore        4
+        50: aload_1
+        51: iconst_0
+        52: iconst_2
+        53: iastore
+        54: aload         4
+        56: athrow
+        57: aload_1
+        58: iconst_0
+        59: iconst_2
+        60: iastore
+        61: return
+      Exception table:
+         from    to  target type
+            20    24    27   Class java/lang/IndexOutOfBoundsException
+            27    39    48   any
+            20    24    39   Class java/lang/Exception
+            39    48    48   any
+            20    24    48   any
+      LineNumberTable:
+        line 113: 0
+        line 114: 4
+        line 115: 20
+        line 116: 20
+        line 117: 20
+        line 119: 29
+        line 121: 41
+        line 124: 50
+        line 124: 57
+Error: unknown attribute
+        PositionTable: length = 0x234
+         00 00 00 71 00 17 00 71 00 17 02 CA 00 01 00 71
+         00 0F 00 71 00 18 02 37 00 03 00 71 00 0B 00 71
+         00 18 02 34 00 04 00 72 00 0F 00 72 00 17 02 47
+         00 05 00 72 00 0F 00 72 00 17 02 47 00 07 00 72
+         00 0F 00 72 00 17 02 47 00 08 00 72 00 0F 00 72
+         00 17 02 47 00 09 00 72 00 10 00 72 00 10 02 CB
+         00 0A 00 72 00 0F 00 72 00 17 02 47 00 0B 00 72
+         00 0F 00 72 00 17 02 47 00 0C 00 72 00 0F 00 72
+         00 17 02 47 00 0D 00 72 00 13 00 72 00 13 02 CC
+         00 0E 00 72 00 0F 00 72 00 17 02 47 00 0F 00 72
+         00 0F 00 72 00 17 02 47 00 10 00 72 00 0F 00 72
+         00 17 02 47 00 11 00 72 00 16 00 72 00 16 02 CD
+         00 12 00 72 00 0F 00 72 00 17 02 47 00 13 00 72
+         00 0B 00 72 00 17 02 44 00 14 00 75 00 05 00 75
+         00 05 02 CE 00 15 00 75 00 07 00 75 00 07 02 CF
+         00 16 00 75 00 0C 00 75 00 0C 02 D0 00 17 00 75
+         00 05 00 75 00 0C 02 5B 00 18 00 74 00 04 00 7D
+         00 04 02 57 00 1B 00 76 00 06 00 78 00 04 02 62
+         00 1D 00 77 00 0B 00 77 00 3F 02 6A 00 20 00 77
+         00 0B 00 77 00 3F 02 6A 00 21 00 77 00 19 00 77
+         00 3E 02 6D 00 23 00 77 00 0B 00 77 00 3F 02 6A
+         00 26 00 77 00 05 00 77 00 40 02 69 00 27 00 78
+         00 06 00 7A 00 04 02 6F 00 29 00 79 00 05 00 79
+         00 05 02 D1 00 2A 00 79 00 07 00 79 00 07 02 D2
+         00 2B 00 79 00 0C 00 79 00 0C 02 D3 00 2C 00 79
+         00 05 00 79 00 0C 02 77 00 2D 00 74 00 04 00 7D
+         00 04 02 57 00 30 00 74 00 04 00 7D 00 04 02 57
+         00 32 00 7C 00 05 00 7C 00 05 02 D4 00 33 00 7C
+         00 07 00 7C 00 07 02 D5 00 34 00 7C 00 0C 00 7C
+         00 0C 02 D6 00 35 00 7C 00 05 00 7C 00 0C 02 D7
+         00 36 00 74 00 04 00 7D 00 04 02 57 00 38 00 74
+         00 04 00 7D 00 04 02 57 00 39 00 7C 00 05 00 7C
+         00 05 02 D8 00 3A 00 7C 00 07 00 7C 00 07 02 D9
+         00 3B 00 7C 00 0C 00 7C 00 0C 02 DA 00 3C 00 7C
+         00 05 00 7C 00 0C 02 81 00 3D 00 70 00 03 00 7E
+         00 03 02 23
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      62     0  this   LJ17;
+            0      61     1     a   [I
+            4      57     2     b   [I
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=0
+         0: ldc           #2                  // class J17
+         2: invokevirtual #105                // Method java/lang/Class.desiredAssertionStatus:()Z
+         5: ifne          12
+         8: iconst_1
+         9: goto          13
+        12: iconst_0
+        13: putstatic     #39                 // Field $assertiosDisabled:Z
+        16: return
+      LineNumberTable:
+Error: unknown attribute
+        PositionTable: length = 0x18
+         00 0D 00 14 00 01 00 80 00 01 00 75 00 10 00 14
+         00 01 00 80 00 01 00 75
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+}
+SourceFile: "J17.java"

@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -164,6 +164,27 @@ public abstract class BitwiseExpr extends Binary implements Cloneable {
   public Expr getRightOperandNoTransform() {
     return (Expr) getChildNoTransform(1);
   }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:264
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:264")
+  public Collection<Problem> typeProblems() {
+    {
+        TypeDecl left = getLeftOperand().type();
+        TypeDecl right = getRightOperand().type();
+        if (left.isIntegralType() && right.isIntegralType()) {
+          return Collections.emptyList();
+        } else if (left.isBoolean() && right.isBoolean()) {
+          return Collections.emptyList();
+        } else {
+          return Collections.singletonList(errorf("%s is not compatible with %s",
+              left.typeName(), right.typeName()));
+        }
+      }
+  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -208,27 +229,6 @@ public abstract class BitwiseExpr extends Binary implements Cloneable {
       }
       return unknownType();
     }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:264
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:264")
-  public Collection<Problem> typeProblems() {
-    {
-        TypeDecl left = getLeftOperand().type();
-        TypeDecl right = getRightOperand().type();
-        if (left.isIntegralType() && right.isIntegralType()) {
-          return Collections.emptyList();
-        } else if (left.isBoolean() && right.isBoolean()) {
-          return Collections.emptyList();
-        } else {
-          return Collections.singletonList(errorf("%s is not compatible with %s",
-              left.typeName(), right.typeName()));
-        }
-      }
-  }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
     return super.rewriteTo();

@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -39,18 +39,18 @@ public class ArrayAccess extends Access implements Cloneable {
     out.print("]");
   }
   /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:453
-   */
-  public void emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
-    gen.emit(node, type().arrayStore());
-  }
-  /**
    * @aspect CreateBCode
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:523
    */
   public void createPushAssignmentResult(CodeGeneration gen) {
     type().emitDup_x2(this, gen);
+  }
+  /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:453
+   */
+  public void emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
+    gen.emit(node, type().arrayStore());
   }
   /**
    * @declaredat ASTNode:1
@@ -241,6 +241,17 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64")
+  public boolean isArrayAccess() {
+    boolean isArrayAccess_value = true;
+    return isArrayAccess_value;
+  }
+  /**
+   * @attribute syn
    * @aspect DefiniteAssignment
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268
    */
@@ -303,14 +314,35 @@ public class ArrayAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64")
-  public boolean isArrayAccess() {
-    boolean isArrayAccess_value = true;
-    return isArrayAccess_value;
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33")
+  public boolean isVariable() {
+    boolean isVariable_value = true;
+    return isVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:173
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:173")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        if (isQualified() && !qualifier().type().isArrayDecl() && !qualifier().type().isUnknown()) {
+          problems.add(errorf("the type %s of the indexed element is not an array",
+                qualifier().type().name()));
+        }
+        if (!getExpr().type().unaryNumericPromotion().isInt() || !getExpr().type().isIntegralType()) {
+          problems.add(errorf("array index must be int after unary numeric promotion which %s is not",
+              getExpr().type().typeName()));
+        }
+        return problems;
+      }
   }
   /**
    * Defines the expected kind of name for the left hand side in a qualified
@@ -357,38 +389,6 @@ public class ArrayAccess extends Access implements Cloneable {
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33")
-  public boolean isVariable() {
-    boolean isVariable_value = true;
-    return isVariable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:173
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:173")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        if (isQualified() && !qualifier().type().isArrayDecl() && !qualifier().type().isUnknown()) {
-          problems.add(errorf("the type %s of the indexed element is not an array",
-                qualifier().type().name()));
-        }
-        if (!getExpr().type().unaryNumericPromotion().isInt() || !getExpr().type().isIntegralType()) {
-          problems.add(errorf("array index must be int after unary numeric promotion which %s is not",
-              getExpr().type().typeName()));
-        }
-        return problems;
-      }
   }
   /**
    * @attribute syn
@@ -442,22 +442,6 @@ public class ArrayAccess extends Access implements Cloneable {
     }
   }
   protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
-   * @apilevel internal
-   */
-  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (getExprNoTransform() != null && _callerNode == getExpr()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:62
-      return unqualifiedScope().lookupMethod(name);
-    }
-    else {
-      return getParent().Define_lookupMethod(this, _callerNode, name);
-    }
-  }
-  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /**
@@ -522,6 +506,22 @@ public class ArrayAccess extends Access implements Cloneable {
     }
   }
   protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
+   * @apilevel internal
+   */
+  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (getExprNoTransform() != null && _callerNode == getExpr()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:62
+      return unqualifiedScope().lookupMethod(name);
+    }
+    else {
+      return getParent().Define_lookupMethod(this, _callerNode, name);
+    }
+  }
+  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /**

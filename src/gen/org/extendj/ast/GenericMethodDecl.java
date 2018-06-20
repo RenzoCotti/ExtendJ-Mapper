@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -204,11 +204,11 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     super.flushAttrCache();
     rawMethodDecl_reset();
     lookupParMethodDecl_Collection_TypeDecl__reset();
+    typeVariableInReturn_reset();
     subsignatureTo_MethodDecl_reset();
     sameTypeParameters_GenericMethodDecl_reset();
     sameFormalParameters_GenericMethodDecl_reset();
     usesTypeVariable_reset();
-    typeVariableInReturn_reset();
     genericMethodLevel_reset();
   }
   /** @apilevel internal 
@@ -901,6 +901,69 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     List<TypeVariable> typeParameters_value = getTypeParameterList();
     return typeParameters_value;
   }
+  /** @apilevel internal */
+  private void typeVariableInReturn_reset() {
+    typeVariableInReturn_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle typeVariableInReturn_computed = null;
+
+  /** @apilevel internal */
+  protected boolean typeVariableInReturn_value;
+
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:117
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:117")
+  public boolean typeVariableInReturn() {
+    ASTNode$State state = state();
+    if (typeVariableInReturn_computed == ASTNode$State.NON_CYCLE || typeVariableInReturn_computed == state().cycle()) {
+      return typeVariableInReturn_value;
+    }
+    typeVariableInReturn_value = typeVariableInReturn_compute();
+    if (state().inCircle()) {
+      typeVariableInReturn_computed = state().cycle();
+    
+    } else {
+      typeVariableInReturn_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return typeVariableInReturn_value;
+  }
+  /** @apilevel internal */
+  private boolean typeVariableInReturn_compute() {
+      if (!getTypeAccess().usesTypeVariable()) {
+        return false;
+      }
+      ASTNode current = getTypeAccess();
+      LinkedList<ASTNode> list = new LinkedList<ASTNode>();
+      list.add(current);
+      boolean foundUse = false;
+      while (!list.isEmpty()) {
+        current = list.poll();
+        for (int i = 0; i < current.getNumChild(); i++) {
+          list.add(current.getChild(i));
+        }
+        if (current instanceof TypeAccess) {
+          TypeAccess typeAccess = (TypeAccess) current;
+          if (typeAccess.type().isTypeVariable()) {
+            for (int i = 0; i < getNumTypeParameter(); i++) {
+              if (typeAccess.type() == getTypeParameter(i)) {
+                foundUse = true;
+                break;
+              }
+            }
+            if (foundUse) {
+              break;
+            }
+          }
+        }
+      }
+      return foundUse;
+    }
   /**
    * @attribute syn
    * @aspect FunctionalInterface
@@ -1111,69 +1174,6 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     }
     return usesTypeVariable_value;
   }
-  /** @apilevel internal */
-  private void typeVariableInReturn_reset() {
-    typeVariableInReturn_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle typeVariableInReturn_computed = null;
-
-  /** @apilevel internal */
-  protected boolean typeVariableInReturn_value;
-
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:117
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:117")
-  public boolean typeVariableInReturn() {
-    ASTNode$State state = state();
-    if (typeVariableInReturn_computed == ASTNode$State.NON_CYCLE || typeVariableInReturn_computed == state().cycle()) {
-      return typeVariableInReturn_value;
-    }
-    typeVariableInReturn_value = typeVariableInReturn_compute();
-    if (state().inCircle()) {
-      typeVariableInReturn_computed = state().cycle();
-    
-    } else {
-      typeVariableInReturn_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return typeVariableInReturn_value;
-  }
-  /** @apilevel internal */
-  private boolean typeVariableInReturn_compute() {
-      if (!getTypeAccess().usesTypeVariable()) {
-        return false;
-      }
-      ASTNode current = getTypeAccess();
-      LinkedList<ASTNode> list = new LinkedList<ASTNode>();
-      list.add(current);
-      boolean foundUse = false;
-      while (!list.isEmpty()) {
-        current = list.poll();
-        for (int i = 0; i < current.getNumChild(); i++) {
-          list.add(current.getChild(i));
-        }
-        if (current instanceof TypeAccess) {
-          TypeAccess typeAccess = (TypeAccess) current;
-          if (typeAccess.type().isTypeVariable()) {
-            for (int i = 0; i < getNumTypeParameter(); i++) {
-              if (typeAccess.type() == getTypeParameter(i)) {
-                foundUse = true;
-                break;
-              }
-            }
-            if (foundUse) {
-              break;
-            }
-          }
-        }
-      }
-      return foundUse;
-    }
   /**
    * @attribute syn
    * @aspect GenericsCodegen
@@ -1311,7 +1311,7 @@ public class GenericMethodDecl extends MethodDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeVariablePositions.jrag:31
    * @apilevel internal
    */
   public int Define_genericMethodLevel(ASTNode _callerNode, ASTNode _childNode) {

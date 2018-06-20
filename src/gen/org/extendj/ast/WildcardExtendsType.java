@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -371,30 +371,6 @@ public class WildcardExtendsType extends AbstractWildcardType implements Cloneab
    */
   public Access getAccessNoTransform() {
     return (Access) getChildNoTransform(2);
-  }
-  /**
-   * @param bound the bounded type variable
-   * @return {@code true} if this type is within the bounds of the parameter type
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40")
-  public boolean withinBounds(TypeDecl bound) {
-    boolean withinBounds_TypeDecl_value = bound.boundOf(extendsType());
-    return withinBounds_TypeDecl_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87")
-  public boolean boundOfArray(ArrayDecl type) {
-    boolean boundOfArray_ArrayDecl_value = getAccess().type().boundOfArray(type);
-    return boundOfArray_ArrayDecl_value;
   }
 /** @apilevel internal */
 protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
@@ -867,6 +843,30 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
     
     }
     return instanceOf_TypeDecl_value;
+  }
+  /**
+   * @param bound the bounded type variable
+   * @return {@code true} if this type is within the bounds of the parameter type
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40")
+  public boolean withinBounds(TypeDecl bound) {
+    boolean withinBounds_TypeDecl_value = bound.boundOf(extendsType());
+    return withinBounds_TypeDecl_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87")
+  public boolean boundOfArray(ArrayDecl type) {
+    boolean boundOfArray_ArrayDecl_value = getAccess().type().boundOfArray(type);
+    return boundOfArray_ArrayDecl_value;
   }
   /**
    * @attribute syn

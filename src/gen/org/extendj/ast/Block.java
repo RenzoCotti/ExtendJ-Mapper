@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -108,12 +108,12 @@ public class Block extends Stmt implements Cloneable, VariableScope {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    canCompleteNormally_reset();
     assignedAfterReturn_Variable_reset();
     assignedAfter_Variable_reset();
     unassignedAfterReturn_Variable_reset();
     unassignedAfter_Variable_reset();
     localVariableDeclaration_String_reset();
-    canCompleteNormally_reset();
     variableScopeEndLabel_CodeGeneration_reset();
     lookupType_String_reset();
     lookupVariable_String_reset();
@@ -315,16 +315,39 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   public List<Stmt> getStmtsNoTransform() {
     return getStmtListNoTransform();
   }
+  /** @apilevel internal */
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
+
+  /** @apilevel internal */
+  protected boolean canCompleteNormally_value;
+
   /**
    * @attribute syn
-   * @aspect DeclareBeforeUse
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:42
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:42")
-  public boolean declaredBeforeUse(VariableDeclarator decl, int indexUse) {
-    boolean declaredBeforeUse_VariableDeclarator_int_value = decl.blockIndex() < indexUse;
-    return declaredBeforeUse_VariableDeclarator_int_value;
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
+    ASTNode$State state = state();
+    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
+    }
+    canCompleteNormally_value = getNumStmt() == 0
+          ? reachable()
+          : getStmt(getNumStmt() - 1).canCompleteNormally();
+    if (state().inCircle()) {
+      canCompleteNormally_computed = state().cycle();
+    
+    } else {
+      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return canCompleteNormally_value;
   }
   /** @apilevel internal */
   private void assignedAfterReturn_Variable_reset() {
@@ -619,6 +642,17 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   /**
    * @attribute syn
+   * @aspect DeclareBeforeUse
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:42
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:42")
+  public boolean declaredBeforeUse(VariableDeclarator decl, int indexUse) {
+    boolean declaredBeforeUse_VariableDeclarator_int_value = decl.blockIndex() < indexUse;
+    return declaredBeforeUse_VariableDeclarator_int_value;
+  }
+  /**
+   * @attribute syn
    * @aspect PrettyPrintUtil
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:191
    */
@@ -627,40 +661,6 @@ public class Block extends Stmt implements Cloneable, VariableScope {
   public boolean hasStmts() {
     boolean hasStmts_value = getNumStmt() > 0;
     return hasStmts_value;
-  }
-  /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
-
-  /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
-
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
-    ASTNode$State state = state();
-    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
-    }
-    canCompleteNormally_value = getNumStmt() == 0
-          ? reachable()
-          : getStmt(getNumStmt() - 1).canCompleteNormally();
-    if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
-    
-    } else {
-      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return canCompleteNormally_value;
   }
   /**
    * @attribute syn
@@ -716,6 +716,17 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     
     }
     return variableScopeEndLabel_CodeGeneration_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49")
+  public boolean reachable() {
+    boolean reachable_value = getParent().Define_reachable(this, null);
+    return reachable_value;
   }
   /**
    * @attribute inh
@@ -805,31 +816,39 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return otherLocalClassDecls_String_value;
   }
   /**
-   * @attribute inh
-   * @aspect UnreachableStatements
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49")
-  public boolean reachable() {
-    boolean reachable_value = getParent().Define_reachable(this, null);
-    return reachable_value;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:35
    * @apilevel internal
    */
-  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:40
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:70
       int index = _callerNode.getIndexOfChild(_childNode);
-      return index;
+      return index == 0
+            ? reachable()
+            : getStmt(index-1).canCompleteNormally();
     }
     else {
-      return getParent().Define_blockIndex(this, _callerNode);
+      return getParent().Define_reachable(this, _callerNode);
     }
   }
-  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
+   * @apilevel internal
+   */
+  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:208
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return i == 0 ? reachable() : getStmt(i-1).reachable();
+    }
+    else {
+      return getParent().Define_reportUnreachable(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -988,6 +1007,23 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:35
+   * @apilevel internal
+   */
+  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:40
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return index;
+    }
+    else {
+      return getParent().Define_blockIndex(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
@@ -1005,42 +1041,6 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
-   * @apilevel internal
-   */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:70
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return index == 0
-            ? reachable()
-            : getStmt(index-1).canCompleteNormally();
-    }
-    else {
-      return getParent().Define_reachable(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
-   * @apilevel internal
-   */
-  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:208
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return i == 0 ? reachable() : getStmt(i-1).reachable();
-    }
-    else {
-      return getParent().Define_reportUnreachable(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
@@ -1055,23 +1055,6 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
-   * @apilevel internal
-   */
-  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
-    if (_callerNode == getStmtListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:88
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return variableScopeEndLabel(gen);
-    }
-    else {
-      return getParent().Define_variableScopeEndLabel(this, _callerNode, gen);
-    }
-  }
-  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     return true;
   }
   /**
@@ -1095,6 +1078,23 @@ public class Block extends Stmt implements Cloneable, VariableScope {
     }
   }
   protected boolean canDefine_localNum(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
+   * @apilevel internal
+   */
+  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
+    if (_callerNode == getStmtListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:88
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return variableScopeEndLabel(gen);
+    }
+    else {
+      return getParent().Define_variableScopeEndLabel(this, _callerNode, gen);
+    }
+  }
+  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     return true;
   }
   /** @apilevel internal */

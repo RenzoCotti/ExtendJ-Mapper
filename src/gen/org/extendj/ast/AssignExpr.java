@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -41,6 +41,13 @@ public abstract class AssignExpr extends Expr implements Cloneable {
     out.print(getSource());
   }
   /**
+   * @aspect NodeConstructors
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:96
+   */
+  public static Stmt asStmt(Expr left, Expr right) {
+    return new ExprStmt(new AssignSimpleExpr(left, right));
+  }
+  /**
    * @aspect DefiniteAssignment
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:591
    */
@@ -51,13 +58,6 @@ public abstract class AssignExpr extends Expr implements Cloneable {
       }
     }
     return super.checkDUeverywhere(v);
-  }
-  /**
-   * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:96
-   */
-  public static Stmt asStmt(Expr left, Expr right) {
-    return new ExprStmt(new AssignSimpleExpr(left, right));
   }
   /**
    * @aspect CreateBCode
@@ -452,6 +452,29 @@ public abstract class AssignExpr extends Expr implements Cloneable {
       return (Boolean) _value.value;
     }
   }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:77
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:77")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        if (!getDest().isVariable()) {
+          return Collections.singletonList((error("left hand side is not a variable")));
+        } else {
+          TypeDecl source = getSource().type();
+          TypeDecl dest = getDest().type();
+          if (getSource().type().isPrimitive() && getDest().type().isPrimitive()) {
+            return Collections.emptyList();
+          }
+          return Collections.singletonList(errorf("can not assign %s of type %s a value of type %s",
+              getDest().prettyPrint(), getDest().type().typeName(), getSource().type().typeName()));
+        }
+      }
+  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -484,29 +507,6 @@ public abstract class AssignExpr extends Expr implements Cloneable {
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:77
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:77")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        if (!getDest().isVariable()) {
-          return Collections.singletonList((error("left hand side is not a variable")));
-        } else {
-          TypeDecl source = getSource().type();
-          TypeDecl dest = getDest().type();
-          if (getSource().type().isPrimitive() && getDest().type().isPrimitive()) {
-            return Collections.emptyList();
-          }
-          return Collections.singletonList(errorf("can not assign %s of type %s a value of type %s",
-              getDest().prettyPrint(), getDest().type().typeName(), getSource().type().typeName()));
-        }
-      }
   }
   /**
    * @attribute syn

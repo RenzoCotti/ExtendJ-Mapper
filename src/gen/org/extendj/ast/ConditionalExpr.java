@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -182,18 +182,13 @@ public class ConditionalExpr extends Expr implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    constant_reset();
-    isConstant_reset();
     booleanOperator_reset();
     unassignedAfterTrue_Variable_reset();
     unassignedAfterFalse_Variable_reset();
     unassignedAfter_Variable_reset();
+    constant_reset();
+    isConstant_reset();
     type_reset();
-    compatibleStrictContext_TypeDecl_reset();
-    compatibleLooseContext_TypeDecl_reset();
-    pertinentToApplicability_Expr_BodyDecl_int_reset();
-    moreSpecificThan_TypeDecl_TypeDecl_reset();
-    potentiallyCompatible_TypeDecl_BodyDecl_reset();
     isBooleanExpression_reset();
     isBooleanConditional_reset();
     isNumericExpression_reset();
@@ -201,6 +196,11 @@ public class ConditionalExpr extends Expr implements Cloneable {
     isReferenceConditional_reset();
     isPolyExpression_reset();
     assignConversionTo_TypeDecl_reset();
+    compatibleStrictContext_TypeDecl_reset();
+    compatibleLooseContext_TypeDecl_reset();
+    pertinentToApplicability_Expr_BodyDecl_int_reset();
+    moreSpecificThan_TypeDecl_TypeDecl_reset();
+    potentiallyCompatible_TypeDecl_BodyDecl_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:52
@@ -401,72 +401,6 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
 
     return conditionalExprType(second, third);
-  }
-  /** @apilevel internal */
-  private void constant_reset() {
-    constant_computed = null;
-    constant_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle constant_computed = null;
-
-  /** @apilevel internal */
-  protected Constant constant_value;
-
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:85
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:85")
-  public Constant constant() {
-    ASTNode$State state = state();
-    if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
-      return constant_value;
-    }
-    constant_value = type().questionColon(getCondition().constant(),
-              getTrueExpr().constant(),getFalseExpr().constant());
-    if (state().inCircle()) {
-      constant_computed = state().cycle();
-    
-    } else {
-      constant_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return constant_value;
-  }
-  /** @apilevel internal */
-  private void isConstant_reset() {
-    isConstant_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle isConstant_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isConstant_value;
-
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:406
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:406")
-  public boolean isConstant() {
-    ASTNode$State state = state();
-    if (isConstant_computed == ASTNode$State.NON_CYCLE || isConstant_computed == state().cycle()) {
-      return isConstant_value;
-    }
-    isConstant_value = getCondition().isConstant() && getTrueExpr().isConstant() && getFalseExpr().isConstant();
-    if (state().inCircle()) {
-      isConstant_computed = state().cycle();
-    
-    } else {
-      isConstant_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return isConstant_value;
   }
   /** @apilevel internal */
   private void booleanOperator_reset() {
@@ -693,6 +627,72 @@ public class ConditionalExpr extends Expr implements Cloneable {
     }
   }
   /** @apilevel internal */
+  private void constant_reset() {
+    constant_computed = null;
+    constant_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle constant_computed = null;
+
+  /** @apilevel internal */
+  protected Constant constant_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:85
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:85")
+  public Constant constant() {
+    ASTNode$State state = state();
+    if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
+      return constant_value;
+    }
+    constant_value = type().questionColon(getCondition().constant(),
+              getTrueExpr().constant(),getFalseExpr().constant());
+    if (state().inCircle()) {
+      constant_computed = state().cycle();
+    
+    } else {
+      constant_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return constant_value;
+  }
+  /** @apilevel internal */
+  private void isConstant_reset() {
+    isConstant_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle isConstant_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isConstant_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:406
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:406")
+  public boolean isConstant() {
+    ASTNode$State state = state();
+    if (isConstant_computed == ASTNode$State.NON_CYCLE || isConstant_computed == state().cycle()) {
+      return isConstant_value;
+    }
+    isConstant_value = getCondition().isConstant() && getTrueExpr().isConstant() && getFalseExpr().isConstant();
+    if (state().inCircle()) {
+      isConstant_computed = state().cycle();
+    
+    } else {
+      isConstant_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return isConstant_value;
+  }
+  /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
     type_value = null;
@@ -809,242 +809,6 @@ public class ConditionalExpr extends Expr implements Cloneable {
           || getFalseExpr().modifiedInScope(var);
     return modifiedInScope_Variable_value;
   }
-  /** @apilevel internal */
-  private void compatibleStrictContext_TypeDecl_reset() {
-    compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
-    compatibleStrictContext_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map compatibleStrictContext_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map compatibleStrictContext_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32")
-  public boolean compatibleStrictContext(TypeDecl type) {
-    Object _parameters = type;
-    if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
-    if (compatibleStrictContext_TypeDecl_values == null) compatibleStrictContext_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (compatibleStrictContext_TypeDecl_values.containsKey(_parameters) && compatibleStrictContext_TypeDecl_computed != null
-        && compatibleStrictContext_TypeDecl_computed.containsKey(_parameters)
-        && (compatibleStrictContext_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || compatibleStrictContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) compatibleStrictContext_TypeDecl_values.get(_parameters);
-    }
-    boolean compatibleStrictContext_TypeDecl_value = compatibleStrictContext_compute(type);
-    if (state().inCircle()) {
-      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
-      compatibleStrictContext_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
-      compatibleStrictContext_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return compatibleStrictContext_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean compatibleStrictContext_compute(TypeDecl type) {
-      if (isPolyExpression()) {
-        return getTrueExpr().compatibleStrictContext(type)
-            && getFalseExpr().compatibleStrictContext(type);
-      } else {
-        return super.compatibleStrictContext(type);
-      }
-    }
-  /** @apilevel internal */
-  private void compatibleLooseContext_TypeDecl_reset() {
-    compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
-    compatibleLooseContext_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map compatibleLooseContext_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map compatibleLooseContext_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76")
-  public boolean compatibleLooseContext(TypeDecl type) {
-    Object _parameters = type;
-    if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
-    if (compatibleLooseContext_TypeDecl_values == null) compatibleLooseContext_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (compatibleLooseContext_TypeDecl_values.containsKey(_parameters) && compatibleLooseContext_TypeDecl_computed != null
-        && compatibleLooseContext_TypeDecl_computed.containsKey(_parameters)
-        && (compatibleLooseContext_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || compatibleLooseContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) compatibleLooseContext_TypeDecl_values.get(_parameters);
-    }
-    boolean compatibleLooseContext_TypeDecl_value = compatibleLooseContext_compute(type);
-    if (state().inCircle()) {
-      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
-      compatibleLooseContext_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
-      compatibleLooseContext_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return compatibleLooseContext_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean compatibleLooseContext_compute(TypeDecl type) {
-      if (isPolyExpression()) {
-        return getTrueExpr().compatibleLooseContext(type)
-            && getFalseExpr().compatibleLooseContext(type);
-      } else {
-        return super.compatibleLooseContext(type);
-      }
-    }
-  /** @apilevel internal */
-  private void pertinentToApplicability_Expr_BodyDecl_int_reset() {
-    pertinentToApplicability_Expr_BodyDecl_int_computed = new java.util.HashMap(4);
-    pertinentToApplicability_Expr_BodyDecl_int_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_values;
-  /** @apilevel internal */
-  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_computed;
-  /**
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104")
-  public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
-    java.util.List _parameters = new java.util.ArrayList(3);
-    _parameters.add(access);
-    _parameters.add(decl);
-    _parameters.add(argIndex);
-    if (pertinentToApplicability_Expr_BodyDecl_int_computed == null) pertinentToApplicability_Expr_BodyDecl_int_computed = new java.util.HashMap(4);
-    if (pertinentToApplicability_Expr_BodyDecl_int_values == null) pertinentToApplicability_Expr_BodyDecl_int_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (pertinentToApplicability_Expr_BodyDecl_int_values.containsKey(_parameters) && pertinentToApplicability_Expr_BodyDecl_int_computed != null
-        && pertinentToApplicability_Expr_BodyDecl_int_computed.containsKey(_parameters)
-        && (pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == ASTNode$State.NON_CYCLE || pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) pertinentToApplicability_Expr_BodyDecl_int_values.get(_parameters);
-    }
-    boolean pertinentToApplicability_Expr_BodyDecl_int_value = getFalseExpr().pertinentToApplicability(access, decl, argIndex)
-          && getTrueExpr().pertinentToApplicability(access, decl, argIndex);
-    if (state().inCircle()) {
-      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
-      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, state().cycle());
-    
-    } else {
-      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
-      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return pertinentToApplicability_Expr_BodyDecl_int_value;
-  }
-  /** @apilevel internal */
-  private void moreSpecificThan_TypeDecl_TypeDecl_reset() {
-    moreSpecificThan_TypeDecl_TypeDecl_computed = new java.util.HashMap(4);
-    moreSpecificThan_TypeDecl_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_computed;
-  /**
-   * Computes which type is more specific for a specific argument, as defined in 15.12.2.5
-   * @param type1
-   * @param type2
-   * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230")
-  public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
-    java.util.List _parameters = new java.util.ArrayList(2);
-    _parameters.add(type1);
-    _parameters.add(type2);
-    if (moreSpecificThan_TypeDecl_TypeDecl_computed == null) moreSpecificThan_TypeDecl_TypeDecl_computed = new java.util.HashMap(4);
-    if (moreSpecificThan_TypeDecl_TypeDecl_values == null) moreSpecificThan_TypeDecl_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (moreSpecificThan_TypeDecl_TypeDecl_values.containsKey(_parameters) && moreSpecificThan_TypeDecl_TypeDecl_computed != null
-        && moreSpecificThan_TypeDecl_TypeDecl_computed.containsKey(_parameters)
-        && (moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) moreSpecificThan_TypeDecl_TypeDecl_values.get(_parameters);
-    }
-    boolean moreSpecificThan_TypeDecl_TypeDecl_value = moreSpecificThan_compute(type1, type2);
-    if (state().inCircle()) {
-      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
-      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
-      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return moreSpecificThan_TypeDecl_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean moreSpecificThan_compute(TypeDecl type1, TypeDecl type2) {
-      if (super.moreSpecificThan(type1, type2)) {
-        return true;
-      }
-      return getTrueExpr().moreSpecificThan(type1, type2)
-          && getFalseExpr().moreSpecificThan(type1, type2);
-    }
-  /** @apilevel internal */
-  private void potentiallyCompatible_TypeDecl_BodyDecl_reset() {
-    potentiallyCompatible_TypeDecl_BodyDecl_computed = new java.util.HashMap(4);
-    potentiallyCompatible_TypeDecl_BodyDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465")
-  public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
-    java.util.List _parameters = new java.util.ArrayList(2);
-    _parameters.add(type);
-    _parameters.add(candidateDecl);
-    if (potentiallyCompatible_TypeDecl_BodyDecl_computed == null) potentiallyCompatible_TypeDecl_BodyDecl_computed = new java.util.HashMap(4);
-    if (potentiallyCompatible_TypeDecl_BodyDecl_values == null) potentiallyCompatible_TypeDecl_BodyDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (potentiallyCompatible_TypeDecl_BodyDecl_values.containsKey(_parameters) && potentiallyCompatible_TypeDecl_BodyDecl_computed != null
-        && potentiallyCompatible_TypeDecl_BodyDecl_computed.containsKey(_parameters)
-        && (potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) potentiallyCompatible_TypeDecl_BodyDecl_values.get(_parameters);
-    }
-    boolean potentiallyCompatible_TypeDecl_BodyDecl_value = potentiallyCompatible_compute(type, candidateDecl);
-    if (state().inCircle()) {
-      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
-      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
-      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return potentiallyCompatible_TypeDecl_BodyDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean potentiallyCompatible_compute(TypeDecl type, BodyDecl candidateDecl) {
-      if (!isPolyExpression()) {
-        return true;
-      }
-      return getTrueExpr().potentiallyCompatible(type, candidateDecl)
-          && getFalseExpr().potentiallyCompatible(type, candidateDecl);
-    }
   /** @apilevel internal */
   private void isBooleanExpression_reset() {
     isBooleanExpression_computed = null;
@@ -1286,6 +1050,242 @@ public class ConditionalExpr extends Expr implements Cloneable {
       } else {
         return getTrueExpr().assignConversionTo(type) && getFalseExpr().assignConversionTo(type);
       }
+    }
+  /** @apilevel internal */
+  private void compatibleStrictContext_TypeDecl_reset() {
+    compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
+    compatibleStrictContext_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map compatibleStrictContext_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map compatibleStrictContext_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:32")
+  public boolean compatibleStrictContext(TypeDecl type) {
+    Object _parameters = type;
+    if (compatibleStrictContext_TypeDecl_computed == null) compatibleStrictContext_TypeDecl_computed = new java.util.HashMap(4);
+    if (compatibleStrictContext_TypeDecl_values == null) compatibleStrictContext_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (compatibleStrictContext_TypeDecl_values.containsKey(_parameters) && compatibleStrictContext_TypeDecl_computed != null
+        && compatibleStrictContext_TypeDecl_computed.containsKey(_parameters)
+        && (compatibleStrictContext_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || compatibleStrictContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) compatibleStrictContext_TypeDecl_values.get(_parameters);
+    }
+    boolean compatibleStrictContext_TypeDecl_value = compatibleStrictContext_compute(type);
+    if (state().inCircle()) {
+      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
+      compatibleStrictContext_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      compatibleStrictContext_TypeDecl_values.put(_parameters, compatibleStrictContext_TypeDecl_value);
+      compatibleStrictContext_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return compatibleStrictContext_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean compatibleStrictContext_compute(TypeDecl type) {
+      if (isPolyExpression()) {
+        return getTrueExpr().compatibleStrictContext(type)
+            && getFalseExpr().compatibleStrictContext(type);
+      } else {
+        return super.compatibleStrictContext(type);
+      }
+    }
+  /** @apilevel internal */
+  private void compatibleLooseContext_TypeDecl_reset() {
+    compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
+    compatibleLooseContext_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map compatibleLooseContext_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map compatibleLooseContext_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:76")
+  public boolean compatibleLooseContext(TypeDecl type) {
+    Object _parameters = type;
+    if (compatibleLooseContext_TypeDecl_computed == null) compatibleLooseContext_TypeDecl_computed = new java.util.HashMap(4);
+    if (compatibleLooseContext_TypeDecl_values == null) compatibleLooseContext_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (compatibleLooseContext_TypeDecl_values.containsKey(_parameters) && compatibleLooseContext_TypeDecl_computed != null
+        && compatibleLooseContext_TypeDecl_computed.containsKey(_parameters)
+        && (compatibleLooseContext_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || compatibleLooseContext_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) compatibleLooseContext_TypeDecl_values.get(_parameters);
+    }
+    boolean compatibleLooseContext_TypeDecl_value = compatibleLooseContext_compute(type);
+    if (state().inCircle()) {
+      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
+      compatibleLooseContext_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      compatibleLooseContext_TypeDecl_values.put(_parameters, compatibleLooseContext_TypeDecl_value);
+      compatibleLooseContext_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return compatibleLooseContext_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean compatibleLooseContext_compute(TypeDecl type) {
+      if (isPolyExpression()) {
+        return getTrueExpr().compatibleLooseContext(type)
+            && getFalseExpr().compatibleLooseContext(type);
+      } else {
+        return super.compatibleLooseContext(type);
+      }
+    }
+  /** @apilevel internal */
+  private void pertinentToApplicability_Expr_BodyDecl_int_reset() {
+    pertinentToApplicability_Expr_BodyDecl_int_computed = new java.util.HashMap(4);
+    pertinentToApplicability_Expr_BodyDecl_int_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_values;
+  /** @apilevel internal */
+  protected java.util.Map pertinentToApplicability_Expr_BodyDecl_int_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:104")
+  public boolean pertinentToApplicability(Expr access, BodyDecl decl, int argIndex) {
+    java.util.List _parameters = new java.util.ArrayList(3);
+    _parameters.add(access);
+    _parameters.add(decl);
+    _parameters.add(argIndex);
+    if (pertinentToApplicability_Expr_BodyDecl_int_computed == null) pertinentToApplicability_Expr_BodyDecl_int_computed = new java.util.HashMap(4);
+    if (pertinentToApplicability_Expr_BodyDecl_int_values == null) pertinentToApplicability_Expr_BodyDecl_int_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (pertinentToApplicability_Expr_BodyDecl_int_values.containsKey(_parameters) && pertinentToApplicability_Expr_BodyDecl_int_computed != null
+        && pertinentToApplicability_Expr_BodyDecl_int_computed.containsKey(_parameters)
+        && (pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == ASTNode$State.NON_CYCLE || pertinentToApplicability_Expr_BodyDecl_int_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) pertinentToApplicability_Expr_BodyDecl_int_values.get(_parameters);
+    }
+    boolean pertinentToApplicability_Expr_BodyDecl_int_value = getFalseExpr().pertinentToApplicability(access, decl, argIndex)
+          && getTrueExpr().pertinentToApplicability(access, decl, argIndex);
+    if (state().inCircle()) {
+      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
+      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, state().cycle());
+    
+    } else {
+      pertinentToApplicability_Expr_BodyDecl_int_values.put(_parameters, pertinentToApplicability_Expr_BodyDecl_int_value);
+      pertinentToApplicability_Expr_BodyDecl_int_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return pertinentToApplicability_Expr_BodyDecl_int_value;
+  }
+  /** @apilevel internal */
+  private void moreSpecificThan_TypeDecl_TypeDecl_reset() {
+    moreSpecificThan_TypeDecl_TypeDecl_computed = new java.util.HashMap(4);
+    moreSpecificThan_TypeDecl_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map moreSpecificThan_TypeDecl_TypeDecl_computed;
+  /**
+   * Computes which type is more specific for a specific argument, as defined in 15.12.2.5
+   * @param type1
+   * @param type2
+   * @return {@code true} if type1 is more specific than type2, {@code false} otherwise
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:230")
+  public boolean moreSpecificThan(TypeDecl type1, TypeDecl type2) {
+    java.util.List _parameters = new java.util.ArrayList(2);
+    _parameters.add(type1);
+    _parameters.add(type2);
+    if (moreSpecificThan_TypeDecl_TypeDecl_computed == null) moreSpecificThan_TypeDecl_TypeDecl_computed = new java.util.HashMap(4);
+    if (moreSpecificThan_TypeDecl_TypeDecl_values == null) moreSpecificThan_TypeDecl_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (moreSpecificThan_TypeDecl_TypeDecl_values.containsKey(_parameters) && moreSpecificThan_TypeDecl_TypeDecl_computed != null
+        && moreSpecificThan_TypeDecl_TypeDecl_computed.containsKey(_parameters)
+        && (moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || moreSpecificThan_TypeDecl_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) moreSpecificThan_TypeDecl_TypeDecl_values.get(_parameters);
+    }
+    boolean moreSpecificThan_TypeDecl_TypeDecl_value = moreSpecificThan_compute(type1, type2);
+    if (state().inCircle()) {
+      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
+      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      moreSpecificThan_TypeDecl_TypeDecl_values.put(_parameters, moreSpecificThan_TypeDecl_TypeDecl_value);
+      moreSpecificThan_TypeDecl_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return moreSpecificThan_TypeDecl_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean moreSpecificThan_compute(TypeDecl type1, TypeDecl type2) {
+      if (super.moreSpecificThan(type1, type2)) {
+        return true;
+      }
+      return getTrueExpr().moreSpecificThan(type1, type2)
+          && getFalseExpr().moreSpecificThan(type1, type2);
+    }
+  /** @apilevel internal */
+  private void potentiallyCompatible_TypeDecl_BodyDecl_reset() {
+    potentiallyCompatible_TypeDecl_BodyDecl_computed = new java.util.HashMap(4);
+    potentiallyCompatible_TypeDecl_BodyDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map potentiallyCompatible_TypeDecl_BodyDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:465")
+  public boolean potentiallyCompatible(TypeDecl type, BodyDecl candidateDecl) {
+    java.util.List _parameters = new java.util.ArrayList(2);
+    _parameters.add(type);
+    _parameters.add(candidateDecl);
+    if (potentiallyCompatible_TypeDecl_BodyDecl_computed == null) potentiallyCompatible_TypeDecl_BodyDecl_computed = new java.util.HashMap(4);
+    if (potentiallyCompatible_TypeDecl_BodyDecl_values == null) potentiallyCompatible_TypeDecl_BodyDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (potentiallyCompatible_TypeDecl_BodyDecl_values.containsKey(_parameters) && potentiallyCompatible_TypeDecl_BodyDecl_computed != null
+        && potentiallyCompatible_TypeDecl_BodyDecl_computed.containsKey(_parameters)
+        && (potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || potentiallyCompatible_TypeDecl_BodyDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) potentiallyCompatible_TypeDecl_BodyDecl_values.get(_parameters);
+    }
+    boolean potentiallyCompatible_TypeDecl_BodyDecl_value = potentiallyCompatible_compute(type, candidateDecl);
+    if (state().inCircle()) {
+      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
+      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      potentiallyCompatible_TypeDecl_BodyDecl_values.put(_parameters, potentiallyCompatible_TypeDecl_BodyDecl_value);
+      potentiallyCompatible_TypeDecl_BodyDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return potentiallyCompatible_TypeDecl_BodyDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean potentiallyCompatible_compute(TypeDecl type, BodyDecl candidateDecl) {
+      if (!isPolyExpression()) {
+        return true;
+      }
+      return getTrueExpr().potentiallyCompatible(type, candidateDecl)
+          && getFalseExpr().potentiallyCompatible(type, candidateDecl);
     }
   /**
    * @attribute syn

@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -28,7 +28,7 @@ import java.io.DataInputStream;
  * @production InferredParameterDeclaration : {@link ASTNode} ::= <span class="component">&lt;ID:String&gt;</span>;
 
  */
-public class InferredParameterDeclaration extends ASTNode<ASTNode> implements Cloneable, SimpleSet<Variable>, Variable {
+public class InferredParameterDeclaration extends ASTNode<ASTNode> implements Cloneable, Variable, SimpleSet<Variable> {
   /**
    * @aspect Java8PrettyPrint
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PrettyPrint.jadd:95
@@ -144,9 +144,9 @@ public class InferredParameterDeclaration extends ASTNode<ASTNode> implements Cl
   public void flushAttrCache() {
     super.flushAttrCache();
     isEffectivelyFinal_reset();
-    enclosingLambda_reset();
-    lookupVariable_String_reset();
     inferredType_reset();
+    lookupVariable_String_reset();
+    enclosingLambda_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:37
@@ -272,91 +272,6 @@ public class InferredParameterDeclaration extends ASTNode<ASTNode> implements Cl
   @ASTNodeAnnotation.Token(name="ID")
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
-  }
-  /** @apilevel internal */
-  private void isEffectivelyFinal_reset() {
-    isEffectivelyFinal_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle isEffectivelyFinal_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isEffectivelyFinal_value;
-
-  /**
-   * @attribute syn
-   * @aspect EffectivelyFinal
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:136
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EffectivelyFinal", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:136")
-  public boolean isEffectivelyFinal() {
-    ASTNode$State state = state();
-    if (isEffectivelyFinal_computed == ASTNode$State.NON_CYCLE || isEffectivelyFinal_computed == state().cycle()) {
-      return isEffectivelyFinal_value;
-    }
-    isEffectivelyFinal_value = isFinal() || !inhModifiedInScope(this);
-    if (state().inCircle()) {
-      isEffectivelyFinal_computed = state().cycle();
-    
-    } else {
-      isEffectivelyFinal_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return isEffectivelyFinal_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Java8NameCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:41
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:41")
-  public Collection<Problem> nameProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        SimpleSet<Variable> decls = outerScope().lookupVariable(name());
-        for (Variable var : decls) {
-          if (var instanceof VariableDeclarator) {
-            VariableDeclarator decl = (VariableDeclarator) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          } else if (var instanceof ParameterDeclaration) {
-            ParameterDeclaration decl = (ParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          } else if (var instanceof InferredParameterDeclaration) {
-            InferredParameterDeclaration decl = (InferredParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          } else if (var instanceof CatchParameterDeclaration) {
-            CatchParameterDeclaration decl = (CatchParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          }
-        }
-    
-        // 8.4.1
-        if (!lookupVariable(name()).contains(this)) {
-          problems.add(errorf("duplicate declaration of parameter %s", name()));
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/QualifiedNames.jrag:29
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/QualifiedNames.jrag:29")
-  public String name() {
-    String name_value = getID();
-    return name_value;
   }
   /**
    * @attribute syn
@@ -615,6 +530,91 @@ public class InferredParameterDeclaration extends ASTNode<ASTNode> implements Cl
   }
   /**
    * @attribute syn
+   * @aspect Java8NameCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:41
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Java8NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/NameCheck.jrag:41")
+  public Collection<Problem> nameProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        SimpleSet<Variable> decls = outerScope().lookupVariable(name());
+        for (Variable var : decls) {
+          if (var instanceof VariableDeclarator) {
+            VariableDeclarator decl = (VariableDeclarator) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          } else if (var instanceof ParameterDeclaration) {
+            ParameterDeclaration decl = (ParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          } else if (var instanceof InferredParameterDeclaration) {
+            InferredParameterDeclaration decl = (InferredParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          } else if (var instanceof CatchParameterDeclaration) {
+            CatchParameterDeclaration decl = (CatchParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          }
+        }
+    
+        // 8.4.1
+        if (!lookupVariable(name()).contains(this)) {
+          problems.add(errorf("duplicate declaration of parameter %s", name()));
+        }
+        return problems;
+      }
+  }
+  /** @apilevel internal */
+  private void isEffectivelyFinal_reset() {
+    isEffectivelyFinal_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle isEffectivelyFinal_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isEffectivelyFinal_value;
+
+  /**
+   * @attribute syn
+   * @aspect EffectivelyFinal
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:136
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="EffectivelyFinal", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:136")
+  public boolean isEffectivelyFinal() {
+    ASTNode$State state = state();
+    if (isEffectivelyFinal_computed == ASTNode$State.NON_CYCLE || isEffectivelyFinal_computed == state().cycle()) {
+      return isEffectivelyFinal_value;
+    }
+    isEffectivelyFinal_value = isFinal() || !inhModifiedInScope(this);
+    if (state().inCircle()) {
+      isEffectivelyFinal_computed = state().cycle();
+    
+    } else {
+      isEffectivelyFinal_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return isEffectivelyFinal_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/QualifiedNames.jrag:29
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/QualifiedNames.jrag:29")
+  public String name() {
+    String name_value = getID();
+    return name_value;
+  }
+  /**
+   * @attribute syn
    * @aspect Modifiers
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:281
    */
@@ -637,47 +637,58 @@ public class InferredParameterDeclaration extends ASTNode<ASTNode> implements Cl
   }
   /**
    * @attribute inh
-   * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableDeclaration.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30")
-  public boolean inhModifiedInScope(Variable var) {
-    boolean inhModifiedInScope_Variable_value = getParent().Define_inhModifiedInScope(this, null, var);
-    return inhModifiedInScope_Variable_value;
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableDeclaration.jrag:77")
+  public TypeDecl enclosingLambdaType() {
+    TypeDecl enclosingLambdaType_value = getParent().Define_enclosingLambdaType(this, null);
+    return enclosingLambdaType_value;
   }
   /**
    * @attribute inh
-   * @aspect EnclosingLambda
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:35
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:35")
-  public LambdaExpr enclosingLambda() {
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:31")
+  public TypeDecl unknownType() {
+    TypeDecl unknownType_value = getParent().Define_unknownType(this, null);
+    return unknownType_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect LambdaParametersInference
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:477
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:477")
+  public TypeDecl inferredType() {
     ASTNode$State state = state();
-    if (enclosingLambda_computed == ASTNode$State.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
-      return enclosingLambda_value;
+    if (inferredType_computed == ASTNode$State.NON_CYCLE || inferredType_computed == state().cycle()) {
+      return inferredType_value;
     }
-    enclosingLambda_value = getParent().Define_enclosingLambda(this, null);
+    inferredType_value = getParent().Define_inferredType(this, null);
     if (state().inCircle()) {
-      enclosingLambda_computed = state().cycle();
+      inferredType_computed = state().cycle();
     
     } else {
-      enclosingLambda_computed = ASTNode$State.NON_CYCLE;
+      inferredType_computed = ASTNode$State.NON_CYCLE;
     
     }
-    return enclosingLambda_value;
+    return inferredType_value;
   }
   /** @apilevel internal */
-  private void enclosingLambda_reset() {
-    enclosingLambda_computed = null;
-    enclosingLambda_value = null;
+  private void inferredType_reset() {
+    inferredType_computed = null;
+    inferredType_value = null;
   }
   /** @apilevel internal */
-  protected ASTNode$State.Cycle enclosingLambda_computed = null;
+  protected ASTNode$State.Cycle inferredType_computed = null;
 
   /** @apilevel internal */
-  protected LambdaExpr enclosingLambda_value;
+  protected TypeDecl inferredType_value;
 
   /**
    * @attribute inh
@@ -741,59 +752,48 @@ public class InferredParameterDeclaration extends ASTNode<ASTNode> implements Cl
   }
   /**
    * @attribute inh
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:31
+   * @aspect PreciseRethrow
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:31")
-  public TypeDecl unknownType() {
-    TypeDecl unknownType_value = getParent().Define_unknownType(this, null);
-    return unknownType_value;
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30")
+  public boolean inhModifiedInScope(Variable var) {
+    boolean inhModifiedInScope_Variable_value = getParent().Define_inhModifiedInScope(this, null, var);
+    return inhModifiedInScope_Variable_value;
   }
   /**
    * @attribute inh
-   * @aspect LambdaParametersInference
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:477
+   * @aspect EnclosingLambda
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LambdaParametersInference", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:477")
-  public TypeDecl inferredType() {
+  @ASTNodeAnnotation.Source(aspect="EnclosingLambda", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:35")
+  public LambdaExpr enclosingLambda() {
     ASTNode$State state = state();
-    if (inferredType_computed == ASTNode$State.NON_CYCLE || inferredType_computed == state().cycle()) {
-      return inferredType_value;
+    if (enclosingLambda_computed == ASTNode$State.NON_CYCLE || enclosingLambda_computed == state().cycle()) {
+      return enclosingLambda_value;
     }
-    inferredType_value = getParent().Define_inferredType(this, null);
+    enclosingLambda_value = getParent().Define_enclosingLambda(this, null);
     if (state().inCircle()) {
-      inferredType_computed = state().cycle();
+      enclosingLambda_computed = state().cycle();
     
     } else {
-      inferredType_computed = ASTNode$State.NON_CYCLE;
+      enclosingLambda_computed = ASTNode$State.NON_CYCLE;
     
     }
-    return inferredType_value;
+    return enclosingLambda_value;
   }
   /** @apilevel internal */
-  private void inferredType_reset() {
-    inferredType_computed = null;
-    inferredType_value = null;
+  private void enclosingLambda_reset() {
+    enclosingLambda_computed = null;
+    enclosingLambda_value = null;
   }
   /** @apilevel internal */
-  protected ASTNode$State.Cycle inferredType_computed = null;
+  protected ASTNode$State.Cycle enclosingLambda_computed = null;
 
   /** @apilevel internal */
-  protected TypeDecl inferredType_value;
+  protected LambdaExpr enclosingLambda_value;
 
-  /**
-   * @attribute inh
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableDeclaration.jrag:77
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableDeclaration.jrag:77")
-  public TypeDecl enclosingLambdaType() {
-    TypeDecl enclosingLambdaType_value = getParent().Define_enclosingLambdaType(this, null);
-    return enclosingLambdaType_value;
-  }
   /**
    * @attribute inh
    * @aspect NestedTypes

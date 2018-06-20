@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -45,16 +45,6 @@ public class MethodAccess extends Access implements Cloneable {
     out.print(")");
   }
   /**
-   * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:138
-   */
-  protected void collectExceptions(Collection<TypeDecl> exceptions, ASTNode target) {
-    super.collectExceptions(exceptions, target);
-    for (int i = 0; i < decl().getNumException(); i++) {
-      exceptions.add(decl().getException(i).type());
-    }
-  }
-  /**
    * @aspect ExceptionHandling
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:329
    */
@@ -65,6 +55,15 @@ public class MethodAccess extends Access implements Cloneable {
       }
     }
     return super.reachedException(catchType);
+  }
+  /**
+   * @aspect NodeConstructors
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:70
+   */
+  public MethodAccess(String name, List args, int start, int end) {
+    this(name, args);
+    setStart(start);
+    setEnd(end);
   }
   /**
    * @aspect LookupMethod
@@ -99,13 +98,14 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:70
+   * @aspect AnonymousClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:138
    */
-  public MethodAccess(String name, List args, int start, int end) {
-    this(name, args);
-    setStart(start);
-    setEnd(end);
+  protected void collectExceptions(Collection<TypeDecl> exceptions, ASTNode target) {
+    super.collectExceptions(exceptions, target);
+    for (int i = 0; i < decl().getNumException(); i++) {
+      exceptions.add(decl().getException(i).type());
+    }
   }
   /**
    * @aspect MethodSignature15
@@ -228,6 +228,20 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:280
+   */
+  private boolean isSuperAccessor = false;
+  /**
+   * Flags this method access as a call that should be done with invokespecial.
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:285
+   */
+  protected MethodAccess setSuperAccessor() {
+    isSuperAccessor = true;
+    return this;
+  }
+  /**
    * @aspect CreateBCode
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:750
    */
@@ -245,20 +259,6 @@ public class MethodAccess extends Access implements Cloneable {
       // Load implicit this qualifier.
       emitThis(gen, methodQualifierType());
     }
-  }
-  /**
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:280
-   */
-  private boolean isSuperAccessor = false;
-  /**
-   * Flags this method access as a call that should be done with invokespecial.
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:285
-   */
-  protected MethodAccess setSuperAccessor() {
-    isSuperAccessor = true;
-    return this;
   }
   /**
    * @declaredat ASTNode:1
@@ -309,19 +309,19 @@ public class MethodAccess extends Access implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    exceptionCollection_reset();
     computeDAbefore_int_Variable_reset();
     computeDUbefore_int_Variable_reset();
     unassignedAfter_Variable_reset();
     unassignedAfterTrue_Variable_reset();
     unassignedAfterFalse_Variable_reset();
-    exceptionCollection_reset();
     decls_reset();
     decl_reset();
     type_reset();
-    stmtCompatible_reset();
     isBooleanExpression_reset();
     isNumericExpression_reset();
     isPolyExpression_reset();
+    stmtCompatible_reset();
     transformed_reset();
     transformedQualified_reset();
     transformedVariableArity_reset();
@@ -695,6 +695,107 @@ public class MethodAccess extends Access implements Cloneable {
       return this;
     }
   }
+  /**
+   * @attribute syn
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:100
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:100")
+  public Collection<Problem> exceptionHandlingProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        for (TypeDecl exceptionType : exceptionCollection()) {
+          if (exceptionType.isCheckedException() && !handlesException(exceptionType)) {
+            problems.add(errorf("%s.%s invoked in %s may throw uncaught exception %s",
+                decl().hostType().fullName(), this.name(),
+                hostType().fullName(), exceptionType.fullName()));
+          }
+        }
+        return problems;
+      }
+  }
+  /** @apilevel internal */
+  private void exceptionCollection_reset() {
+    exceptionCollection_computed = null;
+    exceptionCollection_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle exceptionCollection_computed = null;
+
+  /** @apilevel internal */
+  protected Collection<TypeDecl> exceptionCollection_value;
+
+  /** @return the exception types possibly thrown by this method access 
+   * @attribute syn
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:113
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:113")
+  public Collection<TypeDecl> exceptionCollection() {
+    ASTNode$State state = state();
+    if (exceptionCollection_computed == ASTNode$State.NON_CYCLE || exceptionCollection_computed == state().cycle()) {
+      return exceptionCollection_value;
+    }
+    exceptionCollection_value = exceptionCollection_compute();
+    if (state().inCircle()) {
+      exceptionCollection_computed = state().cycle();
+    
+    } else {
+      exceptionCollection_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return exceptionCollection_value;
+  }
+  /** @apilevel internal */
+  private Collection<TypeDecl> exceptionCollection_compute() {
+      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
+      Iterator<MethodDecl> iter = decls().iterator();
+      if (!iter.hasNext()) {
+        return exceptions;
+      }
+  
+      MethodDecl m = iter.next();
+  
+      for (int i = 0; i < m.getNumException(); i++) {
+        TypeDecl exceptionType = m.getException(i).type();
+        exceptions.add(exceptionType);
+      }
+  
+      while (iter.hasNext()) {
+        Collection<TypeDecl> first = new HashSet<TypeDecl>();
+        first.addAll(exceptions);
+        Collection<TypeDecl> second = new HashSet<TypeDecl>();
+        m = iter.next();
+        for (int i = 0; i < m.getNumException(); i++) {
+          TypeDecl exceptionType = m.getException(i).type();
+          second.add(exceptionType);
+        }
+        exceptions = new HashSet<TypeDecl>();
+        for (TypeDecl firstType : first) {
+          for (TypeDecl secondType : second) {
+            if (firstType.instanceOf(secondType)) {
+              exceptions.add(firstType);
+            } else if (secondType.instanceOf(firstType)) {
+              exceptions.add(secondType);
+            }
+          }
+        }
+      }
+      return exceptions;
+    }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39")
+  public boolean isMethodAccess() {
+    boolean isMethodAccess_value = true;
+    return isMethodAccess_value;
+  }
   /** @apilevel internal */
   private void computeDAbefore_int_Variable_reset() {
     computeDAbefore_int_Variable_values = null;
@@ -995,94 +1096,126 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:100
+   * @aspect TypeHierarchyCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:100")
-  public Collection<Problem> exceptionHandlingProblems() {
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:53")
+  public Collection<Problem> typeHierarchyProblems() {
     {
         Collection<Problem> problems = new LinkedList<Problem>();
-        for (TypeDecl exceptionType : exceptionCollection()) {
-          if (exceptionType.isCheckedException() && !handlesException(exceptionType)) {
-            problems.add(errorf("%s.%s invoked in %s may throw uncaught exception %s",
-                decl().hostType().fullName(), this.name(),
-                hostType().fullName(), exceptionType.fullName()));
+        if (isQualified() && qualifier().isPackageAccess() && !qualifier().isUnknown()) {
+          problems.add(errorf("The method %s can not be qualified by a package name.",
+              decl().fullSignature()));
+        }
+        if (isQualified() && decl().isAbstract() && qualifier().isSuperAccess()) {
+          problems.add(error("may not access abstract methods in superclass"));
+        }
+        if (decls().isEmpty() && (!isQualified() || !qualifier().isUnknown())) {
+          StringBuilder sb = new StringBuilder();
+          sb.append("no method named " + name());
+          sb.append("(");
+          for (int i = 0; i < getNumArg(); i++) {
+            TypeDecl argType = getArg(i).type();
+            if (argType.isVoid()) {
+              // Error will be reported for the void argument in typeCheck
+              // so we return now to avoid confusing double errors.
+              return problems;
+            }
+            if (i != 0) {
+              sb.append(", ");
+            }
+            sb.append(argType.typeName());
+          }
+          sb.append(")" + " in " + methodHost() + " matches.");
+          if (singleCandidateDecl() != null) {
+            sb.append(" However, there is a method " + singleCandidateDecl().fullSignature());
+          }
+          problems.add(error(sb.toString()));
+        }
+        if (decls().size() > 1) {
+          boolean allAbstract = true;
+          for (MethodDecl m : decls()) {
+            if (!m.isAbstract() && !m.hostType().isObject()) {
+              allAbstract = false;
+              break;
+            }
+          }
+          if (!allAbstract && validArgs()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("several most specific methods for " + this.prettyPrint() + "\n");
+            for (MethodDecl m : decls()) {
+              sb.append("    " + m.fullSignature() + " in " + m.hostType().typeName() + "\n");
+            }
+            problems.add(error(sb.toString()));
           }
         }
         return problems;
       }
   }
-  /** @apilevel internal */
-  private void exceptionCollection_reset() {
-    exceptionCollection_computed = null;
-    exceptionCollection_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle exceptionCollection_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<TypeDecl> exceptionCollection_value;
-
-  /** @return the exception types possibly thrown by this method access 
+  /**
    * @attribute syn
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:113
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:149
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:113")
-  public Collection<TypeDecl> exceptionCollection() {
-    ASTNode$State state = state();
-    if (exceptionCollection_computed == ASTNode$State.NON_CYCLE || exceptionCollection_computed == state().cycle()) {
-      return exceptionCollection_value;
-    }
-    exceptionCollection_value = exceptionCollection_compute();
-    if (state().inCircle()) {
-      exceptionCollection_computed = state().cycle();
-    
-    } else {
-      exceptionCollection_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return exceptionCollection_value;
-  }
-  /** @apilevel internal */
-  private Collection<TypeDecl> exceptionCollection_compute() {
-      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
-      Iterator<MethodDecl> iter = decls().iterator();
-      if (!iter.hasNext()) {
-        return exceptions;
-      }
-  
-      MethodDecl m = iter.next();
-  
-      for (int i = 0; i < m.getNumException(); i++) {
-        TypeDecl exceptionType = m.getException(i).type();
-        exceptions.add(exceptionType);
-      }
-  
-      while (iter.hasNext()) {
-        Collection<TypeDecl> first = new HashSet<TypeDecl>();
-        first.addAll(exceptions);
-        Collection<TypeDecl> second = new HashSet<TypeDecl>();
-        m = iter.next();
-        for (int i = 0; i < m.getNumException(); i++) {
-          TypeDecl exceptionType = m.getException(i).type();
-          second.add(exceptionType);
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:149")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        for (int i = 0; i < getNumArg(); ++i) {
+          if (getArg(i).type().isVoid()) {
+            problems.add(errorf("expression '%s' has type void and is not a valid method argument",
+                getArg(i).prettyPrint()));
+          }
         }
-        exceptions = new HashSet<TypeDecl>();
-        for (TypeDecl firstType : first) {
-          for (TypeDecl secondType : second) {
-            if (firstType.instanceOf(secondType)) {
-              exceptions.add(firstType);
-            } else if (secondType.instanceOf(firstType)) {
-              exceptions.add(secondType);
+        if (isQualified() && decl().isAbstract() && qualifier().isSuperAccess()) {
+          problems.add(error("may not access abstract methods in superclass"));
+        }
+        if (!decl().isVariableArity() || invokesVariableArityAsArray()) {
+          for (int i = 0; i < decl().getNumParameter(); i++) {
+            TypeDecl exprType = getArg(i).type();
+            TypeDecl parmType = decl().getParameter(i).type();
+            if (!exprType.methodInvocationConversionTo(parmType) &&
+                !exprType.isUnknown() && !parmType.isUnknown()) {
+              problems.add(errorf("argument '%s' of type %s is not compatible with the method parameter type %s",
+                  getArg(i).prettyPrint(), exprType.typeName(), parmType.typeName()));
             }
           }
         }
+        return problems;
       }
-      return exceptions;
-    }
+  }
+  /**
+   * @attribute syn
+   * @aspect NameCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:95
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:95")
+  public boolean validArgs() {
+    {
+        for (int i = 0; i < getNumArg(); i++) {
+          if (!getArg(i).isPolyExpression() && getArg(i).type().isUnknown()) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  /**
+   * Defines the expected kind of name for the left hand side in a qualified
+   * expression.
+   * @attribute syn
+   * @aspect SyntacticClassification
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60")
+  public NameType predNameType() {
+    NameType predNameType_value = NameType.AMBIGUOUS_NAME;
+    return predNameType_value;
+  }
   /**
    * @attribute syn
    * @aspect LookupMethod
@@ -1227,23 +1360,6 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:95
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:95")
-  public boolean validArgs() {
-    {
-        for (int i = 0; i < getNumArg(); i++) {
-          if (!getArg(i).isPolyExpression() && getArg(i).type().isUnknown()) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /**
-   * @attribute syn
    * @aspect Names
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:36
    */
@@ -1252,30 +1368,6 @@ public class MethodAccess extends Access implements Cloneable {
   public String name() {
     String name_value = getID();
     return name_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39")
-  public boolean isMethodAccess() {
-    boolean isMethodAccess_value = true;
-    return isMethodAccess_value;
-  }
-  /**
-   * Defines the expected kind of name for the left hand side in a qualified
-   * expression.
-   * @attribute syn
-   * @aspect SyntacticClassification
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60")
-  public NameType predNameType() {
-    NameType predNameType_value = NameType.AMBIGUOUS_NAME;
-    return predNameType_value;
   }
   /** @apilevel internal */
   private void type_reset() {
@@ -1326,94 +1418,20 @@ public class MethodAccess extends Access implements Cloneable {
     }
   /**
    * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:149
+   * @aspect VariableArityParameters
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:65
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:149")
-  public Collection<Problem> typeProblems() {
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:65")
+  public boolean invokesVariableArityAsArray() {
     {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        for (int i = 0; i < getNumArg(); ++i) {
-          if (getArg(i).type().isVoid()) {
-            problems.add(errorf("expression '%s' has type void and is not a valid method argument",
-                getArg(i).prettyPrint()));
-          }
+        if (!decl().isVariableArity()) {
+          return false;
         }
-        if (isQualified() && decl().isAbstract() && qualifier().isSuperAccess()) {
-          problems.add(error("may not access abstract methods in superclass"));
+        if (arity() != decl().arity()) {
+          return false;
         }
-        if (!decl().isVariableArity() || invokesVariableArityAsArray()) {
-          for (int i = 0; i < decl().getNumParameter(); i++) {
-            TypeDecl exprType = getArg(i).type();
-            TypeDecl parmType = decl().getParameter(i).type();
-            if (!exprType.methodInvocationConversionTo(parmType) &&
-                !exprType.isUnknown() && !parmType.isUnknown()) {
-              problems.add(errorf("argument '%s' of type %s is not compatible with the method parameter type %s",
-                  getArg(i).prettyPrint(), exprType.typeName(), parmType.typeName()));
-            }
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:53
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:53")
-  public Collection<Problem> typeHierarchyProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        if (isQualified() && qualifier().isPackageAccess() && !qualifier().isUnknown()) {
-          problems.add(errorf("The method %s can not be qualified by a package name.",
-              decl().fullSignature()));
-        }
-        if (isQualified() && decl().isAbstract() && qualifier().isSuperAccess()) {
-          problems.add(error("may not access abstract methods in superclass"));
-        }
-        if (decls().isEmpty() && (!isQualified() || !qualifier().isUnknown())) {
-          StringBuilder sb = new StringBuilder();
-          sb.append("no method named " + name());
-          sb.append("(");
-          for (int i = 0; i < getNumArg(); i++) {
-            TypeDecl argType = getArg(i).type();
-            if (argType.isVoid()) {
-              // Error will be reported for the void argument in typeCheck
-              // so we return now to avoid confusing double errors.
-              return problems;
-            }
-            if (i != 0) {
-              sb.append(", ");
-            }
-            sb.append(argType.typeName());
-          }
-          sb.append(")" + " in " + methodHost() + " matches.");
-          if (singleCandidateDecl() != null) {
-            sb.append(" However, there is a method " + singleCandidateDecl().fullSignature());
-          }
-          problems.add(error(sb.toString()));
-        }
-        if (decls().size() > 1) {
-          boolean allAbstract = true;
-          for (MethodDecl m : decls()) {
-            if (!m.isAbstract() && !m.hostType().isObject()) {
-              allAbstract = false;
-              break;
-            }
-          }
-          if (!allAbstract && validArgs()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("several most specific methods for " + this.prettyPrint() + "\n");
-            for (MethodDecl m : decls()) {
-              sb.append("    " + m.fullSignature() + " in " + m.hostType().typeName() + "\n");
-            }
-            problems.add(error(sb.toString()));
-          }
-        }
-        return problems;
+        return getArg(getNumArg()-1).type().methodInvocationConversionTo(decl().lastParameter().type());
       }
   }
   /**
@@ -1590,24 +1608,6 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:65
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:65")
-  public boolean invokesVariableArityAsArray() {
-    {
-        if (!decl().isVariableArity()) {
-          return false;
-        }
-        if (arity() != decl().arity()) {
-          return false;
-        }
-        return getArg(getNumArg()-1).type().methodInvocationConversionTo(decl().lastParameter().type());
-      }
-  }
-  /**
-   * @attribute syn
    * @aspect PreciseRethrow
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:145
    */
@@ -1647,38 +1647,6 @@ public class MethodAccess extends Access implements Cloneable {
         }
         return Collections.emptyList();
       }
-  }
-  /** @apilevel internal */
-  private void stmtCompatible_reset() {
-    stmtCompatible_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle stmtCompatible_computed = null;
-
-  /** @apilevel internal */
-  protected boolean stmtCompatible_value;
-
-  /**
-   * @attribute syn
-   * @aspect StmtCompatible
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:129
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:129")
-  public boolean stmtCompatible() {
-    ASTNode$State state = state();
-    if (stmtCompatible_computed == ASTNode$State.NON_CYCLE || stmtCompatible_computed == state().cycle()) {
-      return stmtCompatible_value;
-    }
-    stmtCompatible_value = true;
-    if (state().inCircle()) {
-      stmtCompatible_computed = state().cycle();
-    
-    } else {
-      stmtCompatible_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return stmtCompatible_value;
   }
   /** @apilevel internal */
   private void isBooleanExpression_reset() {
@@ -1805,17 +1773,37 @@ public class MethodAccess extends Access implements Cloneable {
       GenericMethodDecl genericDecl = decl().genericDecl();
       return genericDecl.typeVariableInReturn();
     }
+  /** @apilevel internal */
+  private void stmtCompatible_reset() {
+    stmtCompatible_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle stmtCompatible_computed = null;
+
+  /** @apilevel internal */
+  protected boolean stmtCompatible_value;
+
   /**
-   * @return {@code true} if this access is a method call of a non-static method.
    * @attribute syn
-   * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426
+   * @aspect StmtCompatible
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:129
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426")
-  public boolean isInstanceMethodAccess() {
-    boolean isInstanceMethodAccess_value = !decl().isStatic();
-    return isInstanceMethodAccess_value;
+  @ASTNodeAnnotation.Source(aspect="StmtCompatible", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:129")
+  public boolean stmtCompatible() {
+    ASTNode$State state = state();
+    if (stmtCompatible_computed == ASTNode$State.NON_CYCLE || stmtCompatible_computed == state().cycle()) {
+      return stmtCompatible_value;
+    }
+    stmtCompatible_value = true;
+    if (state().inCircle()) {
+      stmtCompatible_computed = state().cycle();
+    
+    } else {
+      stmtCompatible_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return stmtCompatible_value;
   }
   /**
    * @attribute syn
@@ -1933,6 +1921,18 @@ public class MethodAccess extends Access implements Cloneable {
     state().leaveLazyAttribute();
     return transformedQualified_value;
   }
+  /**
+   * @return {@code true} if this access is a method call of a non-static method.
+   * @attribute syn
+   * @aspect GenerateClassfile
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:426")
+  public boolean isInstanceMethodAccess() {
+    boolean isInstanceMethodAccess_value = !decl().isStatic();
+    return isInstanceMethodAccess_value;
+  }
   /** @apilevel internal */
   private void transformedVariableArity_reset() {
     transformedVariableArity_computed = false;
@@ -1998,17 +1998,6 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @attribute inh
-   * @aspect LookupMethod
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:38
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:38")
-  public MethodDecl unknownMethod() {
-    MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
-    return unknownMethod_value;
-  }
-  /**
-   * @attribute inh
    * @aspect TypeHierarchyCheck
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:184
    */
@@ -2020,6 +2009,17 @@ public class MethodAccess extends Access implements Cloneable {
   }
   /**
    * @attribute inh
+   * @aspect LookupMethod
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:38
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:38")
+  public MethodDecl unknownMethod() {
+    MethodDecl unknownMethod_value = getParent().Define_unknownMethod(this, null);
+    return unknownMethod_value;
+  }
+  /**
+   * @attribute inh
    * @aspect SuppressWarnings
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/SuppressWarnings.jrag:39
    */
@@ -2028,6 +2028,42 @@ public class MethodAccess extends Access implements Cloneable {
   public boolean withinSuppressWarnings(String annot) {
     boolean withinSuppressWarnings_String_value = getParent().Define_withinSuppressWarnings(this, null, annot);
     return withinSuppressWarnings_String_value;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93
+   * @apilevel internal
+   */
+  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:99
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
+    }
+    else {
+      int childIndex = this.getIndexOfChild(_callerNode);
+      return isRightChildOfDot();
+    }
+  }
+  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110
+   * @apilevel internal
+   */
+  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:115
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return prevExprError();
+    }
+    else {
+      int childIndex = this.getIndexOfChild(_callerNode);
+      return prevExpr();
+    }
+  }
+  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
   }
   /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
@@ -2064,20 +2100,14 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
    * @apilevel internal
    */
-  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:58
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return unqualifiedScope().lookupMethod(name);
-    }
-    else {
-      return getParent().Define_lookupMethod(this, _callerNode, name);
-    }
+  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unqualifiedScope().methodHost();
   }
-  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2130,42 +2160,6 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93
-   * @apilevel internal
-   */
-  public boolean Define_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:99
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
-    }
-    else {
-      int childIndex = this.getIndexOfChild(_callerNode);
-      return isRightChildOfDot();
-    }
-  }
-  protected boolean canDefine_isRightChildOfDot(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110
-   * @apilevel internal
-   */
-  public Expr Define_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:115
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return prevExprError();
-    }
-    else {
-      int childIndex = this.getIndexOfChild(_callerNode);
-      return prevExpr();
-    }
-  }
-  protected boolean canDefine_prevExpr(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
@@ -2183,14 +2177,20 @@ public class MethodAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
    * @apilevel internal
    */
-  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unqualifiedScope().methodHost();
+  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:58
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return unqualifiedScope().lookupMethod(name);
+    }
+    else {
+      return getParent().Define_lookupMethod(this, _callerNode, name);
+    }
   }
-  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /**
@@ -2341,7 +2341,7 @@ public class MethodAccess extends Access implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:147
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:51
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2350,7 +2350,7 @@ public class MethodAccess extends Access implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:51
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:147
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2416,10 +2416,10 @@ public class MethodAccess extends Access implements Cloneable {
     for (Problem value : exceptionHandlingProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeProblems()) {
+    for (Problem value : typeHierarchyProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeHierarchyProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
     if (decl().isDeprecated()

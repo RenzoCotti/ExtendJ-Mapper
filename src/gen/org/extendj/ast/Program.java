@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,14 +30,6 @@ import java.io.DataInputStream;
  */
 public class Program extends ASTNode<ASTNode> implements Cloneable {
   /**
-   * Returns a robust iterator that can be iterated while the colleciton is updated.
-   * @aspect LibraryCompilationUnits
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LibCompilationUnits.jadd:35
-   */
-  public Iterator<CompilationUnit> libraryCompilationUnitIterator() {
-    return libraryCompilationUnitSet.iterator();
-  }
-  /**
    * @aspect AddOptionsToProgram
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Options.jadd:34
    */
@@ -48,6 +40,14 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    */
   public Options options() {
     return options;
+  }
+  /**
+   * Returns a robust iterator that can be iterated while the colleciton is updated.
+   * @aspect LibraryCompilationUnits
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LibCompilationUnits.jadd:35
+   */
+  public Iterator<CompilationUnit> libraryCompilationUnitIterator() {
+    return libraryCompilationUnitSet.iterator();
   }
   /**
    * @aspect ClassPath
@@ -185,61 +185,6 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
    */
   public void addSourcePath(PathPart pathPart) {
     classPath.addSourcePath(pathPart);
-  }
-  /**
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:37
-   */
-  public long javaParseTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:38
-   */
-  public long bytecodeParseTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:39
-   */
-  public long codeGenTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:40
-   */
-  public long errorCheckTime;
-  /**
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:41
-   */
-  public int numJavaFiles;
-  /**
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:42
-   */
-  public int numClassFiles;
-  /**
-   * Reset the profile statistics.
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:47
-   */
-  public void resetStatistics() {
-    javaParseTime = 0;
-    bytecodeParseTime = 0;
-    codeGenTime = 0;
-    errorCheckTime = 0;
-    numJavaFiles = 0;
-    numClassFiles = 0;
-  }
-  /**
-   * @aspect FrontendMain
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:56
-   */
-  public void printStatistics(PrintStream out) {
-    out.println("javaParseTime: " + javaParseTime);
-    out.println("numJavaFiles: " + numJavaFiles);
-    out.println("bytecodeParseTime: " + bytecodeParseTime);
-    out.println("numClassFiles: " + numClassFiles);
-    out.println("errorCheckTime: " + errorCheckTime);
-    out.println("codeGenTime: " + codeGenTime);
   }
   /**
    * @aspect LookupFullyQualifiedTypes
@@ -388,6 +333,61 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
       libraryTypeMap.put(PRIMITIVE_PACKAGE_NAME + ".null", unit.typeNull());
       libraryTypeMap.put(PRIMITIVE_PACKAGE_NAME + ".void", unit.typeVoid());
       libraryTypeMap.put(PRIMITIVE_PACKAGE_NAME + ".Unknown", unit.unknownType());
+  }
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:37
+   */
+  public long javaParseTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:38
+   */
+  public long bytecodeParseTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:39
+   */
+  public long codeGenTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:40
+   */
+  public long errorCheckTime;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:41
+   */
+  public int numJavaFiles;
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:42
+   */
+  public int numClassFiles;
+  /**
+   * Reset the profile statistics.
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:47
+   */
+  public void resetStatistics() {
+    javaParseTime = 0;
+    bytecodeParseTime = 0;
+    codeGenTime = 0;
+    errorCheckTime = 0;
+    numJavaFiles = 0;
+    numClassFiles = 0;
+  }
+  /**
+   * @aspect FrontendMain
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/FrontendMain.jrag:56
+   */
+  public void printStatistics(PrintStream out) {
+    out.println("javaParseTime: " + javaParseTime);
+    out.println("numJavaFiles: " + numJavaFiles);
+    out.println("bytecodeParseTime: " + bytecodeParseTime);
+    out.println("numClassFiles: " + numClassFiles);
+    out.println("errorCheckTime: " + errorCheckTime);
+    out.println("codeGenTime: " + codeGenTime);
   }
   /**
    * @aspect PrettyPrintUtil
@@ -1509,135 +1509,58 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
    * @apilevel internal
    */
-  public TypeDecl Define_superType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  protected boolean canDefine_superType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:39
-   * @apilevel internal
-   */
-  public ConstructorDecl Define_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownConstructor();
-  }
-  protected boolean canDefine_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:56
-   * @apilevel internal
-   */
-  public TypeDecl Define_componentType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownType();
-  }
-  protected boolean canDefine_componentType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:255
-   * @apilevel internal
-   */
-  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ClassPath.jrag:105
-   * @apilevel internal
-   */
-  public CompilationUnit Define_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  protected boolean canDefine_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:35
-   * @apilevel internal
-   */
-  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return -1;
-  }
-  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:58
-   * @apilevel internal
-   */
-  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return false;
   }
-  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:34
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
    * @apilevel internal
    */
-  public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return false;
   }
-  protected boolean canDefine_isDest(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
    * @apilevel internal
    */
-  public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return true;
-  }
-  protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:66
-   * @apilevel internal
-   */
-  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return false;
   }
-  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:35
    * @apilevel internal
    */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  public Collection<ConstructorDecl> Define_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
+    return Collections.emptyList();
   }
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  protected boolean canDefine_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:43
    * @apilevel internal
    */
-  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  public Collection<ConstructorDecl> Define_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return true;
+    return Collections.emptyList();
   }
-  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+  protected boolean canDefine_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -1709,49 +1632,126 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:35
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
    * @apilevel internal
    */
-  public Collection<ConstructorDecl> Define_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return Collections.emptyList();
+    return true;
   }
-  protected boolean canDefine_lookupConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:43
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ClassPath.jrag:105
    * @apilevel internal
    */
-  public Collection<ConstructorDecl> Define_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  public CompilationUnit Define_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return Collections.emptyList();
+    return null;
   }
-  protected boolean canDefine_lookupSuperConstructor(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_compilationUnit(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:42
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:34
    * @apilevel internal
    */
-  public Expr Define_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_isDest(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  protected boolean canDefine_isDest(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:44
+   * @apilevel internal
+   */
+  public boolean Define_isSource(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return true;
+  }
+  protected boolean canDefine_isSource(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:66
+   * @apilevel internal
+   */
+  public boolean Define_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  protected boolean canDefine_isIncOrDec(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
+   * @apilevel internal
+   */
+  public boolean Define_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return true;
+  }
+  protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @apilevel internal
+   */
+  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     {
-        throw new UnsupportedOperationException();
+        throw new Error("Needs extra equation for methodHost()");
       }
   }
-  protected boolean canDefine_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:188
    * @apilevel internal
    */
-  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return Collections.EMPTY_LIST;
+    return false;
   }
-  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:196
+   * @apilevel internal
+   */
+  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
+   * @apilevel internal
+   */
+  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -1953,14 +1953,36 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
    * @apilevel internal
    */
-  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    return emptySet();
+    return unknownType();
   }
-  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
+   * @apilevel internal
+   */
+  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return typeVoid();
+  }
+  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:667
+   * @apilevel internal
+   */
+  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2085,6 +2107,17 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
+   * @apilevel internal
+   */
+  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return emptySet();
+  }
+  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:356
    * @apilevel internal
    */
@@ -2142,6 +2175,39 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Arrays.jrag:56
+   * @apilevel internal
+   */
+  public TypeDecl Define_componentType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unknownType();
+  }
+  protected boolean canDefine_componentType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:35
+   * @apilevel internal
+   */
+  public int Define_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return -1;
+  }
+  protected boolean canDefine_blockIndex(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:58
+   * @apilevel internal
+   */
+  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
+  }
+  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
@@ -2150,6 +2216,63 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return NameType.NOT_CLASSIFIED;
   }
   protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:42
+   * @apilevel internal
+   */
+  public Expr Define_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    {
+        throw new UnsupportedOperationException();
+      }
+  }
+  protected boolean canDefine_nestedScope(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
+   * @apilevel internal
+   */
+  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return Collections.EMPTY_LIST;
+  }
+  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:255
+   * @apilevel internal
+   */
+  public LabeledStmt Define_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  protected boolean canDefine_lookupLabel(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:33
+   * @apilevel internal
+   */
+  public TypeDecl Define_superType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return null;
+  }
+  protected boolean canDefine_superType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:39
+   * @apilevel internal
+   */
+  public ConstructorDecl Define_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unknownConstructor();
+  }
+  protected boolean canDefine_constructorDecl(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2246,126 +2369,36 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:74
    * @apilevel internal
    */
-  public TypeDecl Define_switchType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unknownType();
-  }
-  protected boolean canDefine_switchType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
-   * @apilevel internal
-   */
-  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeVoid();
-  }
-  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:667
-   * @apilevel internal
-   */
-  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+  public TypeDecl Define_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return null;
   }
-  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:69
    * @apilevel internal
    */
-  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+  public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    {
-        throw new Error("Needs extra equation for methodHost()");
-      }
+    return typeNull();
   }
-  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:188
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    */
-  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
     return false;
   }
-  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:196
-   * @apilevel internal
-   */
-  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
-   * @apilevel internal
-   */
-  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:280
-   * @apilevel internal
-   */
-  public boolean Define_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return true;
-  }
-  protected boolean canDefine_reportUnreachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
-   * @apilevel internal
-   */
-  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
-   * @apilevel internal
-   */
-  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
-   * @apilevel internal
-   */
-  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2432,17 +2465,6 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return unknownType();
   }
   protected boolean canDefine_enclosingAnnotationDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericMethodsInference.jrag:69
-   * @apilevel internal
-   */
-  public TypeDecl Define_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return typeNull();
-  }
-  protected boolean canDefine_assignConvertedType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2520,28 +2542,6 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return wildcards().lookupGLBType(bounds);
   }
   protected boolean canDefine_lookupGLBType(ASTNode _callerNode, ASTNode _childNode, Collection<TypeDecl> bounds) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:74
-   * @apilevel internal
-   */
-  public TypeDecl Define_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return null;
-  }
-  protected boolean canDefine_genericDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
-   * @apilevel internal
-   */
-  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2624,19 +2624,6 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
-   * @apilevel internal
-   */
-  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
-    int i = this.getIndexOfChild(_callerNode);
-    {
-        throw new Error("variableScopeEndLabel not valid from here");
-      }
-  }
-  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:104
    * @apilevel internal
    */
@@ -2682,6 +2669,19 @@ public class Program extends ASTNode<ASTNode> implements Cloneable {
       }
   }
   protected boolean canDefine_resultSaveLocalNum(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
+   * @apilevel internal
+   */
+  public int Define_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
+    int i = this.getIndexOfChild(_callerNode);
+    {
+        throw new Error("variableScopeEndLabel not valid from here");
+      }
+  }
+  protected boolean canDefine_variableScopeEndLabel(ASTNode _callerNode, ASTNode _childNode, CodeGeneration gen) {
     return true;
   }
   /** @apilevel internal */

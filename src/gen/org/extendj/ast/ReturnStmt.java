@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -42,18 +42,18 @@ public class ReturnStmt extends Stmt implements Cloneable {
     out.print(";");
   }
   /**
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:108
-   */
-  public void collectBranches(Collection<Stmt> c) {
-    c.add(this);
-  }
-  /**
    * @aspect NodeConstructors
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:76
    */
   public ReturnStmt(Expr expr) {
     this(new Opt(expr));
+  }
+  /**
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:108
+   */
+  public void collectBranches(Collection<Stmt> c) {
+    c.add(this);
   }
   /**
    * @aspect CreateBCode
@@ -136,12 +136,12 @@ public class ReturnStmt extends Stmt implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    canCompleteNormally_reset();
+    getFinallyOpt_reset();
     assignedAfter_Variable_reset();
     unassignedAfterReachedFinallyBlocks_Variable_reset();
     assignedAfterReachedFinallyBlocks_Variable_reset();
     unassignedAfter_Variable_reset();
-    getFinallyOpt_reset();
-    canCompleteNormally_reset();
     enclosingLambda_reset();
     resultSaveLocalNum_reset();
   }
@@ -334,6 +334,74 @@ public class ReturnStmt extends Stmt implements Cloneable {
   protected int getFinallyOptChildPosition() {
     return 1;
   }
+  /** @apilevel internal */
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
+
+  /** @apilevel internal */
+  protected boolean canCompleteNormally_value;
+
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
+    ASTNode$State state = state();
+    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
+    }
+    canCompleteNormally_value = false;
+    if (state().inCircle()) {
+      canCompleteNormally_computed = state().cycle();
+    
+    } else {
+      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return canCompleteNormally_value;
+  }
+  /** @apilevel internal */
+  private void getFinallyOpt_reset() {
+    getFinallyOpt_computed = false;
+    
+    getFinallyOpt_value = null;
+  }
+  /** @apilevel internal */
+  protected boolean getFinallyOpt_computed = false;
+
+  /** @apilevel internal */
+  protected Opt<Block> getFinallyOpt_value;
+
+  /**
+   * @attribute syn nta
+   * @aspect NTAFinally
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:54
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:54")
+  public Opt<Block> getFinallyOpt() {
+    ASTNode$State state = state();
+    if (getFinallyOpt_computed) {
+      return (Opt<Block>) getChild(getFinallyOptChildPosition());
+    }
+    state().enterLazyAttribute();
+    getFinallyOpt_value = getFinallyOpt_compute();
+    setChild(getFinallyOpt_value, getFinallyOptChildPosition());
+    getFinallyOpt_computed = true;
+    state().leaveLazyAttribute();
+    Opt<Block> node = (Opt<Block>) this.getChild(getFinallyOptChildPosition());
+    return node;
+  }
+  /** @apilevel internal */
+  private Opt<Block> getFinallyOpt_compute() {
+      return branchFinallyOpt();
+    }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
@@ -569,42 +637,6 @@ public class ReturnStmt extends Stmt implements Cloneable {
       return (Boolean) _value.value;
     }
   }
-  /** @apilevel internal */
-  private void getFinallyOpt_reset() {
-    getFinallyOpt_computed = false;
-    
-    getFinallyOpt_value = null;
-  }
-  /** @apilevel internal */
-  protected boolean getFinallyOpt_computed = false;
-
-  /** @apilevel internal */
-  protected Opt<Block> getFinallyOpt_value;
-
-  /**
-   * @attribute syn nta
-   * @aspect NTAFinally
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:54
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="NTAFinally", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NTAFinally.jrag:54")
-  public Opt<Block> getFinallyOpt() {
-    ASTNode$State state = state();
-    if (getFinallyOpt_computed) {
-      return (Opt<Block>) getChild(getFinallyOptChildPosition());
-    }
-    state().enterLazyAttribute();
-    getFinallyOpt_value = getFinallyOpt_compute();
-    setChild(getFinallyOpt_value, getFinallyOptChildPosition());
-    getFinallyOpt_computed = true;
-    state().leaveLazyAttribute();
-    Opt<Block> node = (Opt<Block>) this.getChild(getFinallyOptChildPosition());
-    return node;
-  }
-  /** @apilevel internal */
-  private Opt<Block> getFinallyOpt_compute() {
-      return branchFinallyOpt();
-    }
   /**
    * @attribute syn
    * @aspect TypeCheck
@@ -644,38 +676,6 @@ public class ReturnStmt extends Stmt implements Cloneable {
         }
         return problems;
       }
-  }
-  /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
-
-  /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
-
-  /**
-   * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
-    ASTNode$State state = state();
-    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
-    }
-    canCompleteNormally_value = false;
-    if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
-    
-    } else {
-      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return canCompleteNormally_value;
   }
   /**
    * @attribute syn

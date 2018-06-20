@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -83,10 +83,10 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    finallyIterator_reset();
+    canCompleteNormally_reset();
     assignedAfter_Variable_reset();
     unassignedAfter_Variable_reset();
-    canCompleteNormally_reset();
+    finallyIterator_reset();
     localSize_reset();
     enclosingFinally_Stmt_reset();
     localNum_reset();
@@ -140,79 +140,36 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:78")
   public abstract boolean modifiedInScope(Variable var);
   /** @apilevel internal */
-  private void finallyIterator_reset() {
-    finallyIterator_computed = null;
-    finallyIterator_value = null;
+  private void canCompleteNormally_reset() {
+    canCompleteNormally_computed = null;
   }
   /** @apilevel internal */
-  protected ASTNode$State.Cycle finallyIterator_computed = null;
+  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
 
   /** @apilevel internal */
-  protected Iterator<FinallyHost> finallyIterator_value;
+  protected boolean canCompleteNormally_value;
 
   /**
-   * Finds enclosing finally and monitor exit blocks.
-   * @return an iterator for finally (and monitor exit) blocks that are
-   * reached before the final target of this statement is reached
    * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:80
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:80")
-  public Iterator<FinallyHost> finallyIterator() {
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
+  public boolean canCompleteNormally() {
     ASTNode$State state = state();
-    if (finallyIterator_computed == ASTNode$State.NON_CYCLE || finallyIterator_computed == state().cycle()) {
-      return finallyIterator_value;
+    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
+      return canCompleteNormally_value;
     }
-    finallyIterator_value = finallyIterator_compute();
+    canCompleteNormally_value = true;
     if (state().inCircle()) {
-      finallyIterator_computed = state().cycle();
+      canCompleteNormally_computed = state().cycle();
     
     } else {
-      finallyIterator_computed = ASTNode$State.NON_CYCLE;
+      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
     
     }
-    return finallyIterator_value;
-  }
-  /** @apilevel internal */
-  private Iterator<FinallyHost> finallyIterator_compute() {
-      return new LazyFinallyIterator(this);
-    }
-  /**
-   * @return <code>true</code> if this statement can branch to
-   * the target statement.
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:182
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:182")
-  public boolean canBranchTo(BranchTargetStmt target) {
-    boolean canBranchTo_BranchTargetStmt_value = false;
-    return canBranchTo_BranchTargetStmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:184
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:184")
-  public boolean canBranchTo(LabeledStmt target) {
-    boolean canBranchTo_LabeledStmt_value = false;
-    return canBranchTo_LabeledStmt_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect BranchTarget
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:186
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:186")
-  public boolean canBranchTo(SwitchStmt target) {
-    boolean canBranchTo_SwitchStmt_value = false;
-    return canBranchTo_SwitchStmt_value;
+    return canCompleteNormally_value;
   }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
@@ -343,61 +300,79 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
     return continueLabel_value;
   }
   /** @apilevel internal */
-  private void canCompleteNormally_reset() {
-    canCompleteNormally_computed = null;
+  private void finallyIterator_reset() {
+    finallyIterator_computed = null;
+    finallyIterator_value = null;
   }
   /** @apilevel internal */
-  protected ASTNode$State.Cycle canCompleteNormally_computed = null;
+  protected ASTNode$State.Cycle finallyIterator_computed = null;
 
   /** @apilevel internal */
-  protected boolean canCompleteNormally_value;
+  protected Iterator<FinallyHost> finallyIterator_value;
 
   /**
+   * Finds enclosing finally and monitor exit blocks.
+   * @return an iterator for finally (and monitor exit) blocks that are
+   * reached before the final target of this statement is reached
    * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:80
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:50")
-  public boolean canCompleteNormally() {
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:80")
+  public Iterator<FinallyHost> finallyIterator() {
     ASTNode$State state = state();
-    if (canCompleteNormally_computed == ASTNode$State.NON_CYCLE || canCompleteNormally_computed == state().cycle()) {
-      return canCompleteNormally_value;
+    if (finallyIterator_computed == ASTNode$State.NON_CYCLE || finallyIterator_computed == state().cycle()) {
+      return finallyIterator_value;
     }
-    canCompleteNormally_value = true;
+    finallyIterator_value = finallyIterator_compute();
     if (state().inCircle()) {
-      canCompleteNormally_computed = state().cycle();
+      finallyIterator_computed = state().cycle();
     
     } else {
-      canCompleteNormally_computed = ASTNode$State.NON_CYCLE;
+      finallyIterator_computed = ASTNode$State.NON_CYCLE;
     
     }
-    return canCompleteNormally_value;
+    return finallyIterator_value;
+  }
+  /** @apilevel internal */
+  private Iterator<FinallyHost> finallyIterator_compute() {
+      return new LazyFinallyIterator(this);
+    }
+  /**
+   * @return <code>true</code> if this statement can branch to
+   * the target statement.
+   * @attribute syn
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:182
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:182")
+  public boolean canBranchTo(BranchTargetStmt target) {
+    boolean canBranchTo_BranchTargetStmt_value = false;
+    return canBranchTo_BranchTargetStmt_value;
   }
   /**
    * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1858
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:184
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1858")
-  public int break_label() {
-    {
-        throw new UnsupportedOperationException("Can not break at this statement of type "
-            + getClass().getName());
-      }
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:184")
+  public boolean canBranchTo(LabeledStmt target) {
+    boolean canBranchTo_LabeledStmt_value = false;
+    return canBranchTo_LabeledStmt_value;
   }
   /**
    * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1883
+   * @aspect BranchTarget
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:186
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1883")
-  public int continue_label() {
-    {
-        throw new UnsupportedOperationException("Can not continue at this statement");
-      }
+  @ASTNodeAnnotation.Source(aspect="BranchTarget", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:186")
+  public boolean canBranchTo(SwitchStmt target) {
+    boolean canBranchTo_SwitchStmt_value = false;
+    return canBranchTo_SwitchStmt_value;
   }
   /** @apilevel internal */
   private void localSize_reset() {
@@ -433,6 +408,119 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
     
     }
     return localSize_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1858
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1858")
+  public int break_label() {
+    {
+        throw new UnsupportedOperationException("Can not break at this statement of type "
+            + getClass().getName());
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1883
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1883")
+  public int continue_label() {
+    {
+        throw new UnsupportedOperationException("Can not continue at this statement");
+      }
+  }
+  /**
+   * @attribute inh
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:48
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:48")
+  public boolean reachable() {
+    boolean reachable_value = getParent().Define_reachable(this, null);
+    return reachable_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:207
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:207")
+  public boolean reportUnreachable() {
+    boolean reportUnreachable_value = getParent().Define_reportUnreachable(this, null);
+    return reportUnreachable_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect DefiniteAssignment
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256")
+  public boolean assignedBefore(Variable v) {
+    boolean assignedBefore_Variable_value = getParent().Define_assignedBefore(this, null, v);
+    return assignedBefore_Variable_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect DefiniteUnassignment
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891")
+  public boolean unassignedBefore(Variable v) {
+    boolean unassignedBefore_Variable_value = getParent().Define_unassignedBefore(this, null, v);
+    return unassignedBefore_Variable_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect LookupFullyQualifiedTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:128
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:128")
+  public TypeDecl lookupType(String packageName, String typeName) {
+    TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
+    return lookupType_String_String_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect TypeScopePropagation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:353
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:353")
+  public SimpleSet<TypeDecl> lookupType(String name) {
+    SimpleSet<TypeDecl> lookupType_String_value = getParent().Define_lookupType(this, null, name);
+    return lookupType_String_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect VariableScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:40
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:40")
+  public SimpleSet<Variable> lookupVariable(String name) {
+    SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
+    return lookupVariable_String_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect LookupMethod
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52")
+  public Collection<MethodDecl> lookupMethod(String name) {
+    Collection<MethodDecl> lookupMethod_String_value = getParent().Define_lookupMethod(this, null, name);
+    return lookupMethod_String_value;
   }
   /**
    * @return the target statement for a break or continue
@@ -492,72 +580,6 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   protected java.util.Map enclosingFinally_Stmt_computed;
   /**
    * @attribute inh
-   * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256")
-  public boolean assignedBefore(Variable v) {
-    boolean assignedBefore_Variable_value = getParent().Define_assignedBefore(this, null, v);
-    return assignedBefore_Variable_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect DefiniteUnassignment
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:891")
-  public boolean unassignedBefore(Variable v) {
-    boolean unassignedBefore_Variable_value = getParent().Define_unassignedBefore(this, null, v);
-    return unassignedBefore_Variable_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect LookupMethod
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52")
-  public Collection<MethodDecl> lookupMethod(String name) {
-    Collection<MethodDecl> lookupMethod_String_value = getParent().Define_lookupMethod(this, null, name);
-    return lookupMethod_String_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect LookupFullyQualifiedTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:128
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:128")
-  public TypeDecl lookupType(String packageName, String typeName) {
-    TypeDecl lookupType_String_String_value = getParent().Define_lookupType(this, null, packageName, typeName);
-    return lookupType_String_String_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:353
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:353")
-  public SimpleSet<TypeDecl> lookupType(String name) {
-    SimpleSet<TypeDecl> lookupType_String_value = getParent().Define_lookupType(this, null, name);
-    return lookupType_String_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect VariableScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:40
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:40")
-  public SimpleSet<Variable> lookupVariable(String name) {
-    SimpleSet<Variable> lookupVariable_String_value = getParent().Define_lookupVariable(this, null, name);
-    return lookupVariable_String_value;
-  }
-  /**
-   * @attribute inh
    * @aspect NestedTypes
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:572
    */
@@ -577,41 +599,6 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:48
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:48")
-  public boolean reachable() {
-    boolean reachable_value = getParent().Define_reachable(this, null);
-    return reachable_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:207
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:207")
-  public boolean reportUnreachable() {
-    boolean reportUnreachable_value = getParent().Define_reportUnreachable(this, null);
-    return reportUnreachable_value;
-  }
-  /**
-   * Checks if the branch statement leaves the monitor.
-   * @return <code>true</code> if the branch leaves the monitor
-   * @attribute inh
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2074
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2074")
-  public boolean leavesMonitor(Stmt branch, SynchronizedStmt monitor) {
-    boolean leavesMonitor_Stmt_SynchronizedStmt_value = getParent().Define_leavesMonitor(this, null, branch, monitor);
-    return leavesMonitor_Stmt_SynchronizedStmt_value;
   }
   /**
    * @return The next available local variable index.
@@ -646,6 +633,19 @@ public abstract class Stmt extends ASTNode<ASTNode> implements Cloneable {
   /** @apilevel internal */
   protected int localNum_value;
 
+  /**
+   * Checks if the branch statement leaves the monitor.
+   * @return <code>true</code> if the branch leaves the monitor
+   * @attribute inh
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2074
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:2074")
+  public boolean leavesMonitor(Stmt branch, SynchronizedStmt monitor) {
+    boolean leavesMonitor_Stmt_SynchronizedStmt_value = getParent().Define_leavesMonitor(this, null, branch, monitor);
+    return leavesMonitor_Stmt_SynchronizedStmt_value;
+  }
   /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:78
    * @apilevel internal

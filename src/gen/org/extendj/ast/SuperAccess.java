@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -229,68 +229,6 @@ public class SuperAccess extends Access implements Cloneable {
 { return isQualified() ? qualifier().type() : hostType(); }
   /**
    * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:327
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:327")
-  public SimpleSet<TypeDecl> decls() {
-    SimpleSet<TypeDecl> decls_value = emptySet();
-    return decls_value;
-  }
-  /** @apilevel internal */
-  private void decl_reset() {
-    decl_computed = null;
-    decl_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle decl_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl decl_value;
-
-  /**
-   * @return the type whose supertype this super access references.
-   * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:337
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:337")
-  public TypeDecl decl() {
-    ASTNode$State state = state();
-    if (decl_computed == ASTNode$State.NON_CYCLE || decl_computed == state().cycle()) {
-      return decl_value;
-    }
-    decl_value = decl_compute();
-    if (state().inCircle()) {
-      decl_computed = state().cycle();
-    
-    } else {
-      decl_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return decl_value;
-  }
-  /** @apilevel internal */
-  private TypeDecl decl_compute() {
-      TypeDecl typeDecl;
-      if (isQualified()) {
-        typeDecl = qualifier().type();
-      } else {
-        typeDecl = hostType();
-        while (typeDecl instanceof LambdaAnonymousDecl) {
-          typeDecl = typeDecl.enclosingType();
-        }
-      }
-  
-      if (typeDecl instanceof ParTypeDecl) {
-        typeDecl = ((ParTypeDecl) typeDecl).genericDecl();
-      }
-      return typeDecl;
-    }
-  /**
-   * @attribute syn
    * @aspect AccessTypes
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:48
    */
@@ -300,69 +238,6 @@ public class SuperAccess extends Access implements Cloneable {
     boolean isSuperAccess_value = true;
     return isSuperAccess_value;
   }
-  /**
-   * Defines the expected kind of name for the left hand side in a qualified
-   * expression.
-   * @attribute syn
-   * @aspect SyntacticClassification
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60")
-  public NameType predNameType() {
-    NameType predNameType_value = NameType.TYPE_NAME;
-    return predNameType_value;
-  }
-  /** @apilevel internal */
-  private void type_reset() {
-    type_computed = null;
-    type_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle type_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl type_value;
-
-  /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
-  public TypeDecl type() {
-    ASTNode$State state = state();
-    if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
-      return type_value;
-    }
-    type_value = type_compute();
-    if (state().inCircle()) {
-      type_computed = state().cycle();
-    
-    } else {
-      type_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return type_value;
-  }
-  /** @apilevel internal */
-  private TypeDecl type_compute() {
-      TypeDecl typeDecl = decl();
-      if (typeDecl.isInterfaceDecl()) {
-        if (isQualified() && qualifier().type() == typeDecl) {
-          return typeDecl;
-        }
-      }
-      if (!typeDecl.isClassDecl()) {
-        return unknownType();
-      }
-      ClassDecl classDecl = (ClassDecl) typeDecl;
-      if (!classDecl.hasSuperclass()) {
-        return unknownType();
-      }
-      return classDecl.superclass();
-    }
   /**
    * @attribute syn
    * @aspect TypeHierarchyCheck
@@ -483,6 +358,131 @@ public class SuperAccess extends Access implements Cloneable {
         return problems;
       }
   }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:327
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:327")
+  public SimpleSet<TypeDecl> decls() {
+    SimpleSet<TypeDecl> decls_value = emptySet();
+    return decls_value;
+  }
+  /** @apilevel internal */
+  private void decl_reset() {
+    decl_computed = null;
+    decl_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle decl_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl decl_value;
+
+  /**
+   * @return the type whose supertype this super access references.
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:337
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:337")
+  public TypeDecl decl() {
+    ASTNode$State state = state();
+    if (decl_computed == ASTNode$State.NON_CYCLE || decl_computed == state().cycle()) {
+      return decl_value;
+    }
+    decl_value = decl_compute();
+    if (state().inCircle()) {
+      decl_computed = state().cycle();
+    
+    } else {
+      decl_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return decl_value;
+  }
+  /** @apilevel internal */
+  private TypeDecl decl_compute() {
+      TypeDecl typeDecl;
+      if (isQualified()) {
+        typeDecl = qualifier().type();
+      } else {
+        typeDecl = hostType();
+        while (typeDecl instanceof LambdaAnonymousDecl) {
+          typeDecl = typeDecl.enclosingType();
+        }
+      }
+  
+      if (typeDecl instanceof ParTypeDecl) {
+        typeDecl = ((ParTypeDecl) typeDecl).genericDecl();
+      }
+      return typeDecl;
+    }
+  /**
+   * Defines the expected kind of name for the left hand side in a qualified
+   * expression.
+   * @attribute syn
+   * @aspect SyntacticClassification
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="SyntacticClassification", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:60")
+  public NameType predNameType() {
+    NameType predNameType_value = NameType.TYPE_NAME;
+    return predNameType_value;
+  }
+  /** @apilevel internal */
+  private void type_reset() {
+    type_computed = null;
+    type_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle type_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl type_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
+  public TypeDecl type() {
+    ASTNode$State state = state();
+    if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
+      return type_value;
+    }
+    type_value = type_compute();
+    if (state().inCircle()) {
+      type_computed = state().cycle();
+    
+    } else {
+      type_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return type_value;
+  }
+  /** @apilevel internal */
+  private TypeDecl type_compute() {
+      TypeDecl typeDecl = decl();
+      if (typeDecl.isInterfaceDecl()) {
+        if (isQualified() && qualifier().type() == typeDecl) {
+          return typeDecl;
+        }
+      }
+      if (!typeDecl.isClassDecl()) {
+        return unknownType();
+      }
+      ClassDecl classDecl = (ClassDecl) typeDecl;
+      if (!classDecl.hasSuperclass()) {
+        return unknownType();
+      }
+      return classDecl.superclass();
+    }
   /** @return the host type that needs an implicit super accessor for this super access. 
    * @attribute syn
    * @aspect InnerClasses

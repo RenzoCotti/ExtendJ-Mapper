@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -771,6 +771,28 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
   }
   /**
    * @attribute syn
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122")
+  public TypeDecl stringPromotion() {
+    TypeDecl stringPromotion_value = typeObject();
+    return stringPromotion_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect LocalNum
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:198
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:198")
+  public int variableSize() {
+    int variableSize_value = 1;
+    return variableSize_value;
+  }
+  /**
+   * @attribute syn
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:303
    */
@@ -862,17 +884,6 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
         return methods;
       }
   }
-  /**
-   * @attribute syn
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:122")
-  public TypeDecl stringPromotion() {
-    TypeDecl stringPromotion_value = typeObject();
-    return stringPromotion_value;
-  }
   /** @apilevel internal */
   private void jvmName_reset() {
     jvmName_computed = null;
@@ -916,17 +927,6 @@ public abstract class ReferenceType extends TypeDecl implements Cloneable {
         return enclosingType().jvmName() + "$" + name();
       }
     }
-  /**
-   * @attribute syn
-   * @aspect LocalNum
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:198
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LocalNum", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:198")
-  public int variableSize() {
-    int variableSize_value = 1;
-    return variableSize_value;
-  }
   /**
    * @attribute inh
    * @aspect AutoBoxing

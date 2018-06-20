@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -143,28 +143,18 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
         this);
   }
   /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:677
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:549
    */
-  public void emitInvokeConstructor(ASTNode<ASTNode> node, CodeGeneration gen) {
-    int stackChange = -1;
-    for (int i = 0; i < getNumParameter(); i++) {
-      stackChange -= getParameter(i).type().variableSize();
+  protected List<ParameterDeclaration> createAccessorParameters() {
+    List<ParameterDeclaration> parameters = new List();
+    for (ParameterDeclaration param : getParameterList()) {
+      parameters.add(new ParameterDeclaration(param.type(), param.name()));
     }
-    for (Variable var : hostType().enclosingVariables()) {
-      stackChange -= var.type().variableSize();
-    }
-    if (hostType().needsEnclosing()) {
-      stackChange -= 1;
-    }
-    if (hostType().needsSuperEnclosing()) {
-      stackChange -= 1;
-    }
-    String classname = hostType().constantPoolName();
-    String desc = descName();
-    String name = "<init>";
-    int index = gen.constantPool().addMethodref(classname, name, desc);
-    gen.emit(node, Bytecode.INVOKESPECIAL, stackChange).add2(index);
+    parameters.add(new ParameterDeclaration(
+        hostType().createBoundAccess(),
+        "p" + getNumParameter()));
+    return parameters;
   }
   /**
    * @aspect CreateBCode
@@ -265,6 +255,30 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     }
   }
   /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:677
+   */
+  public void emitInvokeConstructor(ASTNode<ASTNode> node, CodeGeneration gen) {
+    int stackChange = -1;
+    for (int i = 0; i < getNumParameter(); i++) {
+      stackChange -= getParameter(i).type().variableSize();
+    }
+    for (Variable var : hostType().enclosingVariables()) {
+      stackChange -= var.type().variableSize();
+    }
+    if (hostType().needsEnclosing()) {
+      stackChange -= 1;
+    }
+    if (hostType().needsSuperEnclosing()) {
+      stackChange -= 1;
+    }
+    String classname = hostType().constantPoolName();
+    String desc = descName();
+    String name = "<init>";
+    int index = gen.constantPool().addMethodref(classname, name, desc);
+    gen.emit(node, Bytecode.INVOKESPECIAL, stackChange).add2(index);
+  }
+  /**
    * @aspect GenerateClassfile
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:306
    */
@@ -286,20 +300,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     cp.addUtf8("<init>");
     cp.addUtf8(descName());
     attributes();
-  }
-  /**
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:549
-   */
-  protected List<ParameterDeclaration> createAccessorParameters() {
-    List<ParameterDeclaration> parameters = new List();
-    for (ParameterDeclaration param : getParameterList()) {
-      parameters.add(new ParameterDeclaration(param.type(), param.name()));
-    }
-    parameters.add(new ParameterDeclaration(
-        hostType().createBoundAccess(),
-        "p" + getNumParameter()));
-    return parameters;
   }
   /**
    * @declaredat ASTNode:1
@@ -360,28 +360,28 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    accessibleFrom_TypeDecl_reset();
-    assignedAfter_Variable_reset();
-    unassignedAfter_Variable_reset();
-    throwsException_TypeDecl_reset();
     name_reset();
     signature_reset();
     sameSignature_ConstructorDecl_reset();
     lessSpecificThan_ConstructorDecl_reset();
     getImplicitConstructorInvocation_reset();
+    throwsException_TypeDecl_reset();
+    accessibleFrom_TypeDecl_reset();
+    assignedAfter_Variable_reset();
+    unassignedAfter_Variable_reset();
     parameterDeclaration_String_reset();
     circularThisInvocation_ConstructorDecl_reset();
+    sourceConstructorDecl_reset();
     transformed_reset();
     transformedEnumConstructor_reset();
-    sourceConstructorDecl_reset();
-    attributes_reset();
-    descName_reset();
-    bytecodes_ConstantPool_reset();
-    flags_reset();
     offsetBeforeParameters_reset();
     offsetFirstEnclosingVariable_reset();
     localIndexOfEnclosingVariable_Variable_reset();
     offsetAfterParameters_reset();
+    attributes_reset();
+    flags_reset();
+    bytecodes_ConstantPool_reset();
+    descName_reset();
     handlesException_TypeDecl_reset();
   }
   /** @apilevel internal 
@@ -914,223 +914,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     return res;
   }
   /** @apilevel internal */
-  private void accessibleFrom_TypeDecl_reset() {
-    accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
-    accessibleFrom_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map accessibleFrom_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map accessibleFrom_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect AccessControl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:122
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:122")
-  public boolean accessibleFrom(TypeDecl type) {
-    Object _parameters = type;
-    if (accessibleFrom_TypeDecl_computed == null) accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
-    if (accessibleFrom_TypeDecl_values == null) accessibleFrom_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (accessibleFrom_TypeDecl_values.containsKey(_parameters) && accessibleFrom_TypeDecl_computed != null
-        && accessibleFrom_TypeDecl_computed.containsKey(_parameters)
-        && (accessibleFrom_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || accessibleFrom_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) accessibleFrom_TypeDecl_values.get(_parameters);
-    }
-    boolean accessibleFrom_TypeDecl_value = accessibleFrom_compute(type);
-    if (state().inCircle()) {
-      accessibleFrom_TypeDecl_values.put(_parameters, accessibleFrom_TypeDecl_value);
-      accessibleFrom_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      accessibleFrom_TypeDecl_values.put(_parameters, accessibleFrom_TypeDecl_value);
-      accessibleFrom_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return accessibleFrom_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean accessibleFrom_compute(TypeDecl type) {
-      if (!hostType().accessibleFrom(type)) {
-        return false;
-      } else if (isPublic()) {
-        return true;
-      } else if (isProtected()) {
-        return true;
-      } else if (isPrivate()) {
-        return hostType().topLevelType() == type.topLevelType();
-      } else {
-        return hostPackage().equals(type.hostPackage());
-      }
-    }
-  /** @apilevel internal */
-  private void assignedAfter_Variable_reset() {
-    assignedAfter_Variable_values = null;
-  }
-  protected java.util.Map assignedAfter_Variable_values;
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:272")
-  public boolean assignedAfter(Variable v) {
-    Object _parameters = v;
-    if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
-    ASTNode$State.CircularValue _value;
-    if (assignedAfter_Variable_values.containsKey(_parameters)) {
-      Object _cache = assignedAfter_Variable_values.get(_parameters);
-      if (!(_cache instanceof ASTNode$State.CircularValue)) {
-        return (Boolean) _cache;
-      } else {
-        _value = (ASTNode$State.CircularValue) _cache;
-      }
-    } else {
-      _value = new ASTNode$State.CircularValue();
-      assignedAfter_Variable_values.put(_parameters, _value);
-      _value.value = true;
-    }
-    ASTNode$State state = state();
-    if (!state.inCircle() || state.calledByLazyAttribute()) {
-      state.enterCircle();
-      boolean new_assignedAfter_Variable_value;
-      do {
-        _value.cycle = state.nextCycle();
-        new_assignedAfter_Variable_value = getBlock().assignedAfter(v) && getBlock().assignedAfterReturn(v);
-        if (new_assignedAfter_Variable_value != ((Boolean)_value.value)) {
-          state.setChangeInCycle();
-          _value.value = new_assignedAfter_Variable_value;
-        }
-      } while (state.testAndClearChangeInCycle());
-      assignedAfter_Variable_values.put(_parameters, new_assignedAfter_Variable_value);
-
-      state.leaveCircle();
-      return new_assignedAfter_Variable_value;
-    } else if (_value.cycle != state.cycle()) {
-      _value.cycle = state.cycle();
-      boolean new_assignedAfter_Variable_value = getBlock().assignedAfter(v) && getBlock().assignedAfterReturn(v);
-      if (new_assignedAfter_Variable_value != ((Boolean)_value.value)) {
-        state.setChangeInCycle();
-        _value.value = new_assignedAfter_Variable_value;
-      }
-      return new_assignedAfter_Variable_value;
-    } else {
-      return (Boolean) _value.value;
-    }
-  }
-  /** @apilevel internal */
-  private void unassignedAfter_Variable_reset() {
-    unassignedAfter_Variable_values = null;
-  }
-  protected java.util.Map unassignedAfter_Variable_values;
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:915")
-  public boolean unassignedAfter(Variable v) {
-    Object _parameters = v;
-    if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
-    ASTNode$State.CircularValue _value;
-    if (unassignedAfter_Variable_values.containsKey(_parameters)) {
-      Object _cache = unassignedAfter_Variable_values.get(_parameters);
-      if (!(_cache instanceof ASTNode$State.CircularValue)) {
-        return (Boolean) _cache;
-      } else {
-        _value = (ASTNode$State.CircularValue) _cache;
-      }
-    } else {
-      _value = new ASTNode$State.CircularValue();
-      unassignedAfter_Variable_values.put(_parameters, _value);
-      _value.value = true;
-    }
-    ASTNode$State state = state();
-    if (!state.inCircle() || state.calledByLazyAttribute()) {
-      state.enterCircle();
-      boolean new_unassignedAfter_Variable_value;
-      do {
-        _value.cycle = state.nextCycle();
-        new_unassignedAfter_Variable_value = getBlock().unassignedAfter(v) && getBlock().unassignedAfterReturn(v);
-        if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
-          state.setChangeInCycle();
-          _value.value = new_unassignedAfter_Variable_value;
-        }
-      } while (state.testAndClearChangeInCycle());
-      unassignedAfter_Variable_values.put(_parameters, new_unassignedAfter_Variable_value);
-
-      state.leaveCircle();
-      return new_unassignedAfter_Variable_value;
-    } else if (_value.cycle != state.cycle()) {
-      _value.cycle = state.cycle();
-      boolean new_unassignedAfter_Variable_value = getBlock().unassignedAfter(v) && getBlock().unassignedAfterReturn(v);
-      if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
-        state.setChangeInCycle();
-        _value.value = new_unassignedAfter_Variable_value;
-      }
-      return new_unassignedAfter_Variable_value;
-    } else {
-      return (Boolean) _value.value;
-    }
-  }
-  /**
-   * Attribute to determine if the implicit constructor invocation should
-   * be checked for semantic errors.
-   * 
-   * @return {@code true} if this constructor declaration has an implicit
-   * constructor invocation
-   * @attribute syn
-   * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:315
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:315")
-  public boolean checkImplicitConstructorInvocation() {
-    boolean checkImplicitConstructorInvocation_value = !isOriginalEnumConstructor() && refined_ErrorCheck_ConstructorDecl_checkImplicitConstructorInvocation();
-    return checkImplicitConstructorInvocation_value;
-  }
-  /** @apilevel internal */
-  private void throwsException_TypeDecl_reset() {
-    throwsException_TypeDecl_computed = new java.util.HashMap(4);
-    throwsException_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map throwsException_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map throwsException_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:222
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:222")
-  public boolean throwsException(TypeDecl exceptionType) {
-    Object _parameters = exceptionType;
-    if (throwsException_TypeDecl_computed == null) throwsException_TypeDecl_computed = new java.util.HashMap(4);
-    if (throwsException_TypeDecl_values == null) throwsException_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (throwsException_TypeDecl_values.containsKey(_parameters) && throwsException_TypeDecl_computed != null
-        && throwsException_TypeDecl_computed.containsKey(_parameters)
-        && (throwsException_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || throwsException_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) throwsException_TypeDecl_values.get(_parameters);
-    }
-    boolean throwsException_TypeDecl_value = throwsException_compute(exceptionType);
-    if (state().inCircle()) {
-      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
-      throwsException_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
-      throwsException_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return throwsException_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean throwsException_compute(TypeDecl exceptionType) {
-      for (Access exception : getExceptionList()) {
-        if (exceptionType.instanceOf(exception.type())) {
-          return true;
-        }
-      }
-      return false;
-    }
-  /** @apilevel internal */
   private void name_reset() {
     name_computed = null;
     name_value = null;
@@ -1408,6 +1191,272 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
       }
   }
   /** @apilevel internal */
+  private void throwsException_TypeDecl_reset() {
+    throwsException_TypeDecl_computed = new java.util.HashMap(4);
+    throwsException_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map throwsException_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map throwsException_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:222
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:222")
+  public boolean throwsException(TypeDecl exceptionType) {
+    Object _parameters = exceptionType;
+    if (throwsException_TypeDecl_computed == null) throwsException_TypeDecl_computed = new java.util.HashMap(4);
+    if (throwsException_TypeDecl_values == null) throwsException_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (throwsException_TypeDecl_values.containsKey(_parameters) && throwsException_TypeDecl_computed != null
+        && throwsException_TypeDecl_computed.containsKey(_parameters)
+        && (throwsException_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || throwsException_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) throwsException_TypeDecl_values.get(_parameters);
+    }
+    boolean throwsException_TypeDecl_value = throwsException_compute(exceptionType);
+    if (state().inCircle()) {
+      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
+      throwsException_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
+      throwsException_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return throwsException_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean throwsException_compute(TypeDecl exceptionType) {
+      for (Access exception : getExceptionList()) {
+        if (exceptionType.instanceOf(exception.type())) {
+          return true;
+        }
+      }
+      return false;
+    }
+  /** @apilevel internal */
+  private void accessibleFrom_TypeDecl_reset() {
+    accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
+    accessibleFrom_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map accessibleFrom_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map accessibleFrom_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect AccessControl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:122
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:122")
+  public boolean accessibleFrom(TypeDecl type) {
+    Object _parameters = type;
+    if (accessibleFrom_TypeDecl_computed == null) accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
+    if (accessibleFrom_TypeDecl_values == null) accessibleFrom_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (accessibleFrom_TypeDecl_values.containsKey(_parameters) && accessibleFrom_TypeDecl_computed != null
+        && accessibleFrom_TypeDecl_computed.containsKey(_parameters)
+        && (accessibleFrom_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || accessibleFrom_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) accessibleFrom_TypeDecl_values.get(_parameters);
+    }
+    boolean accessibleFrom_TypeDecl_value = accessibleFrom_compute(type);
+    if (state().inCircle()) {
+      accessibleFrom_TypeDecl_values.put(_parameters, accessibleFrom_TypeDecl_value);
+      accessibleFrom_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      accessibleFrom_TypeDecl_values.put(_parameters, accessibleFrom_TypeDecl_value);
+      accessibleFrom_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return accessibleFrom_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean accessibleFrom_compute(TypeDecl type) {
+      if (!hostType().accessibleFrom(type)) {
+        return false;
+      } else if (isPublic()) {
+        return true;
+      } else if (isProtected()) {
+        return true;
+      } else if (isPrivate()) {
+        return hostType().topLevelType() == type.topLevelType();
+      } else {
+        return hostPackage().equals(type.hostPackage());
+      }
+    }
+  /** @apilevel internal */
+  private void assignedAfter_Variable_reset() {
+    assignedAfter_Variable_values = null;
+  }
+  protected java.util.Map assignedAfter_Variable_values;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:272")
+  public boolean assignedAfter(Variable v) {
+    Object _parameters = v;
+    if (assignedAfter_Variable_values == null) assignedAfter_Variable_values = new java.util.HashMap(4);
+    ASTNode$State.CircularValue _value;
+    if (assignedAfter_Variable_values.containsKey(_parameters)) {
+      Object _cache = assignedAfter_Variable_values.get(_parameters);
+      if (!(_cache instanceof ASTNode$State.CircularValue)) {
+        return (Boolean) _cache;
+      } else {
+        _value = (ASTNode$State.CircularValue) _cache;
+      }
+    } else {
+      _value = new ASTNode$State.CircularValue();
+      assignedAfter_Variable_values.put(_parameters, _value);
+      _value.value = true;
+    }
+    ASTNode$State state = state();
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      boolean new_assignedAfter_Variable_value;
+      do {
+        _value.cycle = state.nextCycle();
+        new_assignedAfter_Variable_value = getBlock().assignedAfter(v) && getBlock().assignedAfterReturn(v);
+        if (new_assignedAfter_Variable_value != ((Boolean)_value.value)) {
+          state.setChangeInCycle();
+          _value.value = new_assignedAfter_Variable_value;
+        }
+      } while (state.testAndClearChangeInCycle());
+      assignedAfter_Variable_values.put(_parameters, new_assignedAfter_Variable_value);
+
+      state.leaveCircle();
+      return new_assignedAfter_Variable_value;
+    } else if (_value.cycle != state.cycle()) {
+      _value.cycle = state.cycle();
+      boolean new_assignedAfter_Variable_value = getBlock().assignedAfter(v) && getBlock().assignedAfterReturn(v);
+      if (new_assignedAfter_Variable_value != ((Boolean)_value.value)) {
+        state.setChangeInCycle();
+        _value.value = new_assignedAfter_Variable_value;
+      }
+      return new_assignedAfter_Variable_value;
+    } else {
+      return (Boolean) _value.value;
+    }
+  }
+  /** @apilevel internal */
+  private void unassignedAfter_Variable_reset() {
+    unassignedAfter_Variable_values = null;
+  }
+  protected java.util.Map unassignedAfter_Variable_values;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:915")
+  public boolean unassignedAfter(Variable v) {
+    Object _parameters = v;
+    if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
+    ASTNode$State.CircularValue _value;
+    if (unassignedAfter_Variable_values.containsKey(_parameters)) {
+      Object _cache = unassignedAfter_Variable_values.get(_parameters);
+      if (!(_cache instanceof ASTNode$State.CircularValue)) {
+        return (Boolean) _cache;
+      } else {
+        _value = (ASTNode$State.CircularValue) _cache;
+      }
+    } else {
+      _value = new ASTNode$State.CircularValue();
+      unassignedAfter_Variable_values.put(_parameters, _value);
+      _value.value = true;
+    }
+    ASTNode$State state = state();
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      boolean new_unassignedAfter_Variable_value;
+      do {
+        _value.cycle = state.nextCycle();
+        new_unassignedAfter_Variable_value = getBlock().unassignedAfter(v) && getBlock().unassignedAfterReturn(v);
+        if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
+          state.setChangeInCycle();
+          _value.value = new_unassignedAfter_Variable_value;
+        }
+      } while (state.testAndClearChangeInCycle());
+      unassignedAfter_Variable_values.put(_parameters, new_unassignedAfter_Variable_value);
+
+      state.leaveCircle();
+      return new_unassignedAfter_Variable_value;
+    } else if (_value.cycle != state.cycle()) {
+      _value.cycle = state.cycle();
+      boolean new_unassignedAfter_Variable_value = getBlock().unassignedAfter(v) && getBlock().unassignedAfterReturn(v);
+      if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
+        state.setChangeInCycle();
+        _value.value = new_unassignedAfter_Variable_value;
+      }
+      return new_unassignedAfter_Variable_value;
+    } else {
+      return (Boolean) _value.value;
+    }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:566
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:566")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        // 8.8.4 (8.4.4)
+        TypeDecl exceptionType = typeThrowable();
+        for (int i = 0; i < getNumException(); i++) {
+          TypeDecl typeDecl = getException(i).type();
+          if (!typeDecl.instanceOf(exceptionType)) {
+            problems.add(errorf("%s throws non throwable type %s", signature(), typeDecl.fullName()));
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:252
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:252")
+  public boolean isSynthetic() {
+    boolean isSynthetic_value = getModifiers().isSynthetic();
+    return isSynthetic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:272
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:272")
+  public boolean isPublic() {
+    boolean isPublic_value = getModifiers().isPublic();
+    return isPublic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:273
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:273")
+  public boolean isPrivate() {
+    boolean isPrivate_value = getModifiers().isPrivate();
+    return isPrivate_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:274
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:274")
+  public boolean isProtected() {
+    boolean isProtected_value = getModifiers().isProtected();
+    return isProtected_value;
+  }
+  /** @apilevel internal */
   private void parameterDeclaration_String_reset() {
     parameterDeclaration_String_computed = new java.util.HashMap(4);
     parameterDeclaration_String_values = null;
@@ -1454,50 +1503,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
       }
       return emptySet();
     }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:252
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:252")
-  public boolean isSynthetic() {
-    boolean isSynthetic_value = getModifiers().isSynthetic();
-    return isSynthetic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:272
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:272")
-  public boolean isPublic() {
-    boolean isPublic_value = getModifiers().isPublic();
-    return isPublic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:273
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:273")
-  public boolean isPrivate() {
-    boolean isPrivate_value = getModifiers().isPrivate();
-    return isPrivate_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:274
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:274")
-  public boolean isProtected() {
-    boolean isProtected_value = getModifiers().isProtected();
-    return isProtected_value;
-  }
   /**
    * @attribute syn
    * @aspect NameCheck
@@ -1582,6 +1587,22 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
       return false;
     }
   /**
+   * Attribute to determine if the implicit constructor invocation should
+   * be checked for semantic errors.
+   * 
+   * @return {@code true} if this constructor declaration has an implicit
+   * constructor invocation
+   * @attribute syn
+   * @aspect ErrorCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:315
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:315")
+  public boolean checkImplicitConstructorInvocation() {
+    boolean checkImplicitConstructorInvocation_value = !isOriginalEnumConstructor() && refined_ErrorCheck_ConstructorDecl_checkImplicitConstructorInvocation();
+    return checkImplicitConstructorInvocation_value;
+  }
+  /**
    * @attribute syn
    * @aspect PrettyPrintUtil
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:217
@@ -1638,24 +1659,25 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   }
   /**
    * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:566
+   * @aspect VariableArityParameters
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:56
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:566")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        // 8.8.4 (8.4.4)
-        TypeDecl exceptionType = typeThrowable();
-        for (int i = 0; i < getNumException(); i++) {
-          TypeDecl typeDecl = getException(i).type();
-          if (!typeDecl.instanceOf(exceptionType)) {
-            problems.add(errorf("%s throws non throwable type %s", signature(), typeDecl.fullName()));
-          }
-        }
-        return problems;
-      }
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:56")
+  public boolean isVariableArity() {
+    boolean isVariableArity_value = getNumParameter() == 0 ? false : getParameter(getNumParameter() - 1).isVariableArity();
+    return isVariableArity_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect VariableArityParameters
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:95
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:95")
+  public ParameterDeclaration lastParameter() {
+    ParameterDeclaration lastParameter_value = getParameter(getNumParameter() - 1);
+    return lastParameter_value;
   }
   /**
    * @attribute syn
@@ -1678,6 +1700,50 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   public boolean isDeprecated() {
     boolean isDeprecated_value = getModifiers().hasDeprecatedAnnotation();
     return isDeprecated_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect LookupParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1563
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1563")
+  public boolean isSubstitutable() {
+    boolean isSubstitutable_value = true;
+    return isSubstitutable_value;
+  }
+  /** @apilevel internal */
+  private void sourceConstructorDecl_reset() {
+    sourceConstructorDecl_computed = null;
+    sourceConstructorDecl_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle sourceConstructorDecl_computed = null;
+
+  /** @apilevel internal */
+  protected ConstructorDecl sourceConstructorDecl_value;
+
+  /**
+   * @attribute syn
+   * @aspect SourceDeclarations
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1733
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1733")
+  public ConstructorDecl sourceConstructorDecl() {
+    ASTNode$State state = state();
+    if (sourceConstructorDecl_computed == ASTNode$State.NON_CYCLE || sourceConstructorDecl_computed == state().cycle()) {
+      return sourceConstructorDecl_value;
+    }
+    sourceConstructorDecl_value = this;
+    if (state().inCircle()) {
+      sourceConstructorDecl_computed = state().cycle();
+    
+    } else {
+      sourceConstructorDecl_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return sourceConstructorDecl_value;
   }
   /** @apilevel internal */
   private void transformed_reset() {
@@ -1812,50 +1878,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
         }
         return problems;
       }
-  }
-  /**
-   * @attribute syn
-   * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1563
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1563")
-  public boolean isSubstitutable() {
-    boolean isSubstitutable_value = true;
-    return isSubstitutable_value;
-  }
-  /** @apilevel internal */
-  private void sourceConstructorDecl_reset() {
-    sourceConstructorDecl_computed = null;
-    sourceConstructorDecl_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle sourceConstructorDecl_computed = null;
-
-  /** @apilevel internal */
-  protected ConstructorDecl sourceConstructorDecl_value;
-
-  /**
-   * @attribute syn
-   * @aspect SourceDeclarations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1733
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="SourceDeclarations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1733")
-  public ConstructorDecl sourceConstructorDecl() {
-    ASTNode$State state = state();
-    if (sourceConstructorDecl_computed == ASTNode$State.NON_CYCLE || sourceConstructorDecl_computed == state().cycle()) {
-      return sourceConstructorDecl_value;
-    }
-    sourceConstructorDecl_value = this;
-    if (state().inCircle()) {
-      sourceConstructorDecl_computed = state().cycle();
-    
-    } else {
-      sourceConstructorDecl_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return sourceConstructorDecl_value;
   }
   /**
    * @attribute syn
@@ -2002,28 +2024,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     return arity_value;
   }
   /**
-   * @attribute syn
-   * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:56
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:56")
-  public boolean isVariableArity() {
-    boolean isVariableArity_value = getNumParameter() == 0 ? false : getParameter(getNumParameter() - 1).isVariableArity();
-    return isVariableArity_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:95
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:95")
-  public ParameterDeclaration lastParameter() {
-    ParameterDeclaration lastParameter_value = getParameter(getNumParameter() - 1);
-    return lastParameter_value;
-  }
-  /**
    * @return true if the modifier list includes the SafeVarargs annotation
    * @attribute syn
    * @aspect SafeVarargs
@@ -2047,17 +2047,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   public boolean hasIllegalAnnotationSafeVarargs() {
     boolean hasIllegalAnnotationSafeVarargs_value = hasAnnotationSafeVarargs() && !isVariableArity();
     return hasIllegalAnnotationSafeVarargs_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40")
-  public boolean modifiedInScope(Variable var) {
-    boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
-    return modifiedInScope_Variable_value;
   }
   /**
    * @attribute syn
@@ -2137,214 +2126,16 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
         return true;
       }
   }
-  /** @apilevel internal */
-  private void attributes_reset() {
-    attributes_computed = null;
-    attributes_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle attributes_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<Attribute> attributes_value;
-
   /**
    * @attribute syn
-   * @aspect Attributes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259
+   * @aspect PreciseRethrow
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259")
-  public Collection<Attribute> attributes() {
-    ASTNode$State state = state();
-    if (attributes_computed == ASTNode$State.NON_CYCLE || attributes_computed == state().cycle()) {
-      return attributes_value;
-    }
-    attributes_value = attributes_compute();
-    if (state().inCircle()) {
-      attributes_computed = state().cycle();
-    
-    } else {
-      attributes_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return attributes_value;
-  }
-  /** @apilevel internal */
-  private Collection<Attribute> attributes_compute() {
-      Collection<Attribute> attributes = refined_Attributes_ConstructorDecl_attributes();
-      getModifiers().addRuntimeVisibleAnnotationsAttribute(attributes);
-      getModifiers().addRuntimeInvisibleAnnotationsAttribute(attributes);
-      return attributes;
-    }
-  /** @apilevel internal */
-  private void descName_reset() {
-    descName_computed = null;
-    descName_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle descName_computed = null;
-
-  /** @apilevel internal */
-  protected String descName_value;
-
-  /**
-   * @attribute syn
-   * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:133
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:133")
-  public String descName() {
-    ASTNode$State state = state();
-    if (descName_computed == ASTNode$State.NON_CYCLE || descName_computed == state().cycle()) {
-      return descName_value;
-    }
-    descName_value = descName_compute();
-    if (state().inCircle()) {
-      descName_computed = state().cycle();
-    
-    } else {
-      descName_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return descName_value;
-  }
-  /** @apilevel internal */
-  private String descName_compute() {
-      StringBuilder b = new StringBuilder();
-      b.append("(");
-      // Add this$0 argument.
-      if (needsEnclosing()) {
-        b.append(enclosing().typeDescriptor());
-      }
-      if (needsSuperEnclosing()) {
-        b.append(superEnclosing().typeDescriptor());
-      }
-      // Add formal arguments.
-      for (ParameterDeclaration param : getParameterList()) {
-        b.append(param.type().typeDescriptor());
-      }
-      // Add enclosing variables.
-      for (Variable var : hostType().enclosingVariables()) {
-        b.append(var.type().typeDescriptor());
-      }
-      b.append(")V");
-      return b.toString();
-    }
-  /** @apilevel internal */
-  private void bytecodes_ConstantPool_reset() {
-    bytecodes_ConstantPool_computed = new java.util.HashMap(4);
-    bytecodes_ConstantPool_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map bytecodes_ConstantPool_values;
-  /** @apilevel internal */
-  protected java.util.Map bytecodes_ConstantPool_computed;
-  /**
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:169
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:169")
-  public CodeGeneration bytecodes(ConstantPool constantPool) {
-    Object _parameters = constantPool;
-    if (bytecodes_ConstantPool_computed == null) bytecodes_ConstantPool_computed = new java.util.HashMap(4);
-    if (bytecodes_ConstantPool_values == null) bytecodes_ConstantPool_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (bytecodes_ConstantPool_values.containsKey(_parameters) && bytecodes_ConstantPool_computed != null
-        && bytecodes_ConstantPool_computed.containsKey(_parameters)
-        && (bytecodes_ConstantPool_computed.get(_parameters) == ASTNode$State.NON_CYCLE || bytecodes_ConstantPool_computed.get(_parameters) == state().cycle())) {
-      return (CodeGeneration) bytecodes_ConstantPool_values.get(_parameters);
-    }
-    CodeGeneration bytecodes_ConstantPool_value = bytecodes_compute(constantPool);
-    if (state().inCircle()) {
-      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
-      bytecodes_ConstantPool_computed.put(_parameters, state().cycle());
-    
-    } else {
-      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
-      bytecodes_ConstantPool_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return bytecodes_ConstantPool_value;
-  }
-  /** @apilevel internal */
-  private CodeGeneration bytecodes_compute(ConstantPool constantPool) {
-    BodyRootNode.add(this);
-      CodeGeneration gen = new CodeGeneration(constantPool, name(), descName(), hostType().typeName(), destination_compute());
-      try {
-        generateBytecodes(gen);
-      } catch (CodeGeneration.JumpOffsetError e) {
-        // Retry with wide gotos.
-        gen = new CodeGeneration(constantPool, true, name(), descName(), hostType().typeName(), destination_compute());
-        generateBytecodes(gen);
-      }
-      return gen;
-    }
-  /**
-   * The constructor that is called in bytecode.
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:984
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:984")
-  public ConstructorDecl bytecodeTarget() {
-    ConstructorDecl bytecodeTarget_value = this;
-    return bytecodeTarget_value;
-  }
-  /** @apilevel internal */
-  private void flags_reset() {
-    flags_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle flags_computed = null;
-
-  /** @apilevel internal */
-  protected int flags_value;
-
-  /**
-   * @attribute syn
-   * @aspect Flags
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:95
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:95")
-  public int flags() {
-    ASTNode$State state = state();
-    if (flags_computed == ASTNode$State.NON_CYCLE || flags_computed == state().cycle()) {
-      return flags_value;
-    }
-    flags_value = flags_compute();
-    if (state().inCircle()) {
-      flags_computed = state().cycle();
-    
-    } else {
-      flags_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return flags_value;
-  }
-  /** @apilevel internal */
-  private int flags_compute() {
-      int res = refined_Flags_ConstructorDecl_flags();
-      if (isVariableArity()) {
-        res |= Modifiers.ACC_VARARGS;
-      }
-      return res;
-    }
-  /**
-   * @attribute syn
-   * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455")
-  public boolean isMethodOrConstructor() {
-    boolean isMethodOrConstructor_value = true;
-    return isMethodOrConstructor_value;
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40")
+  public boolean modifiedInScope(Variable var) {
+    boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
+    return modifiedInScope_Variable_value;
   }
   /**
    * @attribute syn
@@ -2573,6 +2364,215 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
       }
       return localIndex;
     }
+  /** @apilevel internal */
+  private void attributes_reset() {
+    attributes_computed = null;
+    attributes_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle attributes_computed = null;
+
+  /** @apilevel internal */
+  protected Collection<Attribute> attributes_value;
+
+  /**
+   * @attribute syn
+   * @aspect Attributes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259")
+  public Collection<Attribute> attributes() {
+    ASTNode$State state = state();
+    if (attributes_computed == ASTNode$State.NON_CYCLE || attributes_computed == state().cycle()) {
+      return attributes_value;
+    }
+    attributes_value = attributes_compute();
+    if (state().inCircle()) {
+      attributes_computed = state().cycle();
+    
+    } else {
+      attributes_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return attributes_value;
+  }
+  /** @apilevel internal */
+  private Collection<Attribute> attributes_compute() {
+      Collection<Attribute> attributes = refined_Attributes_ConstructorDecl_attributes();
+      getModifiers().addRuntimeVisibleAnnotationsAttribute(attributes);
+      getModifiers().addRuntimeInvisibleAnnotationsAttribute(attributes);
+      return attributes;
+    }
+  /** @apilevel internal */
+  private void flags_reset() {
+    flags_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle flags_computed = null;
+
+  /** @apilevel internal */
+  protected int flags_value;
+
+  /**
+   * @attribute syn
+   * @aspect Flags
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:95
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:95")
+  public int flags() {
+    ASTNode$State state = state();
+    if (flags_computed == ASTNode$State.NON_CYCLE || flags_computed == state().cycle()) {
+      return flags_value;
+    }
+    flags_value = flags_compute();
+    if (state().inCircle()) {
+      flags_computed = state().cycle();
+    
+    } else {
+      flags_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return flags_value;
+  }
+  /** @apilevel internal */
+  private int flags_compute() {
+      int res = refined_Flags_ConstructorDecl_flags();
+      if (isVariableArity()) {
+        res |= Modifiers.ACC_VARARGS;
+      }
+      return res;
+    }
+  /** @apilevel internal */
+  private void bytecodes_ConstantPool_reset() {
+    bytecodes_ConstantPool_computed = new java.util.HashMap(4);
+    bytecodes_ConstantPool_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map bytecodes_ConstantPool_values;
+  /** @apilevel internal */
+  protected java.util.Map bytecodes_ConstantPool_computed;
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:169
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:169")
+  public CodeGeneration bytecodes(ConstantPool constantPool) {
+    Object _parameters = constantPool;
+    if (bytecodes_ConstantPool_computed == null) bytecodes_ConstantPool_computed = new java.util.HashMap(4);
+    if (bytecodes_ConstantPool_values == null) bytecodes_ConstantPool_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (bytecodes_ConstantPool_values.containsKey(_parameters) && bytecodes_ConstantPool_computed != null
+        && bytecodes_ConstantPool_computed.containsKey(_parameters)
+        && (bytecodes_ConstantPool_computed.get(_parameters) == ASTNode$State.NON_CYCLE || bytecodes_ConstantPool_computed.get(_parameters) == state().cycle())) {
+      return (CodeGeneration) bytecodes_ConstantPool_values.get(_parameters);
+    }
+    CodeGeneration bytecodes_ConstantPool_value = bytecodes_compute(constantPool);
+    if (state().inCircle()) {
+      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
+      bytecodes_ConstantPool_computed.put(_parameters, state().cycle());
+    
+    } else {
+      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
+      bytecodes_ConstantPool_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return bytecodes_ConstantPool_value;
+  }
+  /** @apilevel internal */
+  private CodeGeneration bytecodes_compute(ConstantPool constantPool) {
+    BodyRootNode.add(this);
+      CodeGeneration gen = new CodeGeneration(constantPool, name(), descName(), hostType().typeName(), destination_compute());
+      try {
+        generateBytecodes(gen);
+      } catch (CodeGeneration.JumpOffsetError e) {
+        // Retry with wide gotos.
+        gen = new CodeGeneration(constantPool, true, name(), descName(), hostType().typeName(), destination_compute());
+        generateBytecodes(gen);
+      }
+      return gen;
+    }
+  /**
+   * The constructor that is called in bytecode.
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:984
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:984")
+  public ConstructorDecl bytecodeTarget() {
+    ConstructorDecl bytecodeTarget_value = this;
+    return bytecodeTarget_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenerateClassfile
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455")
+  public boolean isMethodOrConstructor() {
+    boolean isMethodOrConstructor_value = true;
+    return isMethodOrConstructor_value;
+  }
+  /** @apilevel internal */
+  private void descName_reset() {
+    descName_computed = null;
+    descName_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle descName_computed = null;
+
+  /** @apilevel internal */
+  protected String descName_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantPoolNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:133
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:133")
+  public String descName() {
+    ASTNode$State state = state();
+    if (descName_computed == ASTNode$State.NON_CYCLE || descName_computed == state().cycle()) {
+      return descName_value;
+    }
+    descName_value = descName_compute();
+    if (state().inCircle()) {
+      descName_computed = state().cycle();
+    
+    } else {
+      descName_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return descName_value;
+  }
+  /** @apilevel internal */
+  private String descName_compute() {
+      StringBuilder b = new StringBuilder();
+      b.append("(");
+      // Add this$0 argument.
+      if (needsEnclosing()) {
+        b.append(enclosing().typeDescriptor());
+      }
+      if (needsSuperEnclosing()) {
+        b.append(superEnclosing().typeDescriptor());
+      }
+      // Add formal arguments.
+      for (ParameterDeclaration param : getParameterList()) {
+        b.append(param.type().typeDescriptor());
+      }
+      // Add enclosing variables.
+      for (Variable var : hostType().enclosingVariables()) {
+        b.append(var.type().typeDescriptor());
+      }
+      b.append(")V");
+      return b.toString();
+    }
   /**
    * @attribute syn
    * @aspect GenericsCodegen
@@ -2662,6 +2662,107 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     return isOriginalEnumConstructor_value;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
+   * @apilevel internal
+   */
+  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:89
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
+    }
+    else {
+      return getParent().Define_isMethodParameter(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
+   * @apilevel internal
+   */
+  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:90
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return true;
+    }
+    else {
+      return getParent().Define_isConstructorParameter(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
+   * @apilevel internal
+   */
+  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:91
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
+    }
+    else {
+      return getParent().Define_isExceptionHandlerParameter(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
+   * @apilevel internal
+   */
+  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:219
+      return throwsException(exceptionType);
+    }
+    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:216
+      return throwsException(exceptionType);
+    }
+    else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:213
+      return throwsException(exceptionType);
+    }
+    else {
+      return getParent().Define_handlesException(this, _callerNode, exceptionType);
+    }
+  }
+  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
+   * @apilevel internal
+   */
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:57
+      return hasParsedConstructorInvocation()
+            ? getParsedConstructorInvocation().canCompleteNormally()
+            : true;
+    }
+    else if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:53
+      return true;
+    }
+    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:52
+      return true;
+    }
+    else {
+      return getParent().Define_reachable(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
@@ -2691,237 +2792,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     }
   }
   protected boolean canDefine_unassignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
-   * @apilevel internal
-   */
-  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
-    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:219
-      return throwsException(exceptionType);
-    }
-    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:216
-      return throwsException(exceptionType);
-    }
-    else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:213
-      return throwsException(exceptionType);
-    }
-    else {
-      return getParent().Define_handlesException(this, _callerNode, exceptionType);
-    }
-  }
-  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
-   * @apilevel internal
-   */
-  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:93
-      {
-          Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
-          for (MethodDecl m : lookupMethod(name)) {
-            if (!hostType().memberMethods(name).contains(m) || m.isStatic()) {
-              methods.add(m);
-            }
-          }
-          return methods;
-        }
-    }
-    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:83
-      {
-          Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
-          for (MethodDecl m : lookupMethod(name)) {
-            if (!hostType().memberMethods(name).contains(m) || m.isStatic()) {
-              methods.add(m);
-            }
-          }
-          return methods;
-        }
-    }
-    else {
-      return getParent().Define_lookupMethod(this, _callerNode, name);
-    }
-  }
-  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
-   * @apilevel internal
-   */
-  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:112
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return parameterDeclaration(name);
-    }
-    else if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:99
-      {
-          SimpleSet<Variable> result = parameterDeclaration(name);
-          if (!result.isEmpty()) {
-            return result;
-          }
-          for (Variable v : lookupVariable(name)) {
-            if (!hostType().memberFields(name).contains(v) || v.isStatic()) {
-              result = result.add(v);
-            }
-          }
-          return result;
-        }
-    }
-    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:86
-      {
-          SimpleSet<Variable> result = parameterDeclaration(name);
-          if (!result.isEmpty()) {
-            return result;
-          }
-          for (Variable v : lookupVariable(name)) {
-            if (!hostType().memberFields(name).contains(v) || v.isStatic()) {
-              result = result.add(v);
-            }
-          }
-          return result;
-        }
-    }
-    else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:78
-      {
-          SimpleSet<Variable> result = parameterDeclaration(name);
-          if (!result.isEmpty()) {
-            return result;
-          }
-          return lookupVariable(name);
-        }
-    }
-    else {
-      return getParent().Define_lookupVariable(this, _callerNode, name);
-    }
-  }
-  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:433
-   * @apilevel internal
-   */
-  public boolean Define_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
-    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:338
-      return true;
-    }
-    else {
-      return getParent().Define_mayBePublic(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:435
-   * @apilevel internal
-   */
-  public boolean Define_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
-    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:339
-      return true;
-    }
-    else {
-      return getParent().Define_mayBeProtected(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:434
-   * @apilevel internal
-   */
-  public boolean Define_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
-    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:340
-      return true;
-    }
-    else {
-      return getParent().Define_mayBePrivate(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:356
-   * @apilevel internal
-   */
-  public ASTNode Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:358
-      return this;
-    }
-    else {
-      return getParent().Define_enclosingBlock(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
-   * @apilevel internal
-   */
-  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:136
-      return NameType.EXPRESSION_NAME;
-    }
-    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:135
-      return NameType.EXPRESSION_NAME;
-    }
-    else if (_callerNode == getExceptionListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:106
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return NameType.TYPE_NAME;
-    }
-    else if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:105
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return NameType.TYPE_NAME;
-    }
-    else {
-      return getParent().Define_nameType(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:667
-   * @apilevel internal
-   */
-  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
-    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:688
-      return unknownType();
-    }
-    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:686
-      return unknownType();
-    }
-    else {
-      return getParent().Define_enclosingInstance(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2989,80 +2859,227 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:667
    * @apilevel internal
    */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:57
-      return hasParsedConstructorInvocation()
-            ? getParsedConstructorInvocation().canCompleteNormally()
-            : true;
-    }
-    else if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:53
-      return true;
+  public TypeDecl Define_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:688
+      return unknownType();
     }
     else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:52
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:686
+      return unknownType();
+    }
+    else {
+      return getParent().Define_enclosingInstance(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_enclosingInstance(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:433
+   * @apilevel internal
+   */
+  public boolean Define_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
+    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:338
       return true;
     }
     else {
-      return getParent().Define_reachable(this, _callerNode);
+      return getParent().Define_mayBePublic(this, _callerNode);
     }
   }
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_mayBePublic(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:435
    * @apilevel internal
    */
-  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:89
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
-    }
-    else {
-      return getParent().Define_isMethodParameter(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
-   * @apilevel internal
-   */
-  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:90
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
+  public boolean Define_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
+    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:339
       return true;
     }
     else {
-      return getParent().Define_isConstructorParameter(this, _callerNode);
+      return getParent().Define_mayBeProtected(this, _callerNode);
     }
   }
-  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_mayBeProtected(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:434
    * @apilevel internal
    */
-  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:91
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
+  public boolean Define_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
+    if (getModifiersNoTransform() != null && _callerNode == getModifiers()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:340
+      return true;
     }
     else {
-      return getParent().Define_isExceptionHandlerParameter(this, _callerNode);
+      return getParent().Define_mayBePrivate(this, _callerNode);
     }
   }
-  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_mayBePrivate(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
+   * @apilevel internal
+   */
+  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:112
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return parameterDeclaration(name);
+    }
+    else if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:99
+      {
+          SimpleSet<Variable> result = parameterDeclaration(name);
+          if (!result.isEmpty()) {
+            return result;
+          }
+          for (Variable v : lookupVariable(name)) {
+            if (!hostType().memberFields(name).contains(v) || v.isStatic()) {
+              result = result.add(v);
+            }
+          }
+          return result;
+        }
+    }
+    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:86
+      {
+          SimpleSet<Variable> result = parameterDeclaration(name);
+          if (!result.isEmpty()) {
+            return result;
+          }
+          for (Variable v : lookupVariable(name)) {
+            if (!hostType().memberFields(name).contains(v) || v.isStatic()) {
+              result = result.add(v);
+            }
+          }
+          return result;
+        }
+    }
+    else if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:78
+      {
+          SimpleSet<Variable> result = parameterDeclaration(name);
+          if (!result.isEmpty()) {
+            return result;
+          }
+          return lookupVariable(name);
+        }
+    }
+    else {
+      return getParent().Define_lookupVariable(this, _callerNode, name);
+    }
+  }
+  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:356
+   * @apilevel internal
+   */
+  public ASTNode Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:358
+      return this;
+    }
+    else {
+      return getParent().Define_enclosingBlock(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
+   * @apilevel internal
+   */
+  public NameType Define_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:136
+      return NameType.EXPRESSION_NAME;
+    }
+    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:135
+      return NameType.EXPRESSION_NAME;
+    }
+    else if (_callerNode == getExceptionListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:106
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return NameType.TYPE_NAME;
+    }
+    else if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:105
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return NameType.TYPE_NAME;
+    }
+    else {
+      return getParent().Define_nameType(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_nameType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
+   * @apilevel internal
+   */
+  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (getImplicitConstructorInvocationNoTransform() != null && _callerNode == getImplicitConstructorInvocation()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:93
+      {
+          Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
+          for (MethodDecl m : lookupMethod(name)) {
+            if (!hostType().memberMethods(name).contains(m) || m.isStatic()) {
+              methods.add(m);
+            }
+          }
+          return methods;
+        }
+    }
+    else if (_callerNode == getParsedConstructorInvocationOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:83
+      {
+          Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
+          for (MethodDecl m : lookupMethod(name)) {
+            if (!hostType().memberMethods(name).contains(m) || m.isStatic()) {
+              methods.add(m);
+            }
+          }
+          return methods;
+        }
+    }
+    else {
+      return getParent().Define_lookupMethod(this, _callerNode, name);
+    }
+  }
+  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
+   * @apilevel internal
+   */
+  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:41
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return i == getNumParameter() - 1;
+    }
+    else {
+      return getParent().Define_variableArityValid(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -3082,17 +3099,6 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:566
-   * @apilevel internal
-   */
-  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return hostType().isEnumDecl();
-  }
-  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:789
    * @apilevel internal
    */
@@ -3104,20 +3110,14 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:566
    * @apilevel internal
    */
-  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:41
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return i == getNumParameter() - 1;
-    }
-    else {
-      return getParent().Define_variableArityValid(this, _callerNode);
-    }
+  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return hostType().isEnumDecl();
   }
-  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -3201,7 +3201,7 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:104
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:564
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -3210,7 +3210,7 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:564
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:104
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -3241,10 +3241,10 @@ public class ConstructorDecl extends BodyDecl implements Cloneable, ExceptionHol
   }
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
-    for (Problem value : nameProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeProblems()) {
+    for (Problem value : nameProblems()) {
       collection.add(value);
     }
     for (Problem value : enumProblems()) {

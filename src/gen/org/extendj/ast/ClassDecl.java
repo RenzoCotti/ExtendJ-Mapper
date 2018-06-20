@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -72,26 +72,6 @@ public class ClassDecl extends ReferenceType implements Cloneable {
     out.print("}");
   }
   /**
-   * @aspect SuperClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:665
-   */
-  public boolean hasSuperclass() {
-    return !isObject();
-  }
-  /**
-   * @aspect SuperClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:669
-   */
-  public TypeDecl superclass() {
-    if (isObject()) {
-      return unknownType();
-    } else if (hasSuperClass()) {
-      return getSuperClass().type();
-    } else {
-      return typeObject();
-    }
-  }
-  /**
    * Check compatibility of interface method and superclass method.
    * @param m interface method
    * @param n superclass method
@@ -136,6 +116,26 @@ public class ClassDecl extends ReferenceType implements Cloneable {
           }
         }
       }
+    }
+  }
+  /**
+   * @aspect SuperClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:665
+   */
+  public boolean hasSuperclass() {
+    return !isObject();
+  }
+  /**
+   * @aspect SuperClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:669
+   */
+  public TypeDecl superclass() {
+    if (isObject()) {
+      return unknownType();
+    } else if (hasSuperClass()) {
+      return getSuperClass().type();
+    } else {
+      return typeObject();
     }
   }
   /**
@@ -375,24 +375,24 @@ public class ClassDecl extends ReferenceType implements Cloneable {
     super.flushAttrCache();
     constructors_reset();
     getImplicitConstructorOpt_reset();
-    methodsSignatureMap_reset();
-    ancestorMethods_String_reset();
-    memberFieldsMap_reset();
-    memberFields_String_reset();
     unimplementedMethods_reset();
     hasAbstract_reset();
+    memberFieldsMap_reset();
+    memberFields_String_reset();
+    methodsSignatureMap_reset();
+    ancestorMethods_String_reset();
     castingConversionTo_TypeDecl_reset();
     isString_reset();
     isObject_reset();
     instanceOf_TypeDecl_reset();
     superInterfaces_reset();
     isCircular_reset();
-    iterableElementType_reset();
     erasedAncestorMethodsMap_reset();
     implementedInterfaces_reset();
     subtype_TypeDecl_reset();
-    strictSubtype_TypeDecl_reset();
+    iterableElementType_reset();
     hasOverridingMethodInSuper_MethodDecl_reset();
+    strictSubtype_TypeDecl_reset();
     typeDescriptor_reset();
     bridgeCandidates_String_reset();
     needsSignatureAttribute_reset();
@@ -875,20 +875,6 @@ public class ClassDecl extends ReferenceType implements Cloneable {
     return c;
   }
   /**
-   * @aspect TypeConversion
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:103
-   */
-  private boolean refined_TypeConversion_ClassDecl_castingConversionTo_TypeDecl(TypeDecl type)
-{
-    if (type.isArrayDecl()) {
-      return isObject();
-    } else if (type.isClassDecl()) {
-      return this == type || instanceOf(type) || type.instanceOf(this);
-    } else if (type.isInterfaceDecl()) {
-      return !isFinal() || instanceOf(type);
-    } else return super.castingConversionTo(type);
-  }
-  /**
    * @aspect TypeHierarchyCheck
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:353
    */
@@ -1005,6 +991,20 @@ public class ClassDecl extends ReferenceType implements Cloneable {
     return problems;
   }
   /**
+   * @aspect TypeConversion
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:103
+   */
+  private boolean refined_TypeConversion_ClassDecl_castingConversionTo_TypeDecl(TypeDecl type)
+{
+    if (type.isArrayDecl()) {
+      return isObject();
+    } else if (type.isClassDecl()) {
+      return this == type || instanceOf(type) || type.instanceOf(this);
+    } else if (type.isInterfaceDecl()) {
+      return !isFinal() || instanceOf(type);
+    } else return super.castingConversionTo(type);
+  }
+  /**
    * @aspect Generics
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:79
    */
@@ -1028,124 +1028,6 @@ public class ClassDecl extends ReferenceType implements Cloneable {
       return S.erasure().castingConversionTo(T.erasure());
     }
     return refined_TypeConversion_ClassDecl_castingConversionTo_TypeDecl(type);
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessControl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:183
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:183")
-  public Collection<Problem> accessControlProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-    
-        // 8.1.1.2 final Classes
-        TypeDecl typeDecl = superclass();
-        if (!typeDecl.isUnknown() && !typeDecl.accessibleFromExtend(this)) {
-          problems.add(errorf("class %s may not extend non accessible type %s",
-              fullName(), typeDecl.fullName()));
-        }
-    
-        if (hasSuperclass() && !superclass().accessibleFrom(this)) {
-          problems.add(errorf("a superclass must be accessible which %s is not",
-              superclass().name()));
-        }
-    
-        // 8.1.4
-        for (int i = 0; i < getNumImplements(); i++) {
-          TypeDecl decl = getImplements(i).type();
-          if (!decl.isCircular() && !decl.accessibleFrom(this)) {
-            problems.add(errorf("class %s can not implement non accessible type %s",
-                fullName(), decl.fullName()));
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:95
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:95")
-  public Constant cast(Constant c) {
-    Constant cast_Constant_value = Constant.create(c.stringValue());
-    return cast_Constant_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:195
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:195")
-  public Constant add(Constant c1, Constant c2) {
-    Constant add_Constant_Constant_value = Constant.create(c1.stringValue() + c2.stringValue());
-    return add_Constant_Constant_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:299
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:299")
-  public Constant questionColon(Constant cond, Constant c1, Constant c2) {
-    Constant questionColon_Constant_Constant_Constant_value = Constant.create(cond.booleanValue() ? c1.stringValue() : c2.stringValue());
-    return questionColon_Constant_Constant_Constant_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:499
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:499")
-  public boolean eqIsTrue(Expr left, Expr right) {
-    boolean eqIsTrue_Expr_Expr_value = isString() && left.constant().stringValue().equals(right.constant().stringValue());
-    return eqIsTrue_Expr_Expr_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46")
-  public int lineNumber() {
-    int lineNumber_value = getLine(IDstart);
-    return lineNumber_value;
-  }
-  /**
-   * Computes compile errors for each checked exception thrown by the default
-   * constructor of this class.
-   * @attribute syn
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:382
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:382")
-  public Collection<Problem> exceptionHandlingProblems() {
-    {
-        if (!hasImplicitConstructor() || isAnonymous()) {
-          // If this class is anonymous, then exceptions are checked by the code
-          // instantiating the anonymous class.
-          return Collections.emptyList();
-        }
-        Collection<Problem> problems = new LinkedList<Problem>();
-        Stmt superCall = getImplicitConstructor().getParsedConstructorInvocation();
-        SuperConstructorAccess superAccess = (SuperConstructorAccess) ((ExprStmt) superCall).getExpr();
-        for (Access exception : superAccess.decl().getExceptionList()) {
-          if (exception.type().isCheckedException()) {
-            problems.add(errorf(
-                "default constructor for class %s throws unchecked exception %s via "
-                + "superclass constructor", name(), exception.type().fullName()));
-          }
-        }
-        return problems;
-      }
   }
   /**
    * @attribute syn
@@ -1292,6 +1174,453 @@ public class ClassDecl extends ReferenceType implements Cloneable {
         return false;
       }
   }
+  /**
+   * Computes compile errors for each checked exception thrown by the default
+   * constructor of this class.
+   * @attribute syn
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:382
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:382")
+  public Collection<Problem> exceptionHandlingProblems() {
+    {
+        if (!hasImplicitConstructor() || isAnonymous()) {
+          // If this class is anonymous, then exceptions are checked by the code
+          // instantiating the anonymous class.
+          return Collections.emptyList();
+        }
+        Collection<Problem> problems = new LinkedList<Problem>();
+        Stmt superCall = getImplicitConstructor().getParsedConstructorInvocation();
+        SuperConstructorAccess superAccess = (SuperConstructorAccess) ((ExprStmt) superCall).getExpr();
+        for (Access exception : superAccess.decl().getExceptionList()) {
+          if (exception.type().isCheckedException()) {
+            problems.add(errorf(
+                "default constructor for class %s throws unchecked exception %s via "
+                + "superclass constructor", name(), exception.type().fullName()));
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessControl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:183
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessControl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:183")
+  public Collection<Problem> accessControlProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+    
+        // 8.1.1.2 final Classes
+        TypeDecl typeDecl = superclass();
+        if (!typeDecl.isUnknown() && !typeDecl.accessibleFromExtend(this)) {
+          problems.add(errorf("class %s may not extend non accessible type %s",
+              fullName(), typeDecl.fullName()));
+        }
+    
+        if (hasSuperclass() && !superclass().accessibleFrom(this)) {
+          problems.add(errorf("a superclass must be accessible which %s is not",
+              superclass().name()));
+        }
+    
+        // 8.1.4
+        for (int i = 0; i < getNumImplements(); i++) {
+          TypeDecl decl = getImplements(i).type();
+          if (!decl.isCircular() && !decl.accessibleFrom(this)) {
+            problems.add(errorf("class %s can not implement non accessible type %s",
+                fullName(), decl.fullName()));
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:95
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:95")
+  public Constant cast(Constant c) {
+    Constant cast_Constant_value = Constant.create(c.stringValue());
+    return cast_Constant_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:195
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:195")
+  public Constant add(Constant c1, Constant c2) {
+    Constant add_Constant_Constant_value = Constant.create(c1.stringValue() + c2.stringValue());
+    return add_Constant_Constant_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:299
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:299")
+  public Constant questionColon(Constant cond, Constant c1, Constant c2) {
+    Constant questionColon_Constant_Constant_Constant_value = Constant.create(cond.booleanValue() ? c1.stringValue() : c2.stringValue());
+    return questionColon_Constant_Constant_Constant_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:499
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:499")
+  public boolean eqIsTrue(Expr left, Expr right) {
+    boolean eqIsTrue_Expr_Expr_value = isString() && left.constant().stringValue().equals(right.constant().stringValue());
+    return eqIsTrue_Expr_Expr_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeHierarchyCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:353
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:353")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = refined_TypeHierarchyCheck_ClassDecl_typeProblems();
+    
+        if (hasSuperclass()) {
+          // JLS SE7 8.4.8.4
+          // Check for duplicate methods inherited from parameterized supertype.
+          if (superclass().isParameterizedType()) {
+            Map<String, SimpleSet<MethodDecl>> localMap = localMethodsSignatureMap();
+            Map<String, SimpleSet<MethodDecl>> methodMap = superclass().localMethodsSignatureMap();
+            for (Map.Entry<String, SimpleSet<MethodDecl>> entry: methodMap.entrySet()) {
+              String signature = entry.getKey();
+              if (!localMap.containsKey(signature)) {
+                // Not locally overridden.
+                SimpleSet<MethodDecl> set = entry.getValue();
+                Iterator<MethodDecl> iter = set.iterator();
+                iter.next();
+                while (iter.hasNext()) {
+                  iter.next();
+                  problems.add(errorf(
+                      "method with signature %s is multiply declared when inherited from %s",
+                      signature, superclass().typeName()));
+                }
+              }
+            }
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeHierarchyCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:389
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:389")
+  public Collection<Problem> nameProblems() {
+    {
+        Collection<Problem> problems = refined_TypeHierarchyCheck_ClassDecl_nameProblems();
+        for (SimpleSet<MethodDecl> set : methodsSignatureMap().values()) {
+          if (set.size() > 1) {
+            boolean foundClassAbstract = false;
+            MethodDecl foundNonAbstract = null;
+            for (MethodDecl m : set) {
+              if (!m.isAbstract()) {
+                foundNonAbstract = m;
+              } else if (m.hostType().isClassDecl() && m.hostType() != this) {
+                foundClassAbstract = true;
+              }
+            }
+            // 8.4.8.1
+            if (foundNonAbstract != null && !foundClassAbstract) {
+              problems.add(errorf("Method %s is multiply declared in %s",
+                  foundNonAbstract.fullSignature(), typeName()));
+            }
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629")
+  public SimpleSet<TypeDecl> memberTypes(String name) {
+    {
+        SimpleSet<TypeDecl> result = localTypeDecls(name);
+        if (!result.isEmpty()) {
+          return result;
+        }
+        for (Iterator<TypeDecl> outerIter = interfacesIterator(); outerIter.hasNext(); ) {
+          TypeDecl type = outerIter.next();
+          for (TypeDecl decl : type.memberTypes(name)) {
+            if (!decl.isPrivate() && decl.accessibleFrom(this)) {
+              result = result.add(decl);
+            }
+          }
+        }
+        if (hasSuperclass()) {
+          for (TypeDecl decl : superclass().memberTypes(name)) {
+            if (!decl.isPrivate() && decl.accessibleFrom(this)) {
+              result = result.add(decl);
+            }
+          }
+        }
+        return result;
+      }
+  }
+  /** @apilevel internal */
+  private void unimplementedMethods_reset() {
+    unimplementedMethods_computed = null;
+    unimplementedMethods_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle unimplementedMethods_computed = null;
+
+  /** @apilevel internal */
+  protected Collection<MethodDecl> unimplementedMethods_value;
+
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:35
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:35")
+  public Collection<MethodDecl> unimplementedMethods() {
+    ASTNode$State state = state();
+    if (unimplementedMethods_computed == ASTNode$State.NON_CYCLE || unimplementedMethods_computed == state().cycle()) {
+      return unimplementedMethods_value;
+    }
+    unimplementedMethods_value = unimplementedMethods_compute();
+    if (state().inCircle()) {
+      unimplementedMethods_computed = state().cycle();
+    
+    } else {
+      unimplementedMethods_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return unimplementedMethods_value;
+  }
+  /** @apilevel internal */
+  private Collection<MethodDecl> unimplementedMethods_compute() {
+      Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
+      for (Iterator iter = interfacesMethodsIterator(); iter.hasNext(); ) {
+        MethodDecl m = (MethodDecl) iter.next();
+        boolean implemented = false;
+        SimpleSet<MethodDecl> result = localMethodsSignature(m.signature());
+        if (result.isSingleton()) {
+          MethodDecl n = result.singletonValue();
+          if (!n.isAbstract()) {
+            implemented = true;
+          }
+        }
+        if (!implemented) {
+          result = ancestorMethods(m.signature());
+          for (MethodDecl n : result) {
+            if (!n.isAbstract() && n.isPublic()) {
+              implemented = true;
+              break;
+            }
+          }
+        }
+        if (!implemented) {
+          methods.add(m);
+        }
+      }
+  
+      if (hasSuperclass()) {
+        for (MethodDecl m : superclass().unimplementedMethods()) {
+          SimpleSet<MethodDecl> result = localMethodsSignature(m.signature());
+          if (result.isSingleton()) {
+            MethodDecl n = result.singletonValue();
+            if (n.isAbstract() || !n.overrides(m)) {
+              methods.add(m);
+            }
+          } else {
+            methods.add(m);
+          }
+        }
+      }
+  
+      for (Iterator iter = localMethodsIterator(); iter.hasNext(); ) {
+        MethodDecl m = (MethodDecl) iter.next();
+        if (m.isAbstract()) {
+          methods.add(m);
+        }
+      }
+      return methods;
+    }
+  /** @apilevel internal */
+  private void hasAbstract_reset() {
+    hasAbstract_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle hasAbstract_computed = null;
+
+  /** @apilevel internal */
+  protected boolean hasAbstract_value;
+
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:33
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:33")
+  public boolean hasAbstract() {
+    ASTNode$State state = state();
+    if (hasAbstract_computed == ASTNode$State.NON_CYCLE || hasAbstract_computed == state().cycle()) {
+      return hasAbstract_value;
+    }
+    hasAbstract_value = !unimplementedMethods().isEmpty();
+    if (state().inCircle()) {
+      hasAbstract_computed = state().cycle();
+    
+    } else {
+      hasAbstract_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return hasAbstract_value;
+  }
+  /** @apilevel internal */
+  private void memberFieldsMap_reset() {
+    memberFieldsMap_computed = null;
+    memberFieldsMap_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle memberFieldsMap_computed = null;
+
+  /** @apilevel internal */
+  protected Map<String, SimpleSet<Variable>> memberFieldsMap_value;
+
+  /**
+   * @attribute syn
+   * @aspect Fields
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:402
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:402")
+  public Map<String, SimpleSet<Variable>> memberFieldsMap() {
+    ASTNode$State state = state();
+    if (memberFieldsMap_computed == ASTNode$State.NON_CYCLE || memberFieldsMap_computed == state().cycle()) {
+      return memberFieldsMap_value;
+    }
+    memberFieldsMap_value = memberFieldsMap_compute();
+    if (state().inCircle()) {
+      memberFieldsMap_computed = state().cycle();
+    
+    } else {
+      memberFieldsMap_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return memberFieldsMap_value;
+  }
+  /** @apilevel internal */
+  private Map<String, SimpleSet<Variable>> memberFieldsMap_compute() {
+      Map<String, SimpleSet<Variable>> map =
+          new HashMap<String, SimpleSet<Variable>>(localFieldsMap());
+      if (hasSuperclass()) {
+        Iterator<Variable> iter = superclass().fieldsIterator();
+        while (iter.hasNext()) {
+          Variable decl = iter.next();
+          if (!decl.isPrivate() && decl.accessibleFrom(this)
+              && !localFieldsMap().containsKey(decl.name())) {
+            putSimpleSetElement(map, decl.name(), decl);
+          }
+        }
+      }
+      Iterator<TypeDecl> outerIter = interfacesIterator();
+      while (outerIter.hasNext()) {
+        TypeDecl type = outerIter.next();
+        Iterator<Variable> iter = type.fieldsIterator();
+        while (iter.hasNext()) {
+          Variable decl = iter.next();
+          if (!decl.isPrivate() && decl.accessibleFrom(this)
+              && !localFieldsMap().containsKey(decl.name())) {
+            putSimpleSetElement(map, decl.name(), decl);
+          }
+        }
+      }
+      return map;
+    }
+  /** @apilevel internal */
+  private void memberFields_String_reset() {
+    memberFields_String_computed = new java.util.HashMap(4);
+    memberFields_String_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map memberFields_String_values;
+  /** @apilevel internal */
+  protected java.util.Map memberFields_String_computed;
+  /**
+   * @attribute syn
+   * @aspect Fields
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475")
+  public SimpleSet<Variable> memberFields(String name) {
+    Object _parameters = name;
+    if (memberFields_String_computed == null) memberFields_String_computed = new java.util.HashMap(4);
+    if (memberFields_String_values == null) memberFields_String_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (memberFields_String_values.containsKey(_parameters) && memberFields_String_computed != null
+        && memberFields_String_computed.containsKey(_parameters)
+        && (memberFields_String_computed.get(_parameters) == ASTNode$State.NON_CYCLE || memberFields_String_computed.get(_parameters) == state().cycle())) {
+      return (SimpleSet<Variable>) memberFields_String_values.get(_parameters);
+    }
+    SimpleSet<Variable> memberFields_String_value = memberFields_compute(name);
+    if (state().inCircle()) {
+      memberFields_String_values.put(_parameters, memberFields_String_value);
+      memberFields_String_computed.put(_parameters, state().cycle());
+    
+    } else {
+      memberFields_String_values.put(_parameters, memberFields_String_value);
+      memberFields_String_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return memberFields_String_value;
+  }
+  /** @apilevel internal */
+  private SimpleSet<Variable> memberFields_compute(String name) {
+      SimpleSet<Variable> fields = localFields(name);
+      if (!fields.isEmpty()) {
+        return fields; // This causes hiding of fields in superclass and interfaces.
+      }
+      if (hasSuperclass()) {
+        Iterator<Variable> iter = superclass().memberFields(name).iterator();
+        while (iter.hasNext()) {
+          Variable decl = iter.next();
+          if (!decl.isPrivate() && decl.accessibleFrom(this)) {
+            fields = fields.add(decl);
+          }
+        }
+      }
+      Iterator<TypeDecl> outerIter = interfacesIterator();
+      while (outerIter.hasNext()) {
+        TypeDecl type = outerIter.next();
+        Iterator<Variable> iter = type.memberFields(name).iterator();
+        while (iter.hasNext()) {
+          Variable decl = iter.next();
+          if (!decl.isPrivate() && decl.accessibleFrom(this)) {
+            fields = fields.add(decl);
+          }
+        }
+      }
+      return fields;
+    }
   /**
    * @attribute syn
    * @aspect MemberMethods
@@ -1450,275 +1779,14 @@ public class ClassDecl extends ReferenceType implements Cloneable {
     }
   /**
    * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629
+   * @aspect ErrorCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:629")
-  public SimpleSet<TypeDecl> memberTypes(String name) {
-    {
-        SimpleSet<TypeDecl> result = localTypeDecls(name);
-        if (!result.isEmpty()) {
-          return result;
-        }
-        for (Iterator<TypeDecl> outerIter = interfacesIterator(); outerIter.hasNext(); ) {
-          TypeDecl type = outerIter.next();
-          for (TypeDecl decl : type.memberTypes(name)) {
-            if (!decl.isPrivate() && decl.accessibleFrom(this)) {
-              result = result.add(decl);
-            }
-          }
-        }
-        if (hasSuperclass()) {
-          for (TypeDecl decl : superclass().memberTypes(name)) {
-            if (!decl.isPrivate() && decl.accessibleFrom(this)) {
-              result = result.add(decl);
-            }
-          }
-        }
-        return result;
-      }
-  }
-  /** @apilevel internal */
-  private void memberFieldsMap_reset() {
-    memberFieldsMap_computed = null;
-    memberFieldsMap_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle memberFieldsMap_computed = null;
-
-  /** @apilevel internal */
-  protected Map<String, SimpleSet<Variable>> memberFieldsMap_value;
-
-  /**
-   * @attribute syn
-   * @aspect Fields
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:402
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:402")
-  public Map<String, SimpleSet<Variable>> memberFieldsMap() {
-    ASTNode$State state = state();
-    if (memberFieldsMap_computed == ASTNode$State.NON_CYCLE || memberFieldsMap_computed == state().cycle()) {
-      return memberFieldsMap_value;
-    }
-    memberFieldsMap_value = memberFieldsMap_compute();
-    if (state().inCircle()) {
-      memberFieldsMap_computed = state().cycle();
-    
-    } else {
-      memberFieldsMap_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return memberFieldsMap_value;
-  }
-  /** @apilevel internal */
-  private Map<String, SimpleSet<Variable>> memberFieldsMap_compute() {
-      Map<String, SimpleSet<Variable>> map =
-          new HashMap<String, SimpleSet<Variable>>(localFieldsMap());
-      if (hasSuperclass()) {
-        Iterator<Variable> iter = superclass().fieldsIterator();
-        while (iter.hasNext()) {
-          Variable decl = iter.next();
-          if (!decl.isPrivate() && decl.accessibleFrom(this)
-              && !localFieldsMap().containsKey(decl.name())) {
-            putSimpleSetElement(map, decl.name(), decl);
-          }
-        }
-      }
-      Iterator<TypeDecl> outerIter = interfacesIterator();
-      while (outerIter.hasNext()) {
-        TypeDecl type = outerIter.next();
-        Iterator<Variable> iter = type.fieldsIterator();
-        while (iter.hasNext()) {
-          Variable decl = iter.next();
-          if (!decl.isPrivate() && decl.accessibleFrom(this)
-              && !localFieldsMap().containsKey(decl.name())) {
-            putSimpleSetElement(map, decl.name(), decl);
-          }
-        }
-      }
-      return map;
-    }
-  /** @apilevel internal */
-  private void memberFields_String_reset() {
-    memberFields_String_computed = new java.util.HashMap(4);
-    memberFields_String_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map memberFields_String_values;
-  /** @apilevel internal */
-  protected java.util.Map memberFields_String_computed;
-  /**
-   * @attribute syn
-   * @aspect Fields
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Fields", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:475")
-  public SimpleSet<Variable> memberFields(String name) {
-    Object _parameters = name;
-    if (memberFields_String_computed == null) memberFields_String_computed = new java.util.HashMap(4);
-    if (memberFields_String_values == null) memberFields_String_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (memberFields_String_values.containsKey(_parameters) && memberFields_String_computed != null
-        && memberFields_String_computed.containsKey(_parameters)
-        && (memberFields_String_computed.get(_parameters) == ASTNode$State.NON_CYCLE || memberFields_String_computed.get(_parameters) == state().cycle())) {
-      return (SimpleSet<Variable>) memberFields_String_values.get(_parameters);
-    }
-    SimpleSet<Variable> memberFields_String_value = memberFields_compute(name);
-    if (state().inCircle()) {
-      memberFields_String_values.put(_parameters, memberFields_String_value);
-      memberFields_String_computed.put(_parameters, state().cycle());
-    
-    } else {
-      memberFields_String_values.put(_parameters, memberFields_String_value);
-      memberFields_String_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return memberFields_String_value;
-  }
-  /** @apilevel internal */
-  private SimpleSet<Variable> memberFields_compute(String name) {
-      SimpleSet<Variable> fields = localFields(name);
-      if (!fields.isEmpty()) {
-        return fields; // This causes hiding of fields in superclass and interfaces.
-      }
-      if (hasSuperclass()) {
-        Iterator<Variable> iter = superclass().memberFields(name).iterator();
-        while (iter.hasNext()) {
-          Variable decl = iter.next();
-          if (!decl.isPrivate() && decl.accessibleFrom(this)) {
-            fields = fields.add(decl);
-          }
-        }
-      }
-      Iterator<TypeDecl> outerIter = interfacesIterator();
-      while (outerIter.hasNext()) {
-        TypeDecl type = outerIter.next();
-        Iterator<Variable> iter = type.memberFields(name).iterator();
-        while (iter.hasNext()) {
-          Variable decl = iter.next();
-          if (!decl.isPrivate() && decl.accessibleFrom(this)) {
-            fields = fields.add(decl);
-          }
-        }
-      }
-      return fields;
-    }
-  /** @apilevel internal */
-  private void unimplementedMethods_reset() {
-    unimplementedMethods_computed = null;
-    unimplementedMethods_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle unimplementedMethods_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<MethodDecl> unimplementedMethods_value;
-
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:35
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:35")
-  public Collection<MethodDecl> unimplementedMethods() {
-    ASTNode$State state = state();
-    if (unimplementedMethods_computed == ASTNode$State.NON_CYCLE || unimplementedMethods_computed == state().cycle()) {
-      return unimplementedMethods_value;
-    }
-    unimplementedMethods_value = unimplementedMethods_compute();
-    if (state().inCircle()) {
-      unimplementedMethods_computed = state().cycle();
-    
-    } else {
-      unimplementedMethods_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return unimplementedMethods_value;
-  }
-  /** @apilevel internal */
-  private Collection<MethodDecl> unimplementedMethods_compute() {
-      Collection<MethodDecl> methods = new ArrayList<MethodDecl>();
-      for (Iterator iter = interfacesMethodsIterator(); iter.hasNext(); ) {
-        MethodDecl m = (MethodDecl) iter.next();
-        boolean implemented = false;
-        SimpleSet<MethodDecl> result = localMethodsSignature(m.signature());
-        if (result.isSingleton()) {
-          MethodDecl n = result.singletonValue();
-          if (!n.isAbstract()) {
-            implemented = true;
-          }
-        }
-        if (!implemented) {
-          result = ancestorMethods(m.signature());
-          for (MethodDecl n : result) {
-            if (!n.isAbstract() && n.isPublic()) {
-              implemented = true;
-              break;
-            }
-          }
-        }
-        if (!implemented) {
-          methods.add(m);
-        }
-      }
-  
-      if (hasSuperclass()) {
-        for (MethodDecl m : superclass().unimplementedMethods()) {
-          SimpleSet<MethodDecl> result = localMethodsSignature(m.signature());
-          if (result.isSingleton()) {
-            MethodDecl n = result.singletonValue();
-            if (n.isAbstract() || !n.overrides(m)) {
-              methods.add(m);
-            }
-          } else {
-            methods.add(m);
-          }
-        }
-      }
-  
-      for (Iterator iter = localMethodsIterator(); iter.hasNext(); ) {
-        MethodDecl m = (MethodDecl) iter.next();
-        if (m.isAbstract()) {
-          methods.add(m);
-        }
-      }
-      return methods;
-    }
-  /** @apilevel internal */
-  private void hasAbstract_reset() {
-    hasAbstract_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle hasAbstract_computed = null;
-
-  /** @apilevel internal */
-  protected boolean hasAbstract_value;
-
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:33
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:33")
-  public boolean hasAbstract() {
-    ASTNode$State state = state();
-    if (hasAbstract_computed == ASTNode$State.NON_CYCLE || hasAbstract_computed == state().cycle()) {
-      return hasAbstract_value;
-    }
-    hasAbstract_value = !unimplementedMethods().isEmpty();
-    if (state().inCircle()) {
-      hasAbstract_computed = state().cycle();
-    
-    } else {
-      hasAbstract_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return hasAbstract_value;
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46")
+  public int lineNumber() {
+    int lineNumber_value = getLine(IDstart);
+    return lineNumber_value;
   }
   /**
    * @attribute syn
@@ -2072,72 +2140,20 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
       return false;
     }
   /**
+   * A type is reifiable if it either refers to a non-parameterized type,
+   * is a raw type, is a parameterized type with only unbound wildcard
+   * parameters or is an array type with a reifiable type parameter.
+   * 
+   * @see "JLS SE7 &sect;4.7"
    * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:353
+   * @aspect ReifiableTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:353")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = refined_TypeHierarchyCheck_ClassDecl_typeProblems();
-    
-        if (hasSuperclass()) {
-          // JLS SE7 8.4.8.4
-          // Check for duplicate methods inherited from parameterized supertype.
-          if (superclass().isParameterizedType()) {
-            Map<String, SimpleSet<MethodDecl>> localMap = localMethodsSignatureMap();
-            Map<String, SimpleSet<MethodDecl>> methodMap = superclass().localMethodsSignatureMap();
-            for (Map.Entry<String, SimpleSet<MethodDecl>> entry: methodMap.entrySet()) {
-              String signature = entry.getKey();
-              if (!localMap.containsKey(signature)) {
-                // Not locally overridden.
-                SimpleSet<MethodDecl> set = entry.getValue();
-                Iterator<MethodDecl> iter = set.iterator();
-                iter.next();
-                while (iter.hasNext()) {
-                  iter.next();
-                  problems.add(errorf(
-                      "method with signature %s is multiply declared when inherited from %s",
-                      signature, superclass().typeName()));
-                }
-              }
-            }
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:389
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:389")
-  public Collection<Problem> nameProblems() {
-    {
-        Collection<Problem> problems = refined_TypeHierarchyCheck_ClassDecl_nameProblems();
-        for (SimpleSet<MethodDecl> set : methodsSignatureMap().values()) {
-          if (set.size() > 1) {
-            boolean foundClassAbstract = false;
-            MethodDecl foundNonAbstract = null;
-            for (MethodDecl m : set) {
-              if (!m.isAbstract()) {
-                foundNonAbstract = m;
-              } else if (m.hostType().isClassDecl() && m.hostType() != this) {
-                foundClassAbstract = true;
-              }
-            }
-            // 8.4.8.1
-            if (foundNonAbstract != null && !foundClassAbstract) {
-              problems.add(errorf("Method %s is multiply declared in %s",
-                  foundNonAbstract.fullSignature(), typeName()));
-            }
-          }
-        }
-        return problems;
-      }
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
+  public boolean isReifiable() {
+    boolean isReifiable_value = !isInnerClass() || enclosingType().isReifiable();
+    return isReifiable_value;
   }
   /**
    * @attribute syn
@@ -2162,56 +2178,6 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
         return null;
       }
   }
-  /** @apilevel internal */
-  private void iterableElementType_reset() {
-    iterableElementType_computed = null;
-    iterableElementType_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle iterableElementType_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl iterableElementType_value;
-
-  /**
-   * Computes the element type of a type implementing java.lang.Iterable.
-   * Returns UnknownType if this type does not implement java.lang.Iterable.
-   * @attribute syn
-   * @aspect EnhancedFor
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:77
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:77")
-  public TypeDecl iterableElementType() {
-    ASTNode$State state = state();
-    if (iterableElementType_computed == ASTNode$State.NON_CYCLE || iterableElementType_computed == state().cycle()) {
-      return iterableElementType_value;
-    }
-    iterableElementType_value = iterableElementType_compute();
-    if (state().inCircle()) {
-      iterableElementType_computed = state().cycle();
-    
-    } else {
-      iterableElementType_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return iterableElementType_value;
-  }
-  /** @apilevel internal */
-  private TypeDecl iterableElementType_compute() {
-      TypeDecl type = unknownType();
-      for (Access iface : getImplementsList()) {
-        type = iface.type().iterableElementType();
-        if (!type.isUnknown()) {
-          break;
-        }
-      }
-      if (type.isUnknown() && hasSuperclass()) {
-        return superclass().iterableElementType();
-      } else {
-        return type;
-      }
-    }
   /** @apilevel internal */
   private void erasedAncestorMethodsMap_reset() {
     erasedAncestorMethodsMap_computed = null;
@@ -2403,22 +2369,114 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
         return type.hasSuperclass() && type.superclass().subtype(this);
       }
   }
+  /** @apilevel internal */
+  private void iterableElementType_reset() {
+    iterableElementType_computed = null;
+    iterableElementType_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle iterableElementType_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl iterableElementType_value;
+
   /**
-   * A type is reifiable if it either refers to a non-parameterized type,
-   * is a raw type, is a parameterized type with only unbound wildcard
-   * parameters or is an array type with a reifiable type parameter.
-   * 
-   * @see "JLS SE7 &sect;4.7"
+   * Computes the element type of a type implementing java.lang.Iterable.
+   * Returns UnknownType if this type does not implement java.lang.Iterable.
    * @attribute syn
-   * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
+   * @aspect EnhancedFor
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:77
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
-  public boolean isReifiable() {
-    boolean isReifiable_value = !isInnerClass() || enclosingType().isReifiable();
-    return isReifiable_value;
+  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:77")
+  public TypeDecl iterableElementType() {
+    ASTNode$State state = state();
+    if (iterableElementType_computed == ASTNode$State.NON_CYCLE || iterableElementType_computed == state().cycle()) {
+      return iterableElementType_value;
+    }
+    iterableElementType_value = iterableElementType_compute();
+    if (state().inCircle()) {
+      iterableElementType_computed = state().cycle();
+    
+    } else {
+      iterableElementType_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return iterableElementType_value;
   }
+  /** @apilevel internal */
+  private TypeDecl iterableElementType_compute() {
+      TypeDecl type = unknownType();
+      for (Access iface : getImplementsList()) {
+        type = iface.type().iterableElementType();
+        if (!type.isUnknown()) {
+          break;
+        }
+      }
+      if (type.isUnknown() && hasSuperclass()) {
+        return superclass().iterableElementType();
+      } else {
+        return type;
+      }
+    }
+  /** @apilevel internal */
+  private void hasOverridingMethodInSuper_MethodDecl_reset() {
+    hasOverridingMethodInSuper_MethodDecl_computed = new java.util.HashMap(4);
+    hasOverridingMethodInSuper_MethodDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map hasOverridingMethodInSuper_MethodDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map hasOverridingMethodInSuper_MethodDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect MethodSignature18
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:1080
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:1080")
+  public boolean hasOverridingMethodInSuper(MethodDecl m) {
+    Object _parameters = m;
+    if (hasOverridingMethodInSuper_MethodDecl_computed == null) hasOverridingMethodInSuper_MethodDecl_computed = new java.util.HashMap(4);
+    if (hasOverridingMethodInSuper_MethodDecl_values == null) hasOverridingMethodInSuper_MethodDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (hasOverridingMethodInSuper_MethodDecl_values.containsKey(_parameters) && hasOverridingMethodInSuper_MethodDecl_computed != null
+        && hasOverridingMethodInSuper_MethodDecl_computed.containsKey(_parameters)
+        && (hasOverridingMethodInSuper_MethodDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || hasOverridingMethodInSuper_MethodDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) hasOverridingMethodInSuper_MethodDecl_values.get(_parameters);
+    }
+    boolean hasOverridingMethodInSuper_MethodDecl_value = hasOverridingMethodInSuper_compute(m);
+    if (state().inCircle()) {
+      hasOverridingMethodInSuper_MethodDecl_values.put(_parameters, hasOverridingMethodInSuper_MethodDecl_value);
+      hasOverridingMethodInSuper_MethodDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      hasOverridingMethodInSuper_MethodDecl_values.put(_parameters, hasOverridingMethodInSuper_MethodDecl_value);
+      hasOverridingMethodInSuper_MethodDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return hasOverridingMethodInSuper_MethodDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean hasOverridingMethodInSuper_compute(MethodDecl m) {
+      for (Iterator<MethodDecl> outerIter = interfacesMethodsIterator(); outerIter.hasNext(); ) {
+        MethodDecl superMethod = outerIter.next();
+        if (m != superMethod && superMethod.overrides(m)) {
+          return true;
+        }
+  
+      }
+      if (hasSuperclass()) {
+        for (Iterator iter = superclass().methodsIterator(); iter.hasNext(); ) {
+          MethodDecl superMethod = (MethodDecl) iter.next();
+          if (m != superMethod && superMethod.overrides(m)) {
+            return true;
+          }
+        }
+      }
+  
+      return false;
+    }
   /** @apilevel internal */
   private void strictSubtype_TypeDecl_reset() {
     strictSubtype_TypeDecl_values = null;
@@ -2509,64 +2567,57 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
             && type.superclass().strictSubtype(this);
       }
   }
-  /** @apilevel internal */
-  private void hasOverridingMethodInSuper_MethodDecl_reset() {
-    hasOverridingMethodInSuper_MethodDecl_computed = new java.util.HashMap(4);
-    hasOverridingMethodInSuper_MethodDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map hasOverridingMethodInSuper_MethodDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map hasOverridingMethodInSuper_MethodDecl_computed;
   /**
    * @attribute syn
-   * @aspect MethodSignature18
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:1080
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:76
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature18", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/MethodSignature.jrag:1080")
-  public boolean hasOverridingMethodInSuper(MethodDecl m) {
-    Object _parameters = m;
-    if (hasOverridingMethodInSuper_MethodDecl_computed == null) hasOverridingMethodInSuper_MethodDecl_computed = new java.util.HashMap(4);
-    if (hasOverridingMethodInSuper_MethodDecl_values == null) hasOverridingMethodInSuper_MethodDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (hasOverridingMethodInSuper_MethodDecl_values.containsKey(_parameters) && hasOverridingMethodInSuper_MethodDecl_computed != null
-        && hasOverridingMethodInSuper_MethodDecl_computed.containsKey(_parameters)
-        && (hasOverridingMethodInSuper_MethodDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || hasOverridingMethodInSuper_MethodDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) hasOverridingMethodInSuper_MethodDecl_values.get(_parameters);
-    }
-    boolean hasOverridingMethodInSuper_MethodDecl_value = hasOverridingMethodInSuper_compute(m);
-    if (state().inCircle()) {
-      hasOverridingMethodInSuper_MethodDecl_values.put(_parameters, hasOverridingMethodInSuper_MethodDecl_value);
-      hasOverridingMethodInSuper_MethodDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      hasOverridingMethodInSuper_MethodDecl_values.put(_parameters, hasOverridingMethodInSuper_MethodDecl_value);
-      hasOverridingMethodInSuper_MethodDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return hasOverridingMethodInSuper_MethodDecl_value;
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:76")
+  public boolean hasMethod(MethodDecl decl) {
+    boolean hasMethod_MethodDecl_value = super.hasMethod(decl) || hasSuperclass() && superclass().hasMethod(decl);
+    return hasMethod_MethodDecl_value;
   }
-  /** @apilevel internal */
-  private boolean hasOverridingMethodInSuper_compute(MethodDecl m) {
-      for (Iterator<MethodDecl> outerIter = interfacesMethodsIterator(); outerIter.hasNext(); ) {
-        MethodDecl superMethod = outerIter.next();
-        if (m != superMethod && superMethod.overrides(m)) {
-          return true;
-        }
-  
+  /**
+   * @attribute syn
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:485
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:485")
+  public TypeDecl superEnclosing() {
+    {
+        return superclass().erasure().enclosing();
       }
-      if (hasSuperclass()) {
-        for (Iterator iter = superclass().methodsIterator(); iter.hasNext(); ) {
-          MethodDecl superMethod = (MethodDecl) iter.next();
-          if (m != superMethod && superMethod.overrides(m)) {
-            return true;
-          }
+  }
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037")
+  public String arrayTypeDescriptor() {
+    String arrayTypeDescriptor_value = constantPoolName();
+    return arrayTypeDescriptor_value;
+  }
+  /** @return a collection of the methods and constructors declared in this type. 
+   * @attribute syn
+   * @aspect GenerateClassfile
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:431
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:431")
+  public Collection<BodyDecl> methodsAndConstructors() {
+    {
+        Collection<BodyDecl> methods = new ArrayList<BodyDecl>();
+        if (hasImplicitConstructor()) {
+          methods.add(getImplicitConstructor());
         }
+        methods.addAll(super.methodsAndConstructors());
+        return methods;
       }
-  
-      return false;
-    }
+  }
   /** @apilevel internal */
   private void typeDescriptor_reset() {
     typeDescriptor_computed = null;
@@ -2599,57 +2650,6 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
     
     }
     return typeDescriptor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037")
-  public String arrayTypeDescriptor() {
-    String arrayTypeDescriptor_value = constantPoolName();
-    return arrayTypeDescriptor_value;
-  }
-  /** @return a collection of the methods and constructors declared in this type. 
-   * @attribute syn
-   * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:431
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:431")
-  public Collection<BodyDecl> methodsAndConstructors() {
-    {
-        Collection<BodyDecl> methods = new ArrayList<BodyDecl>();
-        if (hasImplicitConstructor()) {
-          methods.add(getImplicitConstructor());
-        }
-        methods.addAll(super.methodsAndConstructors());
-        return methods;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:76
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:76")
-  public boolean hasMethod(MethodDecl decl) {
-    boolean hasMethod_MethodDecl_value = super.hasMethod(decl) || hasSuperclass() && superclass().hasMethod(decl);
-    return hasMethod_MethodDecl_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:485
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:485")
-  public TypeDecl superEnclosing() {
-    {
-        return superclass().erasure().enclosing();
-      }
   }
   /** @apilevel internal */
   private void bridgeCandidates_String_reset() {
@@ -2947,6 +2947,15 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:376
+    {
+      java.util.Set<ASTNode> contributors = _map.get(_root);
+      if (contributors == null) {
+        contributors = new java.util.LinkedHashSet<ASTNode>();
+        _map.put((ASTNode) _root, contributors);
+      }
+      contributors.add(this);
+    }
     // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AccessControl.jrag:181
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -2956,7 +2965,7 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:376
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:351
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -2976,15 +2985,6 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
         contributors.add(this);
       }
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:351
-    {
-      java.util.Set<ASTNode> contributors = _map.get(_root);
-      if (contributors == null) {
-        contributors = new java.util.LinkedHashSet<ASTNode>();
-        _map.put((ASTNode) _root, contributors);
-      }
-      contributors.add(this);
-    }
     super.collect_contributors_CompilationUnit_problems(_root, _map);
   }
   protected void collect_contributors_TypeDecl_accessors(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
@@ -2996,17 +2996,17 @@ getImplicitConstructorOpt().collect_contributors_TypeDecl_accessors(_root, _map)
   }
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
+    for (Problem value : exceptionHandlingProblems()) {
+      collection.add(value);
+    }
     for (Problem value : accessControlProblems()) {
       collection.add(value);
     }
-    for (Problem value : exceptionHandlingProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
     if (!superclass().isUnknown() && superclass().isFinal()) {
       collection.add(errorf("class %s may not extend final class %s", fullName(), superclass().fullName()));
-    }
-    for (Problem value : typeProblems()) {
-      collection.add(value);
     }
   }
 }

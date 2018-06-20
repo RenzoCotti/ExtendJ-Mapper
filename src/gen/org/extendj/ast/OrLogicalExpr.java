@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -249,17 +249,6 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
    */
   public Expr getRightOperandNoTransform() {
     return (Expr) getChildNoTransform(1);
-  }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32")
-  public Constant constant() {
-    Constant constant_value = Constant.create(left().constant().booleanValue() || right().constant().booleanValue());
-    return constant_value;
   }
   /** @apilevel internal */
   private void assignedAfterTrue_Variable_reset() {
@@ -528,6 +517,17 @@ public class OrLogicalExpr extends LogicalExpr implements Cloneable {
     } else {
       return (Boolean) _value.value;
     }
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32")
+  public Constant constant() {
+    Constant constant_value = Constant.create(left().constant().booleanValue() || right().constant().booleanValue());
+    return constant_value;
   }
   /** The operator string used for pretty printing this expression. 
    * @attribute syn

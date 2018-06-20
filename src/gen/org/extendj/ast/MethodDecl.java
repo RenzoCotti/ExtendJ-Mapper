@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -224,6 +224,79 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return foundCompatible;
   }
   /**
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:268
+   */
+  protected Stmt createAccessorStmt() {
+    List<Access> argumentList = new List<Access>();
+    for (ParameterDeclaration param : getParameterList()) {
+      argumentList.add(new VarAccess(param.name()));
+    }
+    Access access = new BoundMethodAccess(name(), argumentList, this);
+    if (!isStatic()) {
+      access = new ThisAccess("this").qualifiesAccess(access);
+    }
+    return isVoid() ? (Stmt) new ExprStmt(access) : new ReturnStmt(new Opt(access));
+  }
+  /** Create a static super accessor binding. 
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:291
+   */
+  public Access createBoundSuperAccessor(List<Expr> args) {
+    if (isStatic()) {
+      return hostType().createQualifiedAccess().qualifiesAccess(
+          new BoundMethodAccess(name(), args, this)
+          .setSuperAccessor());
+    } else {
+      return new BoundMethodAccess(name(), args, this)
+          .setSuperAccessor();
+    }
+  }
+  /**
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:145
+   */
+  private void generateBytecodes(CodeGeneration gen) {
+    int label = gen.variableScopeLabel();
+    int paramLength = 0;
+    if (!isStatic()) {
+      paramLength += 1;
+      gen.addLocalVariableEntryAtCurrentPC("this", hostType().typeDescriptor(), 0, label);
+    }
+    for (ParameterDeclaration p : getParameterList()) {
+      paramLength += p.type().variableSize();
+      if (paramLength > 255) {
+        throw new Error("parameter list too large");
+      }
+      gen.addLocalVariableEntryAtCurrentPC(
+        p.name(), p.type().typeDescriptor(), p.localNum(), label
+      );
+    }
+    createBCode(gen);
+    if (type() instanceof VoidType) {
+      // TODO(joqvist): also check for canCompleteNormally.
+      gen.emitReturn(this);
+    }
+    gen.addVariableScopeLabel(label);
+  }
+  /**
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:210
+   */
+  public void createBCode(CodeGeneration gen) {
+    try {
+      if (hasBlock()) {
+        gen.maxLocals = Math.max(gen.maxLocals, getBlock().localNum());
+        this.bcStartIndex = gen.pos();
+        getBlock().createBCode(gen);
+        this.bcEndIndex = gen.pos();
+      }
+    } catch (Error e) {
+      System.err.println(hostType().typeName() + ": " + this);
+      throw e;
+    }
+  }
+  /**
    * @aspect CodeGeneration
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:634
    */
@@ -273,50 +346,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     gen.emit(node, Bytecode.INVOKESPECIAL, stackChange).add2(index);
   }
   /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:145
-   */
-  private void generateBytecodes(CodeGeneration gen) {
-    int label = gen.variableScopeLabel();
-    int paramLength = 0;
-    if (!isStatic()) {
-      paramLength += 1;
-      gen.addLocalVariableEntryAtCurrentPC("this", hostType().typeDescriptor(), 0, label);
-    }
-    for (ParameterDeclaration p : getParameterList()) {
-      paramLength += p.type().variableSize();
-      if (paramLength > 255) {
-        throw new Error("parameter list too large");
-      }
-      gen.addLocalVariableEntryAtCurrentPC(
-        p.name(), p.type().typeDescriptor(), p.localNum(), label
-      );
-    }
-    createBCode(gen);
-    if (type() instanceof VoidType) {
-      // TODO(joqvist): also check for canCompleteNormally.
-      gen.emitReturn(this);
-    }
-    gen.addVariableScopeLabel(label);
-  }
-  /**
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:210
-   */
-  public void createBCode(CodeGeneration gen) {
-    try {
-      if (hasBlock()) {
-        gen.maxLocals = Math.max(gen.maxLocals, getBlock().localNum());
-        this.bcStartIndex = gen.pos();
-        getBlock().createBCode(gen);
-        this.bcEndIndex = gen.pos();
-      }
-    } catch (Error e) {
-      System.err.println(hostType().typeName() + ": " + this);
-      throw e;
-    }
-  }
-  /**
    * @aspect GenerateClassfile
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:295
    */
@@ -338,35 +367,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     cp.addUtf8(name());
     cp.addUtf8(descName());
     attributes();
-  }
-  /**
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:268
-   */
-  protected Stmt createAccessorStmt() {
-    List<Access> argumentList = new List<Access>();
-    for (ParameterDeclaration param : getParameterList()) {
-      argumentList.add(new VarAccess(param.name()));
-    }
-    Access access = new BoundMethodAccess(name(), argumentList, this);
-    if (!isStatic()) {
-      access = new ThisAccess("this").qualifiesAccess(access);
-    }
-    return isVoid() ? (Stmt) new ExprStmt(access) : new ReturnStmt(new Opt(access));
-  }
-  /** Create a static super accessor binding. 
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:291
-   */
-  public Access createBoundSuperAccessor(List<Expr> args) {
-    if (isStatic()) {
-      return hostType().createQualifiedAccess().qualifiesAccess(
-          new BoundMethodAccess(name(), args, this)
-          .setSuperAccessor());
-    } else {
-      return new BoundMethodAccess(name(), args, this)
-          .setSuperAccessor();
-    }
   }
   /**
    * @aspect AnnotationsCodegen
@@ -469,26 +469,26 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    accessibleFrom_TypeDecl_reset();
     throwsException_TypeDecl_reset();
+    accessibleFrom_TypeDecl_reset();
+    parameterDeclaration_String_reset();
     signature_reset();
     lessSpecificThan_MethodDecl_reset();
     overrideCandidate_MethodDecl_reset();
     overrides_MethodDecl_reset();
     hides_MethodDecl_reset();
-    parameterDeclaration_String_reset();
     type_reset();
     usesTypeVariable_reset();
     sourceMethodDecl_reset();
     subsignatureTo_MethodDecl_reset();
     returnTypeSubstitutableFor_MethodDecl_reset();
-    attributes_reset();
-    descName_reset();
-    bytecodes_ConstantPool_reset();
-    flags_reset();
     offsetBeforeParameters_reset();
     offsetAfterParameters_reset();
     resultOffset_reset();
+    attributes_reset();
+    flags_reset();
+    bytecodes_ConstantPool_reset();
+    descName_reset();
     handlesException_TypeDecl_reset();
   }
   /** @apilevel internal 
@@ -1017,6 +1017,53 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return attributes;
   }
   /** @apilevel internal */
+  private void throwsException_TypeDecl_reset() {
+    throwsException_TypeDecl_computed = new java.util.HashMap(4);
+    throwsException_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map throwsException_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map throwsException_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:204
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:204")
+  public boolean throwsException(TypeDecl exceptionType) {
+    Object _parameters = exceptionType;
+    if (throwsException_TypeDecl_computed == null) throwsException_TypeDecl_computed = new java.util.HashMap(4);
+    if (throwsException_TypeDecl_values == null) throwsException_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (throwsException_TypeDecl_values.containsKey(_parameters) && throwsException_TypeDecl_computed != null
+        && throwsException_TypeDecl_computed.containsKey(_parameters)
+        && (throwsException_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || throwsException_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) throwsException_TypeDecl_values.get(_parameters);
+    }
+    boolean throwsException_TypeDecl_value = throwsException_compute(exceptionType);
+    if (state().inCircle()) {
+      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
+      throwsException_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
+      throwsException_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return throwsException_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean throwsException_compute(TypeDecl exceptionType) {
+      for (Access exception : getExceptionList()) {
+        if (exceptionType.instanceOf(exception.type())) {
+          return true;
+        }
+      }
+      return false;
+    }
+  /** @apilevel internal */
   private void accessibleFrom_TypeDecl_reset() {
     accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
     accessibleFrom_TypeDecl_values = null;
@@ -1074,62 +1121,327 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     }
   /**
    * @attribute syn
-   * @aspect ErrorCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46
+   * @aspect TypeHierarchyCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:387
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46")
-  public int lineNumber() {
-    int lineNumber_value = getLine(IDstart);
-    return lineNumber_value;
-  }
-  /** @apilevel internal */
-  private void throwsException_TypeDecl_reset() {
-    throwsException_TypeDecl_computed = new java.util.HashMap(4);
-    throwsException_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map throwsException_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map throwsException_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:204
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:204")
-  public boolean throwsException(TypeDecl exceptionType) {
-    Object _parameters = exceptionType;
-    if (throwsException_TypeDecl_computed == null) throwsException_TypeDecl_computed = new java.util.HashMap(4);
-    if (throwsException_TypeDecl_values == null) throwsException_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (throwsException_TypeDecl_values.containsKey(_parameters) && throwsException_TypeDecl_computed != null
-        && throwsException_TypeDecl_computed.containsKey(_parameters)
-        && (throwsException_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || throwsException_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) throwsException_TypeDecl_values.get(_parameters);
-    }
-    boolean throwsException_TypeDecl_value = throwsException_compute(exceptionType);
-    if (state().inCircle()) {
-      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
-      throwsException_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      throwsException_TypeDecl_values.put(_parameters, throwsException_TypeDecl_value);
-      throwsException_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return throwsException_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean throwsException_compute(TypeDecl exceptionType) {
-      for (Access exception : getExceptionList()) {
-        if (exceptionType.instanceOf(exception.type())) {
-          return true;
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:387")
+  public boolean mayOverride(MethodDecl m) {
+    {
+        // 9.4.3
+        if (isDefault() && m.hostType().isType("java.lang", "Object") && !m.isPrivate()) {
+          return false;
+        } else {
+          MethodDecl self = this;
+          if (self.isGeneric()) {
+            self = genericDecl().rawMethodDecl();
+          }
+          if (m.isGeneric()) {
+            m = m.genericDecl().rawMethodDecl();
+          }
+          return self.returnTypeSubstitutableFor(m);
         }
       }
-      return false;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:514
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:514")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        // Thrown vs super class method see MethodDecl.nameCheck.
+        // 8.4.4
+        TypeDecl exceptionType = typeThrowable();
+        for (int i = 0; i < getNumException(); i++) {
+          TypeDecl typeDecl = getException(i).type();
+          if (!typeDecl.instanceOf(exceptionType)) {
+            problems.add(errorf("%s throws non throwable type %s", signature(), typeDecl.fullName()));
+          }
+        }
+        // Check returns.
+        if (!isVoid() && hasBlock() && getBlock().canCompleteNormally()) {
+          problems.add(error("the body of a non void method may not complete normally"));
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:152
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:152")
+  public Collection<Problem> modifierProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        if (hostType().isClassDecl()) {
+          // 8.4.3.1
+          if (!hostType().isEnumDecl() && isAbstract() && !hostType().isAbstract()) {
+            problems.add(error("class must be abstract to include abstract methods"));
+          }
+          // 8.4.3.1
+          if (isAbstract() && isPrivate()) {
+            problems.add(error("method may not be abstract and private"));
+          }
+          // 8.4.3.1
+          // 8.4.3.2
+          if (isAbstract() && isStatic()) {
+            problems.add(error("method may not be abstract and static"));
+          }
+          if (isAbstract() && isSynchronized()) {
+            problems.add(error("method may not be abstract and synchronized"));
+          }
+          // 8.4.3.4
+          if (isAbstract() && isNative()) {
+            problems.add(error("method may not be abstract and native"));
+          }
+          if (isAbstract() && isStrictfp()) {
+            problems.add(error("method may not be abstract and strictfp"));
+          }
+          if (isNative() && isStrictfp()) {
+            problems.add(error("method may not be native and strictfp"));
+          }
+          if (isDefault()) {
+            problems.add(error("non-interface methods may not use the default modifier"));
+          }
+        }
+        if (hostType().isInterfaceDecl()) {
+          // 9.4
+          if (isAbstract()) {
+            if (isStatic()) {
+              problems.add(errorf("interface method %s in %s can not be both abstract and static",
+                  signature(), hostType().typeName()));
+            }
+            if (isDefault()) {
+              problems.add(errorf("interface method %s in %s can not be both abstract and default",
+                  signature(), hostType().typeName()));
+            }
+            if (isStrictfp()) {
+              problems.add(errorf("interface method %s in %s can not be both abstract and strictfp",
+                  signature(), hostType().typeName()));
+            }
+          }
+          if (isStatic() && isDefault()) {
+            problems.add(errorf("interface method %s in %s can not be both static and default",
+                signature(), hostType().typeName()));
+          }
+          if (isNative()) {
+            problems.add(errorf("interface method %s in %s may not be native",
+                signature(), hostType().typeName()));
+          }
+          if (isSynchronized()) {
+            problems.add(errorf("interface method %s in %s may not be synchronized",
+                signature(), hostType().typeName()));
+          }
+          if (isProtected()) {
+            problems.add(errorf("interface method %s in %s may not be protected",
+                signature(), hostType().typeName()));
+          }
+          if (isPrivate()) {
+            problems.add(errorf("interface method %s in %s may not be private",
+                signature(), hostType().typeName()));
+          } else if (isFinal()) {
+            problems.add(errorf("interface method %s in %s may not be final",
+                signature(), hostType().typeName()));
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:249
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:249")
+  public boolean isSynthetic() {
+    boolean isSynthetic_value = getModifiers().isSynthetic();
+    return isSynthetic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:259
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:259")
+  public boolean isPublic() {
+    boolean isPublic_value = getModifiers().isPublic() || hostType().isInterfaceDecl();
+    return isPublic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:260
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:260")
+  public boolean isPrivate() {
+    boolean isPrivate_value = getModifiers().isPrivate();
+    return isPrivate_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:261
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:261")
+  public boolean isProtected() {
+    boolean isProtected_value = getModifiers().isProtected();
+    return isProtected_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:262
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:262")
+  public boolean isAbstract() {
+    {
+        return getModifiers().isAbstract() || (hostType().isInterfaceDecl() && !isStatic() && !isDefault());
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:263
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:263")
+  public boolean isStatic() {
+    boolean isStatic_value = getModifiers().isStatic();
+    return isStatic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:266
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:266")
+  public boolean isFinal() {
+    boolean isFinal_value = getModifiers().isFinal() || hostType().isFinal() || isPrivate();
+    return isFinal_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:268
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:268")
+  public boolean isSynchronized() {
+    boolean isSynchronized_value = getModifiers().isSynchronized();
+    return isSynchronized_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:269
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:269")
+  public boolean isNative() {
+    boolean isNative_value = getModifiers().isNative();
+    return isNative_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:270
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:270")
+  public boolean isStrictfp() {
+    boolean isStrictfp_value = getModifiers().isStrictfp();
+    return isStrictfp_value;
+  }
+  /** @apilevel internal */
+  private void parameterDeclaration_String_reset() {
+    parameterDeclaration_String_computed = new java.util.HashMap(4);
+    parameterDeclaration_String_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map parameterDeclaration_String_values;
+  /** @apilevel internal */
+  protected java.util.Map parameterDeclaration_String_computed;
+  /** @return the first variable declaration with the given name. 
+   * @attribute syn
+   * @aspect VariableScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:174
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:174")
+  public SimpleSet<Variable> parameterDeclaration(String name) {
+    Object _parameters = name;
+    if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
+    if (parameterDeclaration_String_values == null) parameterDeclaration_String_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (parameterDeclaration_String_values.containsKey(_parameters) && parameterDeclaration_String_computed != null
+        && parameterDeclaration_String_computed.containsKey(_parameters)
+        && (parameterDeclaration_String_computed.get(_parameters) == ASTNode$State.NON_CYCLE || parameterDeclaration_String_computed.get(_parameters) == state().cycle())) {
+      return (SimpleSet<Variable>) parameterDeclaration_String_values.get(_parameters);
     }
+    SimpleSet<Variable> parameterDeclaration_String_value = parameterDeclaration_compute(name);
+    if (state().inCircle()) {
+      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
+      parameterDeclaration_String_computed.put(_parameters, state().cycle());
+    
+    } else {
+      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
+      parameterDeclaration_String_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return parameterDeclaration_String_value;
+  }
+  /** @apilevel internal */
+  private SimpleSet<Variable> parameterDeclaration_compute(String name) {
+      for (int i = 0; i < getNumParameter(); i++) {
+        if (getParameter(i).name().equals(name)) {
+          return (ParameterDeclaration) getParameter(i);
+        }
+      }
+      return emptySet();
+    }
+  /**
+   * @attribute syn
+   * @aspect NameCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:147
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:147")
+  public Collection<Problem> nameProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        // 8.4
+        // 8.4.2
+        if (hostType().methodsSignature(signature()).size() > 1) {
+          problems.add(errorf("method with signature %s is multiply declared in type %s", signature(),
+              hostType().typeName()));
+        }
+        // 8.4.3.4
+        if (isNative() && hasBlock()) {
+          problems.add(error("native methods must have an empty semicolon body"));
+        }
+        // 8.4.5
+        if (isAbstract() && hasBlock()) {
+          problems.add(error("abstract methods must have an empty semicolon body"));
+        }
+        // 8.4.5
+        if (!hasBlock() && !(isNative() || isAbstract())) {
+          problems.add(error("only abstract and native methods may have an empty semicolon body"));
+        }
+        return problems;
+      }
+  }
   /**
    * @attribute syn
    * @aspect MethodDecl
@@ -1432,278 +1744,16 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     }
     return hides_MethodDecl_value;
   }
-  /** @apilevel internal */
-  private void parameterDeclaration_String_reset() {
-    parameterDeclaration_String_computed = new java.util.HashMap(4);
-    parameterDeclaration_String_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map parameterDeclaration_String_values;
-  /** @apilevel internal */
-  protected java.util.Map parameterDeclaration_String_computed;
-  /** @return the first variable declaration with the given name. 
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:174
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:174")
-  public SimpleSet<Variable> parameterDeclaration(String name) {
-    Object _parameters = name;
-    if (parameterDeclaration_String_computed == null) parameterDeclaration_String_computed = new java.util.HashMap(4);
-    if (parameterDeclaration_String_values == null) parameterDeclaration_String_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (parameterDeclaration_String_values.containsKey(_parameters) && parameterDeclaration_String_computed != null
-        && parameterDeclaration_String_computed.containsKey(_parameters)
-        && (parameterDeclaration_String_computed.get(_parameters) == ASTNode$State.NON_CYCLE || parameterDeclaration_String_computed.get(_parameters) == state().cycle())) {
-      return (SimpleSet<Variable>) parameterDeclaration_String_values.get(_parameters);
-    }
-    SimpleSet<Variable> parameterDeclaration_String_value = parameterDeclaration_compute(name);
-    if (state().inCircle()) {
-      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
-      parameterDeclaration_String_computed.put(_parameters, state().cycle());
-    
-    } else {
-      parameterDeclaration_String_values.put(_parameters, parameterDeclaration_String_value);
-      parameterDeclaration_String_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return parameterDeclaration_String_value;
-  }
-  /** @apilevel internal */
-  private SimpleSet<Variable> parameterDeclaration_compute(String name) {
-      for (int i = 0; i < getNumParameter(); i++) {
-        if (getParameter(i).name().equals(name)) {
-          return (ParameterDeclaration) getParameter(i);
-        }
-      }
-      return emptySet();
-    }
   /**
    * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:152
+   * @aspect ErrorCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:152")
-  public Collection<Problem> modifierProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        if (hostType().isClassDecl()) {
-          // 8.4.3.1
-          if (!hostType().isEnumDecl() && isAbstract() && !hostType().isAbstract()) {
-            problems.add(error("class must be abstract to include abstract methods"));
-          }
-          // 8.4.3.1
-          if (isAbstract() && isPrivate()) {
-            problems.add(error("method may not be abstract and private"));
-          }
-          // 8.4.3.1
-          // 8.4.3.2
-          if (isAbstract() && isStatic()) {
-            problems.add(error("method may not be abstract and static"));
-          }
-          if (isAbstract() && isSynchronized()) {
-            problems.add(error("method may not be abstract and synchronized"));
-          }
-          // 8.4.3.4
-          if (isAbstract() && isNative()) {
-            problems.add(error("method may not be abstract and native"));
-          }
-          if (isAbstract() && isStrictfp()) {
-            problems.add(error("method may not be abstract and strictfp"));
-          }
-          if (isNative() && isStrictfp()) {
-            problems.add(error("method may not be native and strictfp"));
-          }
-          if (isDefault()) {
-            problems.add(error("non-interface methods may not use the default modifier"));
-          }
-        }
-        if (hostType().isInterfaceDecl()) {
-          // 9.4
-          if (isAbstract()) {
-            if (isStatic()) {
-              problems.add(errorf("interface method %s in %s can not be both abstract and static",
-                  signature(), hostType().typeName()));
-            }
-            if (isDefault()) {
-              problems.add(errorf("interface method %s in %s can not be both abstract and default",
-                  signature(), hostType().typeName()));
-            }
-            if (isStrictfp()) {
-              problems.add(errorf("interface method %s in %s can not be both abstract and strictfp",
-                  signature(), hostType().typeName()));
-            }
-          }
-          if (isStatic() && isDefault()) {
-            problems.add(errorf("interface method %s in %s can not be both static and default",
-                signature(), hostType().typeName()));
-          }
-          if (isNative()) {
-            problems.add(errorf("interface method %s in %s may not be native",
-                signature(), hostType().typeName()));
-          }
-          if (isSynchronized()) {
-            problems.add(errorf("interface method %s in %s may not be synchronized",
-                signature(), hostType().typeName()));
-          }
-          if (isProtected()) {
-            problems.add(errorf("interface method %s in %s may not be protected",
-                signature(), hostType().typeName()));
-          }
-          if (isPrivate()) {
-            problems.add(errorf("interface method %s in %s may not be private",
-                signature(), hostType().typeName()));
-          } else if (isFinal()) {
-            problems.add(errorf("interface method %s in %s may not be final",
-                signature(), hostType().typeName()));
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:249
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:249")
-  public boolean isSynthetic() {
-    boolean isSynthetic_value = getModifiers().isSynthetic();
-    return isSynthetic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:259
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:259")
-  public boolean isPublic() {
-    boolean isPublic_value = getModifiers().isPublic() || hostType().isInterfaceDecl();
-    return isPublic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:260
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:260")
-  public boolean isPrivate() {
-    boolean isPrivate_value = getModifiers().isPrivate();
-    return isPrivate_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:261
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:261")
-  public boolean isProtected() {
-    boolean isProtected_value = getModifiers().isProtected();
-    return isProtected_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:262
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:262")
-  public boolean isAbstract() {
-    {
-        return getModifiers().isAbstract() || (hostType().isInterfaceDecl() && !isStatic() && !isDefault());
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:263
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:263")
-  public boolean isStatic() {
-    boolean isStatic_value = getModifiers().isStatic();
-    return isStatic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:266
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:266")
-  public boolean isFinal() {
-    boolean isFinal_value = getModifiers().isFinal() || hostType().isFinal() || isPrivate();
-    return isFinal_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:268
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:268")
-  public boolean isSynchronized() {
-    boolean isSynchronized_value = getModifiers().isSynchronized();
-    return isSynchronized_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:269
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:269")
-  public boolean isNative() {
-    boolean isNative_value = getModifiers().isNative();
-    return isNative_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:270
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:270")
-  public boolean isStrictfp() {
-    boolean isStrictfp_value = getModifiers().isStrictfp();
-    return isStrictfp_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:147
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:147")
-  public Collection<Problem> nameProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        // 8.4
-        // 8.4.2
-        if (hostType().methodsSignature(signature()).size() > 1) {
-          problems.add(errorf("method with signature %s is multiply declared in type %s", signature(),
-              hostType().typeName()));
-        }
-        // 8.4.3.4
-        if (isNative() && hasBlock()) {
-          problems.add(error("native methods must have an empty semicolon body"));
-        }
-        // 8.4.5
-        if (isAbstract() && hasBlock()) {
-          problems.add(error("abstract methods must have an empty semicolon body"));
-        }
-        // 8.4.5
-        if (!hasBlock() && !(isNative() || isAbstract())) {
-          problems.add(error("only abstract and native methods may have an empty semicolon body"));
-        }
-        return problems;
-      }
+  @ASTNodeAnnotation.Source(aspect="ErrorCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ErrorCheck.jrag:46")
+  public int lineNumber() {
+    int lineNumber_value = getLine(IDstart);
+    return lineNumber_value;
   }
   /**
    * @attribute syn
@@ -1773,53 +1823,36 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   /**
    * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:514
+   * @aspect GenericsParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:98
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:514")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        // Thrown vs super class method see MethodDecl.nameCheck.
-        // 8.4.4
-        TypeDecl exceptionType = typeThrowable();
-        for (int i = 0; i < getNumException(); i++) {
-          TypeDecl typeDecl = getException(i).type();
-          if (!typeDecl.instanceOf(exceptionType)) {
-            problems.add(errorf("%s throws non throwable type %s", signature(), typeDecl.fullName()));
-          }
-        }
-        // Check returns.
-        if (!isVoid() && hasBlock() && getBlock().canCompleteNormally()) {
-          problems.add(error("the body of a non void method may not complete normally"));
-        }
-        return problems;
-      }
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:98")
+  public boolean visibleTypeParameters() {
+    boolean visibleTypeParameters_value = !isStatic();
+    return visibleTypeParameters_value;
   }
   /**
    * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:387
+   * @aspect VariableArityParameters
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:53
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:387")
-  public boolean mayOverride(MethodDecl m) {
-    {
-        // 9.4.3
-        if (isDefault() && m.hostType().isType("java.lang", "Object") && !m.isPrivate()) {
-          return false;
-        } else {
-          MethodDecl self = this;
-          if (self.isGeneric()) {
-            self = genericDecl().rawMethodDecl();
-          }
-          if (m.isGeneric()) {
-            m = m.genericDecl().rawMethodDecl();
-          }
-          return self.returnTypeSubstitutableFor(m);
-        }
-      }
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:53")
+  public boolean isVariableArity() {
+    boolean isVariableArity_value = getNumParameter() > 0 && getParameter(getNumParameter() - 1).isVariableArity();
+    return isVariableArity_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect VariableArityParameters
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:63
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:63")
+  public ParameterDeclaration lastParameter() {
+    ParameterDeclaration lastParameter_value = getParameter(getNumParameter() - 1);
+    return lastParameter_value;
   }
   /**
    * @attribute syn
@@ -1943,17 +1976,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return sourceMethodDecl_value;
   }
   /**
-   * @attribute syn
-   * @aspect GenericsParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:98
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:98")
-  public boolean visibleTypeParameters() {
-    boolean visibleTypeParameters_value = !isStatic();
-    return visibleTypeParameters_value;
-  }
-  /**
    * Note: isGeneric must be called first to check if this declaration is generic.
    * Otherwise this attribute will throw an error!
    * @return the original generic declaration of this method.
@@ -1978,28 +2000,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   public int arity() {
     int arity_value = getNumParameter();
     return arity_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:53
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:53")
-  public boolean isVariableArity() {
-    boolean isVariableArity_value = getNumParameter() > 0 && getParameter(getNumParameter() - 1).isVariableArity();
-    return isVariableArity_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:63
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:63")
-  public ParameterDeclaration lastParameter() {
-    ParameterDeclaration lastParameter_value = getParameter(getNumParameter() - 1);
-    return lastParameter_value;
   }
   /**
    * @return true if the modifier list includes the SafeVarargs annotation
@@ -2036,17 +2036,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   public boolean suppressWarnings(String type) {
     boolean suppressWarnings_String_value = hasAnnotationSuppressWarnings(type) || withinSuppressWarnings(type);
     return suppressWarnings_String_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40")
-  public boolean modifiedInScope(Variable var) {
-    boolean modifiedInScope_Variable_value = hasBlock() && getBlock().modifiedInScope(var);
-    return modifiedInScope_Variable_value;
   }
   /** @apilevel internal */
   private void subsignatureTo_MethodDecl_reset() {
@@ -2155,17 +2144,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
       }
     }
   /**
-   * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Modifiers.jrag:31
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Modifiers.jrag:31")
-  public boolean isDefault() {
-    boolean isDefault_value = getModifiers().isDefault();
-    return isDefault_value;
-  }
-  /**
    * If the method is parameterized, this returns the non-wildcard parameterization
    * according to the rules specified in JLS 8 &sect;9.9.
    * @attribute syn
@@ -2178,197 +2156,27 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     MethodDecl nonWildcardParameterization_value = this;
     return nonWildcardParameterization_value;
   }
-  /** @apilevel internal */
-  private void attributes_reset() {
-    attributes_computed = null;
-    attributes_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle attributes_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<Attribute> attributes_value;
-
   /**
    * @attribute syn
-   * @aspect Attributes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Modifiers.jrag:31
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259")
-  public Collection<Attribute> attributes() {
-    ASTNode$State state = state();
-    if (attributes_computed == ASTNode$State.NON_CYCLE || attributes_computed == state().cycle()) {
-      return attributes_value;
-    }
-    attributes_value = attributes_compute();
-    if (state().inCircle()) {
-      attributes_computed = state().cycle();
-    
-    } else {
-      attributes_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return attributes_value;
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/Modifiers.jrag:31")
+  public boolean isDefault() {
+    boolean isDefault_value = getModifiers().isDefault();
+    return isDefault_value;
   }
-  /** @apilevel internal */
-  private Collection<Attribute> attributes_compute() {
-      Collection<Attribute> attributes = refined_AnnotationsCodegen_MethodDecl_attributes();
-      if (needsSignatureAttribute()) {
-        attributes.add(new SignatureAttribute(hostType().constantPool(), methodTypeSignature()));
-      }
-      return attributes;
-    }
-  /** @apilevel internal */
-  private void descName_reset() {
-    descName_computed = null;
-    descName_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle descName_computed = null;
-
-  /** @apilevel internal */
-  protected String descName_value;
-
   /**
    * @attribute syn
-   * @aspect ConstantPoolNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:117
+   * @aspect PreciseRethrow
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:117")
-  public String descName() {
-    ASTNode$State state = state();
-    if (descName_computed == ASTNode$State.NON_CYCLE || descName_computed == state().cycle()) {
-      return descName_value;
-    }
-    descName_value = descName_compute();
-    if (state().inCircle()) {
-      descName_computed = state().cycle();
-    
-    } else {
-      descName_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return descName_value;
-  }
-  /** @apilevel internal */
-  private String descName_compute() {
-      StringBuilder b = new StringBuilder();
-      b.append("(");
-      for (int i=0; i<getNumParameter(); i++) {
-        b.append(getParameter(i).type().typeDescriptor());
-      }
-      b.append(")");
-      if (type().elementType().isUnknown()) {
-        System.err.println(getTypeAccess().dumpTree());
-        throw new Error("Error generating descName for " + signature()
-            + ", did not expect unknown return type");
-      }
-      b.append(type().typeDescriptor());
-      return b.toString();
-    }
-  /** @apilevel internal */
-  private void bytecodes_ConstantPool_reset() {
-    bytecodes_ConstantPool_computed = new java.util.HashMap(4);
-    bytecodes_ConstantPool_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map bytecodes_ConstantPool_values;
-  /** @apilevel internal */
-  protected java.util.Map bytecodes_ConstantPool_computed;
-  /**
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:132
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:132")
-  public CodeGeneration bytecodes(ConstantPool constantPool) {
-    Object _parameters = constantPool;
-    if (bytecodes_ConstantPool_computed == null) bytecodes_ConstantPool_computed = new java.util.HashMap(4);
-    if (bytecodes_ConstantPool_values == null) bytecodes_ConstantPool_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (bytecodes_ConstantPool_values.containsKey(_parameters) && bytecodes_ConstantPool_computed != null
-        && bytecodes_ConstantPool_computed.containsKey(_parameters)
-        && (bytecodes_ConstantPool_computed.get(_parameters) == ASTNode$State.NON_CYCLE || bytecodes_ConstantPool_computed.get(_parameters) == state().cycle())) {
-      return (CodeGeneration) bytecodes_ConstantPool_values.get(_parameters);
-    }
-    CodeGeneration bytecodes_ConstantPool_value = bytecodes_compute(constantPool);
-    if (state().inCircle()) {
-      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
-      bytecodes_ConstantPool_computed.put(_parameters, state().cycle());
-    
-    } else {
-      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
-      bytecodes_ConstantPool_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return bytecodes_ConstantPool_value;
-  }
-  /** @apilevel internal */
-  private CodeGeneration bytecodes_compute(ConstantPool constantPool) {
-      BodyRootNode.add(this);
-      CodeGeneration gen = new CodeGeneration(constantPool, name(), descName(), hostType().typeName(), destination_compute());
-      try {
-        generateBytecodes(gen);
-      } catch (CodeGeneration.JumpOffsetError e) {
-        // Retry with wide gotos.
-        gen = new CodeGeneration(constantPool, true, name(), descName(), hostType().typeName(), destination_compute());
-        generateBytecodes(gen);
-      }
-      return gen;
-    }
-  /** @apilevel internal */
-  private void flags_reset() {
-    flags_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle flags_computed = null;
-
-  /** @apilevel internal */
-  protected int flags_value;
-
-  /**
-   * @attribute syn
-   * @aspect Flags
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:60")
-  public int flags() {
-    ASTNode$State state = state();
-    if (flags_computed == ASTNode$State.NON_CYCLE || flags_computed == state().cycle()) {
-      return flags_value;
-    }
-    flags_value = flags_compute();
-    if (state().inCircle()) {
-      flags_computed = state().cycle();
-    
-    } else {
-      flags_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return flags_value;
-  }
-  /** @apilevel internal */
-  private int flags_compute() {
-      int res = refined_Flags_MethodDecl_flags();
-      if (isVariableArity()) {
-        res |= Modifiers.ACC_VARARGS;
-      }
-      return res;
-    }
-  /**
-   * @attribute syn
-   * @aspect GenerateClassfile
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455")
-  public boolean isMethodOrConstructor() {
-    boolean isMethodOrConstructor_value = true;
-    return isMethodOrConstructor_value;
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:40")
+  public boolean modifiedInScope(Variable var) {
+    boolean modifiedInScope_Variable_value = hasBlock() && getBlock().modifiedInScope(var);
+    return modifiedInScope_Variable_value;
   }
   /** @apilevel internal */
   private void offsetBeforeParameters_reset() {
@@ -2475,6 +2283,198 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     }
     return resultOffset_value;
   }
+  /** @apilevel internal */
+  private void attributes_reset() {
+    attributes_computed = null;
+    attributes_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle attributes_computed = null;
+
+  /** @apilevel internal */
+  protected Collection<Attribute> attributes_value;
+
+  /**
+   * @attribute syn
+   * @aspect Attributes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Attributes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Attributes.jrag:259")
+  public Collection<Attribute> attributes() {
+    ASTNode$State state = state();
+    if (attributes_computed == ASTNode$State.NON_CYCLE || attributes_computed == state().cycle()) {
+      return attributes_value;
+    }
+    attributes_value = attributes_compute();
+    if (state().inCircle()) {
+      attributes_computed = state().cycle();
+    
+    } else {
+      attributes_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return attributes_value;
+  }
+  /** @apilevel internal */
+  private Collection<Attribute> attributes_compute() {
+      Collection<Attribute> attributes = refined_AnnotationsCodegen_MethodDecl_attributes();
+      if (needsSignatureAttribute()) {
+        attributes.add(new SignatureAttribute(hostType().constantPool(), methodTypeSignature()));
+      }
+      return attributes;
+    }
+  /** @apilevel internal */
+  private void flags_reset() {
+    flags_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle flags_computed = null;
+
+  /** @apilevel internal */
+  protected int flags_value;
+
+  /**
+   * @attribute syn
+   * @aspect Flags
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Flags", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Flags.jrag:60")
+  public int flags() {
+    ASTNode$State state = state();
+    if (flags_computed == ASTNode$State.NON_CYCLE || flags_computed == state().cycle()) {
+      return flags_value;
+    }
+    flags_value = flags_compute();
+    if (state().inCircle()) {
+      flags_computed = state().cycle();
+    
+    } else {
+      flags_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return flags_value;
+  }
+  /** @apilevel internal */
+  private int flags_compute() {
+      int res = refined_Flags_MethodDecl_flags();
+      if (isVariableArity()) {
+        res |= Modifiers.ACC_VARARGS;
+      }
+      return res;
+    }
+  /** @apilevel internal */
+  private void bytecodes_ConstantPool_reset() {
+    bytecodes_ConstantPool_computed = new java.util.HashMap(4);
+    bytecodes_ConstantPool_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map bytecodes_ConstantPool_values;
+  /** @apilevel internal */
+  protected java.util.Map bytecodes_ConstantPool_computed;
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:132
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:132")
+  public CodeGeneration bytecodes(ConstantPool constantPool) {
+    Object _parameters = constantPool;
+    if (bytecodes_ConstantPool_computed == null) bytecodes_ConstantPool_computed = new java.util.HashMap(4);
+    if (bytecodes_ConstantPool_values == null) bytecodes_ConstantPool_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (bytecodes_ConstantPool_values.containsKey(_parameters) && bytecodes_ConstantPool_computed != null
+        && bytecodes_ConstantPool_computed.containsKey(_parameters)
+        && (bytecodes_ConstantPool_computed.get(_parameters) == ASTNode$State.NON_CYCLE || bytecodes_ConstantPool_computed.get(_parameters) == state().cycle())) {
+      return (CodeGeneration) bytecodes_ConstantPool_values.get(_parameters);
+    }
+    CodeGeneration bytecodes_ConstantPool_value = bytecodes_compute(constantPool);
+    if (state().inCircle()) {
+      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
+      bytecodes_ConstantPool_computed.put(_parameters, state().cycle());
+    
+    } else {
+      bytecodes_ConstantPool_values.put(_parameters, bytecodes_ConstantPool_value);
+      bytecodes_ConstantPool_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return bytecodes_ConstantPool_value;
+  }
+  /** @apilevel internal */
+  private CodeGeneration bytecodes_compute(ConstantPool constantPool) {
+      BodyRootNode.add(this);
+      CodeGeneration gen = new CodeGeneration(constantPool, name(), descName(), hostType().typeName(), destination_compute());
+      try {
+        generateBytecodes(gen);
+      } catch (CodeGeneration.JumpOffsetError e) {
+        // Retry with wide gotos.
+        gen = new CodeGeneration(constantPool, true, name(), descName(), hostType().typeName(), destination_compute());
+        generateBytecodes(gen);
+      }
+      return gen;
+    }
+  /**
+   * @attribute syn
+   * @aspect GenerateClassfile
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenerateClassfile", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/GenerateClassfile.jrag:455")
+  public boolean isMethodOrConstructor() {
+    boolean isMethodOrConstructor_value = true;
+    return isMethodOrConstructor_value;
+  }
+  /** @apilevel internal */
+  private void descName_reset() {
+    descName_computed = null;
+    descName_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle descName_computed = null;
+
+  /** @apilevel internal */
+  protected String descName_value;
+
+  /**
+   * @attribute syn
+   * @aspect ConstantPoolNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:117
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantPoolNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/ConstantPoolNames.jrag:117")
+  public String descName() {
+    ASTNode$State state = state();
+    if (descName_computed == ASTNode$State.NON_CYCLE || descName_computed == state().cycle()) {
+      return descName_value;
+    }
+    descName_value = descName_compute();
+    if (state().inCircle()) {
+      descName_computed = state().cycle();
+    
+    } else {
+      descName_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return descName_value;
+  }
+  /** @apilevel internal */
+  private String descName_compute() {
+      StringBuilder b = new StringBuilder();
+      b.append("(");
+      for (int i=0; i<getNumParameter(); i++) {
+        b.append(getParameter(i).type().typeDescriptor());
+      }
+      b.append(")");
+      if (type().elementType().isUnknown()) {
+        System.err.println(getTypeAccess().dumpTree());
+        throw new Error("Error generating descName for " + signature()
+            + ", did not expect unknown return type");
+      }
+      b.append(type().typeDescriptor());
+      return b.toString();
+    }
   /**
    * @attribute syn
    * @aspect GenericsCodegen
@@ -2578,6 +2578,89 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return withinSuppressWarnings_String_value;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
+   * @apilevel internal
+   */
+  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:92
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return true;
+    }
+    else {
+      return getParent().Define_isMethodParameter(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
+   * @apilevel internal
+   */
+  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:93
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
+    }
+    else {
+      return getParent().Define_isConstructorParameter(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
+   * @apilevel internal
+   */
+  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:94
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return false;
+    }
+    else {
+      return getParent().Define_isExceptionHandlerParameter(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
+   * @apilevel internal
+   */
+  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    if (_callerNode == getBlockOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:201
+      return throwsException(exceptionType);
+    }
+    else {
+      return getParent().Define_handlesException(this, _callerNode, exceptionType);
+    }
+  }
+  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
+   * @apilevel internal
+   */
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getBlockOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:62
+      return true;
+    }
+    else {
+      return getParent().Define_reachable(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
    * @apilevel internal
    */
@@ -2610,48 +2693,35 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
    * @apilevel internal
    */
-  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:201
-      return throwsException(exceptionType);
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:215
+      return isStatic();
     }
     else {
-      return getParent().Define_handlesException(this, _callerNode, exceptionType);
+      return getParent().Define_inStaticContext(this, _callerNode);
     }
   }
-  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
    * @apilevel internal
    */
-  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:76
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return parameterDeclaration(name);
-    }
-    else if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:64
-      {
-          SimpleSet<Variable> result = parameterDeclaration(name);
-          // A declaration of a method parameter name shadows any other variable declarations.
-          if (!result.isEmpty()) {
-            return result;
-          }
-          // Delegate to other declarations in scope.
-          return lookupVariable(name);
-        }
+  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getBlockOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:536
+      return type();
     }
     else {
-      return getParent().Define_lookupVariable(this, _callerNode, name);
+      return getParent().Define_returnType(this, _callerNode);
     }
   }
-  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2799,6 +2869,35 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
+   * @apilevel internal
+   */
+  public SimpleSet<Variable> Define_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    if (_callerNode == getParameterListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:76
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return parameterDeclaration(name);
+    }
+    else if (_callerNode == getBlockOptNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:64
+      {
+          SimpleSet<Variable> result = parameterDeclaration(name);
+          // A declaration of a method parameter name shadows any other variable declarations.
+          if (!result.isEmpty()) {
+            return result;
+          }
+          // Delegate to other declarations in scope.
+          return lookupVariable(name);
+        }
+    }
+    else {
+      return getParent().Define_lookupVariable(this, _callerNode, name);
+    }
+  }
+  protected boolean canDefine_lookupVariable(ASTNode _callerNode, ASTNode _childNode, String name) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:356
    * @apilevel internal
    */
@@ -2841,102 +2940,20 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    */
-  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:536
-      return type();
-    }
-    else {
-      return getParent().Define_returnType(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
-   * @apilevel internal
-   */
-  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:215
-      return isStatic();
-    }
-    else {
-      return getParent().Define_inStaticContext(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
-   * @apilevel internal
-   */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getBlockOptNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:62
-      return true;
-    }
-    else {
-      return getParent().Define_reachable(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:44
-   * @apilevel internal
-   */
-  public boolean Define_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:92
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return true;
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:42
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return i == getNumParameter() - 1;
     }
     else {
-      return getParent().Define_isMethodParameter(this, _callerNode);
+      return getParent().Define_variableArityValid(this, _callerNode);
     }
   }
-  protected boolean canDefine_isMethodParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:45
-   * @apilevel internal
-   */
-  public boolean Define_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:93
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
-    }
-    else {
-      return getParent().Define_isConstructorParameter(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_isConstructorParameter(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/MultiCatch.jrag:46
-   * @apilevel internal
-   */
-  public boolean Define_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:94
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return false;
-    }
-    else {
-      return getParent().Define_isExceptionHandlerParameter(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_isExceptionHandlerParameter(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -2956,17 +2973,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:566
-   * @apilevel internal
-   */
-  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return false;
-  }
-  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:789
    * @apilevel internal
    */
@@ -2978,20 +2984,14 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:566
    * @apilevel internal
    */
-  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:42
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return i == getNumParameter() - 1;
-    }
-    else {
-      return getParent().Define_variableArityValid(this, _callerNode);
-    }
+  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return false;
   }
-  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -3081,6 +3081,15 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:512
+    {
+      java.util.Set<ASTNode> contributors = _map.get(_root);
+      if (contributors == null) {
+        contributors = new java.util.LinkedHashSet<ASTNode>();
+        _map.put((ASTNode) _root, contributors);
+      }
+      contributors.add(this);
+    }
     // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:150
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
@@ -3091,15 +3100,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
       contributors.add(this);
     }
     // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:145
-    {
-      java.util.Set<ASTNode> contributors = _map.get(_root);
-      if (contributors == null) {
-        contributors = new java.util.LinkedHashSet<ASTNode>();
-        _map.put((ASTNode) _root, contributors);
-      }
-      contributors.add(this);
-    }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:512
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -3126,13 +3126,13 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet<Metho
   }
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
+    for (Problem value : typeProblems()) {
+      collection.add(value);
+    }
     for (Problem value : modifierProblems()) {
       collection.add(value);
     }
     for (Problem value : nameProblems()) {
-      collection.add(value);
-    }
-    for (Problem value : typeProblems()) {
       collection.add(value);
     }
     if (!suppressWarnings("unchecked")

@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -576,6 +576,17 @@ public class VoidType extends TypeDecl implements Cloneable {
     boolean strictSupertypeVoidType_VoidType_value = true;
     return strictSupertypeVoidType_VoidType_value;
   }
+  /**
+   * @attribute syn
+   * @aspect Java2Rewrites
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:72
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:72")
+  public String primitiveClassName() {
+    String primitiveClassName_value = "Void";
+    return primitiveClassName_value;
+  }
   /** @apilevel internal */
   private void typeDescriptor_reset() {
     typeDescriptor_computed = null;
@@ -608,17 +619,6 @@ public class VoidType extends TypeDecl implements Cloneable {
     
     }
     return typeDescriptor_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Java2Rewrites
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:72
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:72")
-  public String primitiveClassName() {
-    String primitiveClassName_value = "Void";
-    return primitiveClassName_value;
   }
   /** @apilevel internal */
   private void fieldTypeSignature_reset() {

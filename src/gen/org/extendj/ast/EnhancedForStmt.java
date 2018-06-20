@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -814,6 +814,40 @@ public class EnhancedForStmt extends BranchTargetStmt implements Cloneable, Vari
     return lookupVariable_String_value;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1249
+   * @apilevel internal
+   */
+  public FieldDecl Define_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
+    if (getVariableDeclNoTransform() != null && _callerNode == getVariableDecl()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1255
+      return null;
+    }
+    else {
+      return getParent().Define_fieldDecl(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1509
+   * @apilevel internal
+   */
+  public FieldDeclarator Define_erasedField(ASTNode _callerNode, ASTNode _childNode) {
+    if (getVariableDeclNoTransform() != null && _callerNode == getVariableDecl()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1520
+      {
+          throw new Error("FieldDeclarator child of EnhancedForStmt");
+        }
+    }
+    else {
+      return getParent().Define_erasedField(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_erasedField(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/BranchTarget.jrag:230
    * @apilevel internal
    */
@@ -1054,40 +1088,6 @@ public class EnhancedForStmt extends BranchTargetStmt implements Cloneable, Vari
     }
   }
   protected boolean canDefine_insideLoop(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1249
-   * @apilevel internal
-   */
-  public FieldDecl Define_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
-    if (getVariableDeclNoTransform() != null && _callerNode == getVariableDecl()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1255
-      return null;
-    }
-    else {
-      return getParent().Define_fieldDecl(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_fieldDecl(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1509
-   * @apilevel internal
-   */
-  public FieldDeclarator Define_erasedField(ASTNode _callerNode, ASTNode _childNode) {
-    if (getVariableDeclNoTransform() != null && _callerNode == getVariableDecl()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1520
-      {
-          throw new Error("FieldDeclarator child of EnhancedForStmt");
-        }
-    }
-    else {
-      return getParent().Define_erasedField(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_erasedField(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**

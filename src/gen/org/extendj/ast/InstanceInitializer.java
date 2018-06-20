@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -78,9 +78,9 @@ public class InstanceInitializer extends BodyDecl implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    exceptions_reset();
     assignedAfter_Variable_reset();
     unassignedAfter_Variable_reset();
+    exceptions_reset();
     handlesException_TypeDecl_reset();
   }
   /** @apilevel internal 
@@ -197,51 +197,6 @@ public class InstanceInitializer extends BodyDecl implements Cloneable {
     return (Block) getChildNoTransform(0);
   }
   /** @apilevel internal */
-  private void exceptions_reset() {
-    exceptions_computed = null;
-    exceptions_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle exceptions_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<TypeDecl> exceptions_value;
-
-  /**
-   * @attribute syn
-   * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:111
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:111")
-  public Collection<TypeDecl> exceptions() {
-    ASTNode$State state = state();
-    if (exceptions_computed == ASTNode$State.NON_CYCLE || exceptions_computed == state().cycle()) {
-      return exceptions_value;
-    }
-    exceptions_value = exceptions_compute();
-    if (state().inCircle()) {
-      exceptions_computed = state().cycle();
-    
-    } else {
-      exceptions_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return exceptions_value;
-  }
-  /** @apilevel internal */
-  private Collection<TypeDecl> exceptions_compute() {
-      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
-      collectExceptions(exceptions, this);
-      for (Iterator<TypeDecl> iter = exceptions.iterator(); iter.hasNext(); ) {
-        TypeDecl exception = iter.next();
-        if (!getBlock().reachedException(exception)) {
-          iter.remove();
-        }
-      }
-      return exceptions;
-    }
-  /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
   }
@@ -343,6 +298,51 @@ public class InstanceInitializer extends BodyDecl implements Cloneable {
       return (Boolean) _value.value;
     }
   }
+  /** @apilevel internal */
+  private void exceptions_reset() {
+    exceptions_computed = null;
+    exceptions_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle exceptions_computed = null;
+
+  /** @apilevel internal */
+  protected Collection<TypeDecl> exceptions_value;
+
+  /**
+   * @attribute syn
+   * @aspect AnonymousClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:111
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:111")
+  public Collection<TypeDecl> exceptions() {
+    ASTNode$State state = state();
+    if (exceptions_computed == ASTNode$State.NON_CYCLE || exceptions_computed == state().cycle()) {
+      return exceptions_value;
+    }
+    exceptions_value = exceptions_compute();
+    if (state().inCircle()) {
+      exceptions_computed = state().cycle();
+    
+    } else {
+      exceptions_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return exceptions_value;
+  }
+  /** @apilevel internal */
+  private Collection<TypeDecl> exceptions_compute() {
+      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
+      collectExceptions(exceptions, this);
+      for (Iterator<TypeDecl> iter = exceptions.iterator(); iter.hasNext(); ) {
+        TypeDecl exception = iter.next();
+        if (!getBlock().reachedException(exception)) {
+          iter.remove();
+        }
+      }
+      return exceptions;
+    }
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
@@ -404,22 +404,6 @@ public class InstanceInitializer extends BodyDecl implements Cloneable {
   /** @apilevel internal */
   protected java.util.Map handlesException_TypeDecl_computed;
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
-   * @apilevel internal
-   */
-  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:553
-      return assignedBefore(v);
-    }
-    else {
-      return super.Define_assignedBefore(_callerNode, _childNode, v);
-    }
-  }
-  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
    * @apilevel internal
    */
@@ -446,19 +430,35 @@ public class InstanceInitializer extends BodyDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:356
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
    * @apilevel internal
    */
-  public ASTNode Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:359
-      return this;
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:64
+      return true;
     }
     else {
-      return getParent().Define_enclosingBlock(this, _callerNode);
+      return getParent().Define_reachable(this, _callerNode);
     }
   }
-  protected boolean canDefine_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:256
+   * @apilevel internal
+   */
+  public boolean Define_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:553
+      return assignedBefore(v);
+    }
+    else {
+      return super.Define_assignedBefore(_callerNode, _childNode, v);
+    }
+  }
+  protected boolean canDefine_assignedBefore(ASTNode _callerNode, ASTNode _childNode, Variable v) {
     return true;
   }
   /**
@@ -478,19 +478,19 @@ public class InstanceInitializer extends BodyDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:356
    * @apilevel internal
    */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+  public ASTNode Define_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
     if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:64
-      return true;
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:359
+      return this;
     }
     else {
-      return getParent().Define_reachable(this, _callerNode);
+      return getParent().Define_enclosingBlock(this, _callerNode);
     }
   }
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_enclosingBlock(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**

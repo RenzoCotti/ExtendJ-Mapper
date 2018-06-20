@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -145,9 +145,9 @@ public class ConstructorAccess extends Access implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
-    unassignedAfter_Variable_reset();
     decls_reset();
     decl_reset();
+    unassignedAfter_Variable_reset();
     type_reset();
     stmtCompatible_reset();
     transformedVariableArity_reset();
@@ -395,88 +395,6 @@ public class ConstructorAccess extends Access implements Cloneable {
 { return this; }
   /**
    * @attribute syn
-   * @aspect DefiniteAssignment
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268")
-  public boolean assignedAfter(Variable v) {
-    boolean assignedAfter_Variable_value = v.isField();
-    return assignedAfter_Variable_value;
-  }
-  /** @apilevel internal */
-  private void unassignedAfter_Variable_reset() {
-    unassignedAfter_Variable_values = null;
-  }
-  protected java.util.Map unassignedAfter_Variable_values;
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
-  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:903")
-  public boolean unassignedAfter(Variable v) {
-    Object _parameters = v;
-    if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
-    ASTNode$State.CircularValue _value;
-    if (unassignedAfter_Variable_values.containsKey(_parameters)) {
-      Object _cache = unassignedAfter_Variable_values.get(_parameters);
-      if (!(_cache instanceof ASTNode$State.CircularValue)) {
-        return (Boolean) _cache;
-      } else {
-        _value = (ASTNode$State.CircularValue) _cache;
-      }
-    } else {
-      _value = new ASTNode$State.CircularValue();
-      unassignedAfter_Variable_values.put(_parameters, _value);
-      _value.value = true;
-    }
-    ASTNode$State state = state();
-    if (!state.inCircle() || state.calledByLazyAttribute()) {
-      state.enterCircle();
-      boolean new_unassignedAfter_Variable_value;
-      do {
-        _value.cycle = state.nextCycle();
-        new_unassignedAfter_Variable_value = !v.isField();
-        if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
-          state.setChangeInCycle();
-          _value.value = new_unassignedAfter_Variable_value;
-        }
-      } while (state.testAndClearChangeInCycle());
-      unassignedAfter_Variable_values.put(_parameters, new_unassignedAfter_Variable_value);
-
-      state.leaveCircle();
-      return new_unassignedAfter_Variable_value;
-    } else if (_value.cycle != state.cycle()) {
-      _value.cycle = state.cycle();
-      boolean new_unassignedAfter_Variable_value = !v.isField();
-      if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
-        state.setChangeInCycle();
-        _value.value = new_unassignedAfter_Variable_value;
-      }
-      return new_unassignedAfter_Variable_value;
-    } else {
-      return (Boolean) _value.value;
-    }
-  }
-  /**
-   * @attribute syn
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:152
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:152")
-  public Collection<Problem> exceptionHandlingProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        for (Access exception : decl().getExceptionList()) {
-          TypeDecl exceptionType = exception.type();
-          if (exceptionType.isCheckedException() && !handlesException(exceptionType)) {
-            problems.add(errorf("%s may throw uncaught exception %s",
-                this.prettyPrint(), exceptionType.fullName()));
-          }
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
    * @aspect ConstructScope
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:85
    */
@@ -562,6 +480,88 @@ public class ConstructorAccess extends Access implements Cloneable {
     }
   /**
    * @attribute syn
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:152
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:152")
+  public Collection<Problem> exceptionHandlingProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        for (Access exception : decl().getExceptionList()) {
+          TypeDecl exceptionType = exception.type();
+          if (exceptionType.isCheckedException() && !handlesException(exceptionType)) {
+            problems.add(errorf("%s may throw uncaught exception %s",
+                this.prettyPrint(), exceptionType.fullName()));
+          }
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect DefiniteAssignment
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="DefiniteAssignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:268")
+  public boolean assignedAfter(Variable v) {
+    boolean assignedAfter_Variable_value = v.isField();
+    return assignedAfter_Variable_value;
+  }
+  /** @apilevel internal */
+  private void unassignedAfter_Variable_reset() {
+    unassignedAfter_Variable_values = null;
+  }
+  protected java.util.Map unassignedAfter_Variable_values;
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isCircular=true)
+  @ASTNodeAnnotation.Source(aspect="DefiniteUnassignment", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:903")
+  public boolean unassignedAfter(Variable v) {
+    Object _parameters = v;
+    if (unassignedAfter_Variable_values == null) unassignedAfter_Variable_values = new java.util.HashMap(4);
+    ASTNode$State.CircularValue _value;
+    if (unassignedAfter_Variable_values.containsKey(_parameters)) {
+      Object _cache = unassignedAfter_Variable_values.get(_parameters);
+      if (!(_cache instanceof ASTNode$State.CircularValue)) {
+        return (Boolean) _cache;
+      } else {
+        _value = (ASTNode$State.CircularValue) _cache;
+      }
+    } else {
+      _value = new ASTNode$State.CircularValue();
+      unassignedAfter_Variable_values.put(_parameters, _value);
+      _value.value = true;
+    }
+    ASTNode$State state = state();
+    if (!state.inCircle() || state.calledByLazyAttribute()) {
+      state.enterCircle();
+      boolean new_unassignedAfter_Variable_value;
+      do {
+        _value.cycle = state.nextCycle();
+        new_unassignedAfter_Variable_value = !v.isField();
+        if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
+          state.setChangeInCycle();
+          _value.value = new_unassignedAfter_Variable_value;
+        }
+      } while (state.testAndClearChangeInCycle());
+      unassignedAfter_Variable_values.put(_parameters, new_unassignedAfter_Variable_value);
+
+      state.leaveCircle();
+      return new_unassignedAfter_Variable_value;
+    } else if (_value.cycle != state.cycle()) {
+      _value.cycle = state.cycle();
+      boolean new_unassignedAfter_Variable_value = !v.isField();
+      if (new_unassignedAfter_Variable_value != ((Boolean)_value.value)) {
+        state.setChangeInCycle();
+        _value.value = new_unassignedAfter_Variable_value;
+      }
+      return new_unassignedAfter_Variable_value;
+    } else {
+      return (Boolean) _value.value;
+    }
+  }
+  /**
+   * @attribute syn
    * @aspect NameCheck
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:172
    */
@@ -603,17 +603,6 @@ public class ConstructorAccess extends Access implements Cloneable {
       }
   }
   /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:37
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:37")
-  public String name() {
-    String name_value = "this";
-    return name_value;
-  }
-  /**
    * Defines the expected kind of name for the left hand side in a qualified
    * expression.
    * @attribute syn
@@ -625,6 +614,17 @@ public class ConstructorAccess extends Access implements Cloneable {
   public NameType predNameType() {
     NameType predNameType_value = NameType.AMBIGUOUS_NAME;
     return predNameType_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:37
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:37")
+  public String name() {
+    String name_value = "this";
+    return name_value;
   }
   /** @apilevel internal */
   private void type_reset() {
@@ -661,17 +661,6 @@ public class ConstructorAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect MethodSignature15
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:498
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:498")
-  public int arity() {
-    int arity_value = getNumArg();
-    return arity_value;
-  }
-  /**
-   * @attribute syn
    * @aspect VariableArityParameters
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:75
    */
@@ -687,6 +676,17 @@ public class ConstructorAccess extends Access implements Cloneable {
         }
         return getArg(getNumArg()-1).type().methodInvocationConversionTo(decl().lastParameter().type());
       }
+  }
+  /**
+   * @attribute syn
+   * @aspect MethodSignature15
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:498
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="MethodSignature15", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/MethodSignature.jrag:498")
+  public int arity() {
+    int arity_value = getNumArg();
+    return arity_value;
   }
   /**
    * @attribute syn
@@ -739,17 +739,6 @@ public class ConstructorAccess extends Access implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:316
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:316")
-  public boolean needsPop() {
-    boolean needsPop_value = false;
-    return needsPop_value;
-  }
-  /**
-   * @attribute syn
    * @aspect Transformations
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Transformations.jrag:75
    */
@@ -763,6 +752,17 @@ public class ConstructorAccess extends Access implements Cloneable {
           return refined_Transformations_ConstructorAccess_transformed();
         }
       }
+  }
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:316
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:316")
+  public boolean needsPop() {
+    boolean needsPop_value = false;
+    return needsPop_value;
   }
   /** @apilevel internal */
   private void transformedVariableArity_reset() {
@@ -818,17 +818,6 @@ public class ConstructorAccess extends Access implements Cloneable {
     }
   /**
    * @attribute inh
-   * @aspect ExceptionHandling
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:89
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:89")
-  public boolean handlesException(TypeDecl exceptionType) {
-    boolean handlesException_TypeDecl_value = getParent().Define_handlesException(this, null, exceptionType);
-    return handlesException_TypeDecl_value;
-  }
-  /**
-   * @attribute inh
    * @aspect ConstructScope
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:35
    */
@@ -850,20 +839,59 @@ public class ConstructorAccess extends Access implements Cloneable {
     return unknownConstructor_value;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
+   * @attribute inh
+   * @aspect ExceptionHandling
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:89
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="ExceptionHandling", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ExceptionHandling.jrag:89")
+  public boolean handlesException(TypeDecl exceptionType) {
+    boolean handlesException_TypeDecl_value = getParent().Define_handlesException(this, null, exceptionType);
+    return handlesException_TypeDecl_value;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
    * @apilevel internal
    */
-  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return unqualifiedScope().methodHost();
+  }
+  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:188
+   * @apilevel internal
+   */
+  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:60
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:191
       int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return unqualifiedScope().lookupMethod(name);
+      return true;
     }
     else {
-      return getParent().Define_lookupMethod(this, _callerNode, name);
+      return getParent().Define_inExplicitConstructorInvocation(this, _callerNode);
     }
   }
-  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
+  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:196
+   * @apilevel internal
+   */
+  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getArgListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:200
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return hostType();
+    }
+    else {
+      return getParent().Define_enclosingExplicitConstructorHostType(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -935,48 +963,20 @@ public class ConstructorAccess extends Access implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:52
    * @apilevel internal
    */
-  public String Define_methodHost(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return unqualifiedScope().methodHost();
-  }
-  protected boolean canDefine_methodHost(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:188
-   * @apilevel internal
-   */
-  public boolean Define_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
+  public Collection<MethodDecl> Define_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:191
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:60
       int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return true;
+      return unqualifiedScope().lookupMethod(name);
     }
     else {
-      return getParent().Define_inExplicitConstructorInvocation(this, _callerNode);
+      return getParent().Define_lookupMethod(this, _callerNode, name);
     }
   }
-  protected boolean canDefine_inExplicitConstructorInvocation(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:196
-   * @apilevel internal
-   */
-  public TypeDecl Define_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getArgListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:200
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return hostType();
-    }
-    else {
-      return getParent().Define_enclosingExplicitConstructorHostType(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_enclosingExplicitConstructorHostType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_lookupMethod(ASTNode _callerNode, ASTNode _childNode, String name) {
     return true;
   }
   /**

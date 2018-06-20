@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -108,11 +108,11 @@ public class FieldDeclarator extends Declarator implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    constant_reset();
     accessibleFrom_TypeDecl_reset();
-    exceptions_reset();
     assignedAfter_Variable_reset();
     unassignedAfter_Variable_reset();
-    constant_reset();
+    exceptions_reset();
     usesTypeVariable_reset();
     isEffectivelyFinal_reset();
     attributes_reset();
@@ -445,6 +445,149 @@ public class FieldDeclarator extends Declarator implements Cloneable {
     getModifiers().addRuntimeInvisibleAnnotationsAttribute(attributes);
     return attributes;
   }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:55
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:55")
+  public boolean isParameter() {
+    boolean isParameter_value = false;
+    return isParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:57
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:57")
+  public boolean isClassVariable() {
+    boolean isClassVariable_value = isStatic() || hostType().isInterfaceDecl();
+    return isClassVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:58
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:58")
+  public boolean isInstanceVariable() {
+    boolean isInstanceVariable_value = (hostType().isClassDecl() || hostType().isAnonymous()) && !isStatic();
+    return isInstanceVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:60")
+  public boolean isMethodParameter() {
+    boolean isMethodParameter_value = false;
+    return isMethodParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:61
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:61")
+  public boolean isConstructorParameter() {
+    boolean isConstructorParameter_value = false;
+    return isConstructorParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:62
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:62")
+  public boolean isExceptionHandlerParameter() {
+    boolean isExceptionHandlerParameter_value = false;
+    return isExceptionHandlerParameter_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:63
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:63")
+  public boolean isLocalVariable() {
+    boolean isLocalVariable_value = false;
+    return isLocalVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:64
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:64")
+  public boolean isField() {
+    boolean isField_value = true;
+    return isField_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:66
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:66")
+  public boolean isBlank() {
+    boolean isBlank_value = !hasInit();
+    return isBlank_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:68
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:68")
+  public String name() {
+    String name_value = getID();
+    return name_value;
+  }
+  /** @apilevel internal */
+  private void constant_reset() {
+    constant_computed = null;
+    constant_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle constant_computed = null;
+
+  /** @apilevel internal */
+  protected Constant constant_value;
+
+  /**
+   * @attribute syn
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:69
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:69")
+  public Constant constant() {
+    ASTNode$State state = state();
+    if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
+      return constant_value;
+    }
+    constant_value = type().cast(getInit().constant());
+    if (state().inCircle()) {
+      constant_computed = state().cycle();
+    
+    } else {
+      constant_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return constant_value;
+  }
   /** @apilevel internal */
   private void accessibleFrom_TypeDecl_reset() {
     accessibleFrom_TypeDecl_computed = new java.util.HashMap(4);
@@ -500,53 +643,6 @@ public class FieldDeclarator extends Declarator implements Cloneable {
       } else {
         return hostPackage().equals(type.hostPackage());
       }
-    }
-  /** @apilevel internal */
-  private void exceptions_reset() {
-    exceptions_computed = null;
-    exceptions_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle exceptions_computed = null;
-
-  /** @apilevel internal */
-  protected Collection<TypeDecl> exceptions_value;
-
-  /**
-   * @attribute syn
-   * @aspect AnonymousClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:97
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:97")
-  public Collection<TypeDecl> exceptions() {
-    ASTNode$State state = state();
-    if (exceptions_computed == ASTNode$State.NON_CYCLE || exceptions_computed == state().cycle()) {
-      return exceptions_value;
-    }
-    exceptions_value = exceptions_compute();
-    if (state().inCircle()) {
-      exceptions_computed = state().cycle();
-    
-    } else {
-      exceptions_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return exceptions_value;
-  }
-  /** @apilevel internal */
-  private Collection<TypeDecl> exceptions_compute() {
-      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
-      if (isInstanceVariable() && hasInit()) {
-        collectExceptions(exceptions, this);
-        for (Iterator<TypeDecl> iter = exceptions.iterator(); iter.hasNext(); ) {
-          TypeDecl type = iter.next();
-          if (!getInit().reachedException(type)) {
-            iter.remove();
-          }
-        }
-      }
-      return exceptions;
     }
   /**
    * @attribute syn
@@ -724,6 +820,27 @@ public class FieldDeclarator extends Declarator implements Cloneable {
   }
   /**
    * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:49
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:49")
+  public Collection<Problem> typeProblems() {
+    {
+        if (hasInit()) {
+          TypeDecl source = getInit().type();
+          TypeDecl dest = type();
+          if (!source.assignConversionTo(dest, getInit())) {
+            return Collections.singletonList(errorf(
+                "can not assign field %s of type %s a value of type %s",
+                name(), dest.typeName(), source.typeName()));
+          }
+        }
+        return Collections.emptyList();
+      }
+  }
+  /**
+   * @attribute syn
    * @aspect Modifiers
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:276
    */
@@ -796,170 +913,53 @@ public class FieldDeclarator extends Declarator implements Cloneable {
         return Collections.emptyList();
       }
   }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:49
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:49")
-  public Collection<Problem> typeProblems() {
-    {
-        if (hasInit()) {
-          TypeDecl source = getInit().type();
-          TypeDecl dest = type();
-          if (!source.assignConversionTo(dest, getInit())) {
-            return Collections.singletonList(errorf(
-                "can not assign field %s of type %s a value of type %s",
-                name(), dest.typeName(), source.typeName()));
-          }
-        }
-        return Collections.emptyList();
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:55
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:55")
-  public boolean isParameter() {
-    boolean isParameter_value = false;
-    return isParameter_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:57
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:57")
-  public boolean isClassVariable() {
-    boolean isClassVariable_value = isStatic() || hostType().isInterfaceDecl();
-    return isClassVariable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:58
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:58")
-  public boolean isInstanceVariable() {
-    boolean isInstanceVariable_value = (hostType().isClassDecl() || hostType().isAnonymous()) && !isStatic();
-    return isInstanceVariable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:60")
-  public boolean isMethodParameter() {
-    boolean isMethodParameter_value = false;
-    return isMethodParameter_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:61
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:61")
-  public boolean isConstructorParameter() {
-    boolean isConstructorParameter_value = false;
-    return isConstructorParameter_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:62
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:62")
-  public boolean isExceptionHandlerParameter() {
-    boolean isExceptionHandlerParameter_value = false;
-    return isExceptionHandlerParameter_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:63
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:63")
-  public boolean isLocalVariable() {
-    boolean isLocalVariable_value = false;
-    return isLocalVariable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:64
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:64")
-  public boolean isField() {
-    boolean isField_value = true;
-    return isField_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:66
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:66")
-  public boolean isBlank() {
-    boolean isBlank_value = !hasInit();
-    return isBlank_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:68
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:68")
-  public String name() {
-    String name_value = getID();
-    return name_value;
+  /** @apilevel internal */
+  private void exceptions_reset() {
+    exceptions_computed = null;
+    exceptions_value = null;
   }
   /** @apilevel internal */
-  private void constant_reset() {
-    constant_computed = null;
-    constant_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle constant_computed = null;
+  protected ASTNode$State.Cycle exceptions_computed = null;
 
   /** @apilevel internal */
-  protected Constant constant_value;
+  protected Collection<TypeDecl> exceptions_value;
 
   /**
    * @attribute syn
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:69
+   * @aspect AnonymousClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:97
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:69")
-  public Constant constant() {
+  @ASTNodeAnnotation.Source(aspect="AnonymousClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:97")
+  public Collection<TypeDecl> exceptions() {
     ASTNode$State state = state();
-    if (constant_computed == ASTNode$State.NON_CYCLE || constant_computed == state().cycle()) {
-      return constant_value;
+    if (exceptions_computed == ASTNode$State.NON_CYCLE || exceptions_computed == state().cycle()) {
+      return exceptions_value;
     }
-    constant_value = type().cast(getInit().constant());
+    exceptions_value = exceptions_compute();
     if (state().inCircle()) {
-      constant_computed = state().cycle();
+      exceptions_computed = state().cycle();
     
     } else {
-      constant_computed = ASTNode$State.NON_CYCLE;
+      exceptions_computed = ASTNode$State.NON_CYCLE;
     
     }
-    return constant_value;
+    return exceptions_value;
   }
+  /** @apilevel internal */
+  private Collection<TypeDecl> exceptions_compute() {
+      Collection<TypeDecl> exceptions = new HashSet<TypeDecl>();
+      if (isInstanceVariable() && hasInit()) {
+        collectExceptions(exceptions, this);
+        for (Iterator<TypeDecl> iter = exceptions.iterator(); iter.hasNext(); ) {
+          TypeDecl type = iter.next();
+          if (!getInit().reachedException(type)) {
+            iter.remove();
+          }
+        }
+      }
+      return exceptions;
+    }
   /** @apilevel internal */
   private void usesTypeVariable_reset() {
     usesTypeVariable_computed = null;
@@ -1183,7 +1183,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:407
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:47
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1192,7 +1192,7 @@ public class FieldDeclarator extends Declarator implements Cloneable {
       }
       contributors.add(this);
     }
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:47
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:407
     {
       java.util.Set<ASTNode> contributors = _map.get(_root);
       if (contributors == null) {
@@ -1219,10 +1219,10 @@ public class FieldDeclarator extends Declarator implements Cloneable {
     for (Problem value : definiteAssignmentProblems()) {
       collection.add(value);
     }
-    for (Problem value : nameProblems()) {
+    for (Problem value : typeProblems()) {
       collection.add(value);
     }
-    for (Problem value : typeProblems()) {
+    for (Problem value : nameProblems()) {
       collection.add(value);
     }
     if (hasInit() && !suppressWarnings("unchecked")) {

@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -29,6 +29,17 @@ import java.io.DataInputStream;
 
  */
 public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
+  /**
+   * Creates a qualified expression. This will not be subject to rewriting.
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:192
+   */
+  public Access qualifiesAccess(Access access) {
+    Dot dot = new Dot(this, access);
+    dot.setStart(this.getStart());
+    dot.setEnd(access.getEnd());
+    return dot;
+  }
   /**
    * @aspect TypeScopePropagation
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:590
@@ -78,17 +89,6 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
     } else {
       return f.hostPackage().equals(hostType().hostPackage());
     }
-  }
-  /**
-   * Creates a qualified expression. This will not be subject to rewriting.
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:192
-   */
-  public Access qualifiesAccess(Access access) {
-    Dot dot = new Dot(this, access);
-    dot.setStart(this.getStart());
-    dot.setEnd(access.getEnd());
-    return dot;
   }
   /**
    * Infer type arguments based on the actual arguments and result assignment type.
@@ -249,20 +249,6 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
     return newMax;
   }
   /**
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:423
-   */
-  public void emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
-    error("emitStore called with " + getClass().getName());
-  }
-  /**
-   * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:958
-   */
-  void emitOperation(CodeGeneration gen) {
-    error();
-  }
-  /**
    * @aspect CreateBCode
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:306
    */
@@ -369,6 +355,20 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:423
+   */
+  public void emitStore(ASTNode<ASTNode> node, CodeGeneration gen) {
+    error("emitStore called with " + getClass().getName());
+  }
+  /**
+   * @aspect CodeGenerationBinaryOperations
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:958
+   */
+  void emitOperation(CodeGeneration gen) {
+    error();
+  }
+  /**
    * @declaredat ASTNode:1
    */
   public Expr() {
@@ -405,16 +405,16 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
     unassignedAfterTrue_Variable_reset();
     unassignedAfter_Variable_reset();
     inferTypeArguments_TypeDecl_List_ParameterDeclaration__List_Expr__List_TypeVariable__reset();
+    isBooleanExpression_reset();
+    isNumericExpression_reset();
+    isPolyExpression_reset();
+    assignConversionTo_TypeDecl_reset();
     stmtCompatible_reset();
     compatibleStrictContext_TypeDecl_reset();
     compatibleLooseContext_TypeDecl_reset();
     pertinentToApplicability_Expr_BodyDecl_int_reset();
     moreSpecificThan_TypeDecl_TypeDecl_reset();
     potentiallyCompatible_TypeDecl_BodyDecl_reset();
-    isBooleanExpression_reset();
-    isNumericExpression_reset();
-    isPolyExpression_reset();
-    assignConversionTo_TypeDecl_reset();
     targetType_reset();
     assignmentContext_reset();
     invocationContext_reset();
@@ -556,83 +556,200 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:296")
   public abstract TypeDecl type();
   /**
+   * Compute the most specific constructor in a collection.
+   * The constructor is invoked with the arguments specified in argList.
+   * The curent context (this) is used to evaluate the hostType for accessibility.
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32
+   * @aspect ConstructScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:65
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32")
-  public Constant constant() {
+  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:65")
+  public SimpleSet<ConstructorDecl> mostSpecificConstructor(Collection<ConstructorDecl> constructors) {
     {
-        throw new UnsupportedOperationException("ConstantExpression operation constant"
-            + " not supported for type " + getClass().getName());
-      }
-  }
-  /**
-   * representableIn(T) is true if and only if the the expression is a
-   * compile-time constant of type byte, char, short or int, and the value
-   * of the expression can be represented (by an expression) in the type T
-   * where T must be byte, char or short.
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328")
-  public boolean representableIn(TypeDecl t) {
-    {
-        if (!type().isByte() && !type().isChar() && !type().isShort() && !type().isInt()) {
-          return false;
+        SimpleSet<ConstructorDecl> maxSpecific = emptySet();
+        for (ConstructorDecl decl : constructors) {
+          if (applicableAndAccessible(decl)) {
+            if (maxSpecific.isEmpty()) {
+              maxSpecific = maxSpecific.add(decl);
+            } else {
+              ConstructorDecl other = maxSpecific.iterator().next();
+              if (decl.moreSpecificThan(other)) {
+                maxSpecific = ASTNode.<ConstructorDecl>emptySet().add(decl);
+              } else if (!other.moreSpecificThan(decl)) {
+                maxSpecific = maxSpecific.add(decl);
+              }
+            }
+          }
         }
-        if (t.isByte()) {
-          return constant().intValue() >= Byte.MIN_VALUE && constant().intValue() <= Byte.MAX_VALUE;
-        }
-        if (t.isChar()) {
-          return constant().intValue() >= Character.MIN_VALUE
-              && constant().intValue() <= Character.MAX_VALUE;
-        }
-        if (t.isShort()) {
-          return constant().intValue() >= Short.MIN_VALUE && constant().intValue() <= Short.MAX_VALUE;
-        }
-        if (t.isInt()) {
-          return constant().intValue() >= Integer.MIN_VALUE
-              && constant().intValue() <= Integer.MAX_VALUE;
-        }
-        return false;
+        return maxSpecific;
       }
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383
+   * @aspect ConstructScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:85
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383")
-  public boolean isConstant() {
-    boolean isConstant_value = false;
-    return isConstant_value;
+  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:85")
+  public boolean applicableAndAccessible(ConstructorDecl decl) {
+    boolean applicableAndAccessible_ConstructorDecl_value = false;
+    return applicableAndAccessible_ConstructorDecl_value;
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:435
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:35
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:435")
-  public boolean isTrue() {
-    boolean isTrue_value = isConstant() && type() instanceof BooleanType && constant().booleanValue();
-    return isTrue_value;
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:35")
+  public boolean isTypeAccess() {
+    boolean isTypeAccess_value = false;
+    return isTypeAccess_value;
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:438
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:438")
-  public boolean isFalse() {
-    boolean isFalse_value = isConstant() && type() instanceof BooleanType && !constant().booleanValue();
-    return isFalse_value;
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39")
+  public boolean isMethodAccess() {
+    boolean isMethodAccess_value = false;
+    return isMethodAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:43
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:43")
+  public boolean isFieldAccess() {
+    boolean isFieldAccess_value = false;
+    return isFieldAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:48
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:48")
+  public boolean isSuperAccess() {
+    boolean isSuperAccess_value = false;
+    return isSuperAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54")
+  public boolean isThisAccess() {
+    boolean isThisAccess_value = false;
+    return isThisAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:60")
+  public boolean isPackageAccess() {
+    boolean isPackageAccess_value = false;
+    return isPackageAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64")
+  public boolean isArrayAccess() {
+    boolean isArrayAccess_value = false;
+    return isArrayAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:68
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:68")
+  public boolean isClassAccess() {
+    boolean isClassAccess_value = false;
+    return isClassAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:72
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:72")
+  public boolean isSuperConstructorAccess() {
+    boolean isSuperConstructorAccess_value = false;
+    return isSuperConstructorAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:169
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:169")
+  public AbstractDot parentDot() {
+    AbstractDot parentDot_value = getParent() instanceof AbstractDot ?
+        (AbstractDot) getParent() : null;
+    return parentDot_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:171
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:171")
+  public boolean hasParentDot() {
+    boolean hasParentDot_value = parentDot() != null;
+    return hasParentDot_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:173
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:173")
+  public boolean hasNextAccess() {
+    boolean hasNextAccess_value = isLeftChildOfDot();
+    return hasNextAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect NameResolution
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:484
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:484")
+  public boolean isParseName() {
+    boolean isParseName_value = false;
+    return isParseName_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect PositiveLiterals
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PositiveLiterals.jrag:36
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PositiveLiterals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PositiveLiterals.jrag:36")
+  public boolean isPositive() {
+    boolean isPositive_value = false;
+    return isPositive_value;
   }
   /**
    * @attribute syn
@@ -832,286 +949,83 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
     }
   }
   /**
-   * Compute the most specific constructor in a collection.
-   * The constructor is invoked with the arguments specified in argList.
-   * The curent context (this) is used to evaluate the hostType for accessibility.
    * @attribute syn
-   * @aspect ConstructScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:65
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:65")
-  public SimpleSet<ConstructorDecl> mostSpecificConstructor(Collection<ConstructorDecl> constructors) {
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:32")
+  public Constant constant() {
     {
-        SimpleSet<ConstructorDecl> maxSpecific = emptySet();
-        for (ConstructorDecl decl : constructors) {
-          if (applicableAndAccessible(decl)) {
-            if (maxSpecific.isEmpty()) {
-              maxSpecific = maxSpecific.add(decl);
-            } else {
-              ConstructorDecl other = maxSpecific.iterator().next();
-              if (decl.moreSpecificThan(other)) {
-                maxSpecific = ASTNode.<ConstructorDecl>emptySet().add(decl);
-              } else if (!other.moreSpecificThan(decl)) {
-                maxSpecific = maxSpecific.add(decl);
-              }
-            }
-          }
+        throw new UnsupportedOperationException("ConstantExpression operation constant"
+            + " not supported for type " + getClass().getName());
+      }
+  }
+  /**
+   * representableIn(T) is true if and only if the the expression is a
+   * compile-time constant of type byte, char, short or int, and the value
+   * of the expression can be represented (by an expression) in the type T
+   * where T must be byte, char or short.
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:328")
+  public boolean representableIn(TypeDecl t) {
+    {
+        if (!type().isByte() && !type().isChar() && !type().isShort() && !type().isInt()) {
+          return false;
         }
-        return maxSpecific;
+        if (t.isByte()) {
+          return constant().intValue() >= Byte.MIN_VALUE && constant().intValue() <= Byte.MAX_VALUE;
+        }
+        if (t.isChar()) {
+          return constant().intValue() >= Character.MIN_VALUE
+              && constant().intValue() <= Character.MAX_VALUE;
+        }
+        if (t.isShort()) {
+          return constant().intValue() >= Short.MIN_VALUE && constant().intValue() <= Short.MAX_VALUE;
+        }
+        if (t.isInt()) {
+          return constant().intValue() >= Integer.MIN_VALUE
+              && constant().intValue() <= Integer.MAX_VALUE;
+        }
+        return false;
       }
   }
   /**
    * @attribute syn
-   * @aspect ConstructScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:85
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstructScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:85")
-  public boolean applicableAndAccessible(ConstructorDecl decl) {
-    boolean applicableAndAccessible_ConstructorDecl_value = false;
-    return applicableAndAccessible_ConstructorDecl_value;
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383")
+  public boolean isConstant() {
+    boolean isConstant_value = false;
+    return isConstant_value;
   }
   /**
    * @attribute syn
-   * @aspect LookupFullyQualifiedTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:110
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:435
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:110")
-  public boolean hasQualifiedPackage(String packageName) {
-    boolean hasQualifiedPackage_String_value = false;
-    return hasQualifiedPackage_String_value;
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:435")
+  public boolean isTrue() {
+    boolean isTrue_value = isConstant() && type() instanceof BooleanType && constant().booleanValue();
+    return isTrue_value;
   }
   /**
    * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:438
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563")
-  public SimpleSet<TypeDecl> qualifiedLookupType(String name) {
-    SimpleSet<TypeDecl> qualifiedLookupType_String_value = keepAccessibleTypes(type().memberTypes(name));
-    return qualifiedLookupType_String_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264")
-  public SimpleSet<Variable> qualifiedLookupVariable(String name) {
-    {
-        if (type().accessibleFrom(hostType())) {
-          return keepAccessibleFields(type().memberFields(name));
-        }
-        return emptySet();
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect PositiveLiterals
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PositiveLiterals.jrag:36
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PositiveLiterals", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PositiveLiterals.jrag:36")
-  public boolean isPositive() {
-    boolean isPositive_value = false;
-    return isPositive_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:43
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:43")
-  public String packageName() {
-    String packageName_value = "";
-    return packageName_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Names
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:73
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:73")
-  public String typeName() {
-    String typeName_value = "";
-    return typeName_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:35
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:35")
-  public boolean isTypeAccess() {
-    boolean isTypeAccess_value = false;
-    return isTypeAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:39")
-  public boolean isMethodAccess() {
-    boolean isMethodAccess_value = false;
-    return isMethodAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:43
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:43")
-  public boolean isFieldAccess() {
-    boolean isFieldAccess_value = false;
-    return isFieldAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:48
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:48")
-  public boolean isSuperAccess() {
-    boolean isSuperAccess_value = false;
-    return isSuperAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54")
-  public boolean isThisAccess() {
-    boolean isThisAccess_value = false;
-    return isThisAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:60")
-  public boolean isPackageAccess() {
-    boolean isPackageAccess_value = false;
-    return isPackageAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:64")
-  public boolean isArrayAccess() {
-    boolean isArrayAccess_value = false;
-    return isArrayAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:68
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:68")
-  public boolean isClassAccess() {
-    boolean isClassAccess_value = false;
-    return isClassAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:72
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:72")
-  public boolean isSuperConstructorAccess() {
-    boolean isSuperConstructorAccess_value = false;
-    return isSuperConstructorAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:169
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:169")
-  public AbstractDot parentDot() {
-    AbstractDot parentDot_value = getParent() instanceof AbstractDot ?
-        (AbstractDot) getParent() : null;
-    return parentDot_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:171
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:171")
-  public boolean hasParentDot() {
-    boolean hasParentDot_value = parentDot() != null;
-    return hasParentDot_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:173
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:173")
-  public boolean hasNextAccess() {
-    boolean hasNextAccess_value = isLeftChildOfDot();
-    return hasNextAccess_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NameResolution
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:484
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameResolution", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:484")
-  public boolean isParseName() {
-    boolean isParseName_value = false;
-    return isParseName_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NestedTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:563
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:563")
-  public Stmt enclosingStmt() {
-    {
-        ASTNode node = this;
-        while (node != null && !(node instanceof Stmt)) {
-          node = node.getParent();
-        }
-        return (Stmt) node;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33")
-  public boolean isVariable() {
-    boolean isVariable_value = false;
-    return isVariable_value;
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:438")
+  public boolean isFalse() {
+    boolean isFalse_value = isConstant() && type() instanceof BooleanType && !constant().booleanValue();
+    return isFalse_value;
   }
   /**
    * @attribute syn
@@ -1137,14 +1051,89 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect Enums
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:648
+   * @aspect LookupFullyQualifiedTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:110
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:648")
-  public boolean isEnumConstant() {
-    boolean isEnumConstant_value = false;
-    return isEnumConstant_value;
+  @ASTNodeAnnotation.Source(aspect="LookupFullyQualifiedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:110")
+  public boolean hasQualifiedPackage(String packageName) {
+    boolean hasQualifiedPackage_String_value = false;
+    return hasQualifiedPackage_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:563")
+  public SimpleSet<TypeDecl> qualifiedLookupType(String name) {
+    SimpleSet<TypeDecl> qualifiedLookupType_String_value = keepAccessibleTypes(type().memberTypes(name));
+    return qualifiedLookupType_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:33")
+  public boolean isVariable() {
+    boolean isVariable_value = false;
+    return isVariable_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect VariableScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:264")
+  public SimpleSet<Variable> qualifiedLookupVariable(String name) {
+    {
+        if (type().accessibleFrom(hostType())) {
+          return keepAccessibleFields(type().memberFields(name));
+        }
+        return emptySet();
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:43
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:43")
+  public String packageName() {
+    String packageName_value = "";
+    return packageName_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Names
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:73
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Names", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:73")
+  public String typeName() {
+    String typeName_value = "";
+    return typeName_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect NestedTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:563
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NestedTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:563")
+  public Stmt enclosingStmt() {
+    {
+        ASTNode node = this;
+        while (node != null && !(node instanceof Stmt)) {
+          node = node.getParent();
+        }
+        return (Stmt) node;
+      }
   }
   /**
    * @attribute syn
@@ -1156,6 +1145,17 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   public Expr erasedCopy() {
     Expr erasedCopy_value = treeCopyNoTransform();
     return erasedCopy_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Enums
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:648
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Enums", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:648")
+  public boolean isEnumConstant() {
+    boolean isEnumConstant_value = false;
+    return isEnumConstant_value;
   }
   /** @apilevel internal */
   private void inferTypeArguments_TypeDecl_List_ParameterDeclaration__List_Expr__List_TypeVariable__reset() {
@@ -1263,6 +1263,151 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   public boolean isVariable(Variable var) {
     boolean isVariable_Variable_value = false;
     return isVariable_Variable_value;
+  }
+  /** @apilevel internal */
+  private void isBooleanExpression_reset() {
+    isBooleanExpression_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle isBooleanExpression_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isBooleanExpression_value;
+
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:29
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:29")
+  public boolean isBooleanExpression() {
+    ASTNode$State state = state();
+    if (isBooleanExpression_computed == ASTNode$State.NON_CYCLE || isBooleanExpression_computed == state().cycle()) {
+      return isBooleanExpression_value;
+    }
+    isBooleanExpression_value = !isPolyExpression() && type().isBoolean();
+    if (state().inCircle()) {
+      isBooleanExpression_computed = state().cycle();
+    
+    } else {
+      isBooleanExpression_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return isBooleanExpression_value;
+  }
+  /** @apilevel internal */
+  private void isNumericExpression_reset() {
+    isNumericExpression_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle isNumericExpression_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isNumericExpression_value;
+
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:60
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:60")
+  public boolean isNumericExpression() {
+    ASTNode$State state = state();
+    if (isNumericExpression_computed == ASTNode$State.NON_CYCLE || isNumericExpression_computed == state().cycle()) {
+      return isNumericExpression_value;
+    }
+    isNumericExpression_value = !isPolyExpression() && type().isNumericType();
+    if (state().inCircle()) {
+      isNumericExpression_computed = state().cycle();
+    
+    } else {
+      isNumericExpression_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return isNumericExpression_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:72
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:72")
+  public boolean isNullLiteral() {
+    boolean isNullLiteral_value = false;
+    return isNullLiteral_value;
+  }
+  /** @apilevel internal */
+  private void isPolyExpression_reset() {
+    isPolyExpression_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle isPolyExpression_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isPolyExpression_value;
+
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86")
+  public boolean isPolyExpression() {
+    ASTNode$State state = state();
+    if (isPolyExpression_computed == ASTNode$State.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
+      return isPolyExpression_value;
+    }
+    isPolyExpression_value = false;
+    if (state().inCircle()) {
+      isPolyExpression_computed = state().cycle();
+    
+    } else {
+      isPolyExpression_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return isPolyExpression_value;
+  }
+  /** @apilevel internal */
+  private void assignConversionTo_TypeDecl_reset() {
+    assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
+    assignConversionTo_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map assignConversionTo_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map assignConversionTo_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149")
+  public boolean assignConversionTo(TypeDecl type) {
+    Object _parameters = type;
+    if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
+    if (assignConversionTo_TypeDecl_values == null) assignConversionTo_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (assignConversionTo_TypeDecl_values.containsKey(_parameters) && assignConversionTo_TypeDecl_computed != null
+        && assignConversionTo_TypeDecl_computed.containsKey(_parameters)
+        && (assignConversionTo_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || assignConversionTo_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) assignConversionTo_TypeDecl_values.get(_parameters);
+    }
+    boolean assignConversionTo_TypeDecl_value = type().assignConversionTo(type, this);
+    if (state().inCircle()) {
+      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
+      assignConversionTo_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
+      assignConversionTo_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return assignConversionTo_TypeDecl_value;
   }
   /** @apilevel internal */
   private void stmtCompatible_reset() {
@@ -1498,151 +1643,6 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
     }
     return potentiallyCompatible_TypeDecl_BodyDecl_value;
   }
-  /** @apilevel internal */
-  private void isBooleanExpression_reset() {
-    isBooleanExpression_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle isBooleanExpression_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isBooleanExpression_value;
-
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:29
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:29")
-  public boolean isBooleanExpression() {
-    ASTNode$State state = state();
-    if (isBooleanExpression_computed == ASTNode$State.NON_CYCLE || isBooleanExpression_computed == state().cycle()) {
-      return isBooleanExpression_value;
-    }
-    isBooleanExpression_value = !isPolyExpression() && type().isBoolean();
-    if (state().inCircle()) {
-      isBooleanExpression_computed = state().cycle();
-    
-    } else {
-      isBooleanExpression_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return isBooleanExpression_value;
-  }
-  /** @apilevel internal */
-  private void isNumericExpression_reset() {
-    isNumericExpression_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle isNumericExpression_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isNumericExpression_value;
-
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:60
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:60")
-  public boolean isNumericExpression() {
-    ASTNode$State state = state();
-    if (isNumericExpression_computed == ASTNode$State.NON_CYCLE || isNumericExpression_computed == state().cycle()) {
-      return isNumericExpression_value;
-    }
-    isNumericExpression_value = !isPolyExpression() && type().isNumericType();
-    if (state().inCircle()) {
-      isNumericExpression_computed = state().cycle();
-    
-    } else {
-      isNumericExpression_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return isNumericExpression_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:72
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:72")
-  public boolean isNullLiteral() {
-    boolean isNullLiteral_value = false;
-    return isNullLiteral_value;
-  }
-  /** @apilevel internal */
-  private void isPolyExpression_reset() {
-    isPolyExpression_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle isPolyExpression_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isPolyExpression_value;
-
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86")
-  public boolean isPolyExpression() {
-    ASTNode$State state = state();
-    if (isPolyExpression_computed == ASTNode$State.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
-      return isPolyExpression_value;
-    }
-    isPolyExpression_value = false;
-    if (state().inCircle()) {
-      isPolyExpression_computed = state().cycle();
-    
-    } else {
-      isPolyExpression_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return isPolyExpression_value;
-  }
-  /** @apilevel internal */
-  private void assignConversionTo_TypeDecl_reset() {
-    assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
-    assignConversionTo_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map assignConversionTo_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map assignConversionTo_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149")
-  public boolean assignConversionTo(TypeDecl type) {
-    Object _parameters = type;
-    if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
-    if (assignConversionTo_TypeDecl_values == null) assignConversionTo_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (assignConversionTo_TypeDecl_values.containsKey(_parameters) && assignConversionTo_TypeDecl_computed != null
-        && assignConversionTo_TypeDecl_computed.containsKey(_parameters)
-        && (assignConversionTo_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || assignConversionTo_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) assignConversionTo_TypeDecl_values.get(_parameters);
-    }
-    boolean assignConversionTo_TypeDecl_value = type().assignConversionTo(type, this);
-    if (state().inCircle()) {
-      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
-      assignConversionTo_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
-      assignConversionTo_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return assignConversionTo_TypeDecl_value;
-  }
   /**
    * @attribute syn
    * @aspect CreateBCode
@@ -1705,6 +1705,50 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @attribute inh
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:78
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:78")
+  public boolean isLeftChildOfDot() {
+    boolean isLeftChildOfDot_value = getParent().Define_isLeftChildOfDot(this, null);
+    return isLeftChildOfDot_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93")
+  public boolean isRightChildOfDot() {
+    boolean isRightChildOfDot_value = getParent().Define_isRightChildOfDot(this, null);
+    return isRightChildOfDot_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110")
+  public Expr prevExpr() {
+    Expr prevExpr_value = getParent().Define_prevExpr(this, null);
+    return prevExpr_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect QualifiedNames
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:134
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:134")
+  public Access nextAccess() {
+    Access nextAccess_value = getParent().Define_nextAccess(this, null);
+    return nextAccess_value;
+  }
+  /**
+   * @attribute inh
    * @aspect DefiniteAssignment
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:34
    */
@@ -1760,14 +1804,25 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @attribute inh
-   * @aspect LookupMethod
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:50
+   * @aspect TypeHierarchyCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:50")
-  public Collection<MethodDecl> lookupMethod(String name) {
-    Collection<MethodDecl> lookupMethod_String_value = getParent().Define_lookupMethod(this, null, name);
-    return lookupMethod_String_value;
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33")
+  public String methodHost() {
+    String methodHost_value = getParent().Define_methodHost(this, null);
+    return methodHost_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect TypeHierarchyCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207")
+  public boolean inStaticContext() {
+    boolean inStaticContext_value = getParent().Define_inStaticContext(this, null);
+    return inStaticContext_value;
   }
   /**
    * @attribute inh
@@ -1947,50 +2002,6 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   }
   /**
    * @attribute inh
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:78
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:78")
-  public boolean isLeftChildOfDot() {
-    boolean isLeftChildOfDot_value = getParent().Define_isLeftChildOfDot(this, null);
-    return isLeftChildOfDot_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:93")
-  public boolean isRightChildOfDot() {
-    boolean isRightChildOfDot_value = getParent().Define_isRightChildOfDot(this, null);
-    return isRightChildOfDot_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:110")
-  public Expr prevExpr() {
-    Expr prevExpr_value = getParent().Define_prevExpr(this, null);
-    return prevExpr_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect QualifiedNames
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:134
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="QualifiedNames", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:134")
-  public Access nextAccess() {
-    Access nextAccess_value = getParent().Define_nextAccess(this, null);
-    return nextAccess_value;
-  }
-  /**
-   * @attribute inh
    * @aspect SyntacticClassification
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    */
@@ -1999,6 +2010,17 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   public NameType nameType() {
     NameType nameType_value = getParent().Define_nameType(this, null);
     return nameType_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect LookupMethod
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:50
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="LookupMethod", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupMethod.jrag:50")
+  public Collection<MethodDecl> lookupMethod(String name) {
+    Collection<MethodDecl> lookupMethod_String_value = getParent().Define_lookupMethod(this, null, name);
+    return lookupMethod_String_value;
   }
   /**
    * @attribute inh
@@ -2032,28 +2054,6 @@ public abstract class Expr extends ASTNode<ASTNode> implements Cloneable {
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:33")
-  public String methodHost() {
-    String methodHost_value = getParent().Define_methodHost(this, null);
-    return methodHost_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207")
-  public boolean inStaticContext() {
-    boolean inStaticContext_value = getParent().Define_inStaticContext(this, null);
-    return inStaticContext_value;
   }
   /**
    * The assign converted type is used in type inference to get the

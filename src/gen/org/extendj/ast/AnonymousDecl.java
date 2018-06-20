@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -83,10 +83,10 @@ public class AnonymousDecl extends ClassDecl implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    getImplicitConstructorOpt_reset();
     isCircular_reset();
     getSuperClassOpt_reset();
     getImplementsList_reset();
-    getImplicitConstructorOpt_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:46
@@ -585,6 +585,96 @@ public class AnonymousDecl extends ClassDecl implements Cloneable {
 
     return parameterList;
   }
+  /** @apilevel internal */
+  private void getImplicitConstructorOpt_reset() {
+    getImplicitConstructorOpt_computed = false;
+    
+    getImplicitConstructorOpt_value = null;
+  }
+  /** @apilevel internal */
+  protected boolean getImplicitConstructorOpt_computed = false;
+
+  /** @apilevel internal */
+  protected Opt<ConstructorDecl> getImplicitConstructorOpt_value;
+
+  /**
+   * @attribute syn nta
+   * @aspect ImplicitConstructor
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:274
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
+  @ASTNodeAnnotation.Source(aspect="ImplicitConstructor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:274")
+  public Opt<ConstructorDecl> getImplicitConstructorOpt() {
+    ASTNode$State state = state();
+    if (getImplicitConstructorOpt_computed) {
+      return (Opt<ConstructorDecl>) getChild(getImplicitConstructorOptChildPosition());
+    }
+    state().enterLazyAttribute();
+    getImplicitConstructorOpt_value = getImplicitConstructorOpt_compute();
+    setChild(getImplicitConstructorOpt_value, getImplicitConstructorOptChildPosition());
+    getImplicitConstructorOpt_computed = true;
+    state().leaveLazyAttribute();
+    Opt<ConstructorDecl> node = (Opt<ConstructorDecl>) this.getChild(getImplicitConstructorOptChildPosition());
+    return node;
+  }
+  /** @apilevel internal */
+  private Opt<ConstructorDecl> getImplicitConstructorOpt_compute() {
+      if (needsImplicitConstructor()) {
+        ConstructorDecl decl = constructorDecl();
+        Modifiers modifiers = new Modifiers();
+        String anonName = "Anonymous" + nextAnonymousIndex();
+  
+        ConstructorDecl constructor = new ConstructorDecl(modifiers, anonName,
+            constructorParameterList(decl), new List(), new Opt(), new Block());
+  
+        setID(anonName);
+  
+        List argList = new List();
+        for (int i = 0; i < constructor.getNumParameter(); i++) {
+          argList.add(new VarAccess(constructor.getParameter(i).name()));
+        }
+  
+        constructor.setParsedConstructorInvocation(
+          new ExprStmt(
+            new SuperConstructorAccess("super", argList)
+          )
+        );
+  
+        Collection<TypeDecl> set = new HashSet<TypeDecl>();
+  
+        // Add initializer and field declaration exceptions.
+        for (int i = 0; i < getNumBodyDecl(); i++) {
+          if (getBodyDecl(i) instanceof InstanceInitializer) {
+            InstanceInitializer init = (InstanceInitializer) getBodyDecl(i);
+            set.addAll(init.exceptions());
+          } else if (getBodyDecl(i) instanceof FieldDecl) {
+            FieldDecl f = (FieldDecl) getBodyDecl(i);
+            for (FieldDeclarator field : f.getDeclaratorList()) {
+              if (field.isInstanceVariable()) {
+                set.addAll(field.exceptions());
+              }
+            }
+          }
+        }
+  
+        // Add superconstructor exceptions.
+        for (int i = 0; i < decl.getNumException(); ++i) {
+          set.add(decl.getException(i).type());
+        }
+  
+        List<Access> exceptionList = new List<Access>();
+        for (TypeDecl exceptionType : set) {
+          if (exceptionType.isNull()) {
+            exceptionType = typeNullPointerException();
+          }
+          exceptionList.add(exceptionType.createQualifiedAccess());
+        }
+        constructor.setExceptionList(exceptionList);
+        return new Opt<ConstructorDecl>(constructor);
+      } else {
+        return new Opt<ConstructorDecl>();
+      }
+    }
 /** @apilevel internal */
 protected ASTNode$State.Cycle isCircular_cycle = null;
   /** @apilevel internal */
@@ -713,96 +803,6 @@ protected ASTNode$State.Cycle isCircular_cycle = null;
         return new List().add(superType().createBoundAccess());
       } else {
         return new List();
-      }
-    }
-  /** @apilevel internal */
-  private void getImplicitConstructorOpt_reset() {
-    getImplicitConstructorOpt_computed = false;
-    
-    getImplicitConstructorOpt_value = null;
-  }
-  /** @apilevel internal */
-  protected boolean getImplicitConstructorOpt_computed = false;
-
-  /** @apilevel internal */
-  protected Opt<ConstructorDecl> getImplicitConstructorOpt_value;
-
-  /**
-   * @attribute syn nta
-   * @aspect ImplicitConstructor
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:274
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN, isNTA=true)
-  @ASTNodeAnnotation.Source(aspect="ImplicitConstructor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupConstructor.jrag:274")
-  public Opt<ConstructorDecl> getImplicitConstructorOpt() {
-    ASTNode$State state = state();
-    if (getImplicitConstructorOpt_computed) {
-      return (Opt<ConstructorDecl>) getChild(getImplicitConstructorOptChildPosition());
-    }
-    state().enterLazyAttribute();
-    getImplicitConstructorOpt_value = getImplicitConstructorOpt_compute();
-    setChild(getImplicitConstructorOpt_value, getImplicitConstructorOptChildPosition());
-    getImplicitConstructorOpt_computed = true;
-    state().leaveLazyAttribute();
-    Opt<ConstructorDecl> node = (Opt<ConstructorDecl>) this.getChild(getImplicitConstructorOptChildPosition());
-    return node;
-  }
-  /** @apilevel internal */
-  private Opt<ConstructorDecl> getImplicitConstructorOpt_compute() {
-      if (needsImplicitConstructor()) {
-        ConstructorDecl decl = constructorDecl();
-        Modifiers modifiers = new Modifiers();
-        String anonName = "Anonymous" + nextAnonymousIndex();
-  
-        ConstructorDecl constructor = new ConstructorDecl(modifiers, anonName,
-            constructorParameterList(decl), new List(), new Opt(), new Block());
-  
-        setID(anonName);
-  
-        List argList = new List();
-        for (int i = 0; i < constructor.getNumParameter(); i++) {
-          argList.add(new VarAccess(constructor.getParameter(i).name()));
-        }
-  
-        constructor.setParsedConstructorInvocation(
-          new ExprStmt(
-            new SuperConstructorAccess("super", argList)
-          )
-        );
-  
-        Collection<TypeDecl> set = new HashSet<TypeDecl>();
-  
-        // Add initializer and field declaration exceptions.
-        for (int i = 0; i < getNumBodyDecl(); i++) {
-          if (getBodyDecl(i) instanceof InstanceInitializer) {
-            InstanceInitializer init = (InstanceInitializer) getBodyDecl(i);
-            set.addAll(init.exceptions());
-          } else if (getBodyDecl(i) instanceof FieldDecl) {
-            FieldDecl f = (FieldDecl) getBodyDecl(i);
-            for (FieldDeclarator field : f.getDeclaratorList()) {
-              if (field.isInstanceVariable()) {
-                set.addAll(field.exceptions());
-              }
-            }
-          }
-        }
-  
-        // Add superconstructor exceptions.
-        for (int i = 0; i < decl.getNumException(); ++i) {
-          set.add(decl.getException(i).type());
-        }
-  
-        List<Access> exceptionList = new List<Access>();
-        for (TypeDecl exceptionType : set) {
-          if (exceptionType.isNull()) {
-            exceptionType = typeNullPointerException();
-          }
-          exceptionList.add(exceptionType.createQualifiedAccess());
-        }
-        constructor.setExceptionList(exceptionList);
-        return new Opt<ConstructorDecl>(constructor);
-      } else {
-        return new Opt<ConstructorDecl>();
       }
     }
   /**

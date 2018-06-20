@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -29,20 +29,6 @@ import java.io.DataInputStream;
 
  */
 public class ParClassDecl extends ClassDecl implements Cloneable, ParTypeDecl, MemberSubstitutor {
-  /**
-   * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1134
-   */
-  public int numTypeParameter() {
-    return ((GenericTypeDecl) original()).getNumTypeParameter();
-  }
-  /**
-   * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1138
-   */
-  public TypeVariable typeParameter(int index) {
-    return ((GenericTypeDecl) original()).getTypeParameter(index);
-  }
   /**
    * @aspect GenericsParTypeDecl
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:107
@@ -67,6 +53,20 @@ public class ParClassDecl extends ClassDecl implements Cloneable, ParTypeDecl, M
         return new ParTypeAccess(new TypeAccess(packageName(), getID()), typeArgumentList);
       }
     }
+  }
+  /**
+   * @aspect LookupParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1134
+   */
+  public int numTypeParameter() {
+    return ((GenericTypeDecl) original()).getNumTypeParameter();
+  }
+  /**
+   * @aspect LookupParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1138
+   */
+  public TypeVariable typeParameter(int index) {
+    return ((GenericTypeDecl) original()).getTypeParameter(index);
   }
   /**
    * @declaredat ASTNode:1
@@ -140,13 +140,13 @@ public class ParClassDecl extends ClassDecl implements Cloneable, ParTypeDecl, M
     typeDescriptor_reset();
     constantPoolName_reset();
     needsSignatureAttribute_reset();
-    firstTypeArgument_reset();
+    fullName_reset();
+    typeName_reset();
     sameSignature_java_util_List_TypeDecl__reset();
     usesTypeVariable_reset();
     sourceTypeDecl_reset();
-    fullName_reset();
-    typeName_reset();
     unimplementedMethods_reset();
+    firstTypeArgument_reset();
     uniqueIndex_reset();
     localMethodsSignatureMap_reset();
     localFields_String_reset();
@@ -747,6 +747,31 @@ public class ParClassDecl extends ClassDecl implements Cloneable, ParTypeDecl, M
   protected int getImplicitConstructorOptChildPosition() {
     return 5;
   }
+  /**
+   * A type is reifiable if it either refers to a non-parameterized type,
+   * is a raw type, is a parameterized type with only unbound wildcard
+   * parameters or is an array type with a reifiable type parameter.
+   * 
+   * @see "JLS SE7 &sect;4.7"
+   * @attribute syn
+   * @aspect ReifiableTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
+  public boolean isReifiable() {
+    {
+        if (original().isInnerClass() && !original().enclosingType().isReifiable()) {
+          return false;
+        }
+        for (TypeDecl argument : getParameterization().args) {
+          if (!argument.isUnboundedWildcard()) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
 /** @apilevel internal */
 protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
   /** @apilevel internal */
@@ -1108,31 +1133,6 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
     return instanceOf_TypeDecl_value;
   }
   /**
-   * A type is reifiable if it either refers to a non-parameterized type,
-   * is a raw type, is a parameterized type with only unbound wildcard
-   * parameters or is an array type with a reifiable type parameter.
-   * 
-   * @see "JLS SE7 &sect;4.7"
-   * @attribute syn
-   * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
-  public boolean isReifiable() {
-    {
-        if (original().isInnerClass() && !original().enclosingType().isReifiable()) {
-          return false;
-        }
-        for (TypeDecl argument : getParameterization().args) {
-          if (!argument.isUnboundedWildcard()) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /**
    * @attribute syn
    * @aspect StrictSubtype
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/GenericsSubtype.jrag:39
@@ -1381,39 +1381,144 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
     return needsSignatureAttribute_value;
   }
   /** @apilevel internal */
-  private void firstTypeArgument_reset() {
-    firstTypeArgument_computed = null;
-    firstTypeArgument_value = null;
+  private void fullName_reset() {
+    fullName_computed = null;
+    fullName_value = null;
   }
   /** @apilevel internal */
-  protected ASTNode$State.Cycle firstTypeArgument_computed = null;
+  protected ASTNode$State.Cycle fullName_computed = null;
 
   /** @apilevel internal */
-  protected TypeDecl firstTypeArgument_value;
+  protected String fullName_value;
 
   /**
-   * Returns the first type argument of this type, if it is parameterized, otherwise returns
-   * java.lang.Object.
    * @attribute syn
-   * @aspect EnhancedFor
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119
+   * @aspect TypeName
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:84
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119")
-  public TypeDecl firstTypeArgument() {
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:84")
+  public String fullName() {
     ASTNode$State state = state();
-    if (firstTypeArgument_computed == ASTNode$State.NON_CYCLE || firstTypeArgument_computed == state().cycle()) {
-      return firstTypeArgument_value;
+    if (fullName_computed == ASTNode$State.NON_CYCLE || fullName_computed == state().cycle()) {
+      return fullName_value;
     }
-    firstTypeArgument_value = getParameterization().args.get(0);
+    fullName_value = fullName_compute();
     if (state().inCircle()) {
-      firstTypeArgument_computed = state().cycle();
+      fullName_computed = state().cycle();
     
     } else {
-      firstTypeArgument_computed = ASTNode$State.NON_CYCLE;
+      fullName_computed = ASTNode$State.NON_CYCLE;
     
     }
-    return firstTypeArgument_value;
+    return fullName_value;
+  }
+  /** @apilevel internal */
+  private String fullName_compute() {
+      if (isNestedType()) {
+        return enclosingType().fullName() + "." + nameWithArgs();
+      }
+      String packageName = packageName();
+      if (packageName.equals("")) {
+        return nameWithArgs();
+      }
+      return packageName + "." + nameWithArgs();
+    }
+  /** @apilevel internal */
+  private void typeName_reset() {
+    typeName_computed = null;
+    typeName_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle typeName_computed = null;
+
+  /** @apilevel internal */
+  protected String typeName_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeName
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:95
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:95")
+  public String typeName() {
+    ASTNode$State state = state();
+    if (typeName_computed == ASTNode$State.NON_CYCLE || typeName_computed == state().cycle()) {
+      return typeName_value;
+    }
+    typeName_value = typeName_compute();
+    if (state().inCircle()) {
+      typeName_computed = state().cycle();
+    
+    } else {
+      typeName_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return typeName_value;
+  }
+  /** @apilevel internal */
+  private String typeName_compute() {
+      if (isNestedType()) {
+        return enclosingType().typeName() + "." + nameWithArgs();
+      }
+      String packageName = packageName();
+      if (packageName.equals("") || packageName.equals(PRIMITIVE_PACKAGE_NAME)) {
+        return nameWithArgs();
+      }
+      return packageName + "." + nameWithArgs();
+    }
+  /**
+   * @attribute syn
+   * @aspect GenericsParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55")
+  public String nameWithArgs() {
+    {
+        java.util.List<TypeDecl> args = getParameterization().args;
+        StringBuilder sb = new StringBuilder();
+        sb.append(name());
+        sb.append("<");
+        for (int i = 0; i < args.size(); i++) {
+          if (i != 0) {
+            sb.append(", ");
+          }
+          sb.append(args.get(i).typeName());
+        }
+        sb.append(">");
+        return sb.toString();
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeScopePropagation
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:492
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:492")
+  public SimpleSet<TypeDecl> localLookupType(String name) {
+    {
+        SimpleSet<TypeDecl> result = memberTypes(name);
+        if (!result.isEmpty()) {
+          return result;
+        }
+        if (name().equals(name)) {
+          return genericDecl(); // Type lookups for this type resolve to the generic type.
+        }
+    
+        result = lookupType(name);
+        // 8.5.2
+        if (isClassDecl() && isStatic() && !isTopLevelType()) {
+          SimpleSet<TypeDecl> newSet = emptySet();
+          for (TypeDecl type : result) {
+            newSet = newSet.add(type);
+          }
+          result = newSet;
+        }
+        return result;
+      }
   }
   /**
    * @attribute syn
@@ -1645,146 +1750,6 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
     return sourceTypeDecl_value;
   }
   /** @apilevel internal */
-  private void fullName_reset() {
-    fullName_computed = null;
-    fullName_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle fullName_computed = null;
-
-  /** @apilevel internal */
-  protected String fullName_value;
-
-  /**
-   * @attribute syn
-   * @aspect TypeName
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:84
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:84")
-  public String fullName() {
-    ASTNode$State state = state();
-    if (fullName_computed == ASTNode$State.NON_CYCLE || fullName_computed == state().cycle()) {
-      return fullName_value;
-    }
-    fullName_value = fullName_compute();
-    if (state().inCircle()) {
-      fullName_computed = state().cycle();
-    
-    } else {
-      fullName_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return fullName_value;
-  }
-  /** @apilevel internal */
-  private String fullName_compute() {
-      if (isNestedType()) {
-        return enclosingType().fullName() + "." + nameWithArgs();
-      }
-      String packageName = packageName();
-      if (packageName.equals("")) {
-        return nameWithArgs();
-      }
-      return packageName + "." + nameWithArgs();
-    }
-  /** @apilevel internal */
-  private void typeName_reset() {
-    typeName_computed = null;
-    typeName_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle typeName_computed = null;
-
-  /** @apilevel internal */
-  protected String typeName_value;
-
-  /**
-   * @attribute syn
-   * @aspect TypeName
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:95
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeName", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/QualifiedNames.jrag:95")
-  public String typeName() {
-    ASTNode$State state = state();
-    if (typeName_computed == ASTNode$State.NON_CYCLE || typeName_computed == state().cycle()) {
-      return typeName_value;
-    }
-    typeName_value = typeName_compute();
-    if (state().inCircle()) {
-      typeName_computed = state().cycle();
-    
-    } else {
-      typeName_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return typeName_value;
-  }
-  /** @apilevel internal */
-  private String typeName_compute() {
-      if (isNestedType()) {
-        return enclosingType().typeName() + "." + nameWithArgs();
-      }
-      String packageName = packageName();
-      if (packageName.equals("") || packageName.equals(PRIMITIVE_PACKAGE_NAME)) {
-        return nameWithArgs();
-      }
-      return packageName + "." + nameWithArgs();
-    }
-  /**
-   * @attribute syn
-   * @aspect GenericsParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:55")
-  public String nameWithArgs() {
-    {
-        java.util.List<TypeDecl> args = getParameterization().args;
-        StringBuilder sb = new StringBuilder();
-        sb.append(name());
-        sb.append("<");
-        for (int i = 0; i < args.size(); i++) {
-          if (i != 0) {
-            sb.append(", ");
-          }
-          sb.append(args.get(i).typeName());
-        }
-        sb.append(">");
-        return sb.toString();
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeScopePropagation
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:492
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeScopePropagation", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:492")
-  public SimpleSet<TypeDecl> localLookupType(String name) {
-    {
-        SimpleSet<TypeDecl> result = memberTypes(name);
-        if (!result.isEmpty()) {
-          return result;
-        }
-        if (name().equals(name)) {
-          return genericDecl(); // Type lookups for this type resolve to the generic type.
-        }
-    
-        result = lookupType(name);
-        // 8.5.2
-        if (isClassDecl() && isStatic() && !isTopLevelType()) {
-          SimpleSet<TypeDecl> newSet = emptySet();
-          for (TypeDecl type : result) {
-            newSet = newSet.add(type);
-          }
-          result = newSet;
-        }
-        return result;
-      }
-  }
-  /** @apilevel internal */
   private void unimplementedMethods_reset() {
     unimplementedMethods_computed = null;
     unimplementedMethods_value = null;
@@ -1831,6 +1796,41 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
       }
       return result;
     }
+  /** @apilevel internal */
+  private void firstTypeArgument_reset() {
+    firstTypeArgument_computed = null;
+    firstTypeArgument_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle firstTypeArgument_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl firstTypeArgument_value;
+
+  /**
+   * Returns the first type argument of this type, if it is parameterized, otherwise returns
+   * java.lang.Object.
+   * @attribute syn
+   * @aspect EnhancedFor
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="EnhancedFor", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/EnhancedFor.jrag:119")
+  public TypeDecl firstTypeArgument() {
+    ASTNode$State state = state();
+    if (firstTypeArgument_computed == ASTNode$State.NON_CYCLE || firstTypeArgument_computed == state().cycle()) {
+      return firstTypeArgument_value;
+    }
+    firstTypeArgument_value = getParameterization().args.get(0);
+    if (state().inCircle()) {
+      firstTypeArgument_computed = state().cycle();
+    
+    } else {
+      firstTypeArgument_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return firstTypeArgument_value;
+  }
   /** @apilevel internal */
   private void uniqueIndex_reset() {
     uniqueIndex_computed = null;

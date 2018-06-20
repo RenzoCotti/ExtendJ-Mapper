@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -260,17 +260,6 @@ public class InstanceOfExpr extends Expr implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383")
-  public boolean isConstant() {
-    boolean isConstant_value = false;
-    return isConstant_value;
-  }
-  /**
-   * @attribute syn
    * @aspect DefiniteAssignment
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DefiniteAssignment.jrag:380
    */
@@ -353,6 +342,34 @@ public class InstanceOfExpr extends Expr implements Cloneable {
       return (Boolean) _value.value;
     }
   }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:383")
+  public boolean isConstant() {
+    boolean isConstant_value = false;
+    return isConstant_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:326
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:326")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = refined_TypeCheck_InstanceOfExpr_typeProblems();
+        if (!getTypeAccess().type().isReifiable()) {
+          problems.add(error(
+              "the right-hand side of this instanceof expression does not denote a reifiable type"));
+        }
+        return problems;
+      }
+  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -385,23 +402,6 @@ public class InstanceOfExpr extends Expr implements Cloneable {
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:326
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:326")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = refined_TypeCheck_InstanceOfExpr_typeProblems();
-        if (!getTypeAccess().type().isReifiable()) {
-          problems.add(error(
-              "the right-hand side of this instanceof expression does not denote a reifiable type"));
-        }
-        return problems;
-      }
   }
   /**
    * @attribute syn

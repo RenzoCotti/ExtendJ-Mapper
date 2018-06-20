@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -259,21 +259,6 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   public String getID() {
     return tokenString_ID != null ? tokenString_ID : "";
   }
-  /**
-   * Creates a copy of this parameter declaration where parameterized types have been erased.
-   * @attribute syn
-   * @aspect LookupParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1475
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1475")
-  public ParameterDeclaration erasedCopy() {
-    ParameterDeclaration erasedCopy_value = new VariableArityParameterDeclaration(
-              getModifiers().treeCopyNoTransform(),
-              getTypeAccess().erasedCopy(),
-              getID());
-    return erasedCopy_value;
-  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -317,6 +302,21 @@ public class VariableArityParameterDeclaration extends ParameterDeclaration impl
   public boolean isVariableArity() {
     boolean isVariableArity_value = true;
     return isVariableArity_value;
+  }
+  /**
+   * Creates a copy of this parameter declaration where parameterized types have been erased.
+   * @attribute syn
+   * @aspect LookupParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1475
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="LookupParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Generics.jrag:1475")
+  public ParameterDeclaration erasedCopy() {
+    ParameterDeclaration erasedCopy_value = new VariableArityParameterDeclaration(
+              getModifiers().treeCopyNoTransform(),
+              getTypeAccess().erasedCopy(),
+              getID());
+    return erasedCopy_value;
   }
   /**
    * @attribute inh

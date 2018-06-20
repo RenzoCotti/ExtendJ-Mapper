@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -443,20 +443,20 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
       }
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
    * @apilevel internal
    */
-  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:35
-      int childIndex = _callerNode.getIndexOfChild(_childNode);
-      return inhModifiedInScope(var);
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableArityParameters.jrag:30
+      int i = _callerNode.getIndexOfChild(_childNode);
+      return i == getNumParameter() - 1;
     }
     else {
-      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
+      return getParent().Define_variableArityValid(this, _callerNode);
     }
   }
-  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -477,20 +477,20 @@ public class DeclaredLambdaParameters extends LambdaParameters implements Clonea
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:46
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
-  public boolean Define_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
+  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     if (_callerNode == getParameterListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableArityParameters.jrag:30
-      int i = _callerNode.getIndexOfChild(_childNode);
-      return i == getNumParameter() - 1;
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:35
+      int childIndex = _callerNode.getIndexOfChild(_childNode);
+      return inhModifiedInScope(var);
     }
     else {
-      return getParent().Define_variableArityValid(this, _callerNode);
+      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
     }
   }
-  protected boolean canDefine_variableArityValid(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     return true;
   }
   /** @apilevel internal */

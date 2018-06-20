@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -122,6 +122,8 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    isPolyExpression_reset();
+    assignConversionTo_TypeDecl_reset();
     toClass_reset();
     arity_reset();
     numParameters_reset();
@@ -133,10 +135,8 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
     pertinentToApplicability_Expr_BodyDecl_int_reset();
     moreSpecificThan_TypeDecl_TypeDecl_reset();
     potentiallyCompatible_TypeDecl_BodyDecl_reset();
-    isPolyExpression_reset();
-    assignConversionTo_TypeDecl_reset();
-    targetInterface_reset();
     type_reset();
+    targetInterface_reset();
     enclosingLambda_reset();
   }
   /** @apilevel internal 
@@ -278,17 +278,84 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
   public LambdaBody getLambdaBodyNoTransform() {
     return (LambdaBody) getChildNoTransform(1);
   }
+  /** @apilevel internal */
+  private void isPolyExpression_reset() {
+    isPolyExpression_computed = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle isPolyExpression_computed = null;
+
+  /** @apilevel internal */
+  protected boolean isPolyExpression_value;
+
   /**
    * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:145
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:145")
-  public boolean modifiedInScope(Variable var) {
-    boolean modifiedInScope_Variable_value = getLambdaBody().modifiedInScope(var);
-    return modifiedInScope_Variable_value;
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86")
+  public boolean isPolyExpression() {
+    ASTNode$State state = state();
+    if (isPolyExpression_computed == ASTNode$State.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
+      return isPolyExpression_value;
+    }
+    isPolyExpression_value = true;
+    if (state().inCircle()) {
+      isPolyExpression_computed = state().cycle();
+    
+    } else {
+      isPolyExpression_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return isPolyExpression_value;
   }
+  /** @apilevel internal */
+  private void assignConversionTo_TypeDecl_reset() {
+    assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
+    assignConversionTo_TypeDecl_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map assignConversionTo_TypeDecl_values;
+  /** @apilevel internal */
+  protected java.util.Map assignConversionTo_TypeDecl_computed;
+  /**
+   * @attribute syn
+   * @aspect PolyExpressions
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149")
+  public boolean assignConversionTo(TypeDecl type) {
+    Object _parameters = type;
+    if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
+    if (assignConversionTo_TypeDecl_values == null) assignConversionTo_TypeDecl_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (assignConversionTo_TypeDecl_values.containsKey(_parameters) && assignConversionTo_TypeDecl_computed != null
+        && assignConversionTo_TypeDecl_computed.containsKey(_parameters)
+        && (assignConversionTo_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || assignConversionTo_TypeDecl_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) assignConversionTo_TypeDecl_values.get(_parameters);
+    }
+    boolean assignConversionTo_TypeDecl_value = assignConversionTo_compute(type);
+    if (state().inCircle()) {
+      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
+      assignConversionTo_TypeDecl_computed.put(_parameters, state().cycle());
+    
+    } else {
+      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
+      assignConversionTo_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return assignConversionTo_TypeDecl_value;
+  }
+  /** @apilevel internal */
+  private boolean assignConversionTo_compute(TypeDecl type) {
+      if (!type.isFunctionalInterface()) {
+        return false;
+      }
+      FunctionDescriptor f = ((InterfaceDecl) type).functionDescriptor();
+      return congruentTo(f);
+    }
   /** @apilevel internal */
   private void toClass_reset() {
     toClass_computed = false;
@@ -916,127 +983,6 @@ public class LambdaExpr extends Expr implements Cloneable, VariableScope {
       }
       return true;
     }
-  /** @apilevel internal */
-  private void isPolyExpression_reset() {
-    isPolyExpression_computed = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle isPolyExpression_computed = null;
-
-  /** @apilevel internal */
-  protected boolean isPolyExpression_value;
-
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:86")
-  public boolean isPolyExpression() {
-    ASTNode$State state = state();
-    if (isPolyExpression_computed == ASTNode$State.NON_CYCLE || isPolyExpression_computed == state().cycle()) {
-      return isPolyExpression_value;
-    }
-    isPolyExpression_value = true;
-    if (state().inCircle()) {
-      isPolyExpression_computed = state().cycle();
-    
-    } else {
-      isPolyExpression_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return isPolyExpression_value;
-  }
-  /** @apilevel internal */
-  private void assignConversionTo_TypeDecl_reset() {
-    assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
-    assignConversionTo_TypeDecl_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map assignConversionTo_TypeDecl_values;
-  /** @apilevel internal */
-  protected java.util.Map assignConversionTo_TypeDecl_computed;
-  /**
-   * @attribute syn
-   * @aspect PolyExpressions
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PolyExpressions", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/PolyExpressions.jrag:149")
-  public boolean assignConversionTo(TypeDecl type) {
-    Object _parameters = type;
-    if (assignConversionTo_TypeDecl_computed == null) assignConversionTo_TypeDecl_computed = new java.util.HashMap(4);
-    if (assignConversionTo_TypeDecl_values == null) assignConversionTo_TypeDecl_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (assignConversionTo_TypeDecl_values.containsKey(_parameters) && assignConversionTo_TypeDecl_computed != null
-        && assignConversionTo_TypeDecl_computed.containsKey(_parameters)
-        && (assignConversionTo_TypeDecl_computed.get(_parameters) == ASTNode$State.NON_CYCLE || assignConversionTo_TypeDecl_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) assignConversionTo_TypeDecl_values.get(_parameters);
-    }
-    boolean assignConversionTo_TypeDecl_value = assignConversionTo_compute(type);
-    if (state().inCircle()) {
-      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
-      assignConversionTo_TypeDecl_computed.put(_parameters, state().cycle());
-    
-    } else {
-      assignConversionTo_TypeDecl_values.put(_parameters, assignConversionTo_TypeDecl_value);
-      assignConversionTo_TypeDecl_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return assignConversionTo_TypeDecl_value;
-  }
-  /** @apilevel internal */
-  private boolean assignConversionTo_compute(TypeDecl type) {
-      if (!type.isFunctionalInterface()) {
-        return false;
-      }
-      FunctionDescriptor f = ((InterfaceDecl) type).functionDescriptor();
-      return congruentTo(f);
-    }
-  /** @apilevel internal */
-  private void targetInterface_reset() {
-    targetInterface_computed = null;
-    targetInterface_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle targetInterface_computed = null;
-
-  /** @apilevel internal */
-  protected InterfaceDecl targetInterface_value;
-
-  /**
-   * @attribute syn
-   * @aspect TargetType
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:141
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:141")
-  public InterfaceDecl targetInterface() {
-    ASTNode$State state = state();
-    if (targetInterface_computed == ASTNode$State.NON_CYCLE || targetInterface_computed == state().cycle()) {
-      return targetInterface_value;
-    }
-    targetInterface_value = targetInterface_compute();
-    if (state().inCircle()) {
-      targetInterface_computed = state().cycle();
-    
-    } else {
-      targetInterface_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return targetInterface_value;
-  }
-  /** @apilevel internal */
-  private InterfaceDecl targetInterface_compute() {
-      if (targetType().isNull()) {
-        return null;
-      } else if (!(targetType() instanceof InterfaceDecl)) {
-        return null;
-      } else {
-        return (InterfaceDecl) targetType();
-      }
-    }
 /** @apilevel internal */
 protected ASTNode$State.Cycle type_cycle = null;
   /** @apilevel internal */
@@ -1193,6 +1139,60 @@ protected ASTNode$State.Cycle type_cycle = null;
         return problems;
       }
   }
+  /** @apilevel internal */
+  private void targetInterface_reset() {
+    targetInterface_computed = null;
+    targetInterface_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle targetInterface_computed = null;
+
+  /** @apilevel internal */
+  protected InterfaceDecl targetInterface_value;
+
+  /**
+   * @attribute syn
+   * @aspect TargetType
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:141
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TargetType", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:141")
+  public InterfaceDecl targetInterface() {
+    ASTNode$State state = state();
+    if (targetInterface_computed == ASTNode$State.NON_CYCLE || targetInterface_computed == state().cycle()) {
+      return targetInterface_value;
+    }
+    targetInterface_value = targetInterface_compute();
+    if (state().inCircle()) {
+      targetInterface_computed = state().cycle();
+    
+    } else {
+      targetInterface_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return targetInterface_value;
+  }
+  /** @apilevel internal */
+  private InterfaceDecl targetInterface_compute() {
+      if (targetType().isNull()) {
+        return null;
+      } else if (!(targetType() instanceof InterfaceDecl)) {
+        return null;
+      } else {
+        return (InterfaceDecl) targetType();
+      }
+    }
+  /**
+   * @attribute syn
+   * @aspect PreciseRethrow
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:145
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/PreciseRethrow.jrag:145")
+  public boolean modifiedInScope(Variable var) {
+    boolean modifiedInScope_Variable_value = getLambdaBody().modifiedInScope(var);
+    return modifiedInScope_Variable_value;
+  }
   /**
    * @attribute inh
    * @aspect EnclosingLambda
@@ -1227,43 +1227,43 @@ protected ASTNode$State.Cycle type_cycle = null;
   protected LambdaExpr enclosingLambda_value;
 
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableDeclaration.jrag:77
    * @apilevel internal
    */
-  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
-    if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:34
-      return modifiedInScope(var);
-    }
-    else {
-      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
-    }
+  public TypeDecl Define_enclosingLambdaType(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return anonymousDecl();
   }
-  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+  protected boolean canDefine_enclosingLambdaType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:37
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
    * @apilevel internal
    */
-  public LambdaExpr Define_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == toClass_value) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:34
-      return this;
-    }
-    else if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:42
-      return this;
-    }
-    else if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:41
-      return this;
+  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:134
+      {
+          InterfaceDecl iDecl = targetInterface();
+          if (iDecl == null) {
+            return false;
+          } else if (!iDecl.isFunctional()) {
+            return false;
+          }
+          for (TypeDecl exception : iDecl.functionDescriptor().throwsList) {
+            if (exceptionType.strictSubtype(exception)) {
+              return true;
+            }
+          }
+          return false;
+        }
     }
     else {
-      return getParent().Define_enclosingLambda(this, _callerNode);
+      return getParent().Define_handlesException(this, _callerNode, exceptionType);
     }
   }
-  protected boolean canDefine_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     return true;
   }
   /**
@@ -1302,35 +1302,6 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
-   * @apilevel internal
-   */
-  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
-    if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:134
-      {
-          InterfaceDecl iDecl = targetInterface();
-          if (iDecl == null) {
-            return false;
-          } else if (!iDecl.isFunctional()) {
-            return false;
-          }
-          for (TypeDecl exception : iDecl.functionDescriptor().throwsList) {
-            if (exceptionType.strictSubtype(exception)) {
-              return true;
-            }
-          }
-          return false;
-        }
-    }
-    else {
-      return getParent().Define_handlesException(this, _callerNode, exceptionType);
-    }
-  }
-  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/AnonymousClasses.jrag:33
    * @apilevel internal
    */
@@ -1339,6 +1310,26 @@ protected ASTNode$State.Cycle type_cycle = null;
     return targetInterface();
   }
   protected boolean canDefine_superType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:32
+   * @apilevel internal
+   */
+  public TypeDecl Define_unknownType(ASTNode _callerNode, ASTNode _childNode) {
+    if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:34
+      return unknownType();
+    }
+    else if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:33
+      return unknownType();
+    }
+    else {
+      return getParent().Define_unknownType(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_unknownType(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -1393,34 +1384,43 @@ protected ASTNode$State.Cycle type_cycle = null;
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:32
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:30
    * @apilevel internal
    */
-  public TypeDecl Define_unknownType(ASTNode _callerNode, ASTNode _childNode) {
-    if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:34
-      return unknownType();
-    }
-    else if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:33
-      return unknownType();
+  public boolean Define_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
+    if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:34
+      return modifiedInScope(var);
     }
     else {
-      return getParent().Define_unknownType(this, _callerNode);
+      return getParent().Define_inhModifiedInScope(this, _callerNode, var);
     }
   }
-  protected boolean canDefine_unknownType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_inhModifiedInScope(ASTNode _callerNode, ASTNode _childNode, Variable var) {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/VariableDeclaration.jrag:77
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:29
    * @apilevel internal
    */
-  public TypeDecl Define_enclosingLambdaType(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return anonymousDecl();
+  public LambdaExpr Define_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == toClass_value) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/backend/ToClassInherited.jrag:34
+      return this;
+    }
+    else if (getLambdaParametersNoTransform() != null && _callerNode == getLambdaParameters()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:42
+      return this;
+    }
+    else if (getLambdaBodyNoTransform() != null && _callerNode == getLambdaBody()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EnclosingLambda.jrag:41
+      return this;
+    }
+    else {
+      return getParent().Define_enclosingLambda(this, _callerNode);
+    }
   }
-  protected boolean canDefine_enclosingLambdaType(ASTNode _callerNode, ASTNode _childNode) {
+  protected boolean canDefine_enclosingLambda(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**

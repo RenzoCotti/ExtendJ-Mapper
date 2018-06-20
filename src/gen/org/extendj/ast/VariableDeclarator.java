@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -406,55 +406,6 @@ public class VariableDeclarator extends Declarator implements Cloneable {
   protected int getTypeAccessChildPosition() {
     return 2;
   }
-  /** @return {@code true} if this declarator declares a local variable with the given name. 
-   * @attribute syn
-   * @aspect VariableScope
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:238
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:238")
-  public boolean declaresVariable(String name) {
-    boolean declaresVariable_String_value = getID().equals(name);
-    return declaresVariable_String_value;
-  }
-  /**
-   * Check for illegal duplicate variable declarations and parameter shadowing.
-   * See JLS8 $6.4.
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:444
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:444")
-  public Collection<Problem> nameProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        for (Variable var : lookupVariable(name())) {
-          if (var instanceof VariableDeclarator) {
-            VariableDeclarator decl = (VariableDeclarator) var;
-            if (decl != this && decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of local variable %s", name()));
-            }
-          } else if (var instanceof ParameterDeclaration) {
-            ParameterDeclaration decl = (ParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("formal parameter is shadowed by local variable %s", name()));
-            }
-          } else if (var instanceof CatchParameterDeclaration) {
-            CatchParameterDeclaration decl = (CatchParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("catch parameter is shadowed by local variable %s", name()));
-            }
-          } else if (var instanceof InferredParameterDeclaration) {
-            InferredParameterDeclaration decl = (InferredParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("lambda parameter is shadowed by local variable %s", name()));
-            }
-          }
-        }
-        return problems;
-      }
-  }
   /**
    * @attribute syn
    * @aspect Variables
@@ -631,6 +582,55 @@ public class VariableDeclarator extends Declarator implements Cloneable {
     }
     return constant_value;
   }
+  /** @return {@code true} if this declarator declares a local variable with the given name. 
+   * @attribute syn
+   * @aspect VariableScope
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:238
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableScope", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:238")
+  public boolean declaresVariable(String name) {
+    boolean declaresVariable_String_value = getID().equals(name);
+    return declaresVariable_String_value;
+  }
+  /**
+   * Check for illegal duplicate variable declarations and parameter shadowing.
+   * See JLS8 $6.4.
+   * @attribute syn
+   * @aspect NameCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:444
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:444")
+  public Collection<Problem> nameProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        for (Variable var : lookupVariable(name())) {
+          if (var instanceof VariableDeclarator) {
+            VariableDeclarator decl = (VariableDeclarator) var;
+            if (decl != this && decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of local variable %s", name()));
+            }
+          } else if (var instanceof ParameterDeclaration) {
+            ParameterDeclaration decl = (ParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("formal parameter is shadowed by local variable %s", name()));
+            }
+          } else if (var instanceof CatchParameterDeclaration) {
+            CatchParameterDeclaration decl = (CatchParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("catch parameter is shadowed by local variable %s", name()));
+            }
+          } else if (var instanceof InferredParameterDeclaration) {
+            InferredParameterDeclaration decl = (InferredParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("lambda parameter is shadowed by local variable %s", name()));
+            }
+          }
+        }
+        return problems;
+      }
+  }
   /**
    * @attribute syn
    * @aspect PreciseRethrow
@@ -712,6 +712,17 @@ public class VariableDeclarator extends Declarator implements Cloneable {
   }
   /**
    * @attribute inh
+   * @aspect NameCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:422
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:422")
+  public VariableScope outerScope() {
+    VariableScope outerScope_value = getParent().Define_outerScope(this, null);
+    return outerScope_value;
+  }
+  /**
+   * @attribute inh
    * @aspect DeclareBeforeUse
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:35
    */
@@ -742,17 +753,6 @@ public class VariableDeclarator extends Declarator implements Cloneable {
   /** @apilevel internal */
   protected int blockIndex_value;
 
-  /**
-   * @attribute inh
-   * @aspect NameCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:422
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:422")
-  public VariableScope outerScope() {
-    VariableScope outerScope_value = getParent().Define_outerScope(this, null);
-    return outerScope_value;
-  }
   /**
    * @attribute inh
    * @aspect NestedTypes
@@ -821,17 +821,6 @@ public class VariableDeclarator extends Declarator implements Cloneable {
 
   /**
    * @attribute inh
-   * @aspect CodeGeneration
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84")
-  public int variableScopeEndLabel(CodeGeneration gen) {
-    int variableScopeEndLabel_CodeGeneration_value = getParent().Define_variableScopeEndLabel(this, null, gen);
-    return variableScopeEndLabel_CodeGeneration_value;
-  }
-  /**
-   * @attribute inh
    * @aspect LocalNum
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/LocalNum.jrag:50
    */
@@ -863,6 +852,17 @@ public class VariableDeclarator extends Declarator implements Cloneable {
   protected int localNum_value;
 
   /**
+   * @attribute inh
+   * @aspect CodeGeneration
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="CodeGeneration", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:84")
+  public int variableScopeEndLabel(CodeGeneration gen) {
+    int variableScopeEndLabel_CodeGeneration_value = getParent().Define_variableScopeEndLabel(this, null, gen);
+    return variableScopeEndLabel_CodeGeneration_value;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/backend/MultiCatch.jrag:113
    * @apilevel internal
    */
@@ -892,15 +892,6 @@ public class VariableDeclarator extends Declarator implements Cloneable {
     return false;
   }
   protected void collect_contributors_CompilationUnit_problems(CompilationUnit _root, java.util.Map<ASTNode, java.util.Set<ASTNode>> _map) {
-    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:438
-    {
-      java.util.Set<ASTNode> contributors = _map.get(_root);
-      if (contributors == null) {
-        contributors = new java.util.LinkedHashSet<ASTNode>();
-        _map.put((ASTNode) _root, contributors);
-      }
-      contributors.add(this);
-    }
     // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:40
     if (hasInit() && !getInit().type().assignConversionTo(type(), getInit())) {
       {
@@ -912,16 +903,25 @@ public class VariableDeclarator extends Declarator implements Cloneable {
         contributors.add(this);
       }
     }
+    // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:438
+    {
+      java.util.Set<ASTNode> contributors = _map.get(_root);
+      if (contributors == null) {
+        contributors = new java.util.LinkedHashSet<ASTNode>();
+        _map.put((ASTNode) _root, contributors);
+      }
+      contributors.add(this);
+    }
     super.collect_contributors_CompilationUnit_problems(_root, _map);
   }
   protected void contributeTo_CompilationUnit_problems(LinkedList<Problem> collection) {
     super.contributeTo_CompilationUnit_problems(collection);
-    for (Problem value : nameProblems()) {
-      collection.add(value);
-    }
     if (hasInit() && !getInit().type().assignConversionTo(type(), getInit())) {
       collection.add(errorf("can not assign variable %s of type %s a value of type %s",
                 name(), type().typeName(), getInit().type().typeName()));
+    }
+    for (Problem value : nameProblems()) {
+      collection.add(value);
     }
   }
 }

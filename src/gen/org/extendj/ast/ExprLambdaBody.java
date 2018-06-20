@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -92,9 +92,9 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    congruentTo_FunctionDescriptor_reset();
     isBlockBody_reset();
     isExprBody_reset();
-    congruentTo_FunctionDescriptor_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:34
@@ -209,17 +209,52 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
   public Expr getExprNoTransform() {
     return (Expr) getChildNoTransform(0);
   }
+  /** @apilevel internal */
+  private void congruentTo_FunctionDescriptor_reset() {
+    congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
+    congruentTo_FunctionDescriptor_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map congruentTo_FunctionDescriptor_values;
+  /** @apilevel internal */
+  protected java.util.Map congruentTo_FunctionDescriptor_computed;
   /**
    * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43
+   * @aspect LambdaExpr
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43")
-  public boolean modifiedInScope(Variable var) {
-    boolean modifiedInScope_Variable_value = getExpr().modifiedInScope(var);
-    return modifiedInScope_Variable_value;
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74")
+  public boolean congruentTo(FunctionDescriptor f) {
+    Object _parameters = f;
+    if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
+    if (congruentTo_FunctionDescriptor_values == null) congruentTo_FunctionDescriptor_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (congruentTo_FunctionDescriptor_values.containsKey(_parameters) && congruentTo_FunctionDescriptor_computed != null
+        && congruentTo_FunctionDescriptor_computed.containsKey(_parameters)
+        && (congruentTo_FunctionDescriptor_computed.get(_parameters) == ASTNode$State.NON_CYCLE || congruentTo_FunctionDescriptor_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) congruentTo_FunctionDescriptor_values.get(_parameters);
+    }
+    boolean congruentTo_FunctionDescriptor_value = congruentTo_compute(f);
+    if (state().inCircle()) {
+      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
+      congruentTo_FunctionDescriptor_computed.put(_parameters, state().cycle());
+    
+    } else {
+      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
+      congruentTo_FunctionDescriptor_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return congruentTo_FunctionDescriptor_value;
   }
+  /** @apilevel internal */
+  private boolean congruentTo_compute(FunctionDescriptor f) {
+      if (f.method.type().isVoid()) {
+        return getExpr().stmtCompatible();
+      } else {
+        return getExpr().assignConversionTo(f.method.type());
+      }
+    }
   /** @apilevel internal */
   private void isBlockBody_reset() {
     isBlockBody_computed = null;
@@ -284,52 +319,17 @@ public class ExprLambdaBody extends LambdaBody implements Cloneable {
     }
     return isExprBody_value;
   }
-  /** @apilevel internal */
-  private void congruentTo_FunctionDescriptor_reset() {
-    congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
-    congruentTo_FunctionDescriptor_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map congruentTo_FunctionDescriptor_values;
-  /** @apilevel internal */
-  protected java.util.Map congruentTo_FunctionDescriptor_computed;
   /**
    * @attribute syn
-   * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74
+   * @aspect PreciseRethrow
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74")
-  public boolean congruentTo(FunctionDescriptor f) {
-    Object _parameters = f;
-    if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
-    if (congruentTo_FunctionDescriptor_values == null) congruentTo_FunctionDescriptor_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (congruentTo_FunctionDescriptor_values.containsKey(_parameters) && congruentTo_FunctionDescriptor_computed != null
-        && congruentTo_FunctionDescriptor_computed.containsKey(_parameters)
-        && (congruentTo_FunctionDescriptor_computed.get(_parameters) == ASTNode$State.NON_CYCLE || congruentTo_FunctionDescriptor_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) congruentTo_FunctionDescriptor_values.get(_parameters);
-    }
-    boolean congruentTo_FunctionDescriptor_value = congruentTo_compute(f);
-    if (state().inCircle()) {
-      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
-      congruentTo_FunctionDescriptor_computed.put(_parameters, state().cycle());
-    
-    } else {
-      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
-      congruentTo_FunctionDescriptor_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return congruentTo_FunctionDescriptor_value;
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43")
+  public boolean modifiedInScope(Variable var) {
+    boolean modifiedInScope_Variable_value = getExpr().modifiedInScope(var);
+    return modifiedInScope_Variable_value;
   }
-  /** @apilevel internal */
-  private boolean congruentTo_compute(FunctionDescriptor f) {
-      if (f.method.type().isVoid()) {
-        return getExpr().stmtCompatible();
-      } else {
-        return getExpr().assignConversionTo(f.method.type());
-      }
-    }
   /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:30
    * @apilevel internal

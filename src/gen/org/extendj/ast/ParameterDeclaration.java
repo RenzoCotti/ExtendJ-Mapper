@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,7 +30,7 @@ import java.io.DataInputStream;
  * @production ParameterDeclaration : {@link ASTNode} ::= <span class="component">{@link Modifiers}</span> <span class="component">TypeAccess:{@link Access}</span> <span class="component">&lt;ID:String&gt;</span>;
 
  */
-public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable, SimpleSet<Variable>, Variable {
+public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable, Variable, SimpleSet<Variable> {
   /**
    * @aspect Java4PrettyPrint
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrint.jadd:533
@@ -40,6 +40,20 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
     out.print(getTypeAccess());
     out.print(" ");
     out.print(getID());
+  }
+  /**
+   * @aspect NodeConstructors
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:32
+   */
+  public ParameterDeclaration(Access type, String name) {
+    this(new Modifiers(new List()), type, name);
+  }
+  /**
+   * @aspect NodeConstructors
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:36
+   */
+  public ParameterDeclaration(TypeDecl type, String name) {
+    this(new Modifiers(new List()), type.createQualifiedAccess(), name);
   }
   /**
    * @aspect DataStructures
@@ -104,20 +118,6 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   @Override
   public Iterator<Variable> iterator() {
     return new SingleItemIterator(this);
-  }
-  /**
-   * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:32
-   */
-  public ParameterDeclaration(Access type, String name) {
-    this(new Modifiers(new List()), type, name);
-  }
-  /**
-   * @aspect NodeConstructors
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NodeConstructors.jrag:36
-   */
-  public ParameterDeclaration(TypeDecl type, String name) {
-    this(new Modifiers(new List()), type.createQualifiedAccess(), name);
   }
   /**
    * @declaredat ASTNode:1
@@ -354,103 +354,6 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @attribute syn
-   * @aspect Modifiers
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:255
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:255")
-  public boolean isSynthetic() {
-    boolean isSynthetic_value = getModifiers().isSynthetic();
-    return isSynthetic_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect NameCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:465
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:465")
-  public Collection<Problem> nameProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        SimpleSet<Variable> decls = outerScope().lookupVariable(name());
-        for (Variable var : decls) {
-          if (var instanceof VariableDeclarator) {
-            VariableDeclarator decl = (VariableDeclarator) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          } else if (var instanceof ParameterDeclaration) {
-            ParameterDeclaration decl = (ParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          } else if (var instanceof InferredParameterDeclaration) {
-            InferredParameterDeclaration decl = (InferredParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          } else if (var instanceof CatchParameterDeclaration) {
-            CatchParameterDeclaration decl = (CatchParameterDeclaration) var;
-            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
-              problems.add(errorf("duplicate declaration of parameter %s", name()));
-            }
-          }
-        }
-    
-        // 8.4.1
-        if (!lookupVariable(name()).contains(this)) {
-          problems.add(errorf("duplicate declaration of parameter %s", name()));
-        }
-        return problems;
-      }
-  }
-  /**
-   * @attribute syn
-   * @aspect PrettyPrintUtil
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:225
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:225")
-  public boolean hasModifiers() {
-    boolean hasModifiers_value = getModifiers().getNumModifier() > 0;
-    return hasModifiers_value;
-  }
-  /** @apilevel internal */
-  private void type_reset() {
-    type_computed = null;
-    type_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle type_computed = null;
-
-  /** @apilevel internal */
-  protected TypeDecl type_value;
-
-  /**
-   * @attribute syn
-   * @aspect TypeAnalysis
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:273
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:273")
-  public TypeDecl type() {
-    ASTNode$State state = state();
-    if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
-      return type_value;
-    }
-    type_value = getTypeAccess().type();
-    if (state().inCircle()) {
-      type_computed = state().cycle();
-    
-    } else {
-      type_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return type_value;
-  }
-  /**
-   * @attribute syn
    * @aspect Variables
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:73
    */
@@ -628,6 +531,114 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
       }
   }
   /**
+   * @attribute syn
+   * @aspect Modifiers
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:255
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Modifiers", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/Modifiers.jrag:255")
+  public boolean isSynthetic() {
+    boolean isSynthetic_value = getModifiers().isSynthetic();
+    return isSynthetic_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect NameCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:465
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:465")
+  public Collection<Problem> nameProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        SimpleSet<Variable> decls = outerScope().lookupVariable(name());
+        for (Variable var : decls) {
+          if (var instanceof VariableDeclarator) {
+            VariableDeclarator decl = (VariableDeclarator) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          } else if (var instanceof ParameterDeclaration) {
+            ParameterDeclaration decl = (ParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          } else if (var instanceof InferredParameterDeclaration) {
+            InferredParameterDeclaration decl = (InferredParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          } else if (var instanceof CatchParameterDeclaration) {
+            CatchParameterDeclaration decl = (CatchParameterDeclaration) var;
+            if (decl.enclosingBodyDecl() == enclosingBodyDecl()) {
+              problems.add(errorf("duplicate declaration of parameter %s", name()));
+            }
+          }
+        }
+    
+        // 8.4.1
+        if (!lookupVariable(name()).contains(this)) {
+          problems.add(errorf("duplicate declaration of parameter %s", name()));
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
+   * @aspect PrettyPrintUtil
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:225
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="PrettyPrintUtil", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/PrettyPrintUtil.jrag:225")
+  public boolean hasModifiers() {
+    boolean hasModifiers_value = getModifiers().getNumModifier() > 0;
+    return hasModifiers_value;
+  }
+  /** @apilevel internal */
+  private void type_reset() {
+    type_computed = null;
+    type_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle type_computed = null;
+
+  /** @apilevel internal */
+  protected TypeDecl type_value;
+
+  /**
+   * @attribute syn
+   * @aspect TypeAnalysis
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:273
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeAnalysis", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeAnalysis.jrag:273")
+  public TypeDecl type() {
+    ASTNode$State state = state();
+    if (type_computed == ASTNode$State.NON_CYCLE || type_computed == state().cycle()) {
+      return type_value;
+    }
+    type_value = getTypeAccess().type();
+    if (state().inCircle()) {
+      type_computed = state().cycle();
+    
+    } else {
+      type_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return type_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect VariableArityParameters
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:59
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:59")
+  public boolean isVariableArity() {
+    boolean isVariableArity_value = false;
+    return isVariableArity_value;
+  }
+  /**
    * Creates a copy of this parameter declaration where parameterized types have been erased.
    * @attribute syn
    * @aspect LookupParTypeDecl
@@ -641,17 +652,6 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
               getTypeAccess().erasedCopy(),
               getID());
     return erasedCopy_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect VariableArityParameters
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:59
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="VariableArityParameters", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/VariableArityParameters.jrag:59")
-  public boolean isVariableArity() {
-    boolean isVariableArity_value = false;
-    return isVariableArity_value;
   }
   /**
    * Builds a copy of this ParameterDeclaration node where all occurrences
@@ -800,6 +800,39 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   }
   /**
    * @attribute inh
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:82
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:82")
+  public boolean isMethodParameter() {
+    boolean isMethodParameter_value = getParent().Define_isMethodParameter(this, null);
+    return isMethodParameter_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:83
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:83")
+  public boolean isConstructorParameter() {
+    boolean isConstructorParameter_value = getParent().Define_isConstructorParameter(this, null);
+    return isConstructorParameter_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect Variables
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:84
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:84")
+  public boolean isExceptionHandlerParameter() {
+    boolean isExceptionHandlerParameter_value = getParent().Define_isExceptionHandlerParameter(this, null);
+    return isExceptionHandlerParameter_value;
+  }
+  /**
+   * @attribute inh
    * @aspect VariableScope
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupVariable.jrag:46
    */
@@ -841,39 +874,6 @@ public class ParameterDeclaration extends ASTNode<ASTNode> implements Cloneable,
   public TypeDecl hostType() {
     TypeDecl hostType_value = getParent().Define_hostType(this, null);
     return hostType_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:82
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:82")
-  public boolean isMethodParameter() {
-    boolean isMethodParameter_value = getParent().Define_isMethodParameter(this, null);
-    return isMethodParameter_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:83
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:83")
-  public boolean isConstructorParameter() {
-    boolean isConstructorParameter_value = getParent().Define_isConstructorParameter(this, null);
-    return isConstructorParameter_value;
-  }
-  /**
-   * @attribute inh
-   * @aspect Variables
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:84
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="Variables", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:84")
-  public boolean isExceptionHandlerParameter() {
-    boolean isExceptionHandlerParameter_value = getParent().Define_isExceptionHandlerParameter(this, null);
-    return isExceptionHandlerParameter_value;
   }
   /**
    * @return true if the variable var is modified in the local scope

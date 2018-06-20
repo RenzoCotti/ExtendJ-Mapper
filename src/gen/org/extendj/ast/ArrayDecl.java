@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -106,9 +106,9 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
     usesTypeVariable_reset();
     subtype_TypeDecl_reset();
     strictSubtype_TypeDecl_reset();
+    jvmName_reset();
     constantPoolName_reset();
     typeDescriptor_reset();
-    jvmName_reset();
     needsSignatureAttribute_reset();
     fieldTypeSignature_reset();
     classTypeSignature_reset();
@@ -930,50 +930,20 @@ public class ArrayDecl extends ClassDecl implements Cloneable {
       }
   }
   /**
+   * A type is reifiable if it either refers to a non-parameterized type,
+   * is a raw type, is a parameterized type with only unbound wildcard
+   * parameters or is an array type with a reifiable type parameter.
+   * 
+   * @see "JLS SE7 &sect;4.7"
    * @attribute syn
-   * @aspect Annotations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199
+   * @aspect ReifiableTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199")
-  public boolean isValidAnnotationMethodReturnType() {
-    boolean isValidAnnotationMethodReturnType_value = !componentType().isArrayDecl() && componentType().isValidAnnotationMethodReturnType();
-    return isValidAnnotationMethodReturnType_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect Annotations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:663
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:663")
-  public boolean commensurateWith(ElementValue value) {
-    boolean commensurateWith_ElementValue_value = value.commensurateWithArrayDecl(this);
-    return commensurateWith_ElementValue_value;
-  }
-  /**
-   * @param bound the bounded type variable
-   * @return {@code true} if this type is within the bounds of the parameter type
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40")
-  public boolean withinBounds(TypeDecl bound) {
-    boolean withinBounds_TypeDecl_value = bound.boundOfArray(this);
-    return withinBounds_TypeDecl_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect GenericBoundCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87")
-  public boolean boundOfArray(ArrayDecl type) {
-    boolean boundOfArray_ArrayDecl_value = type.componentType().withinBounds(componentType());
-    return boundOfArray_ArrayDecl_value;
+  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
+  public boolean isReifiable() {
+    boolean isReifiable_value = componentType().isReifiable();
+    return isReifiable_value;
   }
 /** @apilevel internal */
 protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
@@ -1024,6 +994,28 @@ protected ASTNode$State.Cycle involvesTypeParameters_cycle = null;
     } else {
     }
     return involvesTypeParameters_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Annotations
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:199")
+  public boolean isValidAnnotationMethodReturnType() {
+    boolean isValidAnnotationMethodReturnType_value = !componentType().isArrayDecl() && componentType().isValidAnnotationMethodReturnType();
+    return isValidAnnotationMethodReturnType_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect Annotations
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:663
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Annotations", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:663")
+  public boolean commensurateWith(ElementValue value) {
+    boolean commensurateWith_ElementValue_value = value.commensurateWithArrayDecl(this);
+    return commensurateWith_ElementValue_value;
   }
   /** @apilevel internal */
   private void erasure_reset() {
@@ -1175,20 +1167,28 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
       }
   }
   /**
-   * A type is reifiable if it either refers to a non-parameterized type,
-   * is a raw type, is a parameterized type with only unbound wildcard
-   * parameters or is an array type with a reifiable type parameter.
-   * 
-   * @see "JLS SE7 &sect;4.7"
+   * @param bound the bounded type variable
+   * @return {@code true} if this type is within the bounds of the parameter type
    * @attribute syn
-   * @aspect ReifiableTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ReifiableTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/ReifiableTypes.jrag:39")
-  public boolean isReifiable() {
-    boolean isReifiable_value = componentType().isReifiable();
-    return isReifiable_value;
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:40")
+  public boolean withinBounds(TypeDecl bound) {
+    boolean withinBounds_TypeDecl_value = bound.boundOfArray(this);
+    return withinBounds_TypeDecl_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenericBoundCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericBoundCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericBoundCheck.jrag:87")
+  public boolean boundOfArray(ArrayDecl type) {
+    boolean boundOfArray_ArrayDecl_value = type.componentType().withinBounds(componentType());
+    return boundOfArray_ArrayDecl_value;
   }
   /** @apilevel internal */
   private void strictSubtype_TypeDecl_reset() {
@@ -1256,6 +1256,62 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
         return type.componentType().strictSubtype(componentType());
       }
   }
+  /**
+   * @attribute syn
+   * @aspect CreateBCode
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037")
+  public String arrayTypeDescriptor() {
+    String arrayTypeDescriptor_value = typeDescriptor();
+    return arrayTypeDescriptor_value;
+  }
+  /** @apilevel internal */
+  private void jvmName_reset() {
+    jvmName_computed = null;
+    jvmName_value = null;
+  }
+  /** @apilevel internal */
+  protected ASTNode$State.Cycle jvmName_computed = null;
+
+  /** @apilevel internal */
+  protected String jvmName_value;
+
+  /**
+   * @attribute syn
+   * @aspect Java2Rewrites
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:37
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:37")
+  public String jvmName() {
+    ASTNode$State state = state();
+    if (jvmName_computed == ASTNode$State.NON_CYCLE || jvmName_computed == state().cycle()) {
+      return jvmName_value;
+    }
+    jvmName_value = jvmName_compute();
+    if (state().inCircle()) {
+      jvmName_computed = state().cycle();
+    
+    } else {
+      jvmName_computed = ASTNode$State.NON_CYCLE;
+    
+    }
+    return jvmName_value;
+  }
+  /** @apilevel internal */
+  private String jvmName_compute() {
+      StringBuffer dim = new StringBuffer();
+      for (int i = 0; i < dimension(); i++) {
+        dim.append("[");
+      }
+      if (elementType().isReferenceType()) {
+        return dim.toString() + "L" + elementType().jvmName() + ";";
+      } else {
+        return dim.toString() + elementType().jvmName();
+      }
+    }
   /** @apilevel internal */
   private void constantPoolName_reset() {
     constantPoolName_computed = null;
@@ -1330,62 +1386,6 @@ protected ASTNode$State.Cycle usesTypeVariable_cycle = null;
       }
       dim.append(elementType().typeDescriptor());
       return dim.toString();
-    }
-  /**
-   * @attribute syn
-   * @aspect CreateBCode
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="CreateBCode", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1037")
-  public String arrayTypeDescriptor() {
-    String arrayTypeDescriptor_value = typeDescriptor();
-    return arrayTypeDescriptor_value;
-  }
-  /** @apilevel internal */
-  private void jvmName_reset() {
-    jvmName_computed = null;
-    jvmName_value = null;
-  }
-  /** @apilevel internal */
-  protected ASTNode$State.Cycle jvmName_computed = null;
-
-  /** @apilevel internal */
-  protected String jvmName_value;
-
-  /**
-   * @attribute syn
-   * @aspect Java2Rewrites
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:37
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="Java2Rewrites", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/Java2Rewrites.jrag:37")
-  public String jvmName() {
-    ASTNode$State state = state();
-    if (jvmName_computed == ASTNode$State.NON_CYCLE || jvmName_computed == state().cycle()) {
-      return jvmName_value;
-    }
-    jvmName_value = jvmName_compute();
-    if (state().inCircle()) {
-      jvmName_computed = state().cycle();
-    
-    } else {
-      jvmName_computed = ASTNode$State.NON_CYCLE;
-    
-    }
-    return jvmName_value;
-  }
-  /** @apilevel internal */
-  private String jvmName_compute() {
-      StringBuffer dim = new StringBuffer();
-      for (int i = 0; i < dimension(); i++) {
-        dim.append("[");
-      }
-      if (elementType().isReferenceType()) {
-        return dim.toString() + "L" + elementType().jvmName() + ";";
-      } else {
-        return dim.toString() + elementType().jvmName();
-      }
     }
   /** @apilevel internal */
   private void needsSignatureAttribute_reset() {

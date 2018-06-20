@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -123,6 +123,17 @@ public abstract class Case extends Stmt implements Cloneable {
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
   @ASTNodeAnnotation.Source(aspect="NameCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/NameCheck.jrag:586")
   public abstract boolean constValue(Case c);
+  /**
+   * @attribute syn
+   * @aspect UnreachableStatements
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:127
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:127")
+  public boolean reachable() {
+    boolean reachable_value = getParent().getParent() instanceof Block && ((Block) getParent().getParent()).reachable();
+    return reachable_value;
+  }
   /** @apilevel internal */
   private void assignedBefore_Variable_reset() {
     assignedBefore_Variable_values = null;
@@ -295,14 +306,14 @@ public abstract class Case extends Stmt implements Cloneable {
   }
   /**
    * @attribute syn
-   * @aspect UnreachableStatements
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:127
+   * @aspect StringsInSwitch
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="UnreachableStatements", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:127")
-  public boolean reachable() {
-    boolean reachable_value = getParent().getParent() instanceof Block && ((Block) getParent().getParent()).reachable();
-    return reachable_value;
+  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61")
+  public boolean isDefaultCase() {
+    boolean isDefaultCase_value = false;
+    return isDefaultCase_value;
   }
   /**
    * @attribute syn
@@ -314,17 +325,6 @@ public abstract class Case extends Stmt implements Cloneable {
   public boolean modifiedInScope(Variable var) {
     boolean modifiedInScope_Variable_value = false;
     return modifiedInScope_Variable_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect StringsInSwitch
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="StringsInSwitch", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/StringsInSwitch.jrag:61")
-  public boolean isDefaultCase() {
-    boolean isDefaultCase_value = false;
-    return isDefaultCase_value;
   }
   /** @apilevel internal */
   private void label_reset() {
@@ -357,6 +357,17 @@ public abstract class Case extends Stmt implements Cloneable {
     
     }
     return label_value;
+  }
+  /**
+   * @attribute inh
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482")
+  public TypeDecl switchType() {
+    TypeDecl switchType_value = getParent().Define_switchType(this, null);
+    return switchType_value;
   }
   /**
    * @attribute inh
@@ -396,17 +407,6 @@ public abstract class Case extends Stmt implements Cloneable {
   protected java.util.Map bind_Case_values;
   /** @apilevel internal */
   protected java.util.Map bind_Case_computed;
-  /**
-   * @attribute inh
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.INH)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:482")
-  public TypeDecl switchType() {
-    TypeDecl switchType_value = getParent().Define_switchType(this, null);
-    return switchType_value;
-  }
   /** @apilevel internal */
   public ASTNode rewriteTo() {
     return super.rewriteTo();

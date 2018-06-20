@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -262,6 +262,17 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
     boolean isPositive_value = !getLITERAL().startsWith("-");
     return isPositive_value;
   }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:750
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:750")
+  public Problem sizeError() {
+    Problem sizeError_value = errorf("The integer literal \"%s\" is too large for type int.", getLITERAL());
+    return sizeError_value;
+  }
   /** @apilevel internal */
   private void type_reset() {
     type_computed = null;
@@ -294,17 +305,6 @@ public class IntegerLiteral extends NumericLiteral implements Cloneable {
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:750
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:750")
-  public Problem sizeError() {
-    Problem sizeError_value = errorf("The integer literal \"%s\" is too large for type int.", getLITERAL());
-    return sizeError_value;
   }
   /** @apilevel internal */
   private void constant_reset() {

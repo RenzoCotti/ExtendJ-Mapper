@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -224,6 +224,47 @@ public class ThisAccess extends Access implements Cloneable {
 { return isQualified() ? qualifier().type() : hostType(); }
   /**
    * @attribute syn
+   * @aspect AccessTypes
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54")
+  public boolean isThisAccess() {
+    boolean isThisAccess_value = true;
+    return isThisAccess_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect TypeHierarchyCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:160
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:160")
+  public Collection<Problem> typeHierarchyProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        // 8.8.5.1
+        // JLSv7 8.8.7.1
+        TypeDecl constructorHostType = enclosingExplicitConstructorHostType();
+        if (constructorHostType != null && (constructorHostType == decl())) {
+          problems.add(error("this may not be accessed in an explicit constructor invocation"));
+        } else if (isQualified()) {
+          // 15.8.4
+          if (inStaticContext()) {
+            problems.add(error("qualified this may not occur in static context"));
+          } else if (!hostType().isInnerTypeOf(decl()) && hostType() != decl()) {
+            problems.add(errorf("qualified this access must name an enclosing type which %s is not",
+                decl().typeName()));
+          }
+        } else if (!isQualified() && inStaticContext()) {
+          // 8.4.3.2
+          problems.add(error("this access may not be used in a static context"));
+        }
+        return problems;
+      }
+  }
+  /**
+   * @attribute syn
    * @aspect TypeScopePropagation
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/LookupType.jrag:325
    */
@@ -285,17 +326,6 @@ public class ThisAccess extends Access implements Cloneable {
       return typeDecl;
     }
   /**
-   * @attribute syn
-   * @aspect AccessTypes
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="AccessTypes", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ResolveAmbiguousNames.jrag:54")
-  public boolean isThisAccess() {
-    boolean isThisAccess_value = true;
-    return isThisAccess_value;
-  }
-  /**
    * Defines the expected kind of name for the left hand side in a qualified
    * expression.
    * @attribute syn
@@ -340,36 +370,6 @@ public class ThisAccess extends Access implements Cloneable {
     
     }
     return type_value;
-  }
-  /**
-   * @attribute syn
-   * @aspect TypeHierarchyCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:160
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeHierarchyCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:160")
-  public Collection<Problem> typeHierarchyProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        // 8.8.5.1
-        // JLSv7 8.8.7.1
-        TypeDecl constructorHostType = enclosingExplicitConstructorHostType();
-        if (constructorHostType != null && (constructorHostType == decl())) {
-          problems.add(error("this may not be accessed in an explicit constructor invocation"));
-        } else if (isQualified()) {
-          // 15.8.4
-          if (inStaticContext()) {
-            problems.add(error("qualified this may not occur in static context"));
-          } else if (!hostType().isInnerTypeOf(decl()) && hostType() != decl()) {
-            problems.add(errorf("qualified this access must name an enclosing type which %s is not",
-                decl().typeName()));
-          }
-        } else if (!isQualified() && inStaticContext()) {
-          // 8.4.3.2
-          problems.add(error("this access may not be used in a static context"));
-        }
-        return problems;
-      }
   }
   /**
    * @attribute inh

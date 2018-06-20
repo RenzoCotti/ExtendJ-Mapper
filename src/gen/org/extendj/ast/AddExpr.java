@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -29,13 +29,6 @@ import java.io.DataInputStream;
 
  */
 public class AddExpr extends AdditiveExpr implements Cloneable {
-  /**
-   * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:977
-   */
-  void emitOperation(CodeGeneration gen) {
-    type().add(this, gen);
-  }
   /**
    * @aspect CreateBCode
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1147
@@ -77,6 +70,13 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
         gen.emit(this, Bytecode.INVOKEVIRTUAL, 0).add2(index);
       }
     }
+  }
+  /**
+   * @aspect CodeGenerationBinaryOperations
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:977
+   */
+  void emitOperation(CodeGeneration gen) {
+    type().add(this, gen);
   }
   /**
    * @declaredat ASTNode:1
@@ -271,6 +271,28 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
     Constant constant_value = type().add(getLeftOperand().constant(), getRightOperand().constant());
     return constant_value;
   }
+  /**
+   * @attribute syn
+   * @aspect TypeCheck
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:221
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:221")
+  public Collection<Problem> typeProblems() {
+    {
+        Collection<Problem> problems = new LinkedList<Problem>();
+        TypeDecl left = getLeftOperand().type();
+        TypeDecl right = getRightOperand().type();
+        if (!left.isString() && !right.isString()) {
+          return super.typeProblems();
+        } else if (left.isVoid()) {
+          problems.add(error("The type void of the left hand side is not numeric"));
+        } else if (right.isVoid()) {
+          problems.add(error("The type void of the right hand side is not numeric"));
+        }
+        return problems;
+      }
+  }
   /** The operator string used for pretty printing this expression. 
    * @attribute syn
    * @aspect PrettyPrintUtil
@@ -329,28 +351,6 @@ public class AddExpr extends AdditiveExpr implements Cloneable {
         return left.isString() ? left : right;
       }
     }
-  /**
-   * @attribute syn
-   * @aspect TypeCheck
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:221
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="TypeCheck", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:221")
-  public Collection<Problem> typeProblems() {
-    {
-        Collection<Problem> problems = new LinkedList<Problem>();
-        TypeDecl left = getLeftOperand().type();
-        TypeDecl right = getRightOperand().type();
-        if (!left.isString() && !right.isString()) {
-          return super.typeProblems();
-        } else if (left.isVoid()) {
-          problems.add(error("The type void of the left hand side is not numeric"));
-        } else if (right.isVoid()) {
-          problems.add(error("The type void of the right hand side is not numeric"));
-        }
-        return problems;
-      }
-  }
   /**
    * @attribute syn
    * @aspect InnerClasses

@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -380,45 +380,6 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   public List<FieldDeclarator> getDeclaratorsNoTransform() {
     return getDeclaratorListNoTransform();
   }
-  /**
-   * @attribute syn
-   * @aspect ConstantExpression
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:358
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:358")
-  public boolean isConstant() {
-    {
-        if (!isFinal()) {
-          return false;
-        }
-        for (FieldDeclarator decl : getDeclaratorList()) {
-          TypeDecl type = decl.type();
-          if (!decl.hasInit() || !decl.getInit().isConstant()
-              || !(decl.type() instanceof PrimitiveType || decl.type().isString())) {
-            return false;
-          }
-        }
-        return true;
-      }
-  }
-  /** @return {@code true} if the field declaration is inside this node. 
-   * @attribute syn
-   * @aspect DeclareBeforeUse
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:46
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:46")
-  public boolean declaredIn(Variable decl) {
-    {
-        for (FieldDeclarator field : getDeclaratorList()) {
-          if (field == decl) {
-            return true;
-          }
-        }
-        return declaredBefore(decl);
-      }
-  }
   /** @apilevel internal */
   private void assignedAfter_Variable_reset() {
     assignedAfter_Variable_values = null;
@@ -520,6 +481,28 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     } else {
       return (Boolean) _value.value;
     }
+  }
+  /**
+   * @attribute syn
+   * @aspect ConstantExpression
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:358
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="ConstantExpression", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/ConstantExpression.jrag:358")
+  public boolean isConstant() {
+    {
+        if (!isFinal()) {
+          return false;
+        }
+        for (FieldDeclarator decl : getDeclaratorList()) {
+          TypeDecl type = decl.type();
+          if (!decl.hasInit() || !decl.getInit().isConstant()
+              || !(decl.type() instanceof PrimitiveType || decl.type().isString())) {
+            return false;
+          }
+        }
+        return true;
+      }
   }
   /**
    * @attribute syn
@@ -636,6 +619,23 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     boolean isVolatile_value = getModifiers().isVolatile();
     return isVolatile_value;
   }
+  /** @return {@code true} if the field declaration is inside this node. 
+   * @attribute syn
+   * @aspect DeclareBeforeUse
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:46
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="DeclareBeforeUse", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:46")
+  public boolean declaredIn(Variable decl) {
+    {
+        for (FieldDeclarator field : getDeclaratorList()) {
+          if (field == decl) {
+            return true;
+          }
+        }
+        return declaredBefore(decl);
+      }
+  }
   /**
    * @attribute syn
    * @aspect PrettyPrintUtil
@@ -657,6 +657,17 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   public TypeDecl type() {
     TypeDecl type_value = getTypeAccess().type();
     return type_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect GenericsParTypeDecl
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:100
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:100")
+  public boolean visibleTypeParameters() {
+    boolean visibleTypeParameters_value = !isStatic();
+    return visibleTypeParameters_value;
   }
   /**
    * @attribute syn
@@ -713,17 +724,6 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return isSubstitutable_value;
   }
   /**
-   * @attribute syn
-   * @aspect GenericsParTypeDecl
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:100
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="GenericsParTypeDecl", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/GenericsParTypeDecl.jrag:100")
-  public boolean visibleTypeParameters() {
-    boolean visibleTypeParameters_value = !isStatic();
-    return visibleTypeParameters_value;
-  }
-  /**
    * @return true if the modifier list includes the SafeVarargs annotation
    * @attribute syn
    * @aspect SafeVarargs
@@ -745,6 +745,23 @@ public class FieldDecl extends MemberDecl implements Cloneable {
   public boolean suppressWarnings(String type) {
     boolean suppressWarnings_String_value = hasAnnotationSuppressWarnings(type) || withinSuppressWarnings(type);
     return suppressWarnings_String_value;
+  }
+  /**
+   * @attribute syn
+   * @aspect InnerClasses
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:48
+   */
+  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
+  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:48")
+  public boolean hasField(String name) {
+    {
+        for (FieldDeclarator decl : getDeclaratorList()) {
+          if (decl.name().equals(name)) {
+            return true;
+          }
+        }
+        return false;
+      }
   }
   /** @apilevel internal */
   private void hasInit_reset() {
@@ -818,44 +835,58 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return isField_value;
   }
   /**
-   * @attribute syn
-   * @aspect InnerClasses
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:48
-   */
-  @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="InnerClasses", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/InnerClasses.jrag:48")
-  public boolean hasField(String name) {
-    {
-        for (FieldDeclarator decl : getDeclaratorList()) {
-          if (decl.name().equals(name)) {
-            return true;
-          }
-        }
-        return false;
-      }
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:58
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:133
    * @apilevel internal
    */
-  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+  public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
     if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:62
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:137
       int index = _callerNode.getIndexOfChild(_childNode);
-      {
-          for (int i = index - 1; i >= 0; --i) {
-            if (getDeclarator(i) == decl) {
-              return true;
-            }
-          }
-          return declaredBefore(decl);
-        }
+      return getModifiers();
     }
     else {
-      return getParent().Define_declaredBefore(this, _callerNode, decl);
+      return getParent().Define_declarationModifiers(this, _callerNode);
     }
   }
-  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+  protected boolean canDefine_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:144
+   * @apilevel internal
+   */
+  public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:148
+      int index = _callerNode.getIndexOfChild(_childNode);
+      return getTypeAccess();
+    }
+    else {
+      return getParent().Define_declarationType(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_declarationType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
+   * @apilevel internal
+   */
+  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    {
+        if (hostType().isAnonymous()) {
+          return true;
+        }
+        for (ConstructorDecl decl : hostType().constructors()) {
+          if (!decl.throwsException(exceptionType)) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
+  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
     return true;
   }
   /**
@@ -910,24 +941,14 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java7/frontend/TryWithResources.jrag:115
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
    * @apilevel internal
    */
-  public boolean Define_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     int childIndex = this.getIndexOfChild(_callerNode);
-    {
-        if (hostType().isAnonymous()) {
-          return true;
-        }
-        for (ConstructorDecl decl : hostType().constructors()) {
-          if (!decl.throwsException(exceptionType)) {
-            return false;
-          }
-        }
-        return true;
-      }
+    return isStatic();
   }
-  protected boolean canDefine_handlesException(ASTNode _callerNode, ASTNode _childNode, TypeDecl exceptionType) {
+  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -1043,6 +1064,30 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:58
+   * @apilevel internal
+   */
+  public boolean Define_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    if (_callerNode == getDeclaratorListNoTransform()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/DeclareBeforeUse.jrag:62
+      int index = _callerNode.getIndexOfChild(_childNode);
+      {
+          for (int i = index - 1; i >= 0; --i) {
+            if (getDeclarator(i) == decl) {
+              return true;
+            }
+          }
+          return declaredBefore(decl);
+        }
+    }
+    else {
+      return getParent().Define_declaredBefore(this, _callerNode, decl);
+    }
+  }
+  protected boolean canDefine_declaredBefore(ASTNode _callerNode, ASTNode _childNode, Variable decl) {
+    return true;
+  }
+  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/SyntacticClassification.jrag:36
    * @apilevel internal
    */
@@ -1076,51 +1121,6 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     return true;
   }
   /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeHierarchyCheck.jrag:207
-   * @apilevel internal
-   */
-  public boolean Define_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return isStatic();
-  }
-  protected boolean canDefine_inStaticContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:133
-   * @apilevel internal
-   */
-  public Modifiers Define_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:137
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return getModifiers();
-    }
-    else {
-      return getParent().Define_declarationModifiers(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_declarationModifiers(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:144
-   * @apilevel internal
-   */
-  public Access Define_declarationType(ASTNode _callerNode, ASTNode _childNode) {
-    if (_callerNode == getDeclaratorListNoTransform()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/VariableDeclaration.jrag:148
-      int index = _callerNode.getIndexOfChild(_childNode);
-      return getTypeAccess();
-    }
-    else {
-      return getParent().Define_declarationType(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_declarationType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Annotations.jrag:131
    * @apilevel internal
    */
@@ -1134,17 +1134,6 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   protected boolean canDefine_mayUseAnnotationTarget(ASTNode _callerNode, ASTNode _childNode, String name) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:566
-   * @apilevel internal
-   */
-  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
-    int childIndex = this.getIndexOfChild(_callerNode);
-    return !isStatic() && hostType().isEnumDecl();
-  }
-  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**
@@ -1179,6 +1168,17 @@ public class FieldDecl extends MemberDecl implements Cloneable {
     }
   }
   protected boolean canDefine_erasedField(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java5/frontend/Enums.jrag:566
+   * @apilevel internal
+   */
+  public boolean Define_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
+    int childIndex = this.getIndexOfChild(_callerNode);
+    return !isStatic() && hostType().isEnumDecl();
+  }
+  protected boolean canDefine_inEnumInitializer(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /**

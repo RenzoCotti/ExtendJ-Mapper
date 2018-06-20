@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -109,11 +109,11 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
    */
   public void flushAttrCache() {
     super.flushAttrCache();
+    congruentTo_FunctionDescriptor_reset();
     isBlockBody_reset();
     isExprBody_reset();
     voidCompatible_reset();
     valueCompatible_reset();
-    congruentTo_FunctionDescriptor_reset();
   }
   /** @apilevel internal 
    * @declaredat ASTNode:36
@@ -230,17 +230,60 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
   public Block getBlockNoTransform() {
     return (Block) getChildNoTransform(0);
   }
+  /** @apilevel internal */
+  private void congruentTo_FunctionDescriptor_reset() {
+    congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
+    congruentTo_FunctionDescriptor_values = null;
+  }
+  /** @apilevel internal */
+  protected java.util.Map congruentTo_FunctionDescriptor_values;
+  /** @apilevel internal */
+  protected java.util.Map congruentTo_FunctionDescriptor_computed;
   /**
    * @attribute syn
-   * @aspect PreciseRethrow
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43
+   * @aspect LambdaExpr
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43")
-  public boolean modifiedInScope(Variable var) {
-    boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
-    return modifiedInScope_Variable_value;
+  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74")
+  public boolean congruentTo(FunctionDescriptor f) {
+    Object _parameters = f;
+    if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
+    if (congruentTo_FunctionDescriptor_values == null) congruentTo_FunctionDescriptor_values = new java.util.HashMap(4);
+    ASTNode$State state = state();
+    if (congruentTo_FunctionDescriptor_values.containsKey(_parameters) && congruentTo_FunctionDescriptor_computed != null
+        && congruentTo_FunctionDescriptor_computed.containsKey(_parameters)
+        && (congruentTo_FunctionDescriptor_computed.get(_parameters) == ASTNode$State.NON_CYCLE || congruentTo_FunctionDescriptor_computed.get(_parameters) == state().cycle())) {
+      return (Boolean) congruentTo_FunctionDescriptor_values.get(_parameters);
+    }
+    boolean congruentTo_FunctionDescriptor_value = congruentTo_compute(f);
+    if (state().inCircle()) {
+      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
+      congruentTo_FunctionDescriptor_computed.put(_parameters, state().cycle());
+    
+    } else {
+      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
+      congruentTo_FunctionDescriptor_computed.put(_parameters, ASTNode$State.NON_CYCLE);
+    
+    }
+    return congruentTo_FunctionDescriptor_value;
   }
+  /** @apilevel internal */
+  private boolean congruentTo_compute(FunctionDescriptor f) {
+      if (f.method.type().isVoid()) {
+        return voidCompatible();
+      } else {
+        if (!valueCompatible()) {
+          return false;
+        }
+        for (ReturnStmt returnStmt : lambdaReturns()) {
+          if (!returnStmt.getResult().assignConversionTo(f.method.type())) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
   /** @apilevel internal */
   private void isBlockBody_reset() {
     isBlockBody_computed = null;
@@ -369,60 +412,63 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     }
     return valueCompatible_value;
   }
-  /** @apilevel internal */
-  private void congruentTo_FunctionDescriptor_reset() {
-    congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
-    congruentTo_FunctionDescriptor_values = null;
-  }
-  /** @apilevel internal */
-  protected java.util.Map congruentTo_FunctionDescriptor_values;
-  /** @apilevel internal */
-  protected java.util.Map congruentTo_FunctionDescriptor_computed;
   /**
    * @attribute syn
-   * @aspect LambdaExpr
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74
+   * @aspect PreciseRethrow
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43
    */
   @ASTNodeAnnotation.Attribute(kind=ASTNodeAnnotation.Kind.SYN)
-  @ASTNodeAnnotation.Source(aspect="LambdaExpr", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/LambdaExpr.jrag:74")
-  public boolean congruentTo(FunctionDescriptor f) {
-    Object _parameters = f;
-    if (congruentTo_FunctionDescriptor_computed == null) congruentTo_FunctionDescriptor_computed = new java.util.HashMap(4);
-    if (congruentTo_FunctionDescriptor_values == null) congruentTo_FunctionDescriptor_values = new java.util.HashMap(4);
-    ASTNode$State state = state();
-    if (congruentTo_FunctionDescriptor_values.containsKey(_parameters) && congruentTo_FunctionDescriptor_computed != null
-        && congruentTo_FunctionDescriptor_computed.containsKey(_parameters)
-        && (congruentTo_FunctionDescriptor_computed.get(_parameters) == ASTNode$State.NON_CYCLE || congruentTo_FunctionDescriptor_computed.get(_parameters) == state().cycle())) {
-      return (Boolean) congruentTo_FunctionDescriptor_values.get(_parameters);
-    }
-    boolean congruentTo_FunctionDescriptor_value = congruentTo_compute(f);
-    if (state().inCircle()) {
-      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
-      congruentTo_FunctionDescriptor_computed.put(_parameters, state().cycle());
-    
-    } else {
-      congruentTo_FunctionDescriptor_values.put(_parameters, congruentTo_FunctionDescriptor_value);
-      congruentTo_FunctionDescriptor_computed.put(_parameters, ASTNode$State.NON_CYCLE);
-    
-    }
-    return congruentTo_FunctionDescriptor_value;
+  @ASTNodeAnnotation.Source(aspect="PreciseRethrow", declaredAt="/Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/EffectivelyFinal.jrag:43")
+  public boolean modifiedInScope(Variable var) {
+    boolean modifiedInScope_Variable_value = getBlock().modifiedInScope(var);
+    return modifiedInScope_Variable_value;
   }
-  /** @apilevel internal */
-  private boolean congruentTo_compute(FunctionDescriptor f) {
-      if (f.method.type().isVoid()) {
-        return voidCompatible();
-      } else {
-        if (!valueCompatible()) {
-          return false;
-        }
-        for (ReturnStmt returnStmt : lambdaReturns()) {
-          if (!returnStmt.getResult().assignConversionTo(f.method.type())) {
-            return false;
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
+   * @apilevel internal
+   */
+  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/UnreachableStatements.jrag:29
+      return true;
+    }
+    else {
+      return getParent().Define_reachable(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
+  /**
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
+   * @apilevel internal
+   */
+  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
+      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:39
+      {
+          TypeDecl decl = enclosingLambda().targetType();
+          if (decl == null) {
+            return unknownType();
+          } else if (!(decl instanceof InterfaceDecl)) {
+            return unknownType();
+          } else {
+            InterfaceDecl iDecl = (InterfaceDecl) decl;
+            if (!iDecl.isFunctional()) {
+              return unknownType();
+            } else {
+              return iDecl.functionDescriptor().method.type();
+            }
           }
         }
-        return true;
-      }
     }
+    else {
+      return getParent().Define_returnType(this, _callerNode);
+    }
+  }
+  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
+    return true;
+  }
   /**
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TargetType.jrag:195
    * @apilevel internal
@@ -501,52 +547,6 @@ public class BlockLambdaBody extends LambdaBody implements Cloneable {
     }
   }
   protected boolean canDefine_numericContext(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/TypeCheck.jrag:534
-   * @apilevel internal
-   */
-  public TypeDecl Define_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/TypeCheck.jrag:39
-      {
-          TypeDecl decl = enclosingLambda().targetType();
-          if (decl == null) {
-            return unknownType();
-          } else if (!(decl instanceof InterfaceDecl)) {
-            return unknownType();
-          } else {
-            InterfaceDecl iDecl = (InterfaceDecl) decl;
-            if (!iDecl.isFunctional()) {
-              return unknownType();
-            } else {
-              return iDecl.functionDescriptor().method.type();
-            }
-          }
-        }
-    }
-    else {
-      return getParent().Define_returnType(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_returnType(ASTNode _callerNode, ASTNode _childNode) {
-    return true;
-  }
-  /**
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/frontend/UnreachableStatements.jrag:49
-   * @apilevel internal
-   */
-  public boolean Define_reachable(ASTNode _callerNode, ASTNode _childNode) {
-    if (getBlockNoTransform() != null && _callerNode == getBlock()) {
-      // @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java8/frontend/UnreachableStatements.jrag:29
-      return true;
-    }
-    else {
-      return getParent().Define_reachable(this, _callerNode);
-    }
-  }
-  protected boolean canDefine_reachable(ASTNode _callerNode, ASTNode _childNode) {
     return true;
   }
   /** @apilevel internal */

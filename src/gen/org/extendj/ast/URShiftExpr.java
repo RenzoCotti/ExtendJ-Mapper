@@ -15,9 +15,9 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Set;
 import beaver.*;
-import org.jastadd.util.*;
 import java.util.zip.*;
 import java.io.*;
+import org.jastadd.util.*;
 import org.jastadd.util.PrettyPrintable;
 import org.jastadd.util.PrettyPrinter;
 import java.io.BufferedInputStream;
@@ -30,18 +30,18 @@ import java.io.DataInputStream;
  */
 public class URShiftExpr extends ShiftExpr implements Cloneable {
   /**
-   * @aspect CodeGenerationBinaryOperations
-   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1005
-   */
-  void emitOperation(CodeGeneration gen) {
-    type().ushr(this, gen);
-  }
-  /**
    * @aspect CreateBCode
    * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CreateBCode.jrag:1142
    */
   public void createBCode(CodeGeneration gen) {
     emitShiftExpr(gen);
+  }
+  /**
+   * @aspect CodeGenerationBinaryOperations
+   * @declaredat /Users/BMW/Documents/Git/ExtendJ-Mapper/java4/backend/CodeGeneration.jrag:1005
+   */
+  void emitOperation(CodeGeneration gen) {
+    type().ushr(this, gen);
   }
   /**
    * @declaredat ASTNode:1
